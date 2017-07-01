@@ -1,5 +1,8 @@
 package com.app.rest;
 
+import com.app.action.factory.TestActionFactory;
+import com.app.domain.output.test.TestInfoOutput;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -16,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 public class TestRest {
     @GET
     @Path("/hello")
-    public String test(){
-        return "This is a rest test";
+    public TestInfoOutput test() throws Exception {
+        return TestActionFactory.getTestInfoAction(true).execute();
     }
 }
