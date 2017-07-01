@@ -2,12 +2,6 @@ package com.app.exception;
 
 import com.google.gson.annotations.SerializedName;
 
-/****************************************
- * Copyright (c) xuning.
- * 尊重版权，禁止抄袭!
- * 如有违反，必将追究其法律责任.
- * @Auther is xuning on 17-2-19
- ****************************************/
 public class ErrorInfo extends Base {
     private String code;
     @SerializedName("msg")

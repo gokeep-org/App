@@ -15,9 +15,6 @@ import java.io.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
-/**
- * 使用Gson处理序列化和反序列化，并在Jersey中注册
- */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)

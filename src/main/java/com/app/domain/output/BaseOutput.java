@@ -1,9 +1,5 @@
 package com.app.domain.output;
 
-/****************************************
- * Copyright (c) xuning.
- * @Auther is xuning on 17-7-2
- ****************************************/
 public class BaseOutput {
     public BaseOutput() {
     }

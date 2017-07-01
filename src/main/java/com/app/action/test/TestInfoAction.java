@@ -5,10 +5,6 @@ import com.app.domain.output.test.TestInfoOutput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/****************************************
- * Copyright (c) xuning.
- * @Auther is xuning on 17-7-2
- ****************************************/
 public class TestInfoAction extends ItemAction<TestInfoOutput> {
     private boolean flag;
     private static final Logger LOGGER = LoggerFactory.getLogger(TestInfoAction.class);
