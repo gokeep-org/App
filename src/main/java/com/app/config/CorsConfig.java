@@ -6,13 +6,14 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+/**
+ * Cors跨域请求允许设置
+ * 本配置主要用于对前段进行跨域请求后端要进行的配置，
+ * 对代码本身是没有影响的。
+ */
 @Configuration
 @PropertySource("classpath:application.properties")
 public class CorsConfig extends WebMvcConfigurerAdapter {
-    /**
-     * 设置Cors跨域请求允许设置
-     * @param registry
-     */
     @Value("${server.connection-timeout}")
     private String connectionTimeout;
     @Override
