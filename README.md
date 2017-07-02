@@ -1,5 +1,9 @@
 # App
-SpringBoot项目脚手架项目
+=== 作者： 徐宁===
+
+=== Email： 1748373312@qq.com===
+
+=== Copyright ©2017 xuning 
 
 ### 项目结构
     APP
