@@ -66,7 +66,7 @@ public abstract class BaseAction<T extends BaseOutput> {
     protected abstract T formatOutput() throws Exception;
     
     /**
-     * sync 推送, 整理 sync 参数, 发送到队列
+     * sync 推送整理sync-log消息到队列，也可Async
      */
     protected abstract void logSyncAction() throws Exception;
 }

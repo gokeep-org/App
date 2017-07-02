@@ -3,10 +3,7 @@ package com.app.rest;
 import com.app.action.factory.TestActionFactory;
 import com.app.domain.output.test.TestInfoOutput;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @Path("/test")
@@ -14,8 +11,8 @@ import javax.ws.rs.core.MediaType;
 @Consumes({MediaType.APPLICATION_JSON})
 public class TestRest {
     @GET
-    @Path("/hello")
-    public TestInfoOutput test() throws Exception {
-        return TestActionFactory.getTestInfoAction(true).execute();
+    @Path("/info")
+    public TestInfoOutput test(@QueryParam("flag") boolean flag) throws Exception {
+        return TestActionFactory.getTestInfoAction(flag).execute();
     }
 }

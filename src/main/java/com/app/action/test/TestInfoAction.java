@@ -5,6 +5,8 @@ import com.app.domain.output.test.TestInfoOutput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
+
 public class TestInfoAction extends ItemAction<TestInfoOutput> {
     private boolean flag;
     private static final Logger LOGGER = LoggerFactory.getLogger(TestInfoAction.class);
@@ -21,7 +23,9 @@ public class TestInfoAction extends ItemAction<TestInfoOutput> {
     
     @Override
     protected void additionalValidate() throws Exception {
-        LOGGER.info("Test action additional validate is null");
+        if (Objects.equals(null, flag))
+            flag = false;
+        LOGGER.info("Test action additional validate flag is " + flag);
     
     }
     
