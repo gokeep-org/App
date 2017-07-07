@@ -12,8 +12,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * 对代码本身是没有影响的。
  */
 @Configuration
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application.yml")
 public class CorsConfig extends WebMvcConfigurerAdapter {
+
     @Value("${server.connection-timeout}")
     private String connectionTimeout;
     @Override
