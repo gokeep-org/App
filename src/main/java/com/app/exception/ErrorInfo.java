@@ -2,7 +2,7 @@ package com.app.exception;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ErrorInfo extends Base {
+public class ErrorInfo extends BaseInfo {
     private String code;
     @SerializedName("msg")
     private String messsage;

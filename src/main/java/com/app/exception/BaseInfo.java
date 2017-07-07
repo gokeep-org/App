@@ -1,6 +1,6 @@
 package com.app.exception;
 
-public class Base {
+public class BaseInfo {
 
     public String success = "true";
 
