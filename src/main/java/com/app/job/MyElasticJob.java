@@ -20,9 +20,11 @@ public class MyElasticJob implements SimpleJob {
                 shardingContext.getShardingItem(),
                 new SimpleDateFormat("HH:mm:ss").format(new Date()),
                 Thread.currentThread().getId(), "SIMPLE"));
+        
         switch (shardingContext.getShardingItem()) {
             case 0:
                 LOGGER.info("被分片0处理");
+//                throw new RuntimeException("异常测试");
                 break;
             case 1:
                 // do something by sharding item 1
