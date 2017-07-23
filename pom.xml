@@ -238,7 +238,40 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
+
+    <!--多环境属性配置-->
+    <profiles>
+        <profile>
+            <!-- 本地开发环境 -->
+            <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!-- 生产环境 -->
+            <id>produce</id>
+            <properties>
+                <profiles.active>produce</profiles.active>
+            </properties>
+        </profile>
+    </profiles>
+
+    <!--配置maven构建组件-->
     <build>
+        <!--配置打包环境-->
+        <filters>
+            <filter>src/main/resources/application-${profiles.active}.properties</filter>
+        </filters>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
