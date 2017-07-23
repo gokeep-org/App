@@ -1,6 +1,14 @@
-spring.application.name=appTest
-spring.output.ansi.enabled=always
-spring.http.encoding.charset=utf-8
-spring.http.encoding.force=true
-server.connection-timeout=60000
-spring.profiles.active=@profiles.active@
+spring:
+  application:
+    name: appTest
+  output:
+    ansi:
+      enabled: always
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+  profiles:
+    active: @profiles.active@
+server:
+  connection-timeout: 60000

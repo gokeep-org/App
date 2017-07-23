@@ -264,7 +264,7 @@
     <build>
         <!--配置打包环境-->
         <filters>
-            <filter>src/main/resources/application-${profiles.active}.properties</filter>
+            <filter>src/main/resources/application-${profiles.active}.yml</filter>
         </filters>
         <resources>
             <resource>
