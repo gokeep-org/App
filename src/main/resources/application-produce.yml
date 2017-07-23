@@ -1,2 +1,4 @@
 server:
   port: 22222
+info:
+  str: bbb

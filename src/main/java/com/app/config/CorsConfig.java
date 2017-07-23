@@ -2,7 +2,6 @@ package com.app.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -12,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * 对代码本身是没有影响的。
  */
 @Configuration
-@PropertySource("classpath:application.yml")
+//@PropertySource("classpath:application.yml")
 public class CorsConfig extends WebMvcConfigurerAdapter {
 
     @Value("${server.connection-timeout}")
@@ -26,4 +25,5 @@ public class CorsConfig extends WebMvcConfigurerAdapter {
                 .allowCredentials(true)
                 .maxAge(Integer.parseInt(connectionTimeout));
     }
+    
 }
