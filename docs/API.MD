@@ -1,5 +1,5 @@
 ###API Document
-启动后请求：localhost:10001/test/hello
+启动后请求：localhost:10001/test/info
 获取：
 
 ```xml```
