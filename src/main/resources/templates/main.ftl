@@ -36,11 +36,10 @@
 <body>
 <button id="ADT_A01_BTN">ADT_A01</button>
 <hr/>
-<center>
+<#--<center>-->
     <div id="main_div"
          style="border:1px solid #000; width: 800px; height: 400px; background-color: aliceblue; overflow:auto;">
-
     </div>
-</center>
+<#--</center>-->
 </body>
 </html>
