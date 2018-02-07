@@ -15,16 +15,18 @@ import org.springframework.context.annotation.Configuration;
 import javax.ws.rs.ApplicationPath;
 
 
-@Configuration
-@ApplicationPath(CommonConfig.BASE_PATH)
+//@Configuration
+//@ApplicationPath(CommonConfig.BASE_PATH)
 public class JerseyConfig extends ResourceConfig {
     public JerseyConfig() {
-        setJerseyComponentsLocation();
-        registerJerseyFilter();
-		registerExceptionProcessProvode();
-        registerJsonProvider();
-        registerCompressionEncoder();
-        registerSwagger();
+        if (CommonConfig.IS_ENABLE_JERSEY){
+            setJerseyComponentsLocation();
+            registerJerseyFilter();
+            registerExceptionProcessProvode();
+            registerJsonProvider();
+            registerCompressionEncoder();
+            registerSwagger();
+        }
     }
 
     private void setJerseyComponentsLocation() {
