@@ -13,6 +13,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class HL7EventContainer {
+    /**
+     * 这里是所有消息的输出缓存容器
+     * key为消息的名称，key`为时间戳， value`输出体
+     */
     public static final Map<String, Map<Long, String>> result = new ConcurrentHashMap<>();
     public static final Logger logger = LoggerFactory.getLogger(HL7EventContainer.class);
 

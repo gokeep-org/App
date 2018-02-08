@@ -9,7 +9,7 @@ public class Hl7Config {
         return instance;
     }
 
-    public static final String V232(){
+    public static final String V231(){
         return "MSH|^~\\&|SendingApplication|SendingFacility|NIST_RCVR_36|NIST|20101004144709||ADT^A01^ADT_A01|NIST-101004144709009|P|2.3.1\r" +
                 "EVN||20101004144709\r" +
                 "PID|||PIX^^^NIST2010&2.16.840.1.113883.3.72.5.9.1&ISO||ALPHA^ALAN^^^^^L|BARNES^^^^^^L|19781208|M|||820 JORIE BLVD^^NEW YORK CITY^NY^10503||||||||153-12-5432\r" +

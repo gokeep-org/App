@@ -57,7 +57,7 @@ public class SendAndReceiveAMessage {
         Connection connection = null;
         Message response = null;
         try {
-            connection = this.context.newClient("localhost", Hl7Config.SERVER_PORT, useTls);
+            connection = this.context.newClient(Hl7Config.SERVER_HOST, Hl7Config.SERVER_PORT, useTls);
             Initiator initiator = connection.getInitiator();
             response = initiator.sendAndReceive(message);
         } catch (Throwable e) {

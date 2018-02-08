@@ -6,14 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
 import javax.servlet.http.HttpServletRequest;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -62,13 +56,13 @@ public class HlRest {
         switch (messageType.toUpperCase()){
             case "ADT_A01": sendADTA01Message();
                 break;
-            case "V232": sendV232Message();
-
+            case "V231": sendV231Message();
+                break;
         }
     }
 
-    private void sendV232Message() {
-        SendAndReceiveAMessage.build().sendByCode(Hl7Config.V232());
+    private void sendV231Message() {
+        SendAndReceiveAMessage.build().sendByCode(Hl7Config.V231());
     }
 
     public void sendADTA01Message(){
