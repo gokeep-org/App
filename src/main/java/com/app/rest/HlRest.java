@@ -1,15 +1,11 @@
 package com.app.rest;
 
-import com.app.hl7.HL7EventContainer;
-import com.app.hl7.HlServerListener;
-import com.app.hl7.ListenHL7Socket;
+import com.app.hl7.*;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.ServletContext;
@@ -55,5 +51,27 @@ public class HlRest {
             return;
         }
         HL7EventContainer.delResultByMshName(name);
+    }
+
+    @ResponseBody
+    @RequestMapping(path = "/send/{name}", method = RequestMethod.POST)
+    public void sendMessageToHl7Server(@PathVariable("name") String messageType){
+        if (StringUtils.isEmpty(messageType)){
+            return;
+        }
+        switch (messageType.toUpperCase()){
+            case "ADT_A01": sendADTA01Message();
+                break;
+            case "V232": sendV232Message();
+
+        }
+    }
+
+    private void sendV232Message() {
+        SendAndReceiveAMessage.build().sendByCode(Hl7Config.V232());
+    }
+
+    public void sendADTA01Message(){
+        SendAndReceiveAMessage.build().sendByCode(Hl7Config.ADT_A01());
     }
 }

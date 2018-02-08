@@ -14,16 +14,13 @@ import java.util.Objects;
 
 public class ListenHL7Socket extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(ListenHL7Socket.class);
-    private static final boolean IS_TLS = false;
-    private static final String Hl7ServerHost = "localhost";
-    private static final int Hl7ServerPort = 9080;
     private HL7Service hl7Service;
 
     @Override
     public void run() {
         HapiContext hapiContext = new DefaultHapiContext();
         try {
-            hl7Service = Objects.isNull(hl7Service) || !hl7Service.isRunning() ? hapiContext.newServer(Hl7ServerPort, IS_TLS) : hl7Service;
+            hl7Service = Objects.isNull(hl7Service) || !hl7Service.isRunning() ? hapiContext.newServer(Hl7Config.SERVER_PORT, Hl7Config.IS_TLS) : hl7Service;
         } catch (Throwable e) {
             logger.error("Hl7 Server enable fail. {}", e.getMessage());
         }
@@ -31,11 +28,14 @@ public class ListenHL7Socket extends Thread {
         hl7Service.registerApplication("*", "*", handler);
         try {
             hl7Service.startAndWait();
-//            try {
-////                hapiContext.close();
-//            } catch (IOException e) {
-//                logger.error("Hl7 context close fail");
-//            }
+            /**
+             *  这里因为是一个单例，close会导致之后的所有context为null
+                try {
+                    hapiContext.close();
+                } catch (IOException e) {
+                    logger.error("Hl7 context close fail");
+                }
+             */
         } catch (InterruptedException e) {
             logger.error("Hl7 Server start is fail, ", e.getMessage());
         }
