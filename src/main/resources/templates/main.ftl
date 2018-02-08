@@ -10,7 +10,7 @@
             function flushResult() {
                 $('#main_div').scrollTop($('#main_div')[0].scrollHeight);
                 $.ajax({
-                    url: "http://localhost:10001/hl7/flush?name=ADT_A01",
+                    url: "http://localhost:10001/hl7/flush?name=V231",
                     method: "POST",
                     success: function (result) {
                         for(var key in result){
@@ -27,18 +27,45 @@
                 });
             }
 
-            $("#ADT_A01_BTN").click(function () {
+            function cleanResult() {
+                $.ajax({
+                    url: "http://localhost:10001/hl7/clean",
+                    method: "DELETE",
+                    success: function (result) {
+                        console.log("clean result is success");
+                    },
+                    error: function (result) {
+                        console.log("clean result is fail");
+                    }
+                });
+            }
+            $("#VIEW_RESULT_BTN").click(function () {
 
             });
+
+            $("#CLEAN_RESULT_BTN").click(function () {
+                cleanResult();
+            });
+
+            $("#SEND_ADT01_BTN").click(function () {
+
+            });
+
+            $("#SEND_V232_BTN").click(function () {
+
+            });
+
         });
     </script>
 </head>
 <body>
-<button id="ADT_A01_BTN">ADT_A01</button>
+    <button id="VIEW_RESULT_BTN">查看结果</button>
+    <button id="SEND_V232_BTN">发送V232类型消息</button>
+    <button id="SEND_ADT01_BTN">发送ADT_01类型消息</button>
+    <button id="CLEAN_RESULT_BTN">清空结果</button>
 <hr/>
 <#--<center>-->
-    <div id="main_div"
-         style="border:1px solid #000; width: 800px; height: 400px; background-color: aliceblue; overflow:auto;">
+    <div id="main_div" style="border:1px solid #000; width: 800px; height: 400px; background-color: aliceblue; overflow:auto;">
     </div>
 <#--</center>-->
 </body>
