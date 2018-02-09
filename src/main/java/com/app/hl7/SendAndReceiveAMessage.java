@@ -12,6 +12,7 @@ import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.parser.Parser;
 import ca.uhn.hl7v2.protocol.ReceivingApplication;
 import ca.uhn.hl7v2.protocol.ReceivingApplicationExceptionHandler;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +30,8 @@ public class SendAndReceiveAMessage {
     boolean useTls = false;
     HapiContext context;
     private static SendAndReceiveAMessage client;
+    private String host;
+    private int port;
 
     public static SendAndReceiveAMessage build() {
         synchronized (new Object()) {
@@ -38,6 +41,23 @@ public class SendAndReceiveAMessage {
         return client;
     }
 
+    public static SendAndReceiveAMessage build(String host, int port){
+        client.host = host;
+        client.port = port;
+        build();
+        return client;
+    }
+
+
+    public String parseMessage(Message message){
+        Parser parser = this.context.getPipeParser();
+        try {
+            return parser.encode(message);
+        } catch (HL7Exception e) {
+            logegr.error("parser message by code is fail");
+        }
+        return null;
+    }
 
     public Message sendByCode(String code) {
         Message message = null;
@@ -57,7 +77,11 @@ public class SendAndReceiveAMessage {
         Connection connection = null;
         Message response = null;
         try {
-            connection = this.context.newClient(Hl7Config.SERVER_HOST, Hl7Config.SERVER_PORT, useTls);
+            if (StringUtils.isEmpty(client.host)){
+                connection = this.context.newClient(Hl7Config.SERVER_HOST, Hl7Config.SERVER_PORT, useTls);
+            }else {
+                connection = this.context.newClient(this.host, this.port, useTls);
+            }
             Initiator initiator = connection.getInitiator();
             response = initiator.sendAndReceive(message);
         } catch (Throwable e) {
@@ -68,5 +92,17 @@ public class SendAndReceiveAMessage {
             }
         }
         return response;
+    }
+
+    public static void main(String[] args) {
+        Message message = null;
+        try {
+            message = build().sendByCode(Hl7Config.hinacomPix()).generateACK();
+        } catch (HL7Exception e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        logegr.info("");
     }
 }

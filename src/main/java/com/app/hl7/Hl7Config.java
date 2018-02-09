@@ -3,7 +3,7 @@ package com.app.hl7;
 public class Hl7Config {
     public static final Hl7Config instance = new Hl7Config();
     public static final String SERVER_HOST = "localhost";
-    public static final int SERVER_PORT= 9080;
+    public static final int SERVER_PORT= 9030;
     public static final boolean IS_TLS = false;
     public static final Hl7Config testCase(){
         return instance;
@@ -27,5 +27,10 @@ public class Hl7Config {
                 + "IN1||022254P|4558PD|BLUE CROSS|STREET^OTHER STREET^CITY^ST^00990||(333)333-6666||221K|LENIX|||19980515|19990515|||PATIENT01 TEST D||||||||||||||||||02LL|022LP554";
     }
 
-
+    public static final String hinacomPix(){
+        return "MSH|^~\\&|SendingApplication|SendingFacility|hinacom-pix|hinacom|20101004144709||ADT^A01^ADT_A01|NIST-101004144709009|P|2.3.1\r" +
+                "EVN||20101004144709\r" +
+                "PID|||PIX^^^NIST2010&2.16.840.1.113883.3.72.5.9.1&ISO||ALPHA^ALAN^^^^^L|BARNES^^^^^^L|19781208|M|||820 JORIE BLVD^^NEW YORK CITY^NY^10503||||||||153-12-5432\r" +
+                "PV1||I";
+    }
 }

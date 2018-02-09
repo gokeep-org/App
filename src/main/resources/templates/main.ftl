@@ -8,6 +8,9 @@
         var globalMessageName = "ADT_A01";
         var intervals = [];
         var logNames = ["ADT_A01", "V231"];
+        var host = "http://localhost";
+        var port = 10001;
+        var url = host + ":" + port.toString();
         $("document").ready(function () {
             /**
              * 通过消息名称显示输出
@@ -16,12 +19,11 @@
                 globalMessageName = name;
                 var interval = setInterval(flushResult, 2000);
                 intervals.push(interval);
-
                 function flushResult() {
                     $('#main_div').scrollTop($('#main_div')[0].scrollHeight);
                     $.ajax({
                         // ADT_A01，
-                        url: "http://localhost:10001/hl7/flush?name=" + globalMessageName,
+                        url: url + "/hl7/flush?name=" + globalMessageName,
                         method: "POST",
                         success: function (result) {
                             for (var key in result) {
@@ -44,7 +46,7 @@
              */
             function cleanResult() {
                 $.ajax({
-                    url: "http://localhost:10001/hl7/clean",
+                    url: url + "/hl7/clean",
                     method: "DELETE",
                     success: function (result) {
                         console.log("clean result is success");
@@ -63,7 +65,7 @@
              */
             function sendMessageByName(name) {
                 $.ajax({
-                    url: "http://localhost:10001/hl7/send/" + name.toUpperCase(),
+                    url: url + "/hl7/send/" + name.toUpperCase(),
                     method: "POST",
                     success: function (result) {
                         console.log("send message is success");
@@ -93,30 +95,50 @@
                     clearInterval(intervals[i]);
                 }
             }
-            $("#VIEW_RESULT_BTN").click(function () {
+
+            function intervalSendMessage() {
+                sendMessageByName("V231");
+            }
+
+            function startNewListen() {
+                stopAllInterval();
                 startAllListenSocket();
+            }
+            $("#STOP_LISTEN_BTN").click(function () {
+                stopAllInterval();
             });
+
             $("#CLEAN_RESULT_BTN").click(function () {
                 stopAllInterval();
                 cleanResult();
             });
+
             $("#SEND_ADT01_BTN").click(function () {
-                startAllListenSocket();
+                startNewListen();
                 sendMessageByName("ADT_A01");
             });
+
             $("#SEND_V232_BTN").click(function () {
-                stopAllInterval();
+                startNewListen();
                 sendMessageByName("V231");
+            });
+
+            $("#INTERVAL_SEND_BTN").click(function () {
+                var interval_send  = setInterval(intervalSendMessage, 5000);
+                intervals.push(interval_send);
             });
         });
     </script>
 </head>
     <body>
-        <button id="VIEW_RESULT_BTN">开始监听</button>
+        <button id="STOP_LISTEN_BTN">停止监听消息</button>
         <button id="SEND_V232_BTN">发送V232类型消息</button>
         <button id="SEND_ADT01_BTN">发送ADT_01类型消息</button>
         <button id="CLEAN_RESULT_BTN">清空控制台</button>
+        <button id="INTERVAL_SEND_BTN">定时发送/5s</button>
         <hr/>
+
+
         <#--<center>-->
         <div id="main_div"
              style="border:1px solid #000; width: 800px; height: 400px; background-color: aliceblue; overflow:auto;">

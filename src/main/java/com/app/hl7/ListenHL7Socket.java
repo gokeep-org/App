@@ -29,6 +29,7 @@ public class ListenHL7Socket extends Thread {
         try {
             hl7Service.startAndWait();
             /**
+             * bug fix:
              *  这里因为是一个单例，close会导致之后的所有context为null
                 try {
                     hapiContext.close();
@@ -39,7 +40,7 @@ public class ListenHL7Socket extends Thread {
         } catch (InterruptedException e) {
             logger.error("Hl7 Server start is fail, ", e.getMessage());
         }
-        logger.info("Hl7 Server thread is start and waiting");
+        logger.info("Hl7 Server thread is start and waiting, host is {}, port is {}", Hl7Config.SERVER_HOST, Hl7Config.SERVER_PORT);
     }
 
     public void closeSocketServer(){
