@@ -8,10 +8,10 @@
         var globalMessageName = "ADT_A01";
         var intervals = [];
         var logNames = ["ADT_A01", "V231"];
-        var host = "http://localhost";
+        var host = "http://118.89.240.60";
         var port = 10001;
         var url = host + ":" + port.toString();
-        $("document").ready(function () {
+        $(document).ready(function () {
             /**
              * 通过消息名称显示输出
              **/
