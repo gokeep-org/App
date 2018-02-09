@@ -76,13 +76,13 @@ public class SendAndReceiveAMessage {
     public Message send(Message message) {
         Connection connection = null;
         Message response = null;
-        if (Objects.isNull(message)){
+        if (Objects.isNull(message)) {
             return message;
         }
         try {
-            if (StringUtils.isEmpty(client.host)){
+            if (StringUtils.isEmpty(client.host)) {
                 connection = this.context.newClient(Hl7Config.SERVER_HOST, Hl7Config.SERVER_PORT, useTls);
-            }else {
+            } else {
                 connection = this.context.newClient(this.host, this.port, useTls);
             }
             Initiator initiator = connection.getInitiator();
@@ -95,17 +95,5 @@ public class SendAndReceiveAMessage {
             }
         }
         return response;
-    }
-
-    public static void main(String[] args) {
-        Message message = null;
-        try {
-            message = build().sendByCode(Hl7Config.hinacomPix()).generateACK();
-        } catch (HL7Exception e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        logegr.info("");
     }
 }
