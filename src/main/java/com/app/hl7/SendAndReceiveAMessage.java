@@ -41,9 +41,9 @@ public class SendAndReceiveAMessage {
         return client;
     }
 
-    public static SendAndReceiveAMessage build(String host, int port){
-        client.host = host;
-        client.port = port;
+    public SendAndReceiveAMessage buildAddess(String host, int port){
+        this.host = host;
+        this.port = port;
         build();
         return client;
     }
@@ -76,6 +76,9 @@ public class SendAndReceiveAMessage {
     public Message send(Message message) {
         Connection connection = null;
         Message response = null;
+        if (Objects.isNull(message)){
+            return message;
+        }
         try {
             if (StringUtils.isEmpty(client.host)){
                 connection = this.context.newClient(Hl7Config.SERVER_HOST, Hl7Config.SERVER_PORT, useTls);

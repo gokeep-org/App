@@ -1,5 +1,6 @@
 package com.app.rest;
 
+import ca.uhn.hl7v2.model.Message;
 import com.app.hl7.*;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.QueryParam;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -59,6 +62,32 @@ public class HlRest {
             case "V231": sendV231Message();
                 break;
         }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/proxy", method = RequestMethod.POST)
+    public Map<String, String> proxySendMessage(
+//            @QueryParam("host") String host,
+//            @QueryParam("port") Integer port,
+//            @QueryParam("message") String message,
+            @RequestBody Map<String, Object> body
+    ){
+        Map<String, String> result = new HashMap<>();
+        result.put("res", null);
+        try{
+            String host = body.get("host").toString();
+            int port = Integer.parseInt(body.get("port").toString());
+            String message = body.get("message").toString();
+            SendAndReceiveAMessage sendClient = SendAndReceiveAMessage.build().buildAddess(host, port);
+            Message responseMessage = sendClient.sendByCode(message);
+            String code  =  sendClient.parseMessage(responseMessage);
+            result.put("res", code);
+        }catch (Throwable e){
+            result.put("res", "proxy send error");
+            logger.error("proxy send hl7 message find fail");
+            return result;
+        }
+        return result;
     }
 
     private void sendV231Message() {
