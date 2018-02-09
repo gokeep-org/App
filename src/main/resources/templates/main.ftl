@@ -180,9 +180,9 @@
 </div>
 <br/>
 <label>目标主机(TargeHost)：</label>
-<input type="text" name="host">
+<input type="text" name="host" value="localhost">
 <label>目标端口(TargePort)：</label>
-<input type="text" name="port"><br>
+<input type="text" name="port" value="9030"><br>
 <#--<label>应用名称(ReceivingApplication)：</label>-->
 <#--<input type="text" name="app_name" value=""><br>-->
 <#--<label>设备名称(ReceivingFacility)：</label>-->
@@ -191,7 +191,7 @@
 <#--<input type="text" name="domain" value=""><br>-->
 
 
-<label> 消息（Message）：</label>
+<label> 消息（Message）：</label><br/>
 <textarea name="message" style="resize: none; width:  400px; height: 250px;"></textarea>
 <button id="SEND_INPUT_MESSAGE_BTN">发送请求</button>
 <#--</center>-->
