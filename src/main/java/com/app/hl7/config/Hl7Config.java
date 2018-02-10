@@ -1,4 +1,4 @@
-package com.app.hl7;
+package com.app.hl7.config;
 
 public class Hl7Config {
     public static final Hl7Config instance = new Hl7Config();

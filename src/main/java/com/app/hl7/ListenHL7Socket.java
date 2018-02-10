@@ -1,15 +1,13 @@
 package com.app.hl7;
 
 import ca.uhn.hl7v2.DefaultHapiContext;
-import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.HapiContext;
 import ca.uhn.hl7v2.app.Application;
 import ca.uhn.hl7v2.app.HL7Service;
-import ca.uhn.hl7v2.protocol.impl.HL7Server;
+import com.app.hl7.config.Hl7Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.Objects;
 
 public class ListenHL7Socket extends Thread {

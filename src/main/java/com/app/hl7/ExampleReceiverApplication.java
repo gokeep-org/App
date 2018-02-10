@@ -5,6 +5,7 @@ import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.app.Application;
 import ca.uhn.hl7v2.app.ApplicationException;
 import ca.uhn.hl7v2.model.Message;
+import ca.uhn.hl7v2.model.v22.segment.PID;
 import com.app.hl7.filter.Hl7MessageFilterChain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

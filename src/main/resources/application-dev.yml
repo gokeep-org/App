@@ -2,3 +2,17 @@ server:
   port: 10001
 logging:
   level: debug
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hl7?charset=utf&serverTimezone=UTC
+    username: root
+    password: root
+    hikari:
+      idle-timeout: 10000
+      maximum-pool-size: 10
+      pool-name: hikari-pool
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
