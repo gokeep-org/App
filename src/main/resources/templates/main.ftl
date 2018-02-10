@@ -8,9 +8,10 @@
         var globalMessageName = "ADT_A01";
         var intervals = [];
         var logNames = ["ADT_A01", "V231"];
-        var host = "http://118.89.240.60";
-        var port = 10001;
-        var url = host + ":" + port.toString();
+        var host = "http://localhost";
+        //var host = "http://118.89.240.60";
+        // var port = 10001;
+        // var url = host + ":" + port.toString();
         $(document).ready(function () {
             /**
              * 通过消息名称显示输出
@@ -24,7 +25,7 @@
                     $('#main_div').scrollTop($('#main_div')[0].scrollHeight);
                     $.ajax({
                         // ADT_A01，
-                        url: url + "/hl7/flush?name=" + globalMessageName,
+                        url: "/hl7/flush?name=" + globalMessageName,
                         method: "POST",
                         success: function (result) {
                             for (var key in result) {
@@ -47,7 +48,7 @@
              */
             function cleanResult() {
                 $.ajax({
-                    url: url + "/hl7/clean",
+                    url: "/hl7/clean",
                     method: "DELETE",
                     success: function (result) {
                         console.log("clean result is success");
@@ -68,7 +69,7 @@
              */
             function sendMessageByName(name) {
                 $.ajax({
-                    url: url + "/hl7/send/" + name.toUpperCase(),
+                    url: "/hl7/send/" + name.toUpperCase(),
                     method: "POST",
                     success: function (result) {
                         console.log("send message is success");
@@ -83,18 +84,15 @@
 
             function sendMessageByAddress(host, port,  message) {
                 $.ajax({
-                    body: {
-                        "host": host,
-                        "port": port,
-                        "message": message
-                    },
-                    url: url + "/hl7/proxy",
-                    method: "POST",
+                    data: JSON.stringify({"host": host, "port": port, "message": message}),
+                    url: "/hl7/proxy",
+                    type: "POST",
+                    dataType: "json",
+                    headers: {'Content-Type': 'application/json'},
                     success: function (result) {
                         console.log("send message by address is success");
                         stopAllInterval();
-                        $("#main_div").empty();
-                        $("#main_div").text(result[""]);
+                        $("#main_div").append(result['res'] + "<br/>");
                     },
                     error: function (result) {
                         console.log("send message is fail");
@@ -156,12 +154,19 @@
             $("#SEND_INPUT_MESSAGE_BTN").click(function () {
                 var targetHost = $("input[name='host']").val();
                 var targetPort = $("input[name='port']").val();
-                // var appName = $("input[name='app_name']").val();
-                // var doamin = $("input[name='doamin']").val();
-                // var facilityName = $("input[name='facility_name']").val();
                 var message = $("textarea[name='message']").val();
                 sendMessageByAddress(targetHost, targetPort, message);
             });
+
+            $("#TEMPLATE_BTN").click(function () {
+                $("textarea[name='message']").text(
+                    "MSH|^~\\&|PAMSimulator|IHE|hinacom-pix|hinacom|20130424103105||ADT^A01^ADT_A01|20130424103105|P|2.5||||||8859/1[CR]\n" +
+                        "EVN||20130424103105||||20130424103105[CR]\n" +
+                        "PID|||DDS-43201^^^DDS&1.3.6.1.4.1.12559.11.1.4.1.2&ISO^PI||Bauer^Lothar^^^^^L|Schneider^^^^^^M|19951113050908|M|||Kirchenplatz^^Simbach a.Inn^^84359^AUT|||||||2436^^^IHEPAM&1.3.6.1.4.1.12559.11.1.2.2.5&ISO^AN|||||||||||||N[CR]\n" +
+                        "PV1|||||||||||||||||||2437^^^IHEPAM&1.3.6.1.4.1.12559.11.1.2.2.5&ISO^VN|||||||||||||||||||||||||20130424103100|||||||V[CR"
+                );
+            });
+
         });
     </script>
 </head>
@@ -191,7 +196,7 @@
 <#--<input type="text" name="domain" value=""><br>-->
 
 
-<label> 消息（Message）：</label><br/>
+<label> 消息（Message）：</label><button id="TEMPLATE_BTN">模板</button><br/>
 <textarea name="message" style="resize: none; width:  400px; height: 250px;"></textarea>
 <button id="SEND_INPUT_MESSAGE_BTN">发送请求</button>
 <#--</center>-->

@@ -1,6 +1,7 @@
 package com.app.hl7;
 
 import ca.uhn.hl7v2.model.Message;
+import org.eclipse.jetty.websocket.common.message.MessageAppender;
 import org.omg.CORBA.Object;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,5 +47,15 @@ public class HL7EventContainer {
             return;
         }
         middleMap.put(new Date().getTime(), response);
+    }
+
+    public static final void addOutput(Message message){
+        String name = message.getName();
+        Map<Long, String> middleMap = getEventByMshName(name);
+        if (Objects.isNull(middleMap)){
+            addResult(name, new Date().getTime(), message.toString());
+            return;
+        }
+        middleMap.put(new Date().getTime(), message.toString());
     }
 }

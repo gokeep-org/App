@@ -5,6 +5,7 @@ import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.app.Application;
 import ca.uhn.hl7v2.app.ApplicationException;
 import ca.uhn.hl7v2.model.Message;
+import com.app.hl7.filter.Hl7MessageFilterChain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +24,8 @@ public class ExampleReceiverApplication implements Application {
         logger.info("parse encod message is {}", encodeMessage);
         HL7EventContainer.process(message, "parse encod message is: " + encodeMessage);
         try {
+            // 调用消息责任链处理消息
+            Hl7MessageFilterChain.build().doFilter(message);
             Message result = message.generateACK();
             return result;
         } catch (IOException e) {

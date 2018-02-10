@@ -93,6 +93,9 @@ public class SendAndReceiveAMessage {
             if (Objects.nonNull(connection) || connection.isOpen()) {
                 connection.close();
             }
+            if (Objects.nonNull(response)){
+                HL7EventContainer.addOutput(message);
+            }
         }
         return response;
     }
