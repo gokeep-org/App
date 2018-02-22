@@ -16,6 +16,10 @@ public class Hl7MessageFilterChain<T extends Message> {
     private Hl7MessageFilterChain(){
     }
 
+    /**
+     * 这里建立通过反射的方式获取到全部的处理
+     * @return
+     */
     public static Hl7MessageFilterChain build(){
         Hl7MessageFilterChain chain = new Hl7MessageFilterChain();
         chain.chains.addAll(
@@ -35,10 +39,5 @@ public class Hl7MessageFilterChain<T extends Message> {
         });
         return message;
     }
-
-
-
-
-
 
 }

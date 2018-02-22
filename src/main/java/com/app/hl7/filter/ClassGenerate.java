@@ -12,10 +12,10 @@ import java.util.Enumeration;
 public class ClassGenerate {
     private static final Logger logger = LoggerFactory.getLogger(ClassGenerate.class);
 
-    public static void main(String[] args) {
-        ArrayList<Class> classes = getAllClassByInterface(Hl7MessageFilter.class);
-        logger.info("cl");
-    }
+//    public static void main(String[] args) {
+//        ArrayList<Class> classes = getAllClassByInterface(Hl7MessageFilter.class);
+//        logger.info("cl");
+//    }
     public static ArrayList<Class> getAllClassByInterface(Class clazz) {
         ArrayList<Class> list = new ArrayList<>();
         // 判断是否是一个接口
