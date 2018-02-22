@@ -70,9 +70,6 @@ public class HlRest {
     @ResponseBody
     @RequestMapping(value = "/proxy", method = RequestMethod.POST)
     public Map<String, String> proxySendMessage(
-//            @QueryParam("host") String host,
-//            @QueryParam("port") Integer port,
-//            @QueryParam("message") String message,
             @RequestBody Map<String, Object> body
     ){
         Map<String, String> result = new HashMap<>();
@@ -101,6 +98,10 @@ public class HlRest {
         SendAndReceiveAMessage.build().sendByCode(Hl7Config.ADT_A01());
     }
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public Map<String, Object> addUser(){
         User user = new User();
