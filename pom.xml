@@ -232,11 +232,6 @@
             <artifactId>hapi-base</artifactId>
             <version>2.2</version>
         </dependency>
-        <dependency>
-            <groupId>ca.uhn.hapi</groupId>
-            <artifactId>hapi-hl7overhttp</artifactId>
-            <version>2.2</version>
-        </dependency>
         <!-- These are structure JARs for HL7 v2.1 and 2.5.1 (as an example) -->
         <dependency>
             <groupId>ca.uhn.hapi</groupId>
@@ -263,12 +258,12 @@
             <artifactId>hapi-structures-v251</artifactId>
             <version>2.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>6.0.6</version>
+            <version>5.1.39</version>
         </dependency>
+
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
