@@ -108,7 +108,7 @@ public class NTPTest {
                 Runtime.getRuntime().exec(cmd);
             }else {
                 cmd = "sudo date "+serverTime ;
-                Runtime.getRuntime().exec(cmd);;
+                Runtime.getRuntime().exec(cmd);
             }
         } catch (IOException e) {
             e.printStackTrace();
