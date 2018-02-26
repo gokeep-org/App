@@ -57,13 +57,10 @@ public class UserTest {
 
     @Test
     public void startSendmessage(){
-        String msg = "MSH|^~\\&|NES|NINTENDO|TESTSYSTEM|TESTFACILITY|20010101000000||ADT^A04|Q123456789T123456789X123456|P|2.2\r" +
-                "EVN|A04|20010101000000|||^KOOPA^BOWSER^^^^^^^CURRENT\r" +
-                "PID|1||123456789|0123456789^AA^^JP|BROS^MARIO^^^^||19850101000000|M|||123 FAKE STREET^MARIO \\T\\ LUIGI BROS PLACE^TOADSTOOL KINGDOM^NES^A1B2C3^JP^HOME^^1234|1234|(555)555-0123^HOME^JP:1234567|||S|MSH|12345678|||||||0|||||N\r" +
-                "NK1|1|PEACH^PRINCESS^^^^|SO|ANOTHER CASTLE^^TOADSTOOL KINGDOM^NES^^JP|(123)555-1234|(123)555-2345|NOK|||||||||||||\r" +
-                "NK1|2|TOADSTOOL^PRINCESS^^^^|SO|YET ANOTHER CASTLE^^TOADSTOOL KINGDOM^NES^^JP|(123)555-3456|(123)555-4567|EMC|||||||||||||\r" +
-                "PV1|1|O|ABCD^EFGH^|||^^|123456^DINO^YOSHI^^^^^^MSRM^CURRENT^^^NEIGHBOURHOOD DR NBR^|^DOG^DUCKHUNT^^^^^^^CURRENT||CRD|||||||123456^DINO^YOSHI^^^^^^MSRM^CURRENT^^^NEIGHBOURHOOD DR NBR^|AO|0123456789|1|||||||||||||||||||MSH||A|||20010101000000";
-        SendAndReceiveAMessage.build().sendByCode(msg);
+        String msg = "MSH|^~\\&|SendingApplication|SendingFacility|NIST_RCVR_877|NIST|20101004145353||QBP^Q23^QBP_Q21|NIST-101004145353138|P|2.2\r" +
+                "QPD|IHE PIX Query|QRY1248968460880|PIXL1^^^NIST2010&2.16.840.1.113883.3.72.5.9.1&ISO|^^^NIST2010-3&2.16.840.1.113883.3.72.5.9.3&ISO\r" +
+                "RCP|I";
+        SendAndReceiveAMessage.build().buildAddess("129.6.24.81", 9080).sendByCode(msg);
         System.out.println("");
     }
 }
