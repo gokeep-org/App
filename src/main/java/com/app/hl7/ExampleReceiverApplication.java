@@ -32,9 +32,9 @@ public class ExampleReceiverApplication implements Application {
         HL7EventContainer.process(message, "parse encod message is: " + encodeMessage);
         try {
             // TODO: 调用消息责任链处理消息，
-            //Hl7MessageFilterChain.build().doFilter(message);
+//            Message response = Hl7MessageFilterChain.build().doFilter(message);
             // 这里临时委托给openmrs处理
-            Hl7Util.insertDbMessageInQueue(encodeMessage);
+//            Hl7Util.insertDbMessageInQueue(encodeMessage);
             return message.generateACK();
         } catch (IOException e) {
             throw new HL7Exception(e);

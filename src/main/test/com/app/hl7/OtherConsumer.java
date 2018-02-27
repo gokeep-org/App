@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
 
 public class OtherConsumer {
     private static final Logger logger = LoggerFactory.getLogger(OtherConsumer.class);
-    private static final String host = "124.207.122.122";
-    private static final Integer port = 9004;
+    private static final String host = "localhost";
+    private static final Integer port = 3610;
     public static final String applicationName= "hinacom-pix";
     public static final String facilitName = "hinacom";
 

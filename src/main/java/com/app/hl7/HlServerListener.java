@@ -18,9 +18,9 @@ public class HlServerListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent arg0) {
-        if (Objects.nonNull(socketThread) && !socketThread.isInterrupted()){
-            socketThread.closeSocketServer();
-        }
+//        if (Objects.nonNull(socketThread) && !socketThread.isInterrupted()){
+//            socketThread.closeSocketServer();
+//        }
         logger.info("HL7 server listen is enable and stop listen web servlet");
     }
 

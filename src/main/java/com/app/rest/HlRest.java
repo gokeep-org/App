@@ -3,8 +3,8 @@ package com.app.rest;
 import ca.uhn.hl7v2.model.Message;
 import com.app.hl7.*;
 import com.app.hl7.config.Hl7Config;
-import com.app.hl7.entity.User;
-import com.app.hl7.service.UserService;
+//import com.app.hl7.entity.User;
+//import com.app.hl7.service.UserService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +22,8 @@ import java.util.Objects;
 @RequestMapping("/hl7")
 public class HlRest {
     private static final Logger logger = LoggerFactory.getLogger(HlRest.class);
-    @Autowired
-    private UserService userService;
+//    @Autowired
+//    private UserService userService;
     @RequestMapping(path = "/main", method = RequestMethod.GET)
     public String test(HttpServletRequest servletContextEvent){
         ListenHL7Socket socket = (ListenHL7Socket) servletContextEvent.getAttribute(HlServerListener.KEYWORD_SOCKET);
@@ -99,17 +99,17 @@ public class HlRest {
         SendAndReceiveAMessage.build().sendByCode(Hl7Config.ADT_A01());
     }
 
-    /**
-     *
-     * @return
-     */
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public Map<String, Object> addUser(){
-        User user = new User();
-        user.setUsername("徐宁");
-        userService.addUser(user);
-        Map<String, Object> result = new HashMap<>();
-        result.put("success", true);
-        return result;
-    }
+//    /**
+//     *
+//     * @return
+//     */
+//    @RequestMapping(value = "/user", method = RequestMethod.POST)
+//    public Map<String, Object> addUser(){
+//        User user = new User();
+//        user.setUsername("徐宁");
+//        userService.addUser(user);
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("success", true);
+//        return result;
+//    }
 }
