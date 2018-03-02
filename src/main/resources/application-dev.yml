@@ -5,7 +5,7 @@ logging:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/openempi?charset=utf&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/openempi?charset=utf8&amp;useUnicode=true&amp;useSSL=false
     username: root
     password: root
     hikari:

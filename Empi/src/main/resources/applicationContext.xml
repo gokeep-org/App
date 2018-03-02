@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
-        <property name="url"><value>jdbc:mysql://localhost:3306/openempi</value></property>
+        <property name="url"><value>jdbc:mysql://localhost:3306/openempi?charset=utf8&amp;useUnicode=true&amp;useSSL=false</value></property>
         <property name="username"><value>root</value></property>
         <property name="password"><value>root</value></property>
 
