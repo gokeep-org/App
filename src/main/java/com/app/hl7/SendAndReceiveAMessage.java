@@ -58,6 +58,7 @@ public class SendAndReceiveAMessage {
         Message message = null;
         Parser parser = this.context.getPipeParser();
         try {
+            parser.getParserConfiguration().setAllowUnknownVersions(true);
             message = parser.parse(code);
             if (Objects.isNull(message)) {
                 return message;
