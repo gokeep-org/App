@@ -41,7 +41,8 @@ public class PixPdqServer {
 	}
 
 	public static void startPixPdqSocketServer(String iheConfigPath){
-		String configPath = StringUtils.isEmpty(iheConfigPath) ? "/Users/xuning/workspace/idea/openpixpdq-1.0-source/OpenPIXPDQ/conf/tests/actors/IheActors.xml" : iheConfigPath;
+		String defaultIheConfigPath = "/Users/xuning/workspace/idea/App/src/main/mesatests/actors/IheActors.xml";
+		String configPath = StringUtils.isEmpty(iheConfigPath) ? defaultIheConfigPath : iheConfigPath;
 		ConfigurationLoader loader = ConfigurationLoader.getInstance();
 		try {
 			loader.loadConfiguration(configPath, true);
