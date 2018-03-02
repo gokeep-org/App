@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.ws.rs.ApplicationPath;
 
-
 //@Configuration
 //@ApplicationPath(CommonConfig.BASE_PATH)
 public class JerseyConfig extends ResourceConfig {
