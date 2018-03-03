@@ -499,7 +499,7 @@ public class PixManagerAdapter implements IPixManagerAdapter {
 	private IdentityService getIdentityService() {
 		try {
 			if (identityService == null) {
-				identityService = getIdentityServiceHome().create();
+				identityService = new IdentityServiceImpl();
 			}
 		} catch (Exception e) {
 			log.error("Failed while attempting to retrieve reference to the IdentityService. Error: "+ e);

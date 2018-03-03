@@ -111,7 +111,7 @@
                 <ATTR-25>
                         <COLNAME>pi.dob</COLNAME>
                         <COLTYPE>String</COLTYPE>
-                </ATTR-25>                
+                </ATTR-25>
 
         </QUERY-ATTRIBUTE-TYPES>
 
@@ -148,7 +148,7 @@
         <INSERT-PERSON-INFO>
                 <SQL-GET-PREINSERTID></SQL-GET-PREINSERTID>
                 <SQL-INSERTINTO>insert into person_info (person_info_id, dh_id, lname, fname, secname, suffix, prefix, degree, name_type_cd, name_type_rep_cd, search_key, start_date, end_date, alias, address_1, address_2, city, state_prov, zip, country, parish_cd, pa_start_dt, pa_end_dt, telecom_use_cd, phone_country_cd, phone_area_cd, phone_num, phone_ext, email, gender, marital_status, drv_license_num, drv_license_issuing_state, drv_license_issue_date, ethnic_group_cd, religion_type_cd, race_cd, pi_identifier_type_cd, pi_effective_date, pi_expiration_date, patient_consent, address_type_cd, aa_univ_id, aa_univ_id_type_cd, aa_namespace_id, af_univ_id, af_univ_id_type_cd, af_namespace_id, pi_identifier,ssn,dob,corporate_id)</SQL-INSERTINTO>
-                <SQL-INSERTVALUES>values (nextval('person_id_seq'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)</SQL-INSERTVALUES>
+                <SQL-INSERTVALUES>values (nextval('person_info_id_seq'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)</SQL-INSERTVALUES>
                 <SQL-GET-POSTINSERTID>select currval('person_info_id_seq')</SQL-GET-POSTINSERTID>
         </INSERT-PERSON-INFO>
 

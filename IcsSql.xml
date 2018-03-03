@@ -56,12 +56,12 @@
                         <COLTYPE>String</COLTYPE>
                 </ATTR-12>
 
-<!--  NOT USED
-                <ATTR-13>
-                        <COLNAME>dh.SOURCE_DOCUMENTED??????????????????????????</COLNAME>
-                        <COLTYPE>String</COLTYPE>
-                </ATTR-13>
--->
+                <!--  NOT USED
+                                <ATTR-13>
+                                        <COLNAME>dh.SOURCE_DOCUMENTED??????????????????????????</COLNAME>
+                                        <COLTYPE>String</COLTYPE>
+                                </ATTR-13>
+                -->
                 <ATTR-14>
                         <COLNAME>pi.race_cd</COLNAME>
                         <COLTYPE>String</COLTYPE>
@@ -70,16 +70,16 @@
                         <COLNAME>pi.religion_type_cd</COLNAME>
                         <COLTYPE>String</COLTYPE>
                 </ATTR-15>
-<!--  NOT USED
-                <ATTR-16>
-                        <COLNAME>pp.PHONENUMBER?????????????????????????????</COLNAME>
-                        <COLTYPE>String</COLTYPE>
-                </ATTR-16>
--->
-		<ATTR-17>
-			<COLNAME>p.person_id</COLNAME>
-			<COLTYPE>Number</COLTYPE>
-		</ATTR-17>
+                <!--  NOT USED
+                                <ATTR-16>
+                                        <COLNAME>pp.PHONENUMBER?????????????????????????????</COLNAME>
+                                        <COLTYPE>String</COLTYPE>
+                                </ATTR-16>
+                -->
+                <ATTR-17>
+                        <COLNAME>p.person_id</COLNAME>
+                        <COLTYPE>Number</COLTYPE>
+                </ATTR-17>
                 <ATTR-18>
                         <COLNAME>pi.fname</COLNAME>
                         <COLTYPE>LikeString</COLTYPE>
@@ -111,7 +111,7 @@
                 <ATTR-25>
                         <COLNAME>pi.dob</COLNAME>
                         <COLTYPE>String</COLTYPE>
-                </ATTR-25>                
+                </ATTR-25>
 
         </QUERY-ATTRIBUTE-TYPES>
 
@@ -147,8 +147,8 @@
         </INSERT-DOCUMENT-HEADER>
         <INSERT-PERSON-INFO>
                 <SQL-GET-PREINSERTID></SQL-GET-PREINSERTID>
-                <SQL-INSERTINTO>insert into person_info (person_info_id, dh_id, lname, fname, secname, suffix, prefix, degree, name_type_cd, name_type_rep_cd, search_key, start_date, end_date, alias, address_1, address_2, city, state_prov, zip, country, parish_cd, pa_start_dt, pa_end_dt, telecom_use_cd, phone_country_cd, phone_area_cd, phone_num, phone_ext, email, gender, marital_status, drv_license_num, drv_license_issuing_state, drv_license_issue_date, ethnic_group_cd, religion_type_cd, race_cd, pi_identifier_type_cd, pi_effective_date, pi_expiration_date, patient_consent, address_type_cd, aa_univ_id, aa_univ_id_type_cd, aa_namespace_id, af_univ_id, af_univ_id_type_cd, af_namespace_id, pi_identifier,ssn,dob,corporate_id)</SQL-INSERTINTO>
-                <SQL-INSERTVALUES>values (nextval('person_id_seq'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)</SQL-INSERTVALUES>
+                <SQL-INSERTINTO>insert into person_info (person_info_id, dh_id, lname, fname, secname, suffix, prefix, degree, name_type_cd, name_type_rep_cd, search_key, start_date, end_date, alias, address_1, address_2, city, state_prov, zip, country, parish_cd, pa_start_dt, pa_end_dt, telecom_use_cd, phone_country_cd, phone_area_cd, phone_num, phone_ext, email, gender, marital_status, drv_license_num, drv_license_issuing_state, drv_license_issue_date, ethnic_group_cd, religion_type_cd, race_cd, pi_identifier_type_cd, pi_effective_date, pi_expiration_date, patient_consent, address_type_cd, aa_univ_id, aa_univ_id_type_cd, aa_namespace_id, af_univ_id, af_univ_id_type_cd, af_namespace_id, pi_identifier,ssn,dob,corporate_id,updated_corporate_id)</SQL-INSERTINTO>
+                <SQL-INSERTVALUES>values (nextval('person_info_id_seq'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)</SQL-INSERTVALUES>
                 <SQL-GET-POSTINSERTID>select currval('person_info_id_seq')</SQL-GET-POSTINSERTID>
         </INSERT-PERSON-INFO>
 
@@ -216,34 +216,34 @@
              SET clauses will be done dynamically using above attributes for column names.
           -->
         <UPDATE-PERSON>
-          <SQL-UPDATETABLE>update person</SQL-UPDATETABLE>
-          <SQL-UPDATEWHERE>where person_id = ?</SQL-UPDATEWHERE>
+                <SQL-UPDATETABLE>update person</SQL-UPDATETABLE>
+                <SQL-UPDATEWHERE>where person_id = ?</SQL-UPDATEWHERE>
         </UPDATE-PERSON>
 
         <!-- Used by PersonInfoSql.updatePatientConsent() method
              This will add on an IN clause restricting by Document Headers (associated with a Person_Id)
           -->
         <UPDATE-PERSON-INFO-CONSENT>
-          <SQL-UPDATETABLE>update person_info</SQL-UPDATETABLE>
-          <SQL-SETTABLE>set patient_consent = ?</SQL-SETTABLE>
-          <SQL-UPDATEWHERE>where UPPER(pi_identifier) = UPPER(?)</SQL-UPDATEWHERE>
+                <SQL-UPDATETABLE>update person_info</SQL-UPDATETABLE>
+                <SQL-SETTABLE>set patient_consent = ?</SQL-SETTABLE>
+                <SQL-UPDATEWHERE>where UPPER(pi_identifier) = UPPER(?)</SQL-UPDATEWHERE>
         </UPDATE-PERSON-INFO-CONSENT>
 
         <!-- Used by PersonSql, PersonInfoSql and DocumentHeaderSql delete() methods.
           -->
         <DELETE-PERSON>
-          <SQL-DELETE>delete from person where person_id = ?</SQL-DELETE>
+                <SQL-DELETE>delete from person where person_id = ?</SQL-DELETE>
         </DELETE-PERSON>
 
         <DELETE-PERSON-INFO>
-          <SQL-DELETE>delete from person_info where person_info_id = ?</SQL-DELETE>
+                <SQL-DELETE>delete from person_info where person_info_id = ?</SQL-DELETE>
         </DELETE-PERSON-INFO>
 
         <DELETE-DOCUMENT-HEADER>
-          <SQL-DELETE>delete from document_header where dh_id = ?</SQL-DELETE>
+                <SQL-DELETE>delete from document_header where dh_id = ?</SQL-DELETE>
         </DELETE-DOCUMENT-HEADER>
 
         <DELETE-DOCUMENT-HEADER-FROM-PERSON-INFO>
-          <SQL-DELETE>delete from document_header where dh_id in (select dh_id from person_info where person_info_id = ?)</SQL-DELETE>
+                <SQL-DELETE>delete from document_header where dh_id in (select dh_id from person_info where person_info_id = ?)</SQL-DELETE>
         </DELETE-DOCUMENT-HEADER-FROM-PERSON-INFO>
 </ICS-SQL>

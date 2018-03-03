@@ -83,16 +83,17 @@ public class PersonInfoSql {
     public static final int PI_ORD_SSN = 50;
     public static final int PI_ORD_DOB = 51;
     public static final int PI_ORD_CORPORATE_ID = 52;
+    public static final int PI_ORD_UPDATE_CORPORATE_ID = 53;
 
 
-    public static final int PI_ORD_AN_IDENTIFIER = 53;
-    public static final int PI_ORD_AN_IDENTIFIER_CODE = 54;
-    public static final int PI_ORD_AN_AA_UNIV_ID = 55;
-    public static final int PI_ORD_AN_AA_UNIV_ID_TYPE_CD = 56;
-    public static final int PI_ORD_AN_AA_NAMESPACE_ID = 57;
-    public static final int PI_ORD_AN_AF_UNIV_ID = 58;
-    public static final int PI_ORD_AN_AF_UNIV_ID_TYPE_CD = 59;
-    public static final int PI_ORD_AN_AF_NAMESPACE_ID = 60;
+//    public static final int PI_ORD_AN_IDENTIFIER = 53;
+//    public static final int PI_ORD_AN_IDENTIFIER_CODE = 54;
+//    public static final int PI_ORD_AN_AA_UNIV_ID = 55;
+//    public static final int PI_ORD_AN_AA_UNIV_ID_TYPE_CD = 56;
+//    public static final int PI_ORD_AN_AA_NAMESPACE_ID = 57;
+//    public static final int PI_ORD_AN_AF_UNIV_ID = 58;
+//    public static final int PI_ORD_AN_AF_UNIV_ID_TYPE_CD = 59;
+//    public static final int PI_ORD_AN_AF_NAMESPACE_ID = 60;
 
 
     private static final int PI_COLUMN_MAX = 64; // capacity of List (column count) used for adding Person Info records
@@ -375,15 +376,22 @@ public class PersonInfoSql {
                 pstmt.setNull(PI_ORD_DOB - 1, java.sql.Types.DATE);
             }
             pstmt.setString(PI_ORD_CORPORATE_ID - 1, (String) vars[PI_ORD_CORPORATE_ID]);
+            if (vars[PI_ORD_DOB] != null) {
+                pstmt.setTimestamp(PI_ORD_DOB - 1, new Timestamp(((java.util.Date) vars[PI_ORD_DOB]).getTime()));
+            } else {
+                pstmt.setNull(PI_ORD_DOB - 1, java.sql.Types.DATE);
+            }
+            pstmt.setString(PI_ORD_CORPORATE_ID - 1, (String) vars[PI_ORD_CORPORATE_ID]);
+            pstmt.setString(PI_ORD_UPDATE_CORPORATE_ID - 1, (String) vars[PI_ORD_UPDATE_CORPORATE_ID]);
 
-            pstmt.setString(PI_ORD_AN_IDENTIFIER - 1, (String) vars[PI_ORD_AN_IDENTIFIER]);
-            pstmt.setString(PI_ORD_AN_IDENTIFIER_CODE - 1, (String) vars[PI_ORD_AN_IDENTIFIER_CODE]);
-            pstmt.setString(PI_ORD_AN_AA_UNIV_ID - 1, (String) vars[PI_ORD_AN_AA_UNIV_ID]);
-            pstmt.setString(PI_ORD_AN_AA_UNIV_ID_TYPE_CD - 1, (String) vars[PI_ORD_AN_AA_UNIV_ID_TYPE_CD]);
-            pstmt.setString(PI_ORD_AN_AA_NAMESPACE_ID - 1, (String) vars[PI_ORD_AN_AA_NAMESPACE_ID]);
-            pstmt.setString(PI_ORD_AN_AF_UNIV_ID - 1, (String) vars[PI_ORD_AN_AF_UNIV_ID]);
-            pstmt.setString(PI_ORD_AN_AF_UNIV_ID_TYPE_CD - 1, (String) vars[PI_ORD_AN_AF_UNIV_ID_TYPE_CD]);
-            pstmt.setString(PI_ORD_AN_AF_NAMESPACE_ID - 1, (String) vars[PI_ORD_AN_AF_NAMESPACE_ID]);
+//            pstmt.setString(PI_ORD_AN_IDENTIFIER - 1, (String) vars[PI_ORD_AN_IDENTIFIER]);
+//            pstmt.setString(PI_ORD_AN_IDENTIFIER_CODE - 1, (String) vars[PI_ORD_AN_IDENTIFIER_CODE]);
+//            pstmt.setString(PI_ORD_AN_AA_UNIV_ID - 1, (String) vars[PI_ORD_AN_AA_UNIV_ID]);
+//            pstmt.setString(PI_ORD_AN_AA_UNIV_ID_TYPE_CD - 1, (String) vars[PI_ORD_AN_AA_UNIV_ID_TYPE_CD]);
+//            pstmt.setString(PI_ORD_AN_AA_NAMESPACE_ID - 1, (String) vars[PI_ORD_AN_AA_NAMESPACE_ID]);
+//            pstmt.setString(PI_ORD_AN_AF_UNIV_ID - 1, (String) vars[PI_ORD_AN_AF_UNIV_ID]);
+//            pstmt.setString(PI_ORD_AN_AF_UNIV_ID_TYPE_CD - 1, (String) vars[PI_ORD_AN_AF_UNIV_ID_TYPE_CD]);
+//            pstmt.setString(PI_ORD_AN_AF_NAMESPACE_ID - 1, (String) vars[PI_ORD_AN_AF_NAMESPACE_ID]);
         } catch (SQLException se) {
             throw new DatabaseException("Cannot Prepare Person_Info Insert Statement: " + se.toString());
         }
@@ -543,14 +551,14 @@ public class PersonInfoSql {
             pstmt.setTimestamp(PI_ORD_DOB, (Timestamp) vars[PI_ORD_DOB]);
             pstmt.setString(PI_ORD_CORPORATE_ID, (String) vars[PI_ORD_CORPORATE_ID]);
 
-            pstmt.setString(PI_ORD_AN_IDENTIFIER, (String) vars[PI_ORD_AN_IDENTIFIER]);
-            pstmt.setString(PI_ORD_AN_IDENTIFIER_CODE, (String) vars[PI_ORD_AN_IDENTIFIER_CODE]);
-            pstmt.setString(PI_ORD_AN_AA_UNIV_ID, (String) vars[PI_ORD_AN_AA_UNIV_ID]);
-            pstmt.setString(PI_ORD_AN_AA_UNIV_ID_TYPE_CD, (String) vars[PI_ORD_AN_AA_UNIV_ID_TYPE_CD]);
-            pstmt.setString(PI_ORD_AN_AA_NAMESPACE_ID, (String) vars[PI_ORD_AN_AA_NAMESPACE_ID]);
-            pstmt.setString(PI_ORD_AN_AF_UNIV_ID, (String) vars[PI_ORD_AN_AF_UNIV_ID]);
-            pstmt.setString(PI_ORD_AN_AF_UNIV_ID_TYPE_CD, (String) vars[PI_ORD_AN_AF_UNIV_ID_TYPE_CD]);
-            pstmt.setString(PI_ORD_AN_AF_NAMESPACE_ID, (String) vars[PI_ORD_AN_AF_NAMESPACE_ID]);
+//            pstmt.setString(PI_ORD_AN_IDENTIFIER, (String) vars[PI_ORD_AN_IDENTIFIER]);
+//            pstmt.setString(PI_ORD_AN_IDENTIFIER_CODE, (String) vars[PI_ORD_AN_IDENTIFIER_CODE]);
+//            pstmt.setString(PI_ORD_AN_AA_UNIV_ID, (String) vars[PI_ORD_AN_AA_UNIV_ID]);
+//            pstmt.setString(PI_ORD_AN_AA_UNIV_ID_TYPE_CD, (String) vars[PI_ORD_AN_AA_UNIV_ID_TYPE_CD]);
+//            pstmt.setString(PI_ORD_AN_AA_NAMESPACE_ID, (String) vars[PI_ORD_AN_AA_NAMESPACE_ID]);
+//            pstmt.setString(PI_ORD_AN_AF_UNIV_ID, (String) vars[PI_ORD_AN_AF_UNIV_ID]);
+//            pstmt.setString(PI_ORD_AN_AF_UNIV_ID_TYPE_CD, (String) vars[PI_ORD_AN_AF_UNIV_ID_TYPE_CD]);
+//            pstmt.setString(PI_ORD_AN_AF_NAMESPACE_ID, (String) vars[PI_ORD_AN_AF_NAMESPACE_ID]);
 
         } catch (SQLException se) {
             throw new DatabaseException("Cannot Prepare Person_Info Insert Statement: " + se.toString());
@@ -810,28 +818,28 @@ public class PersonInfoSql {
             if (iteratorAccuntNumbers.hasNext()) {
                 PersonIdentifier accountNumber = (PersonIdentifier) iteratorAccuntNumbers.next();
 
-                personInfoVars[PI_ORD_AN_IDENTIFIER] = accountNumber.getId();
-                personInfoVars[PI_ORD_AN_IDENTIFIER_CODE] = accountNumber.getIdentifierTypeCode();
-
-                if (accountNumber.getAssigningAuthority() != null) {
-                    personInfoVars[PI_ORD_AN_AA_NAMESPACE_ID] = accountNumber.getAssigningAuthority().getNameSpaceID();
-                    personInfoVars[PI_ORD_AN_AA_UNIV_ID] = accountNumber.getAssigningAuthority().getUniversalID();
-                    personInfoVars[PI_ORD_AN_AA_UNIV_ID_TYPE_CD] = accountNumber.getAssigningAuthority().getUniversalIDType();
-                } else {
-                    personInfoVars[PI_ORD_AN_AA_NAMESPACE_ID] = null;
-                    personInfoVars[PI_ORD_AN_AA_UNIV_ID] = null;
-                    personInfoVars[PI_ORD_AN_AA_UNIV_ID_TYPE_CD] = null;
-                }
-
-                if (accountNumber.getAssigningFacility() != null) {
-                    personInfoVars[PI_ORD_AN_AF_NAMESPACE_ID] = accountNumber.getAssigningFacility().getNameSpaceID();
-                    personInfoVars[PI_ORD_AN_AF_UNIV_ID] = accountNumber.getAssigningFacility().getUniversalID();
-                    personInfoVars[PI_ORD_AN_AF_UNIV_ID_TYPE_CD] = accountNumber.getAssigningFacility().getUniversalIDType();
-                } else {
-                    personInfoVars[PI_ORD_AN_AF_NAMESPACE_ID] = null;
-                    personInfoVars[PI_ORD_AN_AF_UNIV_ID] = null;
-                    personInfoVars[PI_ORD_AN_AF_UNIV_ID_TYPE_CD] = null;
-                }
+//                personInfoVars[PI_ORD_AN_IDENTIFIER] = accountNumber.getId();
+//                personInfoVars[PI_ORD_AN_IDENTIFIER_CODE] = accountNumber.getIdentifierTypeCode();
+//
+//                if (accountNumber.getAssigningAuthority() != null) {
+//                    personInfoVars[PI_ORD_AN_AA_NAMESPACE_ID] = accountNumber.getAssigningAuthority().getNameSpaceID();
+//                    personInfoVars[PI_ORD_AN_AA_UNIV_ID] = accountNumber.getAssigningAuthority().getUniversalID();
+//                    personInfoVars[PI_ORD_AN_AA_UNIV_ID_TYPE_CD] = accountNumber.getAssigningAuthority().getUniversalIDType();
+//                } else {
+//                    personInfoVars[PI_ORD_AN_AA_NAMESPACE_ID] = null;
+//                    personInfoVars[PI_ORD_AN_AA_UNIV_ID] = null;
+//                    personInfoVars[PI_ORD_AN_AA_UNIV_ID_TYPE_CD] = null;
+//                }
+//
+//                if (accountNumber.getAssigningFacility() != null) {
+//                    personInfoVars[PI_ORD_AN_AF_NAMESPACE_ID] = accountNumber.getAssigningFacility().getNameSpaceID();
+//                    personInfoVars[PI_ORD_AN_AF_UNIV_ID] = accountNumber.getAssigningFacility().getUniversalID();
+//                    personInfoVars[PI_ORD_AN_AF_UNIV_ID_TYPE_CD] = accountNumber.getAssigningFacility().getUniversalIDType();
+//                } else {
+//                    personInfoVars[PI_ORD_AN_AF_NAMESPACE_ID] = null;
+//                    personInfoVars[PI_ORD_AN_AF_UNIV_ID] = null;
+//                    personInfoVars[PI_ORD_AN_AF_UNIV_ID_TYPE_CD] = null;
+//                }
 
                 lookForMoreRecords = true;
             }

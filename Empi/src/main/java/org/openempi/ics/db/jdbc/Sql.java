@@ -29,7 +29,7 @@ import java.util.List;
  * This class will handle all generic SQL methods, such as building dynamic statements and executing queries.
  */
 public class Sql {
-
+  private static final Logger log = Logger.getLogger("ICS");
 
   /**
      Will build part of the where clause to query based on a particular 
@@ -66,7 +66,7 @@ public class Sql {
      @throws DatabaseException
      @return StringBuffer where clause without 
   */
-  public static StringBuffer addSqlCondition(String colName, 
+  public static StringBuffer addSqlCondition(String colName,
                                              String attrColType, 
                                              Object value, 
                                              List valueList, 
@@ -170,7 +170,7 @@ public class Sql {
       op = " and ";
       break;
     default:
-      throw new DatabaseException("Invalid QueryParamList type: " + params.getType()); 
+      throw new DatabaseException("Invalid QueryParamList type: " + params.getType());
     }
     
     while(iter.hasNext()) {
@@ -191,10 +191,10 @@ public class Sql {
         Object value = param.getValue();
         
         attrElement = icssql.getElement("QUERY-ATTRIBUTE-TYPES").getChild(IcsSqlXML.ATTR_TAG + attributeType.toString());
-        
-        buf = addSqlCondition(attrElement.getChildText("COLNAME"), 
-                              attrElement.getChildText("COLTYPE"), 
-                              value, valueList, buf);
+
+          buf = addSqlCondition(attrElement.getChildText("COLNAME"),
+                  attrElement.getChildText("COLTYPE"),
+                  value, valueList, buf);
       }
       buf.append(") ");
     }
@@ -285,12 +285,15 @@ public class Sql {
     
     try {
       sqlElement =  icssql.getElement("QUERY-GETPERSONS");
-
       buf.append(sqlElement.getChildText("SQL-SELECT")).append(" ");
       buf.append(sqlElement.getChildText("SQL-FROM")).append(" ");
       buf.append(sqlElement.getChildText("SQL-JOIN")).append(" and ( ");
+      try {
+        buf = buildSql(icssql, params, null, buf);
+      }catch (Throwable e){
+        throw new DatabaseException("Build sql find error: " + e.getMessage());
+      }
 
-      buf = buildSql(icssql, params, null, buf);
       
       // The sqlJOIN currently has a sub-select with an open left-paren.
       // This is why we have an extraclose right-paren before the order 

@@ -4,10 +4,10 @@ logging:
   level: debug
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/openempi?charset=utf8&amp;useUnicode=true&amp;useSSL=false
-    username: root
-    password: root
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/openempi?charset=utf8&amp;useUnicode=true&amp;useSSL=false
+    username: xuning
+    password: openempi
     hikari:
       idle-timeout: 10000
       maximum-pool-size: 10
