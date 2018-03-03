@@ -71,11 +71,11 @@ public class Sql {
                                              Object value, 
                                              List valueList, 
                                              StringBuffer buf)
-    throws DatabaseException
   {
     String filterClause; // start with the column name.
-    boolean bind = (valueList != null);
+    boolean bind = (null != valueList);
 
+    try{
     if ((attrColType.compareToIgnoreCase(IcsSqlXML.ATTR_COLTYPE_USTRING) == 0) ||
         (attrColType.compareToIgnoreCase(IcsSqlXML.ATTR_COLTYPE_LIKE_USTRING) == 0)) {
       buf.append(" UPPER(").append(colName).append(")");
@@ -135,6 +135,9 @@ public class Sql {
         if (bind)
           valueList.add(value);
         buf.append(" = ").append(sVal);
+      }}
+      catch (Throwable e){
+          e.printStackTrace();
       }
     return buf;
   }
@@ -160,8 +163,8 @@ public class Sql {
     Element attrElement = null; 
     Iterator iter = params.iterator();
     boolean first = true;  // Set to false after first loop iteration
-    String op;             // SQL logical operand.  Either "or" or "and"
-    
+    String op = "or";             // SQL logical operand.  Either "or" or "and"
+
     switch (params.getType()) {
     case QueryParamList.OR_LIST:
       op = " or ";
@@ -169,8 +172,8 @@ public class Sql {
     case QueryParamList.AND_LIST:
       op = " and ";
       break;
-    default:
-      throw new DatabaseException("Invalid QueryParamList type: " + params.getType());
+//    default:
+//      throw new DatabaseException("Invalid QueryParamList type: " + params.getType());
     }
     
     while(iter.hasNext()) {
@@ -191,9 +194,21 @@ public class Sql {
         Object value = param.getValue();
         
         attrElement = icssql.getElement("QUERY-ATTRIBUTE-TYPES").getChild(IcsSqlXML.ATTR_TAG + attributeType.toString());
+        String colname = null;
+        try{
+          colname = attrElement.getChildText("COLNAME");
+        }catch (Throwable e){
+          try {
+            System.out.println(attributeType + "|" + colname + "|" + attrElement.getText());
+            e.printStackTrace();
+          } catch (Exception e1) {
+            e1.printStackTrace();
+          }
+        }
 
-          buf = addSqlCondition(attrElement.getChildText("COLNAME"),
-                  attrElement.getChildText("COLTYPE"),
+        String colType = attrElement.getChildText("COLTYPE");
+        buf = addSqlCondition(colname,
+                  colType,
                   value, valueList, buf);
       }
       buf.append(") ");
