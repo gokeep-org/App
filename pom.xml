@@ -330,11 +330,6 @@
         </dependency>
         <!--Requests-->
         <dependency>
-            <groupId>cn.networklab</groupId>
-            <artifactId>requests</artifactId>
-            <version>1.0.3</version>
-        </dependency>
-        <dependency>
             <groupId>org.openempi</groupId>
             <artifactId>ejb</artifactId>
             <version>1.0.0</version>
