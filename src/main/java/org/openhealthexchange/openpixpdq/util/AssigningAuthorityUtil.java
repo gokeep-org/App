@@ -72,15 +72,17 @@ public class AssigningAuthorityUtil {
      * @param description
      * @return <code>true</code> if the idDomain is valid.
      */
+    // TODO: 临时修改DOMAIN校验，不对domain做校验
     public static boolean validateDomain(Identifier id, IConnectionDescription description) {
-         if (id == null) return  false;
-
-         List<Identifier> identifiers = description.getAllIdentifiersByType("domain");
-         for (Identifier identifier : identifiers) {
-             if (identifier.equals(id))
-                return true;
-         }
-         return false;
+//         if (id == null) return  false;
+//
+//         List<Identifier> identifiers = description.getAllIdentifiersByType("domain");
+//         for (Identifier identifier : identifiers) {
+//             if (identifier.equals(id))
+//                return true;
+//         }
+//         return false;
+        return true;
     }
     
 
