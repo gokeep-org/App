@@ -31,13 +31,24 @@ public class ICSProperties {
         propFile = Utils.configDir(propFile);
     }
 
+    public static final String getOsType(){
+        String osName = System.getProperty("os.name");
+        if (osName.equalsIgnoreCase("Mac OS X")){
+            return "MAC";
+        }else if (osName.equalsIgnoreCase("win")){
+            return "WIN";
+        }else {
+            return "LINUX";
+        }
+    }
+
     private ICSProperties() {
     }
 
     public static void load() {
         try {
-            String filePath = ICSProperties.class.getResource("/ICS.properties").getPath();
-            File foo = new File(filePath);
+//            String filePath = ICSProperties.class.getResource("ICS.properties").getPath();
+            File foo = getOsType().equalsIgnoreCase("MAC") ? new File(ICSProperties.class.getResource("ICS.properties").getPath()):new File("/root/config/ICS.properties");
             long t = foo.lastModified();
             if (t > lastModified) {
                 lastModified = t;
