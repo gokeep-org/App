@@ -29,6 +29,7 @@
 package org.openhealthexchange.openpixpdq.util;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.misyshealthcare.connect.net.IConnectionDescription;
 import com.misyshealthcare.connect.net.Identifier;
@@ -74,15 +75,17 @@ public class AssigningAuthorityUtil {
      */
     // TODO: 临时修改DOMAIN校验，不对domain做校验
     public static boolean validateDomain(Identifier id, IConnectionDescription description) {
-//         if (id == null) return  false;
-//
-//         List<Identifier> identifiers = description.getAllIdentifiersByType("domain");
-//         for (Identifier identifier : identifiers) {
-//             if (identifier.equals(id))
-//                return true;
-//         }
-//         return false;
-        return true;
+         if (id == null) return  false;
+
+         List<Identifier> identifiers = description.getAllIdentifiersByType("domain");
+         for (Identifier identifier : identifiers) {
+             if (Objects.isNull(identifier)){
+                 continue;
+             }
+             if (identifier.getNamespaceId().equals(id.getNamespaceId()) && identifier.getUniversalId().equalsIgnoreCase(id.getUniversalId()) && id.getUniversalIdType().equalsIgnoreCase(id.getUniversalIdType()))
+                     return true;
+         }
+         return false;
     }
     
 

@@ -9,17 +9,17 @@
         <!--The port for PIX transaction-->
         <Port>3600</Port>
         <Identifier name="ReceivingApplication">
-            <NamespaceId>PAT_IDENTITY_X_REF_MGR_MISYS</NamespaceId>
+            <NamespaceId>CHAO_SI_PIX_MANAGER</NamespaceId>
             <!-- NamespaceId>MESA_XREF</NamespaceId-->
         </Identifier>
         <Identifier name="ReceivingFacility">
-            <NamespaceId>ALLSCRIPTS</NamespaceId>
+            <NamespaceId>CHAO_SI_PIX_FACILLITY</NamespaceId>
             <!-- NamespaceId>XYZ_HOSPITAL</NamespaceId-->
         </Identifier>
      
         <!-- If test is true, it will by pass some receiving application
              and receiving facility validation -->
-        <Property name="test" value="true"/>
+        <Property name="test" value="false"/>
 
         <!-- pixManagerAdapter - required :
             The java adapter class that provides the patient data source for this Pix Manager (required).

@@ -8,17 +8,17 @@
         <!--The port for PDQ Query transaction-->
         <Port>3601</Port>
         <Identifier name="ReceivingApplication">
-            <NamespaceId>PAT_IDENTITY_X_REF_MGR_MISYS</NamespaceId>
+            <NamespaceId>CHAO_SI_PDQ_MANAGER</NamespaceId>
             <!-- NamespaceId>MESA_PD_SUPPLIER</NamespaceId-->
         </Identifier>
         <Identifier name="ReceivingFacility">
-            <NamespaceId>ALLSCRIPTS</NamespaceId>
+            <NamespaceId>CHAO_SI_PDQ_FACILLITY</NamespaceId>
             <!-- NamespaceId>XYZ_HOSPITAL</NamespaceId-->
         </Identifier>
 
         <!-- If test is true, it will bypass receiving application
              and receiving facility validation -->
-        <Property name="test" value="true"/>
+        <Property name="test" value="false"/>
 
         <!-- PdSupplierAdapter - required:
           The java adapter class that provides the patient data source for this Patient Demographics Supplier 

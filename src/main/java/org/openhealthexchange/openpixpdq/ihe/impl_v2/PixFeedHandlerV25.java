@@ -184,6 +184,8 @@ class PixFeedHandlerV25 extends BaseHandler {
 	 */
 	private boolean validateDomain(ACK reply, PatientIdentifier patientId, String incomingMessageId) 
 	throws HL7Exception {
+		boolean  isTest = Boolean.parseBoolean(connection.getProperty("test"));
+		if (isTest) return true;
 		Identifier domain = patientId.getAssigningAuthority();
 		boolean domainOk = AssigningAuthorityUtil.validateDomain(
 				domain, connection);
@@ -275,7 +277,7 @@ class PixFeedHandlerV25 extends BaseHandler {
 		
 		//2.validate the domain
 		boolean isValidDomain = validateDomain(reply, patientId, incomingMessageId);
-//		if (!isValidDomain) return false;
+		if (!isValidDomain) return false;
 		
 		//3. validate ID itself 
 		if (!isPixCreate) { 
