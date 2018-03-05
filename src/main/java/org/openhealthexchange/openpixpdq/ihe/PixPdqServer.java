@@ -41,7 +41,10 @@ public class PixPdqServer {
 	}
 
 	public static void startPixPdqSocketServer(String iheConfigPath){
-		String defaultIheConfigPath = "/root/config/mesatests/actors/IheActors.xml";
+
+		String proIheConfigPath = "/root/config/mesatests/actors/IheActors.xml";
+		String devConfigPath = "/Users/xuning/workspace/idea/App/src/main/mesatests/actors/IheActors.xml";
+		String defaultIheConfigPath = getOsType().equalsIgnoreCase("MAC") ? devConfigPath : proIheConfigPath;
 		String configPath = StringUtils.isEmpty(iheConfigPath) ? defaultIheConfigPath : iheConfigPath;
 		ConfigurationLoader loader = ConfigurationLoader.getInstance();
 		try {
@@ -51,6 +54,17 @@ public class PixPdqServer {
 			printUsage();
 		}
 		System.out.println("SUCCESS: IHE Test server is enable");
+	}
+
+	public static final String getOsType(){
+		String osName = System.getProperty("os.name");
+		if (osName.equalsIgnoreCase("Mac OS X")){
+			return "MAC";
+		}else if (osName.equalsIgnoreCase("win")){
+			return "WIN";
+		}else {
+			return "LINUX";
+		}
 	}
 	
 	/**
