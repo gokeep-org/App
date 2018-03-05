@@ -7,17 +7,18 @@
     <groupId>com.app</groupId>
     <artifactId>Hl7App</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <name>Hl7App</name>
     <description>Hl7App</description>
 
     <modules>
         <!--<module>OauthServer</module>-->
-        <module>Empi</module>
+        <!--<module>Empi</module>-->
     </modules>
 
     <!--Maven相关配置属性-->
     <properties>
+        <start-class>com.app.AppStart</start-class>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -549,6 +550,78 @@
             <version>4.2.2.GA</version>
         </dependency>
 
+        <!--Other jar-->
+        <dependency>
+            <groupId>com.axiom</groupId>  <!--自定义-->
+            <artifactId>api</artifactId>    <!--自定义-->
+            <version>1.0</version> <!--自定义-->
+            <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+            <systemPath>${basedir}/src/main/lib/axiom-api-1.2.5.jar</systemPath> <!--项目根目录下的lib文件夹下-->
+        </dependency>
+        <dependency>
+            <groupId>com.axiom</groupId>  <!--自定义-->
+            <artifactId>dom</artifactId>    <!--自定义-->
+            <version>1.0</version> <!--自定义-->
+            <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+            <systemPath>${basedir}/src/main/lib/axiom-dom-1.2.5.jar</systemPath> <!--项目根目录下的lib文件夹下-->
+        </dependency>
+        <dependency>
+            <groupId>com.axiom</groupId>  <!--自定义-->
+            <artifactId>impl</artifactId>    <!--自定义-->
+            <version>1.0</version> <!--自定义-->
+            <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+            <systemPath>${basedir}/src/main/lib/axiom-impl-1.2.5.jar</systemPath> <!--项目根目录下的lib文件夹下-->
+        </dependency>
+        <dependency>
+            <groupId>com.beep</groupId>  <!--自定义-->
+            <artifactId>core</artifactId>    <!--自定义-->
+            <version>1.0</version> <!--自定义-->
+            <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+            <systemPath>${basedir}/src/main/lib/beepcore.jar</systemPath> <!--项目根目录下的lib文件夹下-->
+        </dependency>
+
+        <dependency>
+            <groupId>com.beep</groupId>  <!--自定义-->
+            <artifactId>sasl</artifactId>    <!--自定义-->
+            <version>1.0</version> <!--自定义-->
+            <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+            <systemPath>${basedir}/src/main/lib/beepsasl.jar</systemPath> <!--项目根目录下的lib文件夹下-->
+        </dependency>
+        <dependency>
+            <groupId>com.beep</groupId>  <!--自定义-->
+            <artifactId>pals</artifactId>    <!--自定义-->
+            <version>1.0</version> <!--自定义-->
+            <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+            <systemPath>${basedir}/src/main/lib/beeptls-ptls.jar</systemPath> <!--项目根目录下的lib文件夹下-->
+        </dependency>
+        <dependency>
+            <groupId>com.braid</groupId>  <!--自定义-->
+            <artifactId>base</artifactId>    <!--自定义-->
+            <version>1.0</version> <!--自定义-->
+            <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+            <systemPath>${basedir}/src/main/lib/braid-base-1.2.jar</systemPath> <!--项目根目录下的lib文件夹下-->
+        </dependency>
+        <dependency>
+            <groupId>com.hapi</groupId>  <!--自定义-->
+            <artifactId>all</artifactId>    <!--自定义-->
+            <version>1.0</version> <!--自定义-->
+            <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+            <systemPath>${basedir}/src/main/lib/hapi-0.5.1.jar</systemPath> <!--项目根目录下的lib文件夹下-->
+        </dependency>
+        <dependency>
+            <groupId>com.old.log4j</groupId>  <!--自定义-->
+            <artifactId>log4j</artifactId>    <!--自定义-->
+            <version>1.0</version> <!--自定义-->
+            <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+            <systemPath>${basedir}/src/main/lib/log4j-1.2.12.jar</systemPath> <!--项目根目录下的lib文件夹下-->
+        </dependency>
+        <dependency>
+            <groupId>com.relaxngDatatype</groupId>  <!--自定义-->
+            <artifactId>relaxngDatatype</artifactId>    <!--自定义-->
+            <version>1.0</version> <!--自定义-->
+            <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+            <systemPath>${basedir}/src/main/lib/relaxngDatatype.jar</systemPath> <!--项目根目录下的lib文件夹下-->
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -556,6 +629,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot-maven-plugin.version}</version>
+                <configuration><mainClass>com.app.AppStart</mainClass></configuration>
                 <executions>
                     <execution>
                         <goals>
