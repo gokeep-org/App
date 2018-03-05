@@ -38,7 +38,6 @@
         <javaee-api.version>7.0</javaee-api.version>
         <jest.version>2.0.1-SNAPSHOT</jest.version>
         <jolokia.version>1.3.5</jolokia.version>
-        <requests.version>1.0.0</requests.version>
         <hikaricp.version>2.6.1</hikaricp.version>
         <!-- HAPI Versions -->
         <hapi.version>2.3</hapi.version>
@@ -219,11 +218,6 @@
             <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
         <!--HTTP Client-->
-        <dependency>
-            <groupId>cn.networklab</groupId>
-            <artifactId>requests</artifactId>
-            <version>${requests.version}</version>
-        </dependency>
         <!-- Json字符串对象转换-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
