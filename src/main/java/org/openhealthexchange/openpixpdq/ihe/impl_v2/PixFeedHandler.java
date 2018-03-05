@@ -72,7 +72,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @version 1.0 Oct 22, 2008
  * 
  * @see org.openhealthexchange.openpixpdq.ihe.impl_v2.PixQueryHandler
- * @see org.openhealthexchange.openpixpdq.ihe.impl_v2.PixUpdateNotification
  */
 class PixFeedHandler extends BaseHandler implements Application {
 	private Hl7Log hl7Log = HL7EventContainer.build();
