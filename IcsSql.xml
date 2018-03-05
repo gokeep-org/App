@@ -112,7 +112,14 @@
                         <COLNAME>pi.dob</COLNAME>
                         <COLTYPE>String</COLTYPE>
                 </ATTR-25>
-
+                <ATTR-27>
+                        <COLNAME>pi.aa_univ_id</COLNAME>
+                        <COLTYPE>String</COLTYPE>
+                </ATTR-27>
+                <ATTR-28>
+                        <COLNAME>pi.aa_univ_id_type_cd</COLNAME>
+                        <COLTYPE>String</COLTYPE>
+                </ATTR-28>
         </QUERY-ATTRIBUTE-TYPES>
 
 

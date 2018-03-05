@@ -175,7 +175,7 @@ public class Sql {
 //    default:
 //      throw new DatabaseException("Invalid QueryParamList type: " + params.getType());
     }
-    
+
     while(iter.hasNext()) {
       if (first) {
         buf.append(" (");
@@ -192,8 +192,8 @@ public class Sql {
         QueryParam param = (QueryParam) p;
         Integer attributeType = param.getAttributeType();
         Object value = param.getValue();
-        
-        attrElement = icssql.getElement("QUERY-ATTRIBUTE-TYPES").getChild(IcsSqlXML.ATTR_TAG + attributeType.toString());
+        Element opElement = icssql.getElement("QUERY-ATTRIBUTE-TYPES");
+        attrElement = opElement.getChild(IcsSqlXML.ATTR_TAG + attributeType.toString());
         String colname = null;
         try{
           colname = attrElement.getChildText("COLNAME");
@@ -205,7 +205,6 @@ public class Sql {
             e1.printStackTrace();
           }
         }
-
         String colType = attrElement.getChildText("COLTYPE");
         buf = addSqlCondition(colname,
                   colType,

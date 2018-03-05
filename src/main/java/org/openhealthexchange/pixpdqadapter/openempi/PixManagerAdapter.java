@@ -55,28 +55,26 @@ public class PixManagerAdapter implements IPixManagerAdapter {
 	@Override	
 	public boolean isValidPatient(PatientIdentifier pid, MessageHeader header)
 			throws PixManagerException {
-//		boolean flag = false;
-//		Person person = new Person();
-//
-//		DocumentHeader dh = getHeader(header);
-//		person.addPersonIdentifier(getPid(dh, pid));
-//
-//		identityService = getIdentityService();
-//
-//		List<Patient> persons = null;
-//		try {
-//			persons = identityService.findPersons(person);
-//
-//		} catch (Exception e) {
-//			throw new PixManagerException(e);
-//		}
-//
-//		if (persons != null && persons.size() != 0) {
-//			flag = true;
-//		}
-//
-//		return flag;
-		return true;
+		boolean flag = true;
+		Person person = new Person();
+
+		DocumentHeader dh = getHeader(header);
+		person.addPersonIdentifier(getPid(dh, pid));
+
+		identityService = getIdentityService();
+
+		List<Patient> persons = null;
+		try {
+			persons = identityService.findPersons(person);
+
+		} catch (Exception e) {
+			throw new PixManagerException(e);
+		}
+
+		if (persons != null && persons.size() != 0) {
+			flag = true;
+		}
+		return flag;
 	}
 
 	private boolean isValidIdentifier(Identifier id) {
