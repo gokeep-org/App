@@ -41,7 +41,7 @@ public class PixPdqServer {
 	}
 
 	public static void startPixPdqSocketServer(String iheConfigPath){
-		String defaultIheConfigPath = "/Users/xuning/workspace/idea/App/src/main/mesatests/actors/IheActors.xml";
+		String defaultIheConfigPath = "/root/config/mesatests/actors/IheActors.xml";
 		String configPath = StringUtils.isEmpty(iheConfigPath) ? defaultIheConfigPath : iheConfigPath;
 		ConfigurationLoader loader = ConfigurationLoader.getInstance();
 		try {
