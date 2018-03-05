@@ -8,23 +8,29 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
 
-@Configuration
 public class HL7EventContainer implements Hl7Log{
+
+    private HL7EventContainer(){}
     private static BlockingQueue<String> iheMessageQueue;
     private static final Logger logger = LoggerFactory.getLogger(HL7EventContainer.class);
-
-    @Bean
-    public HazelcastInstance hazelcastInstance() {
+    private static HL7EventContainer instance;
+    private static HazelcastInstance hazelcastClient;
+    static {
         Config config = new Config();
-        HazelcastInstance hazelcastClient = Hazelcast.newHazelcastInstance(config);
-        iheMessageQueue = hazelcastClient.getQueue("ihe-message-queue");
-        return hazelcastClient;
+        if (Objects.isNull(hazelcastClient)){
+            hazelcastClient = Hazelcast.newHazelcastInstance(config);
+        }
     }
 
-    public static BlockingQueue<String> build() {
-        return iheMessageQueue;
+    public static HL7EventContainer build() {
+        iheMessageQueue = hazelcastClient.getQueue("ihe-message-queue");
+        if (Objects.isNull(instance)){
+            instance = new HL7EventContainer();
+        }
+        return instance;
     }
 
 
