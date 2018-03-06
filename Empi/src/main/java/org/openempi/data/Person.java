@@ -1128,6 +1128,8 @@ public class Person extends TransientObject {
                     isEqual = false;
                 }else if (!getAccountNumbers().equals(other.getAccountNumbers())) {
                     isEqual = false;
+                }else if (!getDocumentHeaders().equals(other.getDocumentHeaders())){
+                    isEqual = false;
                 }
             }
         }
