@@ -46,9 +46,13 @@ public class ICSProperties {
     }
 
     public static void load() {
+        String icsPath = "/Users/xuning/workspace/idea/App/ICS.properties";
         try {
+            if (!getOsType().equalsIgnoreCase("MAC")) {
+                icsPath = "/root/config/ICS.properties";
+            }
 //            String filePath = ICSProperties.class.getResource("ICS.properties").getPath();
-            File foo = getOsType().equalsIgnoreCase("MAC") ? new File(ICSProperties.class.getResource("ICS.properties").getPath()):new File("/root/config/ICS.properties");
+            File foo =  new File(icsPath);
             long t = foo.lastModified();
             if (t > lastModified) {
                 lastModified = t;
