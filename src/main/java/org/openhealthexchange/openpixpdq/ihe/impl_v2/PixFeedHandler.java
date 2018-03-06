@@ -120,7 +120,7 @@ class PixFeedHandler extends BaseHandler implements Application {
      */
 	public Message processMessage(Message msgIn) throws ApplicationException,
 			HL7Exception {
-		hl7Log.put(msgIn.toString());
+		hl7Log.put(msgIn;
 		Message retMessage = null;
 		MessageStore store = actor.initMessageStore(msgIn, true);
 		//String encodedMessage = HapiUtil.encodeMessage(msgIn);
@@ -164,7 +164,7 @@ class PixFeedHandler extends BaseHandler implements Application {
 				actor.saveMessageStore(retMessage, false, store);			
 			}						
 		}
-		hl7Log.put(retMessage.toString());
+		hl7Log.put(retMessage);
 		return retMessage;
 	}
 
