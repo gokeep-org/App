@@ -1,5 +1,6 @@
 package com.app.hl7;
 
+import ca.uhn.hl7v2.model.Message;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
@@ -14,7 +15,7 @@ import java.util.concurrent.BlockingQueue;
 public class HL7EventContainer implements Hl7Log{
 
     private HL7EventContainer(){}
-    private static BlockingQueue<String> iheMessageQueue;
+    private static BlockingQueue<Message> iheMessageQueue;
     private static final Logger logger = LoggerFactory.getLogger(HL7EventContainer.class);
     private static HL7EventContainer instance;
     private static HazelcastInstance hazelcastClient;
@@ -34,7 +35,7 @@ public class HL7EventContainer implements Hl7Log{
     }
 
 
-    public void put(String message) {
+    public void put(Message message) {
         try {
             iheMessageQueue.put(message);
         } catch (InterruptedException e) {
@@ -42,7 +43,7 @@ public class HL7EventContainer implements Hl7Log{
         }
     }
 
-    public void offer(String message) {
+    public void offer(Message message) {
         try {
             iheMessageQueue.offer(message);
         } catch (Throwable e) {
@@ -51,7 +52,7 @@ public class HL7EventContainer implements Hl7Log{
     }
 
 
-    public String take() {
+    public Message take() {
         try {
             return iheMessageQueue.take();
         } catch (InterruptedException e) {

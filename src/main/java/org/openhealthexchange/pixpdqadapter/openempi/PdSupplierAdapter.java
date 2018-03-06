@@ -23,6 +23,7 @@ import org.openempi.data.*;
 import org.openempi.data.PersonIdentifier;
 import org.openempi.ics.pids.IdentityService;
 import org.openempi.ics.pids.IdentityServiceHome;
+import org.openempi.ics.pids.IdentityServiceImpl;
 import org.openhealthexchange.openpixpdq.data.DriversLicense;
 import org.openhealthexchange.openpixpdq.data.*;
 import org.openhealthexchange.openpixpdq.data.PersonName;
@@ -624,7 +625,7 @@ public class PdSupplierAdapter implements IPdSupplierAdapter {
 	private IdentityService getIdentityService() {
 		try {
 			if (identityService == null) {
-				identityService = getIdentityServiceHome().create();
+				identityService = new IdentityServiceImpl();
 			}
 		} catch (Exception e) {
 			 log.error("Failed while attempting to retrieve reference to the IdentityService. Error: " + e);
