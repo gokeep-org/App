@@ -24,6 +24,8 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Set;
 
+import ca.uhn.hl7v2.parser.Parser;
+import com.app.hl7.HL7EventContainer;
 import org.apache.log4j.Logger;
 import org.openhealthexchange.openpixpdq.data.DriversLicense;
 import org.openhealthexchange.openpixpdq.data.MessageHeader;
@@ -103,6 +105,7 @@ class PdQueryHandler extends BaseHandler implements Application {
     private IPdSupplierAdapter pdqAdapter = null;
     /** Used to store continuation pointer  <String(pointer), ContinuationPointer> */
     private static Hashtable<String, ContinuationPointer> dscMap = new Hashtable<String, ContinuationPointer>();
+    private static HL7EventContainer hl7EventContainer = HL7EventContainer.build();
     
     /**
      * Constructor 
@@ -137,7 +140,10 @@ class PdQueryHandler extends BaseHandler implements Application {
      * @param msgIn the incoming PDQ query message
      */
     public Message processMessage(Message msgIn) throws ApplicationException, HL7Exception {
-   		Message retMessage = null;
+        Parser parser = new PipeParser();
+        String encodedMessage = parser.encode(msgIn);
+        hl7EventContainer.put(encodedMessage);
+        Message retMessage = null;
     	MessageStore store = actor.initMessageStore(msgIn, true);
    		try {
    			HL7Header hl7Header = new HL7Header(msgIn);
@@ -171,6 +177,8 @@ class PdQueryHandler extends BaseHandler implements Application {
 				actor.saveMessageStore(retMessage, false, store);			
 			}						
 		}
+        String outMessage = parser.encode(retMessage);
+        hl7EventContainer.put(outMessage);
 		return retMessage;
     }
 

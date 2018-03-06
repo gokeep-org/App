@@ -15,9 +15,6 @@
 package org.openhealthexchange.openpixpdq.ihe.impl_v2;
 
 import java.util.List;
-
-import com.app.hl7.HL7EventContainer;
-import com.app.hl7.Hl7Log;
 import org.apache.log4j.Logger;
 import org.openhealthexchange.openpixpdq.data.MessageHeader;
 import org.openhealthexchange.openpixpdq.data.Patient;
@@ -59,7 +56,6 @@ import com.misyshealthcare.connect.base.audit.AuditCodeMappings;
 import com.misyshealthcare.connect.base.audit.AuditCodeMappings.EventActionCode;
 import com.misyshealthcare.connect.net.IConnectionDescription;
 import com.misyshealthcare.connect.net.Identifier;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * This class processes PIX Feed message in HL7 v2.3.1 format. It 
@@ -74,7 +70,6 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @see org.openhealthexchange.openpixpdq.ihe.impl_v2.PixQueryHandler
  */
 class PixFeedHandler extends BaseHandler implements Application {
-	private Hl7Log hl7Log = HL7EventContainer.build();
     private static Logger log = Logger.getLogger(PixFeedHandler.class);
 	private PixManager actor = null;
 	private IPixManagerAdapter pixAdapter = null;
@@ -120,7 +115,6 @@ class PixFeedHandler extends BaseHandler implements Application {
      */
 	public Message processMessage(Message msgIn) throws ApplicationException,
 			HL7Exception {
-		hl7Log.put(msgIn);
 		Message retMessage = null;
 		MessageStore store = actor.initMessageStore(msgIn, true);
 		//String encodedMessage = HapiUtil.encodeMessage(msgIn);
@@ -164,7 +158,6 @@ class PixFeedHandler extends BaseHandler implements Application {
 				actor.saveMessageStore(retMessage, false, store);			
 			}						
 		}
-		hl7Log.put(retMessage);
 		return retMessage;
 	}
 

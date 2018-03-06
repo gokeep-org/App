@@ -120,6 +120,10 @@
                         <COLNAME>pi.aa_univ_id_type_cd</COLNAME>
                         <COLTYPE>String</COLTYPE>
                 </ATTR-28>
+                <ATTR-29>
+                        <COLNAME>pi.address_1</COLNAME>
+                        <COLTYPE>String</COLTYPE>
+                </ATTR-29>
         </QUERY-ATTRIBUTE-TYPES>
 
 
