@@ -17,10 +17,26 @@
              * 通过消息名称显示输出
              **/
             showLogByName("");
+            getNtpServerTime();
+
+            function getNtpServerTime() {
+                $.ajax({
+                    // ADT_A01，
+                    url: "/hl7/ct",
+                    method: "POST",
+                    success: function (result) {
+                        $("#ntp_server_time").text(result['res']);
+                    },
+                    error: function (result) {
+                        console.log("send get ntp server is fail");
+                    }
+                });
+            }
             function showLogByName(name) {
                 globalMessageName = name;
                 var interval = setInterval(flushResult, 2000);
                 intervals.push(interval);
+
 
                 function flushResult() {
                     $('#main_div').scrollTop($('#main_div')[0].scrollHeight);
@@ -136,8 +152,7 @@
             });
 
             $("#CLEAN_RESULT_BTN").click(function () {
-                stopAllInterval();
-                cleanResult();
+                $("#main_div").text("");
             });
 
             $("#SEND_ADT01_BTN").click(function () {
@@ -171,6 +186,10 @@
                 );
             });
 
+            $("#FLUSH_NTP_TIME_BTN").click(function () {
+                getNtpServerTime();
+            });
+
         });
     </script>
 </head>
@@ -180,6 +199,7 @@
 <button id="SEND_ADT01_BTN">发送ADT_01类型消息</button>
 <button id="CLEAN_RESULT_BTN">清空控制台</button>
 <button id="INTERVAL_SEND_BTN">定时发送/5s</button>
+<button id="FLUSH_NTP_TIME_BTN">ntp server time<span id="ntp_server_time"></span></button>
 <hr/>
 
 

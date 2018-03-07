@@ -1,6 +1,7 @@
 package com.app.hl7;
 
 import org.apache.commons.net.ntp.NTPUDPClient;
+import org.apache.commons.net.ntp.NtpUtils;
 import org.apache.commons.net.ntp.TimeInfo;
 import org.apache.commons.net.ntp.TimeStamp;
 import org.junit.After;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -57,6 +59,21 @@ public class NTPTest {
         return getDateTimeFromNtpServer(ntpAddress);
     }
 
+    @Test
+    public void testLwNtpServer(){
+        getDateTimeFromNtpServer("us.ntp.org.cn");
+    }
+
+    @Test
+    public void customtest() throws IOException {
+        String TIME_SERVER = "utcnist.colorado.edu";
+        NTPUDPClient timeClient = new NTPUDPClient();
+        InetAddress inetAddress = InetAddress.getByName(TIME_SERVER);
+        TimeInfo timeInfo = timeClient.getTime(inetAddress);
+        long returnTime = timeInfo.getReturnTime();
+        Date time = new Date(returnTime);
+        System.out.println("Time from " + TIME_SERVER + ": " + time);
+    }
     @Ignore("自定义地址与NTP时间服务器同步时间方法")
     public String getDateTimeFromNtpServer(String ntpAddress){
         try {
@@ -64,6 +81,8 @@ public class NTPTest {
             InetAddress timeServerAddress = InetAddress.getByName(ntpAddress);
             TimeInfo timeInfo = timeClient.getTime(timeServerAddress);
             TimeStamp timeStamp = timeInfo.getMessage().getTransmitTimeStamp();
+            Long nowTime = new Date().getTime();
+            logger.info("Now date {}, ntp server data: {}", nowTime,timeStamp.getDate().getTime());
             return dateFormat.format(timeStamp.getDate());
         } catch (Throwable e) {
             logger.error("与ntp服务器同步时间错误！", e);

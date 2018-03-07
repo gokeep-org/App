@@ -1,6 +1,7 @@
 package com.app.rest;
 
 import ca.uhn.hl7v2.model.Message;
+import ca.uhn.hl7v2.parser.PipeParser;
 import com.app.hl7.*;
 
 import org.slf4j.Logger;
@@ -48,6 +49,7 @@ public class HlRest {
         String ntpServerTime = NtpUtil.getDateTimeFromNtpServer(ntpServerName);
         Map<String, String> res = new HashMap<>();
         res.put("res", ntpServerTime);
+        HL7EventContainer.queue.offer("From ntp server "+ntpServerName+" receiver time string is " + ntpServerTime+", now date is: "+NtpUtil.smartFormtTime(new Date().getTime()));
         return res;
     }
 
@@ -86,8 +88,10 @@ public class HlRest {
             String host = body.get("host").toString();
             int port = Integer.parseInt(body.get("port").toString());
             String message = body.get("message").toString();
+            result.put("res", message);
             SendAndReceiveAMessage sendClient = SendAndReceiveAMessage.build().buildAddess(host, port);
-            sendClient.sendMessage(message);
+            Message message1 = sendClient.sendMessage(message);
+            result.put("res", new PipeParser().encode(message1));
         }catch (Throwable e){
             result.put("res", "proxy send error");
             logger.error("proxy send hl7 message find fail");
@@ -117,4 +121,9 @@ public class HlRest {
 //        result.put("success", true);
 //        return result;
 //    }
+    @RequestMapping(path = "/client", method = RequestMethod.GET)
+    public String client(){
+        return "client";
+    }
+
 }
