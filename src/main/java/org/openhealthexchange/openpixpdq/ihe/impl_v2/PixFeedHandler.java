@@ -15,6 +15,9 @@
 package org.openhealthexchange.openpixpdq.ihe.impl_v2;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import com.app.hl7.HL7EventContainer;
 import org.apache.log4j.Logger;
 import org.openhealthexchange.openpixpdq.data.MessageHeader;
 import org.openhealthexchange.openpixpdq.data.Patient;
@@ -25,10 +28,7 @@ import org.openhealthexchange.openpixpdq.ihe.PixManagerException;
 import org.openhealthexchange.openpixpdq.ihe.PixUpdateNotifier;
 import org.openhealthexchange.openpixpdq.ihe.audit.ParticipantObject;
 import org.openhealthexchange.openpixpdq.ihe.configuration.IheConfigurationException;
-import org.openhealthexchange.openpixpdq.ihe.impl_v2.hl7.HL7Channel;
-import org.openhealthexchange.openpixpdq.ihe.impl_v2.hl7.HL7Header;
-import org.openhealthexchange.openpixpdq.ihe.impl_v2.hl7.HL7v231;
-import org.openhealthexchange.openpixpdq.ihe.impl_v2.hl7.HL7v231ToBaseConvertor;
+import org.openhealthexchange.openpixpdq.ihe.impl_v2.hl7.*;
 import org.openhealthexchange.openpixpdq.ihe.log.MessageStore;
 import org.openhealthexchange.openpixpdq.util.AssigningAuthorityUtil;
 import org.openhealthexchange.openpixpdq.util.ExceptionUtil;
@@ -115,6 +115,11 @@ class PixFeedHandler extends BaseHandler implements Application {
      */
 	public Message processMessage(Message msgIn) throws ApplicationException,
 			HL7Exception {
+		try {
+			HL7EventContainer.queue.offer(HL7Util.encodeMessage(msgIn), 500, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) {
+			log.error("Put output message off is fail");
+		}
 		Message retMessage = null;
 		MessageStore store = actor.initMessageStore(msgIn, true);
 		//String encodedMessage = HapiUtil.encodeMessage(msgIn);
@@ -157,6 +162,11 @@ class PixFeedHandler extends BaseHandler implements Application {
 			if (store !=null) { 
 				actor.saveMessageStore(retMessage, false, store);			
 			}						
+		}
+		try {
+			HL7EventContainer.queue.offer(HL7Util.encodeMessage(retMessage), 500, TimeUnit.MILLISECONDS);
+		} catch (InterruptedException e) {
+			log.error("Put output message off is fail");
 		}
 		return retMessage;
 	}

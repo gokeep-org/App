@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import ca.uhn.hl7v2.parser.Parser;
 import com.app.hl7.HL7EventContainer;
@@ -78,7 +79,6 @@ import ca.uhn.hl7v2.parser.PipeParser;
 import ca.uhn.hl7v2.util.Terser;
 
 import com.misyshealthcare.connect.base.PatientException;
-import com.misyshealthcare.connect.base.PatientQuery;
 import com.misyshealthcare.connect.base.SharedEnums;
 import com.misyshealthcare.connect.base.SharedEnums.PhoneType;
 import com.misyshealthcare.connect.base.audit.ActiveParticipant;
@@ -105,7 +105,6 @@ class PdQueryHandler extends BaseHandler implements Application {
     private IPdSupplierAdapter pdqAdapter = null;
     /** Used to store continuation pointer  <String(pointer), ContinuationPointer> */
     private static Hashtable<String, ContinuationPointer> dscMap = new Hashtable<String, ContinuationPointer>();
-    private static HL7EventContainer hl7EventContainer = HL7EventContainer.build();
     
     /**
      * Constructor 
@@ -140,9 +139,11 @@ class PdQueryHandler extends BaseHandler implements Application {
      * @param msgIn the incoming PDQ query message
      */
     public Message processMessage(Message msgIn) throws ApplicationException, HL7Exception {
-        Parser parser = new PipeParser();
-        String encodedMessage = parser.encode(msgIn);
-        hl7EventContainer.put(encodedMessage);
+        try {
+            HL7EventContainer.queue.offer(HL7Util.encodeMessage(msgIn), 500, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            log.error("Put input message off is fail");
+        }
         Message retMessage = null;
     	MessageStore store = actor.initMessageStore(msgIn, true);
    		try {
@@ -177,9 +178,12 @@ class PdQueryHandler extends BaseHandler implements Application {
 				actor.saveMessageStore(retMessage, false, store);			
 			}						
 		}
-        String outMessage = parser.encode(retMessage);
-        hl7EventContainer.put(outMessage);
-		return retMessage;
+        try {
+            HL7EventContainer.queue.offer(HL7Util.encodeMessage(retMessage), 500, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            log.error("Put output message off is fail");
+        }
+        return retMessage;
     }
 
     /**

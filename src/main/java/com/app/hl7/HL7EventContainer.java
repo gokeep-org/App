@@ -1,62 +1,62 @@
 package com.app.hl7;
 
-import ca.uhn.hl7v2.model.Message;
-import com.hazelcast.config.Config;
-import com.hazelcast.core.Hazelcast;
-import com.hazelcast.core.HazelcastInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-import java.util.Objects;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
-public class HL7EventContainer implements Hl7Log{
-
-    private HL7EventContainer(){}
-    private static BlockingQueue<String> iheMessageQueue;
-    private static final Logger logger = LoggerFactory.getLogger(HL7EventContainer.class);
-    private static HL7EventContainer instance;
-    private static HazelcastInstance hazelcastClient;
-    static {
-        Config config = new Config();
-        if (Objects.isNull(hazelcastClient)){
-            hazelcastClient = Hazelcast.newHazelcastInstance(config);
-        }
-    }
-
-    public static HL7EventContainer build() {
-        iheMessageQueue = hazelcastClient.getQueue("ihe-message-queue");
-        if (Objects.isNull(instance)){
-            instance = new HL7EventContainer();
-        }
-        return instance;
-    }
-
-
-    public void put(String message) {
-        try {
-            iheMessageQueue.put(message);
-        } catch (InterruptedException e) {
-            return;
-        }
-    }
-
-    public void offer(String message) {
-        try {
-            iheMessageQueue.offer(message);
-        } catch (Throwable e) {
-            return;
-        }
-    }
-
-
-    public String take() {
-        try {
-            return iheMessageQueue.take();
-        } catch (InterruptedException e) {
-            return null;
-        }
-    }
+public class HL7EventContainer{
+    /**
+     * 这里是所有消息的输出缓存容器
+     * key为消息的名称，key`为时间戳， value`输出体
+     */
+    public static final BlockingQueue<String> queue = new LinkedBlockingQueue<>(100000000);
+    public static final Logger logger = LoggerFactory.getLogger(HL7EventContainer.class);
+//
+//
+//    public void offer(String message){
+//        queue.offer(message);
+//    }
+//
+//    public void put(){
+//
+//    }
+//    public static final void addResult(String mshName, Long time, String response){
+//        queue.
+//        Map<Long, String> event = new HashMap<>();
+//        event.put(time, response);
+//        result.put(mshName, event);
+//    }
+//
+//    public static final void delResultByMshName(String msh){
+//        try{
+//            result.remove(msh);
+//        }catch (Throwable e){
+//            logger.error("delete reponse result fail, ", e.getMessage());
+//        }
+//    }
+//
+//    public static final Map<Long, String> getEventByMshName(String mshhName){
+//        return result.get(mshhName);
+//    }
+//
+//    public static final void process(Message requestMessage, String response){
+//        String name = requestMessage.getName();
+//        Map<Long, String> middleMap = getEventByMshName(name);
+//        if (Objects.isNull(middleMap)){
+//            addResult(name, new Date().getTime(), response);
+//            return;
+//        }
+//        middleMap.put(new Date().getTime(), response);
+//    }
+//
+//    public static final void addOutput(Message message){
+//        String name = message.getName();
+//        Map<Long, String> middleMap = getEventByMshName(name);
+//        if (Objects.isNull(middleMap)){
+//            addResult(name, new Date().getTime(), message.toString());
+//            return;
+//        }
+//        middleMap.put(new Date().getTime(), message.toString());
+//    }
 }

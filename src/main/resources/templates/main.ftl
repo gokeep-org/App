@@ -16,6 +16,7 @@
             /**
              * 通过消息名称显示输出
              **/
+            showLogByName("");
             function showLogByName(name) {
                 globalMessageName = name;
                 var interval = setInterval(flushResult, 2000);
@@ -25,12 +26,15 @@
                     $('#main_div').scrollTop($('#main_div')[0].scrollHeight);
                     $.ajax({
                         // ADT_A01，
-                        url: "/hl7/flush?name=" + globalMessageName,
+                        url: "/hl7/flush",
                         method: "POST",
                         success: function (result) {
                             for (var key in result) {
+                                if (key == 0){
+                                    continue;
+                                }
                                 var id = "#" + key;
-                                if ($(id).length <= 0) {
+                                if (result[key] != "no_value") {
                                     var time = new Date().toLocaleString(Number(key)).replace(/\//g, "-").replace("上午", "").replace("下午", "")
                                     $("#main_div").append("<li id='" + key + "' style='float: left;'>" + time + ": " + result[key] + "</li><br/>");
                                 }
@@ -105,7 +109,7 @@
              */
             function startAllListenSocket() {
                 for (var i = 0; i < logNames.length; i++) {
-                    showLogByName(logNames[i])
+                    showLogByName(logNames[i]);
                 }
             }
 
