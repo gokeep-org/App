@@ -8,15 +8,20 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openhealthexchange.openpixpdq.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 从NTF服务器获取时间并且同步本地时间
@@ -65,14 +70,38 @@ public class NTPTest {
     }
 
     @Test
+    public void testRuntime(){
+        Process process = null;
+        String shpath="/Users/xuning/workspace/idea/App/script/sync.sh";
+        String command = "/bin/sh " + shpath;
+        List<String> processList = new ArrayList<String>();
+
+        try {
+            process = Runtime.getRuntime().exec(command);
+            BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = "";
+            while ((line = input.readLine()) != null) {
+                processList.add(line);
+            }
+            input.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (String line : processList) {
+            System.out.println(line);
+        }
+    }
+
+    @Test
     public void customtest() throws IOException {
-        String TIME_SERVER = "utcnist.colorado.edu";
+        String TIME_SERVER = "gazelle.ihe-c.org";
         NTPUDPClient timeClient = new NTPUDPClient();
         InetAddress inetAddress = InetAddress.getByName(TIME_SERVER);
         TimeInfo timeInfo = timeClient.getTime(inetAddress);
-        long returnTime = timeInfo.getReturnTime();
+        long returnTime = timeInfo.getMessage().getTransmitTimeStamp().getTime();
         Date time = new Date(returnTime);
-        System.out.println("Time from " + TIME_SERVER + ": " + time);
+        System.out.println("Time from " + TIME_SERVER + ": " + time.getTime());
+        System.out.println("Time: "+(returnTime-new Date().getTime()));
     }
     @Ignore("自定义地址与NTP时间服务器同步时间方法")
     public String getDateTimeFromNtpServer(String ntpAddress){

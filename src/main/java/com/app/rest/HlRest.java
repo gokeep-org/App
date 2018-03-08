@@ -4,8 +4,10 @@ import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.parser.PipeParser;
 import com.app.hl7.*;
 
+import com.app.hl7.task.SyncTimeFromNtp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,8 @@ public class HlRest {
     private static final Logger logger = LoggerFactory.getLogger(HlRest.class);
 //    @Autowired
 //    private UserService userService;
+    @Autowired
+    SyncTimeFromNtp syncTimeFromNtp;
     @RequestMapping(path = "/main", method = RequestMethod.GET)
     public String test(HttpServletRequest servletContextEvent){
 //        ListenHL7Socket socket = (ListenHL7Socket) servletContextEvent.getAttribute(HlServerListener.KEYWORD_SOCKET);
@@ -46,6 +50,7 @@ public class HlRest {
     @ResponseBody
     @RequestMapping(path = "/ct", method = RequestMethod.POST)
     public Map<String, String> ct(@RequestParam(value = "ntp_server",  defaultValue = "cn.ntp.org.cn") String ntpServerName){
+        syncTimeFromNtp.execute();
         String ntpServerTime = NtpUtil.getDateTimeFromNtpServer(ntpServerName);
         Map<String, String> res = new HashMap<>();
         res.put("res", ntpServerTime);
