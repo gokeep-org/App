@@ -9,6 +9,8 @@ public class Hl7MessageListenThread extends Thread{
     private static final Logger logger = LoggerFactory.getLogger(Hl7MessageListenThread.class);
     @Override
     public void run() {
-        PixPdqServer.startPixPdqSocketServer(null);
+        if (Hl7ComonConfig.ENABLE_PIX_PDQ_SERVER){
+            PixPdqServer.startPixPdqSocketServer(null);
+        }
     }
 }

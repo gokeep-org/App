@@ -22,14 +22,17 @@ import java.util.Objects;
 @RequestMapping("/hl7")
 public class HlRest {
     private static final Logger logger = LoggerFactory.getLogger(HlRest.class);
-//    @Autowired
-//    private UserService userService;
+
     @Autowired
     SyncTimeFromNtp syncTimeFromNtp;
     @RequestMapping(path = "/main", method = RequestMethod.GET)
     public String test(HttpServletRequest servletContextEvent){
-//        ListenHL7Socket socket = (ListenHL7Socket) servletContextEvent.getAttribute(HlServerListener.KEYWORD_SOCKET);
         return "main";
+    }
+
+    @RequestMapping(path = "/rid", method = RequestMethod.GET)
+    public String rid(HttpServletRequest servletContextEvent){
+        return "rid";
     }
 
     @ResponseBody

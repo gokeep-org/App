@@ -312,6 +312,7 @@
                 <select class="col-sm-6" id="preferredContentType">
                     <option selected="selected">application/jpg</option>
                     <option>application/pdf</option>
+                    <option>application/error</option>
                 </select>
                 <!--<div class="col-sm-6">-->
                     <!--<input type="text" class="form-control" id="preferredContentType" placeholder="" value="application/jpg">-->

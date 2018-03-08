@@ -1,12 +1,13 @@
 package com.app.hl7.task;
 
+import com.app.hl7.Hl7ComonConfig;
+import com.app.hl7.NtpUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +19,12 @@ public class SyncTimeFromNtp {
 
     @Scheduled(cron = "0 0/2 * * * ?")
     public void execute() {
+        if (!Hl7ComonConfig.ENABLE_CT_SYNC){
+            return;
+        }
+        if (!NtpUtil.getOsType().equalsIgnoreCase("MAC")){
+            return;
+        }
         try {
             Process process = null;
             String shpath = "/Users/xuning/workspace/idea/App/script/sync.sh";
