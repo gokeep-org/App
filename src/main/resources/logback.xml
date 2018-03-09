@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="3 seconds">
+
+    <property name="LOG_HOME" value="temp\\logs"/>
+
+    <appender name="CONSOLE-LOGGER" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %level %logger{200}.%M:%line - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE-LOGGER-ALL" class="ch.qos.logback.classic.sift.SiftingAppender">
+
+        <discriminator>
+            <key>logFileName</key>
+            <defaultValue>deepradar-all</defaultValue>
+        </discriminator>
+
+        <sift>
+
+            <appender name="FILE-${logFileName}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>${LOG_HOME}/${logFileName}.log</file>
+
+                <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                    <Pattern>
+                        %d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %level %logger{200}.%M:%line - %msg%n
+                    </Pattern>
+                </encoder>
+
+                <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+                    <FileNamePattern>${LOG_HOME}/${logFileName}.%i.log.zip
+                    </FileNamePattern>
+                    <MinIndex>1</MinIndex>
+                    <MaxIndex>10</MaxIndex>
+                </rollingPolicy>
+
+                <triggeringPolicy
+                        class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+                    <MaxFileSize>300MB</MaxFileSize>
+                </triggeringPolicy>
+
+            </appender>
+
+        </sift>
+    </appender>
+
+    <appender name="FILE-LOGGER" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>logFileName</key>
+            <defaultValue>deepradar</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="FILE-${logFileName}" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                <file>${LOG_HOME}/${logFileName}.log</file>
+                <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                    <Pattern>
+                        %d{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %level %logger{200}.%M:%line - %msg%n
+                    </Pattern>
+                </encoder>
+                <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+                    <FileNamePattern>${LOG_HOME}/${logFileName}.%i.log.zip
+                    </FileNamePattern>
+                    <MinIndex>1</MinIndex>
+                    <MaxIndex>10</MaxIndex>
+                </rollingPolicy>
+                <triggeringPolicy
+                        class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+                    <MaxFileSize>300MB</MaxFileSize>
+                </triggeringPolicy>
+            </appender>
+        </sift>
+    </appender>
+
+    <!-- ************************ DEFAULT SETTINGS START ************************ -->
+
+    <root level="error">
+        <appender-ref ref="FILE-LOGGER-ALL"/>
+    </root>
+
+    <logger name="cn.com.deepdata.deepradar" level="debug" additivity="true">
+        <appender-ref ref="FILE-LOGGER-ALL"/>
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+
+    <logger name="cn.com.deepdata.deepradar.client.DeepRadar" level="debug" additivity="true">
+        <appender-ref ref="FILE-LOGGER-ALL"/>
+        <appender-ref ref="FILE-LOGGER"/>
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+    <logger name="cn.com.deepdata.deepradar.client.DeepRadarContext" level="debug" additivity="true">
+        <appender-ref ref="FILE-LOGGER-ALL"/>
+        <appender-ref ref="FILE-LOGGER"/>
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+
+    <logger name="org.glassfish" level="warn" additivity="true">
+        <appender-ref ref="FILE-LOGGER-ALL"/>
+        <appender-ref ref="FILE-LOGGER"/>
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    </logger>
+
+    <logger name="us.codecraft.webmagic" level="warn" additivity="true">
+        <appender-ref ref="FILE-LOGGER-ALL"/>
+        <appender-ref ref="FILE-LOGGER"/>
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    </logger>
+
+    <!-- ************************ DEFAULT SETTINGS END ************************ -->
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <logger name="cn.com.deepdata.deepradar.client.spider.processor.lawinfo.LawInfoPageProcessor" level="trace" additivity="true">
+        <appender-ref ref="FILE-LOGGER"/>
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+    <logger name="cn.com.deepdata.deepradar.client.spider.task.producer.lawinfo" level="trace" additivity="true">
+        <appender-ref ref="FILE-LOGGER"/>
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+    <logger name="cn.com.deepdata.deepradar.client.spider.processor.lawinfo" level="trace" additivity="true">
+        <appender-ref ref="FILE-LOGGER"/>
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <logger name="cn.com.deepdata.deepradar.client.spider.processor.common.CommonPageProcessor" level="trace" additivity="true">
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+
+    <logger name="cn.com.deepdata.deepradar.client.spider.task.producer.court.judgment.LawTaskProducer" level="debug" additivity="true">
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+
+    <logger name="cn.com.deepdata.deepradar.client.spider.processor.court.OpenLawPageProcessor" level="debug" additivity="true">
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+
+    <logger name="cn.com.deepdata.deepradar.client.spider.downloader.SeleniumDownloaderImpl" level="debug" additivity="true">
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+
+    <logger name="cn.com.deepdata.deepradar.client.spider.downloader.HtmlUnitDownloaderImpl" level="debug" additivity="true">
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+
+
+
+
+    <!--<logger name="cn.com.deepdata.deepradar.client.manager.proxy.impl" level="warn" additivity="true">-->
+    <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
+
+    <logger name="cn.com.deepdata.deepradar.client.protocol.DeepRadarWrapper" level="warn" additivity="true">
+        <appender-ref ref="FILE-LOGGER-123-123"/>
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    </logger>
+
+
+
+    <!-- ******************************************************************** -->
+    <logger name="cn.com.deepdata.deepradar.client.spider.task.producer.QichachaTaskProducer" level="trace" additivity="true">
+        <appender-ref ref="FILE-LOGGER"/>
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+    <logger name="cn.com.deepdata.deepradar.client.spider.processor.qichacha.QichachaCompanyInfoApiProcessor" level="trace" additivity="true">
+        <appender-ref ref="FILE-LOGGER"/>
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+    <logger name="cn.com.deepdata.deepradar.client.manager.keystone.impl.KeystoneManagerImpl" level="trace" additivity="true">
+        <appender-ref ref="FILE-LOGGER"/>
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+    <!-- ******************************************************************** -->
+
+
+    <logger name="cn.com.deepdata.deepradar.client.spider.pipeline.FlumePipleline" level="trace" additivity="true">
+        <appender-ref ref="FILE-LOGGER"/>
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+    <logger name="cn.com.deepdata.deepradar.client.spider.pipeline.FlumeWriterDeprecated" level="trace" additivity="true">
+        <appender-ref ref="FILE-LOGGER"/>
+        <appender-ref ref="CONSOLE-LOGGER"/>
+    </logger>
+
+
+</configuration>
