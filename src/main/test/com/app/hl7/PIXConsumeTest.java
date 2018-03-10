@@ -6,23 +6,28 @@ import ca.uhn.hl7v2.parser.FastParser;
 import ca.uhn.hl7v2.parser.GenericParser;
 import ca.uhn.hl7v2.parser.PipeParser;
 import com.app.hl7.msg.TestMessage;
+import org.apache.commons.io.FileUtils;
 import org.junit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * IHE 测试用例,用来测试
  */
 public class PIXConsumeTest {
     private static final Logger logger = LoggerFactory.getLogger(PIXConsumeTest.class);
-    private static final String host = "202.105.136.186";
-    private static final Integer port = 7001;
-    public static final String applicationName= "LWClient";
-    public static final String facilitName = "LWRIS";
+    private static final String host = "129.6.24.81";
+    private static final Integer port = 9080;
+    public static final String applicationName= "NIST_RCVR_308";
+    public static final String facilitName = "NIST";
 
     @Before
     @Ignore("测试已通过")
     public void before(){
+        Hl7Util.cleanFileConetnt();
         logger.info("Test PIX Manager start");
     }
 
@@ -33,11 +38,18 @@ public class PIXConsumeTest {
     }
 
 
+    /**
+     * 添加一个病人信息
+     * @throws HL7Exception
+     * @throws IOException
+     */
     @Test
     @Ignore("测试已通过")
-    public void testITI_8_A01() throws HL7Exception {
+    public void testITI_8_A01() throws HL7Exception, IOException {
+        Hl7Util.writeLog("Request: \n" + TestMessage.PIX_SOURCE_ITI8_A01);
         Message response = SendAndReceiveAMessage.build().buildAddess(host, port).sendMessage(TestMessage.PIX_SOURCE_ITI8_A01);
-        logger.info("Receiver message is {}", new PipeParser().encode(response));
+        String returnMessage = new PipeParser().encode(response);
+        logger.info(returnMessage);
     }
 
     @Test

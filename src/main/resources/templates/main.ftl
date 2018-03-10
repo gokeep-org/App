@@ -17,7 +17,7 @@
              * 通过消息名称显示输出
              **/
             showLogByName("");
-            getNtpServerTime();
+            // getNtpServerTime();
 
             function getNtpServerTime() {
                 $.ajax({

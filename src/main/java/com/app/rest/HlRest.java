@@ -96,10 +96,9 @@ public class HlRest {
             String host = body.get("host").toString();
             int port = Integer.parseInt(body.get("port").toString());
             String message = body.get("message").toString();
-            result.put("res", message);
             SendAndReceiveAMessage sendClient = SendAndReceiveAMessage.build().buildAddess(host, port);
-            Message message1 = sendClient.sendMessage(message);
-            result.put("res", new PipeParser().encode(message1));
+            Message response = sendClient.sendMessage(message);
+            result.put("res", new PipeParser().encode(response));
         }catch (Throwable e){
             result.put("res", "proxy send error");
             logger.error("proxy send hl7 message find fail");

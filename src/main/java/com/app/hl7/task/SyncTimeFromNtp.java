@@ -17,7 +17,7 @@ import java.util.List;
 public class SyncTimeFromNtp {
     private static final Logger logger = LoggerFactory.getLogger(SyncTimeFromNtp.class);
 
-    @Scheduled(cron = "0 0/2 * * * ?")
+    @Scheduled(cron = Hl7ComonConfig.DATE_SYNC_CRON)
     public void execute() {
         if (!Hl7ComonConfig.ENABLE_CT_SYNC){
             return;
@@ -27,7 +27,7 @@ public class SyncTimeFromNtp {
         }
         try {
             Process process = null;
-            String shpath = "/Users/xuning/workspace/idea/App/script/sync.sh";
+            String shpath = Hl7ComonConfig.DATE_SYNC_SH_FILE_PATH + Hl7ComonConfig.DATE_SYNC_ADDRESS;
             String command = "/bin/sh " + shpath;
             List<String> processList = new ArrayList<String>();
             process = Runtime.getRuntime().exec(command);
@@ -37,6 +37,9 @@ public class SyncTimeFromNtp {
                 processList.add(line);
             }
             input.close();
+            if (processList.size() >= 3){
+                logger.info(processList.get(2));
+            }
         } catch (Throwable e) {
             logger.error("execute ntp server sync date find fail, now date is {}", new Date());
         }

@@ -1,11 +1,9 @@
 package com.app.hl7.msg;
-
-import ca.uhn.hl7v2.protocol.ReceivingApplication;
 import com.app.hl7.PIXConsumeTest;
 import com.app.hl7.PdqConsumeTest;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class TestMessage {
+
     private static final String SEND_APPLICATION_NAME = "CHAOSI_CLIENT";
     private static final String SEND_FACILIT_NAME_NAME = "CHAOSI_CLIENT";
     public static final String PIX_CONSUME_ITI_9 = "MSH|^~\\&|SendingApplication|SendingFacility|"+ PIXConsumeTest.applicationName+"|"+PIXConsumeTest.facilitName+"|20101004145353||QBP^Q23^QBP_Q21|NIST-101004145353138|P|2.5\r" +
@@ -85,7 +83,5 @@ public class TestMessage {
     public static final String PDQ_ITI_21_6_2 = "MSH|^~\\&|SendingApplication|SendingFacility|"+PdqConsumeTest.applicationName+"|"+PdqConsumeTest.facilitName+"|20101004143744||QBP^Q22^QBP_Q21|NIST-101004143744188|T|2.5\r" +
             "QPD|IHE PDQ Query|QRY124818486466|@PID.3.1^DV-301~@PID.3.4.1^NIST2010~@PID.3.4.2^2.16.840.1.113883.3.72.5.9.1~@PID.3.4.3^ISO\r" +
             "RCP|I";
-
-
 
 }

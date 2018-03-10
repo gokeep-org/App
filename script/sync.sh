@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-ntp_da gazelle.ihe-c.org
+expect /Users/xuning/workspace/idea/App/script/sync_date.sh $1

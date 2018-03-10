@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="3 seconds">
 
-    <property name="LOG_HOME" value="temp\\logs"/>
+    <property name="LOG_HOME" value="temp/logs"/>
 
     <appender name="CONSOLE-LOGGER" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -14,7 +14,7 @@
 
         <discriminator>
             <key>logFileName</key>
-            <defaultValue>deepradar-all</defaultValue>
+            <defaultValue>ihe-test</defaultValue>
         </discriminator>
 
         <sift>
@@ -48,7 +48,7 @@
     <appender name="FILE-LOGGER" class="ch.qos.logback.classic.sift.SiftingAppender">
         <discriminator>
             <key>logFileName</key>
-            <defaultValue>deepradar</defaultValue>
+            <defaultValue>ihe-app</defaultValue>
         </discriminator>
         <sift>
             <appender name="FILE-${logFileName}" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -74,143 +74,144 @@
 
     <!-- ************************ DEFAULT SETTINGS START ************************ -->
 
-    <root level="error">
+    <root level="info">
         <appender-ref ref="FILE-LOGGER-ALL"/>
+        <appender-ref ref="CONSOLE-LOGGER"/>
     </root>
 
-    <logger name="cn.com.deepdata.deepradar" level="debug" additivity="true">
-        <appender-ref ref="FILE-LOGGER-ALL"/>
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-
-    <logger name="cn.com.deepdata.deepradar.client.DeepRadar" level="debug" additivity="true">
-        <appender-ref ref="FILE-LOGGER-ALL"/>
-        <appender-ref ref="FILE-LOGGER"/>
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-    <logger name="cn.com.deepdata.deepradar.client.DeepRadarContext" level="debug" additivity="true">
-        <appender-ref ref="FILE-LOGGER-ALL"/>
-        <appender-ref ref="FILE-LOGGER"/>
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-
-    <logger name="org.glassfish" level="warn" additivity="true">
-        <appender-ref ref="FILE-LOGGER-ALL"/>
-        <appender-ref ref="FILE-LOGGER"/>
+    <!--<logger name="cn.com.deepdata.deepradar" level="debug" additivity="true">-->
+        <!--<appender-ref ref="FILE-LOGGER-ALL"/>-->
         <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
-    </logger>
-
-    <logger name="us.codecraft.webmagic" level="warn" additivity="true">
-        <appender-ref ref="FILE-LOGGER-ALL"/>
-        <appender-ref ref="FILE-LOGGER"/>
-        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
-    </logger>
-
-    <!-- ************************ DEFAULT SETTINGS END ************************ -->
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    <logger name="cn.com.deepdata.deepradar.client.spider.processor.lawinfo.LawInfoPageProcessor" level="trace" additivity="true">
-        <appender-ref ref="FILE-LOGGER"/>
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-    <logger name="cn.com.deepdata.deepradar.client.spider.task.producer.lawinfo" level="trace" additivity="true">
-        <appender-ref ref="FILE-LOGGER"/>
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-    <logger name="cn.com.deepdata.deepradar.client.spider.processor.lawinfo" level="trace" additivity="true">
-        <appender-ref ref="FILE-LOGGER"/>
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <logger name="cn.com.deepdata.deepradar.client.spider.processor.common.CommonPageProcessor" level="trace" additivity="true">
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-
-    <logger name="cn.com.deepdata.deepradar.client.spider.task.producer.court.judgment.LawTaskProducer" level="debug" additivity="true">
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-
-    <logger name="cn.com.deepdata.deepradar.client.spider.processor.court.OpenLawPageProcessor" level="debug" additivity="true">
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-
-    <logger name="cn.com.deepdata.deepradar.client.spider.downloader.SeleniumDownloaderImpl" level="debug" additivity="true">
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-
-    <logger name="cn.com.deepdata.deepradar.client.spider.downloader.HtmlUnitDownloaderImpl" level="debug" additivity="true">
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-
-
-
-
-    <!--<logger name="cn.com.deepdata.deepradar.client.manager.proxy.impl" level="warn" additivity="true">-->
-    <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
     <!--</logger>-->
 
-    <logger name="cn.com.deepdata.deepradar.client.protocol.DeepRadarWrapper" level="warn" additivity="true">
-        <appender-ref ref="FILE-LOGGER-123-123"/>
+    <!--<logger name="cn.com.deepdata.deepradar.client.DeepRadar" level="debug" additivity="true">-->
+        <!--<appender-ref ref="FILE-LOGGER-ALL"/>-->
+        <!--<appender-ref ref="FILE-LOGGER"/>-->
         <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
-    </logger>
+    <!--</logger>-->
+    <!--<logger name="cn.com.deepdata.deepradar.client.DeepRadarContext" level="debug" additivity="true">-->
+        <!--<appender-ref ref="FILE-LOGGER-ALL"/>-->
+        <!--<appender-ref ref="FILE-LOGGER"/>-->
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
+
+    <!--<logger name="org.glassfish" level="warn" additivity="true">-->
+        <!--<appender-ref ref="FILE-LOGGER-ALL"/>-->
+        <!--<appender-ref ref="FILE-LOGGER"/>-->
+        <!--&lt;!&ndash;<appender-ref ref="CONSOLE-LOGGER"/>&ndash;&gt;-->
+    <!--</logger>-->
+
+    <!--<logger name="us.codecraft.webmagic" level="warn" additivity="true">-->
+        <!--<appender-ref ref="FILE-LOGGER-ALL"/>-->
+        <!--<appender-ref ref="FILE-LOGGER"/>-->
+        <!--&lt;!&ndash;<appender-ref ref="CONSOLE-LOGGER"/>&ndash;&gt;-->
+    <!--</logger>-->
+
+    <!--&lt;!&ndash; ************************ DEFAULT SETTINGS END ************************ &ndash;&gt;-->
+
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+
+    <!--<logger name="cn.com.deepdata.deepradar.client.spider.processor.lawinfo.LawInfoPageProcessor" level="trace" additivity="true">-->
+        <!--<appender-ref ref="FILE-LOGGER"/>-->
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
+    <!--<logger name="cn.com.deepdata.deepradar.client.spider.task.producer.lawinfo" level="trace" additivity="true">-->
+        <!--<appender-ref ref="FILE-LOGGER"/>-->
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
+    <!--<logger name="cn.com.deepdata.deepradar.client.spider.processor.lawinfo" level="trace" additivity="true">-->
+        <!--<appender-ref ref="FILE-LOGGER"/>-->
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
 
 
 
-    <!-- ******************************************************************** -->
-    <logger name="cn.com.deepdata.deepradar.client.spider.task.producer.QichachaTaskProducer" level="trace" additivity="true">
-        <appender-ref ref="FILE-LOGGER"/>
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-    <logger name="cn.com.deepdata.deepradar.client.spider.processor.qichacha.QichachaCompanyInfoApiProcessor" level="trace" additivity="true">
-        <appender-ref ref="FILE-LOGGER"/>
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-    <logger name="cn.com.deepdata.deepradar.client.manager.keystone.impl.KeystoneManagerImpl" level="trace" additivity="true">
-        <appender-ref ref="FILE-LOGGER"/>
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-    <!-- ******************************************************************** -->
 
 
-    <logger name="cn.com.deepdata.deepradar.client.spider.pipeline.FlumePipleline" level="trace" additivity="true">
-        <appender-ref ref="FILE-LOGGER"/>
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
-    <logger name="cn.com.deepdata.deepradar.client.spider.pipeline.FlumeWriterDeprecated" level="trace" additivity="true">
-        <appender-ref ref="FILE-LOGGER"/>
-        <appender-ref ref="CONSOLE-LOGGER"/>
-    </logger>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--<logger name="cn.com.deepdata.deepradar.client.spider.processor.common.CommonPageProcessor" level="trace" additivity="true">-->
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
+
+    <!--<logger name="cn.com.deepdata.deepradar.client.spider.task.producer.court.judgment.LawTaskProducer" level="debug" additivity="true">-->
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
+
+    <!--<logger name="cn.com.deepdata.deepradar.client.spider.processor.court.OpenLawPageProcessor" level="debug" additivity="true">-->
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
+
+    <!--<logger name="cn.com.deepdata.deepradar.client.spider.downloader.SeleniumDownloaderImpl" level="debug" additivity="true">-->
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
+
+    <!--<logger name="cn.com.deepdata.deepradar.client.spider.downloader.HtmlUnitDownloaderImpl" level="debug" additivity="true">-->
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
+
+
+
+
+    <!--&lt;!&ndash;<logger name="cn.com.deepdata.deepradar.client.manager.proxy.impl" level="warn" additivity="true">&ndash;&gt;-->
+    <!--&lt;!&ndash;<appender-ref ref="CONSOLE-LOGGER"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;</logger>&ndash;&gt;-->
+
+    <!--<logger name="cn.com.deepdata.deepradar.client.protocol.DeepRadarWrapper" level="warn" additivity="true">-->
+        <!--<appender-ref ref="FILE-LOGGER-123-123"/>-->
+        <!--&lt;!&ndash;<appender-ref ref="CONSOLE-LOGGER"/>&ndash;&gt;-->
+    <!--</logger>-->
+
+
+
+    <!--&lt;!&ndash; ******************************************************************** &ndash;&gt;-->
+    <!--<logger name="cn.com.deepdata.deepradar.client.spider.task.producer.QichachaTaskProducer" level="trace" additivity="true">-->
+        <!--<appender-ref ref="FILE-LOGGER"/>-->
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
+    <!--<logger name="cn.com.deepdata.deepradar.client.spider.processor.qichacha.QichachaCompanyInfoApiProcessor" level="trace" additivity="true">-->
+        <!--<appender-ref ref="FILE-LOGGER"/>-->
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
+    <!--<logger name="cn.com.deepdata.deepradar.client.manager.keystone.impl.KeystoneManagerImpl" level="trace" additivity="true">-->
+        <!--<appender-ref ref="FILE-LOGGER"/>-->
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
+    <!--&lt;!&ndash; ******************************************************************** &ndash;&gt;-->
+
+
+    <!--<logger name="cn.com.deepdata.deepradar.client.spider.pipeline.FlumePipleline" level="trace" additivity="true">-->
+        <!--<appender-ref ref="FILE-LOGGER"/>-->
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
+    <!--<logger name="cn.com.deepdata.deepradar.client.spider.pipeline.FlumeWriterDeprecated" level="trace" additivity="true">-->
+        <!--<appender-ref ref="FILE-LOGGER"/>-->
+        <!--<appender-ref ref="CONSOLE-LOGGER"/>-->
+    <!--</logger>-->
 
 
 </configuration>
