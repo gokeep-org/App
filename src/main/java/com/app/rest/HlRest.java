@@ -13,10 +13,13 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/hl7")
@@ -35,6 +38,12 @@ public class HlRest {
         return "rid";
     }
 
+
+    @RequestMapping(path = "/ct", method = RequestMethod.GET)
+    public String ct(HttpServletRequest servletContextEvent){
+        return "ct";
+    }
+
     @ResponseBody
     @RequestMapping(path = "/flush", method = RequestMethod.POST)
     public Map<Long, String> flushConsol(){
@@ -51,21 +60,36 @@ public class HlRest {
     }
 
     @ResponseBody
-    @RequestMapping(path = "/ct", method = RequestMethod.POST)
-    public Map<String, String> ct(@RequestParam(value = "ntp_server",  defaultValue = "cn.ntp.org.cn") String ntpServerName){
-        syncTimeFromNtp.execute();
+    @RequestMapping(path = "/sync_date", method = RequestMethod.POST)
+    public Map<String, String> ct(@RequestParam(value = "ntp",  defaultValue = "cn.ntp.org.cn") String ntpServerName){
+//        String serverTime = syncTimeFromNtp.execute(ntpServerName);
         String ntpServerTime = NtpUtil.getDateTimeFromNtpServer(ntpServerName);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String nowDate = dateFormat.format(new Date());
         Map<String, String> res = new HashMap<>();
-        res.put("res", ntpServerTime);
-        HL7EventContainer.queue.offer("From ntp server "+ntpServerName+" receiver time string is " + ntpServerTime+", now date is: "+NtpUtil.smartFormtTime(new Date().getTime()));
+//        int offsetIndex = serverTime.indexOf("offset");
+//        Pattern p = Pattern.compile("^((\\d{2}(([02468][048])|([13579][26]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])))))|(\\d{2}(([02468][1235679])|([13579][01345789]))[\\-\\/\\s]?((((0?[13578])|(1[02]))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(3[01])))|(((0?[469])|(11))[\\-\\/\\s]?((0?[1-9])|([1-2][0-9])|(30)))|(0?2[\\-\\/\\s]?((0?[1-9])|(1[0-9])|(2[0-8]))))))?$");
+//        String serverTimeValue = p.matcher(serverTime).group();
+        res.put("server", ntpServerTime);
+        res.put("local", nowDate);
+//        res.put("log", ntpServerTime);
+//        new SyncTimeFromNtp().start();
+//        HL7EventContainer.queue.offer("From ntp server "+ntpServerName+" receiver time string is " + ntpServerTime+", now date is: "+NtpUtil.smartFormtTime(new Date().getTime()));
         return res;
     }
+
+//
+//    public Map<String, String> startSync(){
+//
+//    }
+
+
 
 //    @ResponseBody
 //    @RequestMapping(path = "/clean", method = RequestMethod.DELETE)
 //    public void cleanResult(@RequestParam(value = "name", defaultValue = "all") String name){
 //        if (name.equalsIgnoreCase("all")){
-//            HL7EventContainer.result.clear();
+//           HL7EventContainer.result.clear();
 //            return;
 //        }
 //        HL7EventContainer.delResultByMshName(name);

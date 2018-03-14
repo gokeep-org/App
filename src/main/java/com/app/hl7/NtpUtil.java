@@ -27,6 +27,7 @@ public class NtpUtil {
         logger.info("Test time NTP, now time is {}", localTime);
         osType = getOsType();
         logger.info("Get os type is {}", osType);
+
     }
 
     public void start() {
@@ -47,12 +48,17 @@ public class NtpUtil {
         return getDateTimeFromNtpServer(ntpAddress);
     }
 
+    public static void main(String[] args) {
+        getDateTimeFromNtpServer("172.16.2.49");
+    }
+
     public static String getDateTimeFromNtpServer(String ntpAddress) {
         try {
             NTPUDPClient timeClient = new NTPUDPClient();
             InetAddress timeServerAddress = InetAddress.getByName(ntpAddress);
             TimeInfo timeInfo = timeClient.getTime(timeServerAddress);
             TimeStamp timeStamp = timeInfo.getMessage().getTransmitTimeStamp();
+            System.out.println(new Date().getTime() - timeInfo.getReturnTime());
             return dateFormat.format(timeStamp.getDate());
         } catch (Throwable e) {
             logger.error("与ntp服务器同步时间错误！", e);

@@ -1,15 +1,64 @@
 <!DOCTYPE>
-<html>
+<html xmlns="http://xmlns.jcp.org/jsf/html">
     <head>
         <meta charset="UTF-8"/>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <#--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+        <script type="application/javascript" src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+        <title>Hl7 Message Client</title>
+        <script type="application/javascript">
+            $(document).ready(function(){
+                // $("#local_time").val(new Date());
+                function sendMessageByAddress() {
+                    $.ajax({
+                        url: "/hl7/sync_date?ntp="+$("#ntp").val(),
+                        type: "POST",
+                        success: function (result) {
+                            $("#local_time").val(result['local']);
+
+                            $("#server_time").val(result['local']);
+
+                            $("#log").val(result['log']);
+                        },
+                        error: function (result) {
+                            console.log("send message is fail");
+                        }
+                    });
+                }
+                $("#sync").click(function () {
+                    sendMessageByAddress();
+                });
+            });
+        </script>
     </head>
     <body>
         <h2>Time Sync client display</h2>
         <center>
             <table>
                 <tr>
-                    <td></td>
+                    <td>当前服务器地址</td>
+                    <td><input type="text" id="ntp" value="172.16.2.49"><br/></td>
                 </tr>
+                <tr>
+                    <td>本地时间</td>
+                    <td><input type="text" id="local_time"><br/></td>
+                </tr>
+                <#--<tr>-->
+                    <#--<td>服务器时间</td>-->
+                    <#--<td><input type="text" id="server_time"><br/></td>-->
+                <#--</tr>-->
+                <tr>
+                    <td>log</td>
+                    <td><textarea type="text" id="log" width="600px"></textarea><br/></td>
+                </tr>
+                <tr>
+                    <td><button type="button" id="sync">同步</button> </td>
+                </tr>
+
             </table>
         </center>
     </body>
