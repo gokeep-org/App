@@ -37,6 +37,29 @@ public class SendAndReceiveAMessage{
         }
         return null;
     }
+
+
+    public Message sendMessage(Message theMessage){
+        try {
+            Initiator initiator = connection.getInitiator();
+            Message response = initiator.sendAndReceive(theMessage);
+            return response;
+        } catch (Throwable e) {
+            logegr.error("Send message is fail: {}", e.getMessage());
+        }finally {
+            try {
+                Hl7Util.writeLog("send message: " + theMessage.encode());
+            } catch (HL7Exception e) {
+                e.printStackTrace();
+            }
+            if (Objects.nonNull(connection) || connection.isOpen()){
+                connection.close();
+            }
+        }
+        return null;
+    }
+
+
     public static SendAndReceiveAMessage build() {
         synchronized (new Object()) {
             client = Objects.isNull(client) ? new SendAndReceiveAMessage() : client;
@@ -51,7 +74,8 @@ public class SendAndReceiveAMessage{
         this.host = host;
         this.port = port;
         try {
-            connection = connectionHub.attach(host, port, new PipeParser(), MinLowerLayerProtocol.class);
+
+        connection = connectionHub.attach(host, port, new PipeParser(), MinLowerLayerProtocol.class);
         } catch (HL7Exception e) {
             logegr.error("get Connection is fail: {}", e.getMessage());
         }
