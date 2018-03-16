@@ -1,7 +1,7 @@
 package com.app.hl7.bean;
 
+import com.app.hl7.Hl7ComonConfig;
 import com.google.gson.annotations.SerializedName;
-import org.slf4j.Logger;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,22 +16,18 @@ public class BasicMessage {
     private int port;
 
     // 发送应用名称
-    @SerializedName("send_application_name")
-    private String sendApplicationName;
+    private String send_application_name = Hl7ComonConfig.sendApplication;
 
-    @SerializedName("send_facilit_name")
-    private String sendFacilitName;
+    private String send_facility_name = Hl7ComonConfig.sendFacilit;
 
     // 接收应用名称
-    @SerializedName("receiver_application_name")
-    private String receiverApplicationName;
+    private String receiver_application_name;
 
-    @SerializedName("receiver_facilit_name")
-    private String receiverFacilitName;
+    // 接收设备名称
+    private String receiver_facility_name;
 
-    // 消息domain
-    private String domain;
-
+    // 封装的元数据内容
+    private Map<String, String> content;
 
     public String getHost() {
         return host;
@@ -49,25 +45,6 @@ public class BasicMessage {
         this.port = port;
     }
 
-    // 消息体内容字段包装
-    private Map<String, String> content;
-
-    public Map<String, String> getContent() {
-        return content;
-    }
-
-    public void setContent(Map<String, String> content) {
-        this.content = content;
-    }
-
-
-    public String getDomain() {
-        return domain;
-    }
-
-    public void setDomain(String domain) {
-        this.domain = domain;
-    }
 
     public static DateFormat getDateFormat() {
         return dateFormat;
@@ -77,36 +54,43 @@ public class BasicMessage {
         BasicMessage.dateFormat = dateFormat;
     }
 
-
-    public String getSendApplicationName() {
-        return sendApplicationName;
+    public String getSend_application_name() {
+        return send_application_name;
     }
 
-    public void setSendApplicationName(String sendApplicationName) {
-        this.sendApplicationName = sendApplicationName;
+    public void setSend_application_name(String send_application_name) {
+        this.send_application_name = send_application_name;
     }
 
-    public String getSendFacilitName() {
-        return sendFacilitName;
+    public String getSend_facility_name() {
+        return send_facility_name;
     }
 
-    public void setSendFacilitName(String sendFacilitName) {
-        this.sendFacilitName = sendFacilitName;
+    public void setSend_facility_name(String send_facility_name) {
+        this.send_facility_name = send_facility_name;
     }
 
-    public String getReceiverApplicationName() {
-        return receiverApplicationName;
+    public String getReceiver_application_name() {
+        return receiver_application_name;
     }
 
-    public void setReceiverApplicationName(String receiverApplicationName) {
-        this.receiverApplicationName = receiverApplicationName;
+    public void setReceiver_application_name(String receiver_application_name) {
+        this.receiver_application_name = receiver_application_name;
     }
 
-    public String getReceiverFacilitName() {
-        return receiverFacilitName;
+    public String getReceiver_facility_name() {
+        return receiver_facility_name;
     }
 
-    public void setReceiverFacilitName(String receiverFacilitName) {
-        this.receiverFacilitName = receiverFacilitName;
+    public void setReceiver_facility_name(String receiver_facility_name) {
+        this.receiver_facility_name = receiver_facility_name;
+    }
+
+    public Map<String, String> getContent() {
+        return content;
+    }
+
+    public void setContent(Map<String, String> content) {
+        this.content = content;
     }
 }

@@ -1,5 +1,7 @@
 package com.app.hl7;
 
+import ca.uhn.hl7v2.HL7Exception;
+import ca.uhn.hl7v2.model.Message;
 import ch.qos.logback.core.util.FileUtil;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -16,6 +18,14 @@ public class Hl7Util {
 
     public static final void writeLog(String log){
         writeLog("\n\n" + log, Hl7ComonConfig.IHE_LOG_PATH, true);
+    }
+
+    public static final void writeHl7MessageLog(Message log){
+        try {
+            writeLog("\n\n" + log.encode(), Hl7ComonConfig.IHE_LOG_PATH, true);
+        } catch (HL7Exception e) {
+            logger.error("write hl7 message find error, {}", e.getMessage());
+        }
     }
 
 

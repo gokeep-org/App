@@ -7,11 +7,17 @@ import ca.uhn.hl7v2.app.Initiator;
 import ca.uhn.hl7v2.llp.MinLowerLayerProtocol;
 import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.parser.PipeParser;
+import com.apple.laf.AquaTreeUI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
+
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SendAndReceiveAMessage{
+    private static final Map<String, Integer> cacheCheck = new ConcurrentHashMap<>();
     private static final Logger logegr = LoggerFactory.getLogger(SendAndReceiveAMessage.class);
 
     boolean useTls = false;
@@ -26,7 +32,8 @@ public class SendAndReceiveAMessage{
     public Message sendMessage(String theMessage){
         try {
             Initiator initiator = connection.getInitiator();
-            Message response = initiator.sendAndReceive(new PipeParser().parse(theMessage));
+            Message requestMessage = new PipeParser().parse(theMessage);
+            Message response = initiator.sendAndReceive(requestMessage);
             return response;
         } catch (Throwable e) {
             logegr.error("Send message is fail: {}", e.getMessage());
@@ -71,10 +78,13 @@ public class SendAndReceiveAMessage{
     }
 
     public SendAndReceiveAMessage buildAddess(String host, int port){
+        if (!StringUtils.isEmpty(host)){
+            cacheCheck.put(host, port);
+        }
         this.host = host;
         this.port = port;
         try {
-
+        // 这里为了实现连接的持续切换，不能够为单例
         connection = connectionHub.attach(host, port, new PipeParser(), MinLowerLayerProtocol.class);
         } catch (HL7Exception e) {
             logegr.error("get Connection is fail: {}", e.getMessage());
