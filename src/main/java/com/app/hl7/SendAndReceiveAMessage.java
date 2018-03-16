@@ -59,7 +59,7 @@ public class SendAndReceiveAMessage{
             } catch (HL7Exception e) {
                 e.printStackTrace();
             }
-            if (Objects.nonNull(connection) || connection.isOpen()){
+             if (Objects.nonNull(connection) || connection.isOpen()){
                 connection.close();
             }
         }
@@ -78,9 +78,6 @@ public class SendAndReceiveAMessage{
     }
 
     public SendAndReceiveAMessage buildAddess(String host, int port){
-        if (!StringUtils.isEmpty(host)){
-            cacheCheck.put(host, port);
-        }
         this.host = host;
         this.port = port;
         try {

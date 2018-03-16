@@ -158,6 +158,9 @@ public class HttpHl7MessageBody extends BasicMessage implements Serializable {
         // 病人标识符
 //        pid.getPatientIdentifierList(0).getID().setValue("chaosi_01");
 
+        // 出生年月
+        pid.getBirthPlace().setValue(map.get("birth"));
+
         String domain = map.get("domain");
         //-------------下面三个通过&构成domain
         if (!StringUtils.isEmpty(domain)) {
@@ -271,8 +274,8 @@ public class HttpHl7MessageBody extends BasicMessage implements Serializable {
      * @throws DataTypeException
      */
     public Message getSearchPatientByIdentifyAndDomain(Map<String, Object> info) throws DataTypeException {
-        QBP_K13 qbp_k13;
         QBP_Q21 qbp_q21 = new QBP_Q21();
+
         try {
             qbp_q21.initQuickstart("QPB", "Q21", "P");
 
@@ -301,6 +304,9 @@ public class HttpHl7MessageBody extends BasicMessage implements Serializable {
         return null;
     }
 
+    private void test(){
+
+    }
     /**
      * 获取合并消息
      *

@@ -188,8 +188,8 @@ public class PixRest {
         } catch (HL7Exception e) {
             e.printStackTrace();
         } finally {
-            Hl7Util.writeHl7MessageLog(inMessage);
-            Hl7Util.writeHl7MessageLog(response);
+//            Hl7Util.writeHl7MessageLog(inMessage);
+//            Hl7Util.writeHl7MessageLog(response);
         }
         return res;
     }
