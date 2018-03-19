@@ -5,7 +5,13 @@ package com.app.dtu;
  * 用于抽象socket各种服务的开启和关闭
  */
 public interface ServerBootstrap {
+    /**
+     * Socket netty服务启动
+     */
     public void start();
 
+    /**
+     * Socket netty服务关闭
+     */
     public void stop();
 }

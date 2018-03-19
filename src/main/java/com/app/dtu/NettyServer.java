@@ -1,8 +1,9 @@
 package com.app.dtu;
 
-import com.app.config.CommonConfig;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.*;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.slf4j.Logger;
@@ -10,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -27,6 +27,9 @@ public class NettyServer  implements ApplicationContextAware, com.app.dtu.Server
         start();
     }
 
+    /**
+     * 当程序启动容器加载完毕启动该socket服务
+     */
     @PostConstruct
     @Override
     public void start() {
@@ -35,7 +38,7 @@ public class NettyServer  implements ApplicationContextAware, com.app.dtu.Server
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new SimpleChatServerInitializer())
-                    .option(ChannelOption.SO_BACKLOG, DtuConfig.SOCKET_SERVER_SO_BACKLOG)
+//                    .option(ChannelOption.SO_BACKLOG, DtuConfig.SOCKET_SERVER_SO_BACKLOG)
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
             ChannelFuture f = b.bind(DtuConfig.SOCKET_SERVER_PORT).sync();
             f.channel().closeFuture().sync();
@@ -51,6 +54,6 @@ public class NettyServer  implements ApplicationContextAware, com.app.dtu.Server
     public void stop() {
         workerGroup.shutdownGracefully();
         bossGroup.shutdownGracefully();
-        logger.info("Close netty socket server is success");
+        logger.info("Netty socket close server is success");
     }
 }

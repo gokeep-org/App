@@ -1,11 +1,14 @@
 package com.app.dtu;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /****************************************
  * Copyright (c) xuning.
@@ -13,11 +16,14 @@ import io.netty.util.concurrent.GlobalEventExecutor;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/5/14.
  ****************************************/
-public class SimpleChatServerHandler extends SimpleChannelInboundHandler<String> {
+public class SimpleChatServerHandler extends ChannelInboundHandlerAdapter {
+
+    private static final Logger logger = LoggerFactory.getLogger(SimpleChatServerHandler.class);
+
     public static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
     @Override
-    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+    public void handlerAdded(ChannelHandlerContext ctx){
         Channel incoming = ctx.channel();
         for (Channel channel : channels) {
             channel.writeAndFlush("[SERVER] - " + incoming.remoteAddress() + " 加入\n");
@@ -26,60 +32,63 @@ public class SimpleChatServerHandler extends SimpleChannelInboundHandler<String>
     }
 
     @Override
-    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+    public void handlerRemoved(ChannelHandlerContext ctx){
         Channel incoming = ctx.channel();
         for (Channel channel : channels) {
             channel.writeAndFlush("[SERVER] - " + incoming.remoteAddress() + " 离开\n");
         }
-        channels.remove(ctx.channel());
+        channels.remove(incoming);
+        logger.info("Netty socket server remove channel success, {}", incoming.remoteAddress());
     }
 
-//    优先级高于messageReceived方法，有了这个方法就会屏蔽messageReceived方法
-//    @Override
-//    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-//        System.out.println("channelRead");
-//        Channel incoming = ctx.channel();
-//        for (Channel channel : channels) {
-//            if (channel != incoming){
-//                channel.writeAndFlush("[" + incoming.remoteAddress() + "]" + msg + "\n");
-//            } else {
-//                channel.writeAndFlush("server: " + msg + "\n");
-//            }
-//        }
-//    }
 
+
+    /**
+     * 关闭连接
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        Channel incoming = ctx.channel();
-        System.out.println("client " + incoming.remoteAddress() + " 在线");
+    public void channelRead(ChannelHandlerContext ctx, Object msg) {
+
+        logger.info("Netty socket server start process socket message");
+        ByteBuf result = (ByteBuf) msg;
+        byte[] result1 = new byte[result.readableBytes()];
+        // msg中存储的是ByteBuf类型的数据，把数据读取到byte[]中
+        result.readBytes(result1);
+        String resultStr = new String(result1);
+        System.out.println("Client said:" + resultStr);
+        // 释放资源，这行很关键
+        result.release();
+        String response = "I am ok!";
+        // 在当前场景下，发送的数据必须转换成ByteBuf数组
+        ByteBuf encoded = ctx.alloc().buffer(4 * response.length());
+        encoded.writeBytes(response.getBytes());
+        ctx.write(encoded);
+        ctx.flush();
+//        ctx.close();
     }
 
     @Override
-    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+    public void channelActive(ChannelHandlerContext ctx){
         Channel incoming = ctx.channel();
-        System.out.println("client " + incoming.remoteAddress() + " 掉线");
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) {
+        Channel incoming = ctx.channel();
+        logger.info("Listen client {} is not connection", incoming.remoteAddress());
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         Channel incoming = ctx.channel();
-        System.out.println("client " + incoming.remoteAddress() + " 异常");
-        // 当出现异常就关闭连接
-        cause.printStackTrace();
-        ctx.close();
-    }
-
-    @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, String msg) throws Exception {
-        Channel incoming = channelHandlerContext.channel();
-        for (Channel channel : channels) {
-            if (channel != incoming) {
-//                System.out.println("[" + incoming.remoteAddress() + "] " + msg);
-                channel.writeAndFlush("[" + incoming.remoteAddress() + "] " + msg + "\n");
-            } else {
-//                System.out.println("server: " + msg);
-                channel.writeAndFlush("server-xxxx: " + msg + "\n");
-            }
+        logger.error("Listen socket connection {} exception, {}", incoming.remoteAddress(), cause.getMessage());
+        if (!ctx.disconnect().isDone()){
+            ctx.close();
         }
     }
+
+
 }
