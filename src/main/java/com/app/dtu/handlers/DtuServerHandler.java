@@ -1,5 +1,6 @@
 package com.app.dtu.handlers;
 
+import com.app.dtu.DtuConfig;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -44,13 +45,14 @@ public class DtuServerHandler extends ChannelInboundHandlerAdapter {
 
     /**
      * 从channel中读取数据，进行处理
+     * 这里是关闭之前的操作最后业务处理操作应该，需要处理
+     *
      * @param ctx
      * @param msg
      * @throws Exception
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-
         logger.info("Netty socket server start process socket message");
         ByteBuf result = (ByteBuf) msg;
         byte[] result1 = new byte[result.readableBytes()];
@@ -65,21 +67,15 @@ public class DtuServerHandler extends ChannelInboundHandlerAdapter {
         ByteBuf encoded = ctx.alloc().buffer(4 * response.length());
         encoded.writeBytes(response.getBytes());
         ctx.write(encoded);
-        ctx.fireChannelRead(msg);
+        if (!DtuConfig.ENABLE_KEEP_ALIVE_CONNECTION) {
+            ctx.fireChannelRead(msg);
+        }
     }
 
-    /**
-     * 监听client连接当断开连接的时候回调处理
-     * @param ctx
-     */
-    @Override
-    public void channelInactive(ChannelHandlerContext ctx) {
-        Channel incoming = ctx.channel();
-        logger.info("Listen client {} is not connection", incoming.remoteAddress());
-    }
 
     /**
      * 如果处理出现异常关闭连接，防止资源的无效暂用
+     *
      * @param ctx
      * @param cause
      */
@@ -88,10 +84,5 @@ public class DtuServerHandler extends ChannelInboundHandlerAdapter {
         Channel incoming = ctx.channel();
         logger.error("Listen socket connection {} exception, {}", incoming.remoteAddress(), cause.getMessage());
         ctx.close();
-    }
-
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        ctx.flush();
     }
 }

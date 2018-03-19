@@ -34,16 +34,13 @@ public class DtuServerInitializer extends ChannelInitializer<SocketChannel> {
 //        pipeline.addLast("encoder", new StringEncoder()); //
 ////        pipeline.addLast("encoder", new ByteArrayDecoder());
 //        pipeline.addLast("handler", new DtuServerHandler());
-
-
         pipeline.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, 0, 4, 0, 4));
         pipeline.addLast("frameEncoder", new LengthFieldPrepender(4));
         pipeline.addLast("msg-filter-handler", new DtuMsgHeaderHandler());
         pipeline.addLast("dtu-handler", new DtuServerHandler());
-        pipeline.addLast("destroy-res-handler", new DtuResDestroyHandler());
-
-
-
+        if (!DtuConfig.ENABLE_KEEP_ALIVE_CONNECTION){
+            pipeline.addLast("destroy-res-handler", new DtuResDestroyHandler());
+        }
         logger.info("Netty socket server listen client connection, [ip: {}]", socketChannel.remoteAddress());
     }
 }
