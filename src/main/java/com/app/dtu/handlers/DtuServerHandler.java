@@ -1,4 +1,4 @@
-package com.app.dtu;
+package com.app.dtu.handlers;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
@@ -16,14 +16,14 @@ import org.slf4j.LoggerFactory;
  * 如有违反，必将追究其法律责任.
  * @Auther is xuning on 2017/5/14.
  ****************************************/
-public class SimpleChatServerHandler extends ChannelInboundHandlerAdapter {
+public class DtuServerHandler extends ChannelInboundHandlerAdapter {
 
-    private static final Logger logger = LoggerFactory.getLogger(SimpleChatServerHandler.class);
+    private static final Logger logger = LoggerFactory.getLogger(DtuServerHandler.class);
 
     public static ChannelGroup channels = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
     @Override
-    public void handlerAdded(ChannelHandlerContext ctx){
+    public void handlerAdded(ChannelHandlerContext ctx) {
         Channel incoming = ctx.channel();
         for (Channel channel : channels) {
             channel.writeAndFlush("[SERVER] - " + incoming.remoteAddress() + " 加入\n");
@@ -32,7 +32,7 @@ public class SimpleChatServerHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void handlerRemoved(ChannelHandlerContext ctx){
+    public void handlerRemoved(ChannelHandlerContext ctx) {
         Channel incoming = ctx.channel();
         for (Channel channel : channels) {
             channel.writeAndFlush("[SERVER] - " + incoming.remoteAddress() + " 离开\n");
@@ -42,9 +42,8 @@ public class SimpleChatServerHandler extends ChannelInboundHandlerAdapter {
     }
 
 
-
     /**
-     * 关闭连接
+     * 从channel中读取数据，进行处理
      * @param ctx
      * @param msg
      * @throws Exception
@@ -66,29 +65,33 @@ public class SimpleChatServerHandler extends ChannelInboundHandlerAdapter {
         ByteBuf encoded = ctx.alloc().buffer(4 * response.length());
         encoded.writeBytes(response.getBytes());
         ctx.write(encoded);
-        ctx.flush();
-//        ctx.close();
+        ctx.fireChannelRead(msg);
     }
 
-    @Override
-    public void channelActive(ChannelHandlerContext ctx){
-        Channel incoming = ctx.channel();
-    }
-
+    /**
+     * 监听client连接当断开连接的时候回调处理
+     * @param ctx
+     */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) {
         Channel incoming = ctx.channel();
         logger.info("Listen client {} is not connection", incoming.remoteAddress());
     }
 
+    /**
+     * 如果处理出现异常关闭连接，防止资源的无效暂用
+     * @param ctx
+     * @param cause
+     */
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         Channel incoming = ctx.channel();
         logger.error("Listen socket connection {} exception, {}", incoming.remoteAddress(), cause.getMessage());
-        if (!ctx.disconnect().isDone()){
-            ctx.close();
-        }
+        ctx.close();
     }
 
-
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        ctx.flush();
+    }
 }

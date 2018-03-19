@@ -37,7 +37,7 @@ public class NettyServer  implements ApplicationContextAware, com.app.dtu.Server
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(new SimpleChatServerInitializer())
+                    .childHandler(new DtuServerInitializer())
 //                    .option(ChannelOption.SO_BACKLOG, DtuConfig.SOCKET_SERVER_SO_BACKLOG)
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
             ChannelFuture f = b.bind(DtuConfig.SOCKET_SERVER_PORT).sync();
