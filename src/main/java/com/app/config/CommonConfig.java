@@ -12,6 +12,5 @@ public class CommonConfig {
     public static final String BASE_PATH = "/";
     public static final String SCAN_REST_PACKAGE = DefaultRestPackage.name;
     public static final boolean ENABLE_WEB_SERVER = false;
-    public static final int SOCKET_SERVER_PORT = 34885;
-    public static final int SOCKET_SERVER_SO_BACKLOG = 1024;
+
 }
