@@ -29,51 +29,38 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
 //        byte[] stringToByte();
         byte[] headBytes = new byte[16];
 
-
+        // 先读取帧头，不做处理
         result.readBytes(headBytes, 0, 4);
-
-
-//
 //        result.markReaderIndex();
-//        0x5A,0x13,0x56,0x78
-        String id ;
+//        result.resetReaderIndex();
+        String id;
         if(Header.compare(headBytes)){
             result.readBytes(headBytes, 0, 5);
             id = ByteUtils.bytesToHexString(headBytes, 5);
             result.readBytes(headBytes, 0, 2);
             int address = (headBytes[0] & 0xFF) * 256 + (headBytes[1] & 0xFF);
-//            result.resetReaderIndex();
+
             id += String.format("%06d", address);
             message.setId(id);
             message.setWarnList(result.readUnsignedShort());
             message.setControCmd(result.readUnsignedByte());
             message.setDataLen(result.readUnsignedShort());
-
-            while (result.readableBytes() - 4 > 0){
+            // 这里取出的字节码剩余大小包含自己，如果为4那么会继续走一次，从而读取异常
+            while (result.readableBytes() - 5 > 0){
                 DataMsg dataMsg = new DataMsg();
                 dataMsg.setType(result.readUnsignedByte());
                 dataMsg.setLen(result.readUnsignedByte());
-                for (int i =0 ; i < dataMsg.getLen(); i++){
+                // 这个区是取出的两个
+                for (int i =0 ; i < dataMsg.getLen(); i += 2){
                     dataMsg.addData(result.readUnsignedShort());
                 }
                 message.addDataMsgs(dataMsg);
             }
-            // TODO: 执行下面的
+            // 释放字节码流
+            result.release();
         }else {
             return;
         }
         ctx.fireChannelRead(message);
-
-
-
-
-        // msg中存储的是ByteBuf类型的数据，把数据读取到byte[]中
-
-        /**
-         * 去除消息头
-         */
-//        result.readBytes(result1);
-//        result.readBytes(result1, 0, 2);
-
     }
 }
