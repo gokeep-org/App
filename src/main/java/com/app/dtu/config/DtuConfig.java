@@ -1,4 +1,4 @@
-package com.app.dtu;
+package com.app.dtu.config;
 
 public class DtuConfig {
 

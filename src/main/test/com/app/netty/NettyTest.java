@@ -1,6 +1,6 @@
 package com.app.netty;
 
-import com.app.dtu.DtuConfig;
+import com.app.dtu.config.DtuConfig;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,15 +23,21 @@ public class NettyTest {
      */
     @Test
     public void testSendSocketMessage() {
-        byte[] msg = "abcd".getBytes();
+        byte[] msg = new byte[6];
+        msg[0] = 0x5A;
+        msg[1] = 0x13;
+        msg[2] = 0x56;
+        msg[3] = 0x78;
+        msg[4] = 0x78;
+        msg[5] = 0x78;
         try {
             Socket socket = new Socket();
             socket.connect(new InetSocketAddress(DtuConfig.DEFAULT_HOST, DtuConfig.SOCKET_SERVER_PORT));
             socket.setKeepAlive(true);
             OutputStream out = socket.getOutputStream();
-            ByteBuffer header = ByteBuffer.allocate(4);
+            ByteBuffer header = ByteBuffer.allocate(6);
             header.putInt(msg.length);
-            out.write(header.array());
+            out.write(msg);
             out.write(msg);
             out.flush();
             InputStream in = socket.getInputStream();
@@ -47,6 +53,24 @@ public class NettyTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+
+
+    @Test
+    public void sendSocketMessage(){
+        byte[] msg = new byte[256];
+        msg[0] = 0x5A;
+        msg[1] = 0x13;
+        msg[2] = 0x56;
+        msg[3] = 0x78;
+        msg[0] = 0x5A;
+        msg[0] = 0x5A;
+        int a = 0x0;
+
+        System.out.println(0x03 * 256 + 0xe8);
+
 
     }
 
