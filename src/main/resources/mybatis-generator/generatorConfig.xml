@@ -47,8 +47,9 @@
         <javaClientGenerator targetPackage="com.app.dtu.bean.dao.impl"
                              targetProject="src/main/java"
                              implementationPackage="com.app.dtu.bean.dao.impl"
-                             type="XMLMAPPER">
-                             <!--type="ANNOTATEDMAPPER">-->
+                             type="ANNOTATEDMAPPER">
+                             <!--type="XMLMAPPER">-->
+
 
             <!--如果需要xml，type为XMLMAPPER-->
             <property name="enableSubPackages" value="true"/>
