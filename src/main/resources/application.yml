@@ -1,6 +1,17 @@
 spring:
   application:
     name: appTest
+  datasource:
+    name: dataSource
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://127.0.0.1:3306/hms?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+          idle-timeout: 10000
+          maximum-pool-size: 10
+          pool-name: hikari-pool
   output:
     ansi:
       enabled: always
@@ -10,5 +21,8 @@ spring:
       force: true
   profiles:
     active: dev
+mybatis:
+  mapperLocations: classpath*:mybatis/*Mapper.xml
+  typeAliasesPackage: com.app.dtu.bean.model
 server:
   connection-timeout: 60000

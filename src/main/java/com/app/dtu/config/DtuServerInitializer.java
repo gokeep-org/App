@@ -1,5 +1,6 @@
 package com.app.dtu.config;
 
+import com.app.dtu.handlers.DataStorgeHandler;
 import com.app.dtu.handlers.DtuMsgHeaderHandler;
 import com.app.dtu.handlers.DtuResDestroyHandler;
 import com.app.dtu.handlers.DtuServerHandler;
@@ -44,6 +45,7 @@ public class DtuServerInitializer extends ChannelInitializer<SocketChannel> {
         */
         pipeline.addLast("msg-filter-handler", new DtuMsgHeaderHandler());
         pipeline.addLast("dtu-handler", new DtuServerHandler());
+        pipeline.addLast("storge-handler", new DataStorgeHandler());
         if (!DtuConfig.ENABLE_KEEP_ALIVE_CONNECTION){
             pipeline.addLast("destroy-res-handler", new DtuResDestroyHandler());
         }

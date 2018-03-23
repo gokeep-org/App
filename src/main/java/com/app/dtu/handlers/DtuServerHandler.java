@@ -1,7 +1,6 @@
 package com.app.dtu.handlers;
 
 import com.app.dtu.bean.Message;
-import com.app.dtu.config.DtuConfig;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -46,6 +45,7 @@ public class DtuServerHandler extends ChannelInboundHandlerAdapter {
     /**
      * 从channel中读取数据，进行处理
      * 这里是关闭之前的操作最后业务处理操作应该，需要处理
+     * 这里实际是封装成对象进行操作，传递给下一个pipline进行入库操作
      *
      * @param ctx
      * @param msg
@@ -74,9 +74,7 @@ public class DtuServerHandler extends ChannelInboundHandlerAdapter {
 //        ByteBuf encoded = ctx.alloc().buffer(4 * response.length());
 //        encoded.writeBytes(response.getBytes());
 //        ctx.write(encoded);
-        if (!DtuConfig.ENABLE_KEEP_ALIVE_CONNECTION) {
-            ctx.fireChannelRead(msg);
-        }
+        ctx.fireChannelRead(msg);
     }
 
 

@@ -46,7 +46,9 @@ public class NettyServer  implements com.app.dtu.ServerBootstrap {
                     .option(ChannelOption.SO_BACKLOG, DtuConfig.SOCKET_SERVER_SO_BACKLOG)
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
             ChannelFuture future = bootstrap.bind(DtuConfig.SOCKET_SERVER_PORT).sync();
-            future.channel().closeFuture().sync();
+            if (DtuConfig.IS_ENABLE_SOCKET_SERVER){
+                future.channel().closeFuture().sync();
+            }
             logger.info("Start netty socket server is success");
         } catch (InterruptedException e) {
             logger.error("Start netty socket server is fail, {}", e.getMessage());
