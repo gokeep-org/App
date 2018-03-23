@@ -26,13 +26,16 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
 
         Message message = new Message();
 
-//        byte[] stringToByte();
         byte[] headBytes = new byte[16];
 
         // 先读取帧头，不做处理
         result.readBytes(headBytes, 0, 4);
-//        result.markReaderIndex();
-//        result.resetReaderIndex();
+        /**
+         * 用来重置到当前标记的指针位置
+         * result.markReaderIndex();
+         * result.resetReaderIndex();
+         */
+
         String id;
         if(Header.compare(headBytes)){
             result.readBytes(headBytes, 0, 5);
@@ -45,7 +48,7 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
             message.setWarnList(result.readUnsignedShort());
             message.setControCmd(result.readUnsignedByte());
             message.setDataLen(result.readUnsignedShort());
-            // 这里取出的字节码剩余大小包含自己，如果为4那么会继续走一次，从而读取异常
+            // 这里取出的字节码剩余大小包含自己，如果为4那么会继续走一次，从而读取异常， 剩下的为校验码和帧尾
             while (result.readableBytes() - 5 > 0){
                 DataMsg dataMsg = new DataMsg();
                 dataMsg.setType(result.readUnsignedByte());
@@ -61,6 +64,7 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
         }else {
             return;
         }
+        // 把解析后的消息交给下一个pipline做处理
         ctx.fireChannelRead(message);
     }
 }
