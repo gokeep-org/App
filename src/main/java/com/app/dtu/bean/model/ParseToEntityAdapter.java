@@ -40,4 +40,5 @@ public interface ParseToEntityAdapter<T extends Device> {
         return generateEntity(buildMessage());
     }
 
+
 }

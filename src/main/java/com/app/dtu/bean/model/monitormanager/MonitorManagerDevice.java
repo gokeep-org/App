@@ -17,7 +17,7 @@ public class MonitorManagerDevice extends Device {
 
 
     /**
-     * 消息解析到实体
+     * 解析消息实体到数据传输对象实体
      * @param message
      * @return
      */
@@ -25,14 +25,6 @@ public class MonitorManagerDevice extends Device {
     public MonitorManagerDevice generateEntity(Message message) {
         this.data = message.getId();
         return this;
-    }
-
-    public static void main(String[] args) {
-        Message message = new Message();
-        message.setId("aaaa");
-        Device device = new MonitorManagerDevice(message);
-        MonitorManagerDevice monitorManagerDevice = (MonitorManagerDevice) device.parseEntity();
-        System.out.println(device);
     }
 
 }
