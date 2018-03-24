@@ -52,4 +52,37 @@ public class Message {
         }
         dataMsgs.add(dataMsg);
     }
+
+    /**
+     * 解析终端编号
+     * @return
+     */
+    public String parseTerminaNo(){
+        return this.id.substring(0, 8);
+    }
+
+    /**
+     * 解析终端类型， 如01， 02
+     * @return
+     */
+    public String parseTerminaType(){
+        return this.id.substring(8, 2);
+    }
+
+    /**
+     * 解析终端型号
+     * @return
+     */
+    public String parseTerminaModelNo(){
+        return this.id.substring(6, 4);
+    }
+    /**
+     * 解析终端地址
+     * @return
+     */
+    public String parseTerminaAddress(){
+        return this.id.substring(9, 6);
+    }
+
+
 }

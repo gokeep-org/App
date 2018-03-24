@@ -1,6 +1,9 @@
 package com.app.dtu.handlers;
 
 import com.app.dtu.bean.Message;
+import com.app.dtu.bean.model.Device;
+import com.app.dtu.bean.model.monitormanager.MonitorManagerDevice;
+import com.app.dtu.repository.MonitorManagerDeviceReponsitory;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -17,6 +20,9 @@ import org.slf4j.LoggerFactory;
  * @Auther is xuning on 2017/5/14.
  ****************************************/
 public class DtuServerHandler extends ChannelInboundHandlerAdapter {
+
+    MonitorManagerDeviceReponsitory monitorManagerDeviceReponsitory;
+
 
     private static final Logger logger = LoggerFactory.getLogger(DtuServerHandler.class);
 
@@ -42,6 +48,9 @@ public class DtuServerHandler extends ChannelInboundHandlerAdapter {
     }
 
 
+
+
+
     /**
      * 从channel中读取数据，进行处理
      * 这里是关闭之前的操作最后业务处理操作应该，需要处理
@@ -55,6 +64,10 @@ public class DtuServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         logger.info("Netty socket server start process socket message");
         Message result = (Message) msg;
+
+        Device message = new MonitorManagerDevice(result);
+        MonitorManagerDevice device = (MonitorManagerDevice) message.parseEntity();
+        monitorManagerDeviceReponsitory.save(device);
 //        byte[] result1 = new byte[result.readableBytes()];
 //        /**
 //         * TODO: 字节码解析处理
