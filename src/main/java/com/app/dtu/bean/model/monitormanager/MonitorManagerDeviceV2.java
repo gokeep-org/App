@@ -10,8 +10,8 @@ import java.io.Serializable;
 /**
  * 监控管理设备实体
  */
-//@Entity
-//@Table(name = "monitor_manager_device")
+@Entity
+@Table(name = "monitor_manager_device")
 public class MonitorManagerDeviceV2 implements DeviceDataDeal, ParseToEntityAdapter<MonitorManagerDeviceV2>, Serializable {
 
 

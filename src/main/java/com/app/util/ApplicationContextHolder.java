@@ -17,6 +17,15 @@ public class ApplicationContextHolder implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         context = applicationContext;
-        new NettyServer().start();
+        new NettyServerThread().start();
     }
+
+
+    class NettyServerThread extends Thread{
+        @Override
+        public void run() {
+            new NettyServer().start();
+        }
+    }
+
 }

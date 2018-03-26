@@ -1,7 +1,8 @@
 package com.app.dtu.handlers;
 
 import com.app.dtu.bean.Message;
-import com.app.dtu.bean.model.MonitorManagerDevice;
+import com.app.dtu.bean.model.DeviceDataDeal;
+import com.app.dtu.bean.model.monitormanager.MonitorManagerDeviceV2;
 import com.app.dtu.service.DataService;
 import com.app.util.ApplicationContextHolder;
 import io.netty.channel.Channel;
@@ -12,8 +13,6 @@ import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Date;
 
 /****************************************
  * Copyright (c) xuning.
@@ -65,14 +64,9 @@ public class DtuServerHandler extends ChannelInboundHandlerAdapter {
         Message result = (Message) msg;
 
         // 实现数据解析适配器
-        MonitorManagerDevice message = new MonitorManagerDevice();
+        DeviceDataDeal message = new MonitorManagerDeviceV2(result);
 //        MonitorManagerDeviceV2 device = (MonitorManagerDeviceV2) message.parseEntity();/
         DataService dataService = (DataService) ApplicationContextHolder.getContext().getBean("dataServiceImpl");
-       message.setCreateDate(new Date().getTime());
-       message.setDeviceId(1L);
-       message.setWarnDesc("oK");
-       message.setWarnList(1);
-       message.setId(2L);
         dataService.save(message);
 
 

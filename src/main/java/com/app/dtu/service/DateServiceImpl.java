@@ -1,19 +1,20 @@
 package com.app.dtu.service;
 
-import com.app.dtu.bean.dao.impl.MonitorManagerDeviceMapper;
-import com.app.dtu.bean.model.MonitorManagerDevice;
+
+import com.app.dtu.bean.model.monitormanager.MonitorManagerDeviceV2;
+import com.app.dtu.repository.MonitorManagerDeviceReponsitory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service(value = "dataServiceImpl")
-public class DateServiceImpl implements DataService<MonitorManagerDevice>{
+public class DateServiceImpl implements DataService<MonitorManagerDeviceV2>{
 //    @Autowired
 //    MonitorManagerDeviceReponsitory monitorManagerDeviceReponsitory;
     @Autowired
-    MonitorManagerDeviceMapper managerDeviceMapper;
+    MonitorManagerDeviceReponsitory monitorManagerDeviceReponsitory;
     @Override
-    public boolean save(com.app.dtu.bean.model.MonitorManagerDevice deviceData) {
-        managerDeviceMapper.insert(deviceData);
+    public boolean save(MonitorManagerDeviceV2 deviceData) {
+        monitorManagerDeviceReponsitory.save(deviceData);
         return true;
     }
 }

@@ -212,11 +212,11 @@
             <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
         <!--HTTP Client-->
-        <dependency>
-            <groupId>cn.networklab</groupId>
-            <artifactId>requests</artifactId>
-            <version>${requests.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>cn.networklab</groupId>-->
+            <!--<artifactId>requests</artifactId>-->
+            <!--<version>${requests.version}</version>-->
+        <!--</dependency>-->
         <!-- Json字符串对象转换-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -240,11 +240,11 @@
             <version>${mysql-connector-java}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${spring-boot-mybatis-version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.mybatis.spring.boot</groupId>-->
+            <!--<artifactId>mybatis-spring-boot-starter</artifactId>-->
+            <!--<version>${spring-boot-mybatis-version}</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -258,17 +258,17 @@
             <version>${hikaricp.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <version>${spring-boot.version}</version>
-            <optional>true</optional>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-configuration-processor</artifactId>-->
+            <!--<version>${spring-boot.version}</version>-->
+            <!--<optional>true</optional>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-actuator</artifactId>-->
+        <!--</dependency>-->
 
         <!--<dependency>-->
             <!--<groupId>com.google.protobuf</groupId>-->
