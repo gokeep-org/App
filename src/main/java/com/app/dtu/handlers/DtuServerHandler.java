@@ -13,6 +13,8 @@ import io.netty.util.concurrent.GlobalEventExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
+
 /****************************************
  * Copyright (c) xuning.
  * 尊重版权，禁止抄袭!
@@ -66,6 +68,11 @@ public class DtuServerHandler extends ChannelInboundHandlerAdapter {
         MonitorManagerDevice message = new MonitorManagerDevice();
 //        MonitorManagerDeviceV2 device = (MonitorManagerDeviceV2) message.parseEntity();/
         DataService dataService = (DataService) ApplicationContextHolder.getContext().getBean("dataServiceImpl");
+       message.setCreateDate(new Date().getTime());
+       message.setDeviceId(1L);
+       message.setWarnDesc("oK");
+       message.setWarnList(1);
+       message.setId(2L);
         dataService.save(message);
 
 
