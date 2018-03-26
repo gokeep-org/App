@@ -4,7 +4,7 @@ package com.app.mybatis;
 import com.app.AppStart;
 import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.ParseToEntityAdapter;
-import com.app.dtu.bean.model.monitormanager.MonitorManagerDeviceV2;
+import com.app.dtu.bean.model.device.MonitorManagerDeviceV2;
 import com.app.dtu.repository.MonitorManagerDeviceReponsitory;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,5 +1,15 @@
 package com.app.dtu.bean;
 
+import org.springframework.util.CollectionUtils;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * TODO: 前期时间紧，先以硬编码方式实现
+ * 后期需要优化，即一次缓存读取到数据，然后以定时任务的方式刷新缓存
+ */
 public enum DeviceTypeName {
     // 消防管理设备
     MONITOR_MANAGER_0001("00", "监控管理设备", "0001", "电气火灾监控设备壁挂式", "DH-A-XT/BG"),
@@ -26,5 +36,28 @@ public enum DeviceTypeName {
         this.modelNo = modelNo;
         this.modelName = modelName;
         this.deviceModelCode = deviceModelCode;
+    }
+
+    /**
+     * 获取所有枚举值
+     * @return
+     */
+    static List<DeviceTypeName> findAll(){
+        return Arrays.asList(DeviceTypeName.values());
+    }
+
+    /**
+     * 根据型号编码获取设备的信息
+     * @param deviceModelCode
+     * @return
+     */
+    public static DeviceTypeName getDeviceTypeInfoByModelCode(String deviceModelCode){
+       List<DeviceTypeName> deviceTypeNames = findAll().stream().filter(deviceTypeName -> {
+            if (deviceTypeName.deviceModelCode.equalsIgnoreCase(deviceModelCode)){
+                return true;
+            }
+            return false;
+        }).collect(Collectors.toList());
+        return CollectionUtils.isEmpty(deviceTypeNames) && deviceTypeNames.size() > 0 ? null : deviceTypeNames.get(0);
     }
 }

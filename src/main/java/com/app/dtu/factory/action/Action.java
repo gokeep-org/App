@@ -7,7 +7,7 @@
 // * 需要满足具备查询操作
 // * @param <T>
 // */
-//public interface Action <T extends DtuBean>{
+//public interface Action <T extends >{
 //    /**
 //     * 保存数据对象事件
 //     * @param object

@@ -9,6 +9,4 @@ public class Const {
     public static final int CHECK_CODE_LEN = 2;
     // 固定字段长度
     public static final int FIXED_LEN = 19;
-
-
 }

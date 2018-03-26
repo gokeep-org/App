@@ -15,20 +15,21 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "device")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Device implements DeviceDataDeal, ParseToEntityAdapter<Device>, Serializable{
 
     public Device(Message message) {
         this.message = message;
     }
-    // 表唯一性ID,表示设备在数据库中唯一存储的ID
+    // 表唯一性ID,表示设备在数据库中唯一存储的ID， 业务ID， 与数据无关
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String sn;
-    // 设备终端ID
+    // 设备终端ID，唯一16位ID
     private String terminalId;
+    // 终端编码
+    private String terminaCode;
     // 设备类别编号
     private String typeNo;
     // 设备类别名称

@@ -1,4 +1,7 @@
 package com.app.dtu.bean.model.device;
 
-public class ElectricalFireDevice {
+/**
+ * 电器火灾监监控设备-01
+ */
+public class ElectricalFireMonitorDevice {
 }

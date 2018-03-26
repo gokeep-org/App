@@ -1,4 +1,4 @@
-package com.app.dtu.bean.model.monitormanager;
+package com.app.dtu.bean.model.device;
 
 import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.DeviceDataDeal;
@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * 监控管理设备实体
+ * 监控管理设备实体-00
  */
 @Entity
 @Table(name = "monitor_manager_device")

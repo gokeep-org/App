@@ -3,7 +3,7 @@ package com.app.dtu.config;
 public class DtuConfig {
 
     public static final boolean IS_ENABLE_SOCKET_SERVER = true;
-
+    // 以具体的服务器为准
     public static final String DEFAULT_HOST = "localhost";
     // Socket 服务的段端口
     public static final int SOCKET_SERVER_PORT = 34885;
