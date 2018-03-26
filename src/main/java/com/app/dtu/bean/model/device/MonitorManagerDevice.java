@@ -12,13 +12,13 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "monitor_manager_device")
-public class MonitorManagerDeviceV2 implements DeviceDataDeal, ParseToEntityAdapter<MonitorManagerDeviceV2>, Serializable {
+public class MonitorManagerDevice implements DeviceDataDeal, ParseToEntityAdapter<MonitorManagerDevice>, Serializable {
 
 
     @Transient
     private Message message;
 
-    public MonitorManagerDeviceV2(Message message) {
+    public MonitorManagerDevice(Message message) {
         this.message = message;
     }
 
@@ -30,7 +30,7 @@ public class MonitorManagerDeviceV2 implements DeviceDataDeal, ParseToEntityAdap
     private long createDate;
 
     // 设备型号ID, 即device_id
-    private long deviceId;
+    private long terminalNo;
 
     private  int warnList;
 
@@ -52,7 +52,7 @@ public class MonitorManagerDeviceV2 implements DeviceDataDeal, ParseToEntityAdap
     }
 
     @Override
-    public MonitorManagerDeviceV2 buildDevice() {
+    public MonitorManagerDevice buildDevice() {
         return this;
     }
 
@@ -67,7 +67,7 @@ public class MonitorManagerDeviceV2 implements DeviceDataDeal, ParseToEntityAdap
      * @return
      */
     @Override
-    public MonitorManagerDeviceV2 generateEntity(Message message) {
+    public MonitorManagerDevice generateEntity(Message message) {
 //        setTerminalAddress(message.parseTerminaAddress());
         this.warnList = message.getWarnList();
         this.warnList = message.getWarnList();
