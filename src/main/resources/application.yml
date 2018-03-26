@@ -24,9 +24,9 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
-#mybatis:
-#  mapperLocations: classpath*:mybatis/*Mapper.xml
-#  typeAliasesPackage: com.app.dtu.bean.model
+      ddl-auto: update
+mybatis:
+  mapperLocations: classpath*:mybatis/*Mapper.xml
+  typeAliasesPackage: com.app.dtu.bean.model
 server:
   connection-timeout: 60000

@@ -7,21 +7,26 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * 设备的基础表
+ * 设备的基础类
  * 用于存储设备的基础信息
+ * 其他的走具体的设备处理， 数据库中会表示为一个存储具体设备信息的码表
+ * 其他的表根据device_id与之做关联，其他的表示具体上报的数据信息存储
  */
 
-//@Entity
-//@Table(name = "device")
-public class Device implements ParseToEntityAdapter<Device>, Serializable{
+@Entity
+@Table(name = "device")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Device implements DeviceDataDeal, ParseToEntityAdapter<Device>, Serializable{
 
     public Device(Message message) {
         this.message = message;
     }
-    // 表唯一性ID
+    // 表唯一性ID,表示设备在数据库中唯一存储的ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    private String sn;
     // 设备终端ID
     private String terminalId;
     // 设备类别编号
@@ -36,11 +41,9 @@ public class Device implements ParseToEntityAdapter<Device>, Serializable{
     private String terminalAddress;
     // 监控数据项
     private String monitorDateItem;
-
-    // 管理机状态
-    private String managerDeviceStatus;
     // 创建时间
     private long createTime;
+    // 该字段不应该被数据库所存储
     @Transient
     private Message message;
 
@@ -108,14 +111,6 @@ public class Device implements ParseToEntityAdapter<Device>, Serializable{
         this.monitorDateItem = monitorDateItem;
     }
 
-    public String getManagerDeviceStatus() {
-        return managerDeviceStatus;
-    }
-
-    public void setManagerDeviceStatus(String managerDeviceStatus) {
-        this.managerDeviceStatus = managerDeviceStatus;
-    }
-
     public Message getMessage() {
         return message;
     }
@@ -142,6 +137,14 @@ public class Device implements ParseToEntityAdapter<Device>, Serializable{
         this.createTime = createTime;
     }
 
+    public String getSn() {
+        return sn;
+    }
+
+    public void setSn(String sn) {
+        this.sn = sn;
+    }
+
     /**
      * 此方法需要子类去重写,否则无法生成实体
      * @param message
@@ -153,7 +156,6 @@ public class Device implements ParseToEntityAdapter<Device>, Serializable{
         if (StringUtils.isEmpty(message) || terminaIdString.length() != 16){
             return null;
         }
-
         terminaIdString.substring(0, 8);
         return this;
     }

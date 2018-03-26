@@ -10,7 +10,9 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 import javax.annotation.PostConstruct;
 
@@ -21,8 +23,9 @@ import javax.annotation.PostConstruct;
  * 2：使用实例化的方法构建，用于非web应用或者单元测试中的方式实例化
  * 3: 实现ApplicationContextAware接口，实现setApplicationContext方法来实现
  */
-@Component
-public class NettyServer  implements com.app.dtu.ServerBootstrap {
+
+public class NettyServer  implements com.app.dtu.ServerBootstrap, ApplicationContextAware {
+    private static ApplicationContext applicationContext;
     private static final Logger logger = LoggerFactory.getLogger(NettyServer.class);
 
     /**
@@ -62,5 +65,11 @@ public class NettyServer  implements com.app.dtu.ServerBootstrap {
         workerGroup.shutdownGracefully();
         bossGroup.shutdownGracefully();
         logger.info("Netty socket close server is success");
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+//        this.applicationContext = applicationContext;
+        start();
     }
 }

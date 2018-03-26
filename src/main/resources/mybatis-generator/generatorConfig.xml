@@ -65,7 +65,7 @@
                <!--selectByExampleQueryId="false"/>-->
 
         <table schema="hms"
-               tableName="user"
+               tableName="monitor_manager_device"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

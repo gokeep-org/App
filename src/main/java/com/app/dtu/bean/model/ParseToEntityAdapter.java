@@ -8,7 +8,7 @@ import java.util.Objects;
  * 用于支持设备数据解析完成之后解析给对象
  * 所有的实体类对象均实现这个接口
  */
-public interface ParseToEntityAdapter<T extends Device> {
+public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
     /**
      * 默认的解析实现，如果某一个实体有特殊的需求，那么重写execute方法即可
      *
