@@ -13,7 +13,6 @@
 
     <modules>
     </modules>
-
     <!--Maven相关配置属性-->
     <properties>
         <java.version>1.8</java.version>
