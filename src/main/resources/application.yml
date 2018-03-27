@@ -10,10 +10,7 @@ spring:
       force: true
   profiles:
     active: dev
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
+    include: [dev,produce]
 #mybatis:
 #  mapperLocations: classpath*:mybatis/*Mapper.xml
 #  typeAliasesPackage: com.app.dtu.bean.model
