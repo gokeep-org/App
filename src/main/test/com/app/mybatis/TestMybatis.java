@@ -4,7 +4,7 @@ package com.app.mybatis;
 import com.app.AppStart;
 import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.ParseToEntityAdapter;
-import com.app.dtu.bean.model.device.MonitorManagerDeviceV2;
+import com.app.dtu.bean.model.device.MonitorManagerDevice;
 import com.app.dtu.repository.MonitorManagerDeviceReponsitory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,8 +30,8 @@ public class TestMybatis {
     public void testJpa(){
         Message message = new Message();
         message.setId("9170000101000511");
-        ParseToEntityAdapter parseToEntityAdapter = new MonitorManagerDeviceV2(message);
-        MonitorManagerDeviceV2 device = (MonitorManagerDeviceV2) parseToEntityAdapter.parseEntity();
+        ParseToEntityAdapter parseToEntityAdapter = new MonitorManagerDevice(message);
+        MonitorManagerDevice device = (MonitorManagerDevice) parseToEntityAdapter.parseEntity();
         monitorManagerDeviceReponsitory.save(device);
         logger.info("ok");
 

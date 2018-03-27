@@ -24,17 +24,58 @@ public enum DeviceTypeName {
     // 电气火灾监控设备
     MONITOR_MANAGER_0008("01", "电气火灾监控设备", "0101", "电气火灾监控设备壁挂式", "DH-A-XT/BG");
 
-    String typeNo;
+    String typeCode;
     String typeName;
-    String modelNo;
+    String modelCode;
     String modelName;
     String deviceModelCode;
 
-    DeviceTypeName(String typeNo, String typeName, String modelNo, String modelName, String deviceModelCode) {
-        this.typeNo = typeNo;
+    DeviceTypeName(String typeCode, String typeName, String modelCode, String modelName, String deviceModelCode) {
+        this.typeCode = typeCode;
         this.typeName = typeName;
-        this.modelNo = modelNo;
+        this.modelCode = modelCode;
         this.modelName = modelName;
+        this.deviceModelCode = deviceModelCode;
+    }
+
+
+    public String getTypeCode() {
+        return typeCode;
+    }
+
+    public void setTypeCode(String typeCode) {
+        this.typeCode = typeCode;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public String getModelCode() {
+        return modelCode;
+    }
+
+    public void setModelCode(String modelCode) {
+        this.modelCode = modelCode;
+    }
+
+    public String getModelName() {
+        return modelName;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    public String getDeviceModelCode() {
+        return deviceModelCode;
+    }
+
+    public void setDeviceModelCode(String deviceModelCode) {
         this.deviceModelCode = deviceModelCode;
     }
 
@@ -53,7 +94,7 @@ public enum DeviceTypeName {
      */
     public static DeviceTypeName getDeviceTypeInfoByModelCode(String deviceModelCode){
        List<DeviceTypeName> deviceTypeNames = findAll().stream().filter(deviceTypeName -> {
-            if (deviceTypeName.deviceModelCode.equalsIgnoreCase(deviceModelCode)){
+            if (deviceTypeName.modelCode.equalsIgnoreCase(deviceModelCode)){
                 return true;
             }
             return false;

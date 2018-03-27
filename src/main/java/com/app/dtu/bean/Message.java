@@ -1,5 +1,10 @@
 package com.app.dtu.bean;
 
+import com.app.dtu.bean.model.Device;
+import com.app.dtu.bean.model.DeviceDataDeal;
+import com.app.dtu.bean.model.device.MonitorManagerDevice;
+import org.springframework.util.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,35 +59,51 @@ public class Message {
     }
 
     /**
-     * 解析终端编号
-     * @return
-     */
-    public String parseTerminaNo(){
-        return this.id.substring(0, 8);
-    }
-
-    /**
      * 解析终端类型， 如01， 02
      * @return
      */
-    public String parseTerminaType(){
-        return this.id.substring(8, 2);
+    public String parseTypeCode(){
+        return this.id.substring(8, 10);
+    }
+
+
+    /**
+     * 解析设备型号
+     * @return
+     */
+    public String parseModelCode(){
+        return this.id.substring(6, 10);
     }
 
     /**
-     * 解析终端型号
+     * 解析设备型号枚举
      * @return
      */
-    public String parseTerminaModelNo(){
-        return this.id.substring(6, 4);
+    public DeviceTypeName parseDeviceModelEnum(){
+        if (StringUtils.isEmpty(this.id) || this.id.length() != 16){
+            return null;
+        }
+        return DeviceTypeName.getDeviceTypeInfoByModelCode(this.parseModelCode());
     }
+
+
     /**
-     * 解析终端地址
+     * 获取到具体的设备处理
      * @return
      */
-    public String parseTerminaAddress(){
-        return this.id.substring(9, 6);
+    public DeviceDataDeal getDevice(){
+        String terminaTypeCode = parseTypeCode();
+        switch (terminaTypeCode){
+            case "00" : return new MonitorManagerDevice(this);
+            default: return null;
+        }
     }
 
-
+    /**
+     * 获取基础设备信息的处理, 这里主要用于数据的初始化
+     * @return
+     */
+    public DeviceDataDeal getBasicDeviceInfoDeal(){
+        return new Device(this);
+    }
 }

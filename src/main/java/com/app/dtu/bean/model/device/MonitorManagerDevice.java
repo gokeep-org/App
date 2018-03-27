@@ -3,6 +3,9 @@ package com.app.dtu.bean.model.device;
 import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.DeviceDataDeal;
 import com.app.dtu.bean.model.ParseToEntityAdapter;
+import com.app.dtu.service.ServiceItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +16,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "monitor_manager_device")
 public class MonitorManagerDevice implements DeviceDataDeal, ParseToEntityAdapter<MonitorManagerDevice>, Serializable {
+    private static final Logger logger = LoggerFactory.getLogger(MonitorManagerDevice.class);
 
     @Transient
     private Message message;
@@ -47,8 +51,17 @@ public class MonitorManagerDevice implements DeviceDataDeal, ParseToEntityAdapte
      */
     @Override
     public MonitorManagerDevice generateEntity(Message message) {
-//        setTerminalAddress(message.parseTerminaAddress());
         return this;
     }
 
+    // 执行数据存储
+    @Override
+    public boolean execute() {
+        try{
+            ServiceItem.monitorManagerService.save(this.generateEntity(this.message));
+        }catch (Throwable e){
+            logger.error("Execute add data to db or generate entity is error");
+        }
+        return true;
+    }
 }
