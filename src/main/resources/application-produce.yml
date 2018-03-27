@@ -1,6 +1,17 @@
 server:
-  port: 20001
+  port: 5005
 logging:
-  level:
-    com:
-      app: off
+  level: info
+  file: ./log/app.log
+spring:
+  datasource:
+    name: dataSource
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://127.0.0.1:3306/hms?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: ${password}
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+          idle-timeout: 10000
+          maximum-pool-size: 10
+          pool-name: hikari-pool

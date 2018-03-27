@@ -30,7 +30,7 @@ public class MonitorManagerDevice implements DeviceDataDeal, ParseToEntityAdapte
     private long createDate;
 
     // 设备型号ID, 即device_id
-    private long terminalNo;
+    private long terminalNo = -1L;
 
     private  int warnList;
 

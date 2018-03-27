@@ -8,11 +8,10 @@
     <artifactId>App</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>AppExample</name>
-    <description>SpringBoot 脚手架</description>
+    <name>DtuDataCenter</name>
+    <description>Dtu Data Center</description>
 
     <modules>
-        <!--<module>OauthServer</module>-->
     </modules>
 
     <!--Maven相关配置属性-->
@@ -350,7 +349,5 @@
                 <!--</dependencies>-->
             <!--</plugin>-->
         </plugins>
-
-
     </build>
 </project>
