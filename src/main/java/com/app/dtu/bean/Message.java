@@ -8,6 +8,9 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 消息传输实体
+ */
 public class Message {
     private String id;
     private int warnList;
@@ -83,7 +86,7 @@ public class Message {
         if (StringUtils.isEmpty(this.id) || this.id.length() != 16){
             return null;
         }
-        return DeviceTypeName.getDeviceTypeInfoByModelCode(this.parseModelCode());
+        return DeviceTypeName.getDeviceTypeInfoByModelCode(parseModelCode());
     }
 
 
