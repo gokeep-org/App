@@ -9,6 +9,7 @@ import java.io.Serializable;
  * 可以作为基础的数据存储被其他的设备类继承， 不是一张单独的表
  */
 public class RedundancyDeviceData implements Serializable{
+
     // 设备的型号
     private String modelCode;
     // 添加日期

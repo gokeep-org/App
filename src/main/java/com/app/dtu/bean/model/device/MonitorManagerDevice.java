@@ -26,6 +26,8 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+
+    
     @Override
     public MonitorManagerDevice buildDevice() {
         return this;

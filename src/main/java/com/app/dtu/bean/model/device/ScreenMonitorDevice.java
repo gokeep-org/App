@@ -5,8 +5,7 @@ import com.app.dtu.bean.model.DeviceDataDeal;
 import com.app.dtu.bean.model.ParseToEntityAdapter;
 import com.app.dtu.bean.model.RedundancyDeviceData;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 视屏监控08
@@ -16,6 +15,20 @@ import javax.persistence.Table;
 @Table(name = "scree_monitor_device")
 public class ScreenMonitorDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<ScreenMonitorDevice> {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     @Override
     public boolean execute() {
         return false;
@@ -30,6 +43,8 @@ public class ScreenMonitorDevice extends RedundancyDeviceData implements DeviceD
     public Message buildMessage() {
         return null;
     }
+
+
 
     @Override
     public ScreenMonitorDevice generateEntity(Message message) {
