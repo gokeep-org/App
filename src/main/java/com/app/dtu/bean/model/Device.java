@@ -25,6 +25,8 @@ public class Device implements DeviceDataDeal, ParseToEntityAdapter<Device>, Ser
 
     private static final Logger logger = LoggerFactory.getLogger(Device.class);
 
+    public Device(){}
+
     public Device(Message message) {
         this.message = message;
     }

@@ -129,7 +129,7 @@ public enum DeviceTypeName {
      * 获取所有枚举值
      * @return
      */
-    static List<DeviceTypeName> findAll(){
+    public static List<DeviceTypeName> findAll(){
         return Arrays.asList(DeviceTypeName.values());
     }
 

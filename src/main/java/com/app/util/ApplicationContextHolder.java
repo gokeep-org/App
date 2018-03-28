@@ -1,6 +1,8 @@
 package com.app.util;
 
 import com.app.dtu.NettyServer;
+import com.app.dtu.bean.model.InitDataTask;
+import com.app.dtu.service.ServiceBeanNames;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -18,6 +20,7 @@ public class ApplicationContextHolder implements ApplicationContextAware {
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         context = applicationContext;
         new NettyServerThread().start();
+        ((InitDataTask)applicationContext.getBean(ServiceBeanNames.INIT_MODEL_TYPE_TABLE_DATA_SERVICE)).start();
     }
 
     /**
