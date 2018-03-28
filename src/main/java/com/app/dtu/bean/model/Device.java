@@ -2,6 +2,7 @@ package com.app.dtu.bean.model;
 
 import com.app.dtu.bean.DeviceTypeName;
 import com.app.dtu.bean.Message;
+import com.app.dtu.config.DtuConfig;
 import com.app.dtu.service.ServiceItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ import java.util.Objects;
  */
 
 @Entity
-@Table(name = "dtu_device")
+@Table(name = DtuConfig.DTU_TABLE_PRIFIX + "device")
 public class Device implements DeviceDataDeal, ParseToEntityAdapter<Device>, Serializable{
 
     private static final Logger logger = LoggerFactory.getLogger(Device.class);

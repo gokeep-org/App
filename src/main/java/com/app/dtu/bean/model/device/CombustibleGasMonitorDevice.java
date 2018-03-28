@@ -4,6 +4,7 @@ import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.DeviceDataDeal;
 import com.app.dtu.bean.model.ParseToEntityAdapter;
 import com.app.dtu.bean.model.RedundancyDeviceData;
+import com.app.dtu.config.DtuConfig;
 
 import javax.persistence.*;
 
@@ -11,9 +12,12 @@ import javax.persistence.*;
  * 可燃气体监控-06
  */
 @Entity
-@Table(name = "dtu_combustible_gas_monitor_device")
+@Table(name =  DtuConfig.DTU_TABLE_PRIFIX +"combustible_gas_monitor_device")
 public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<CombustibleGasMonitorDevice>{
 
+    public CombustibleGasMonitorDevice(Message message) {
+        setMessage(message);
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

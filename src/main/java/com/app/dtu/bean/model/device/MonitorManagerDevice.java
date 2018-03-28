@@ -4,6 +4,7 @@ import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.DeviceDataDeal;
 import com.app.dtu.bean.model.ParseToEntityAdapter;
 import com.app.dtu.bean.model.RedundancyDeviceData;
+import com.app.dtu.config.DtuConfig;
 import com.app.dtu.service.ServiceItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,7 @@ import javax.persistence.*;
  * 监控管理设备实体-00
  */
 @Entity
-@Table(name = "monitor_manager_device")
+@Table(name =  DtuConfig.DTU_TABLE_PRIFIX +"monitor_manager_device")
 public class MonitorManagerDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<MonitorManagerDevice> {
     private static final Logger logger = LoggerFactory.getLogger(MonitorManagerDevice.class);
 

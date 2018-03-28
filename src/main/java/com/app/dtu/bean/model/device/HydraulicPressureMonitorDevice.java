@@ -4,6 +4,7 @@ import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.DeviceDataDeal;
 import com.app.dtu.bean.model.ParseToEntityAdapter;
 import com.app.dtu.bean.model.RedundancyDeviceData;
+import com.app.dtu.config.DtuConfig;
 
 import javax.persistence.*;
 
@@ -11,8 +12,12 @@ import javax.persistence.*;
  * 水压监控-12
  */
 @Entity
-@Table(name = "hydraulic_pressure_monitor_device")
+@Table(name =  DtuConfig.DTU_TABLE_PRIFIX + "hydraulic_pressure_monitor_device")
 public class HydraulicPressureMonitorDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<HydraulicPressureMonitorDevice> {
+
+    public HydraulicPressureMonitorDevice(Message message) {
+        setMessage(message);
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

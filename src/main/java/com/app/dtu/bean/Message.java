@@ -2,7 +2,7 @@ package com.app.dtu.bean;
 
 import com.app.dtu.bean.model.Device;
 import com.app.dtu.bean.model.DeviceDataDeal;
-import com.app.dtu.bean.model.device.MonitorManagerDevice;
+import com.app.dtu.bean.model.device.*;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -98,6 +98,15 @@ public class Message {
         String terminaTypeCode = parseTypeCode();
         switch (terminaTypeCode){
             case "00" : return new MonitorManagerDevice(this);
+            case "01" : return new ElectricalFireMonitorDevice(this);
+            case "02" : return new IntelligentPowerMonitorDevice(this);
+            case "03" : return new FaultArcMonitorDevice(this);
+            case "04" : return new FireControlPowerMonitorDevice(this);
+            case "05" : return new SmokeFeelMonitorDevice(this);
+            case "06" : return new CombustibleGasMonitorDevice(this);
+            case "07" : return new PrventFireDoorMonitorDevice(this);
+            case "08" : return new ScreenMonitorDevice(this);
+            case "12" : return new HydraulicPressureMonitorDevice(this);
             default: return null;
         }
     }
