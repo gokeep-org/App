@@ -1,8 +1,11 @@
 package com.app.dtu.bean.model;
 
 import com.app.dtu.bean.DeviceTypeName;
+import com.app.dtu.config.DtuConfig;
 import com.app.dtu.repository.DeviceRepository;
 import com.app.dtu.service.ServiceBeanNames;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -12,15 +15,24 @@ import java.util.Date;
 import java.util.List;
 @Service(ServiceBeanNames.INIT_MODEL_TYPE_TABLE_DATA_SERVICE)
 public class InitDataTask extends Thread{
+    private static final Logger logger = LoggerFactory.getLogger(InitDataTask.class);
 
     @Autowired
     private DeviceRepository deviceRepository;
 
     @Override
     public void run() {
-        if (isNeedInitDeviceTypeData()){
-            initDeviceModelTable();
+        if (!DtuConfig.IS_CHECK_INIT_DEVICE_MODEL_DATA){
+            return;
         }
+        try {
+            if (isNeedInitDeviceTypeData()){
+                initDeviceModelTable();
+            }
+        }catch (Throwable e){
+            logger.error("Init device model data is fail, ", e.getMessage());
+        }
+
     }
 
     public boolean isNeedInitDeviceTypeData(){
@@ -28,7 +40,7 @@ public class InitDataTask extends Thread{
         if (count != 32){
             return true;
         }
-        return true;
+        return false;
     }
 
     public void initDeviceModelTable(){

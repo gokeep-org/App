@@ -20,7 +20,7 @@ import java.util.Objects;
  */
 
 @Entity
-@Table(name = "device")
+@Table(name = "dtu_device")
 public class Device implements DeviceDataDeal, ParseToEntityAdapter<Device>, Serializable{
 
     private static final Logger logger = LoggerFactory.getLogger(Device.class);

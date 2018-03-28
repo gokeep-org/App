@@ -11,7 +11,7 @@ import javax.persistence.*;
  * 可燃气体监控-06
  */
 @Entity
-@Table(name = "combustible_gas_monitor_device")
+@Table(name = "dtu_combustible_gas_monitor_device")
 public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<CombustibleGasMonitorDevice>{
 
 
