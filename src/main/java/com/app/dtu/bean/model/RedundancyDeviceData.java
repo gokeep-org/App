@@ -4,6 +4,7 @@ import com.app.dtu.bean.Message;
 
 import javax.persistence.Transient;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 可以作为基础的数据存储被其他的设备类继承， 不是一张单独的表
@@ -12,8 +13,26 @@ public class RedundancyDeviceData implements Serializable{
 
     // 设备的型号
     private String modelCode;
+
     // 添加日期
     private long createDate;
+
+    // 唯一16位消息id
+    private String messageId;
+
+
+    public void setRedunancyDeviceInfo(){
+        setMessageId(message.getId());
+        setCreateDate(new Date().getTime());
+        setModelCode(message.parseModelCode());
+    }
+    public String getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(String messageId) {
+        this.messageId = messageId;
+    }
 
     @Transient
     private Message message;
