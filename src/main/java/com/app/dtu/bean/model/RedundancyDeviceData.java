@@ -20,11 +20,25 @@ public class RedundancyDeviceData implements Serializable{
     // 唯一16位消息id
     private String messageId;
 
+    // 告警列表
+    private int warnList;
 
-    public void setRedunancyDeviceInfo(){
+    // 控制指令
+    private int controCmd;
+
+    // 数据长度
+    private int dataLen;
+
+    /**
+     * 设置消息元数据信息
+     */
+    public void buildRedunancyDeviceInfo(){
         setMessageId(message.getId());
         setCreateDate(new Date().getTime());
         setModelCode(message.parseModelCode());
+        setControCmd(message.getControCmd());
+        setDataLen(message.getDataLen());
+        setWarnList(message.getWarnList());
     }
     public String getMessageId() {
         return messageId;
@@ -59,5 +73,29 @@ public class RedundancyDeviceData implements Serializable{
 
     public void setMessage(Message message) {
         this.message = message;
+    }
+
+    public int getWarnList() {
+        return warnList;
+    }
+
+    public void setWarnList(int warnList) {
+        this.warnList = warnList;
+    }
+
+    public int getControCmd() {
+        return controCmd;
+    }
+
+    public void setControCmd(int controCmd) {
+        this.controCmd = controCmd;
+    }
+
+    public int getDataLen() {
+        return dataLen;
+    }
+
+    public void setDataLen(int dataLen) {
+        this.dataLen = dataLen;
     }
 }

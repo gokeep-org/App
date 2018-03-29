@@ -1,5 +1,6 @@
 package com.app.dtu.bean.model.device;
 
+import com.app.dtu.bean.DataMsg;
 import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.DeviceDataDeal;
 import com.app.dtu.bean.model.ParseToEntityAdapter;
@@ -56,9 +57,13 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
      */
     @Override
     public MonitorManagerDevice generateEntity(Message message) {
-        setRedunancyDeviceInfo();
+        buildRedunancyDeviceInfo();
         for (int i=0; i < message.getDataMsgs().size(); i++){
-
+            DataMsg dataMsg = message.getDataMsgs().get(i);
+            if (dataMsg.getType() == 0x0001){
+                dataMsg.getDatas();
+                this.x1 = dataMsg.getDatas()
+            }
         }
         return this;
     }
