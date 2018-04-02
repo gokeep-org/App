@@ -57,6 +57,19 @@ public class RedundancyDeviceData implements Serializable{
 //     * @throws InstantiationException
 //     */
 //    public RedundancyDeviceData ReferenceField(Class classes) throws IllegalAccessException, InstantiationException {
+//        Field[] fields = classes.getDeclaredFields();
+//        getMessage().getDataMsgs().stream().forEach(dataMsg -> {
+//            if (fields[0].getName() == "x1"){
+//                try {
+//                    fields[0].set(classes.newInstance(), dataMsg.getDatas().get(0));
+//                    classes.getDeclaredMethod("", message);
+//                } catch (IllegalAccessException e) {
+//                    e.printStackTrace();
+//                } catch (InstantiationException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 //
 //    }
 

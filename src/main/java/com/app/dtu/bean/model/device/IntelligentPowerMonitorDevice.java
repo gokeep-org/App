@@ -27,77 +27,41 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String ua;
-    private String ub;
-    private String uc;
-    private String la;
-    private String lb;
-    private String lc;
-    private String st;
-    private String pt;
+    private Integer ua;
+    private Integer ub;
+    private Integer uc;
+    private Integer la;
+    private Integer lb;
+    private Integer lc;
+    private Integer st;
+    private Integer pt;
 
-    public String getUa() {
-        return ua;
+    private Integer u;
+    private Integer i;
+    private Integer af;
+
+    public Integer getU() {
+        return u;
     }
 
-    public void setUa(String ua) {
-        this.ua = ua;
+    public void setU(Integer u) {
+        this.u = u;
     }
 
-    public String getUb() {
-        return ub;
+    public Integer getI() {
+        return i;
     }
 
-    public void setUb(String ub) {
-        this.ub = ub;
+    public void setI(Integer i) {
+        this.i = i;
     }
 
-    public String getUc() {
-        return uc;
+    public Integer getAf() {
+        return af;
     }
 
-    public void setUc(String uc) {
-        this.uc = uc;
-    }
-
-    public String getLa() {
-        return la;
-    }
-
-    public void setLa(String la) {
-        this.la = la;
-    }
-
-    public String getLb() {
-        return lb;
-    }
-
-    public void setLb(String lb) {
-        this.lb = lb;
-    }
-
-    public String getLc() {
-        return lc;
-    }
-
-    public void setLc(String lc) {
-        this.lc = lc;
-    }
-
-    public String getSt() {
-        return st;
-    }
-
-    public void setSt(String st) {
-        this.st = st;
-    }
-
-    public String getPt() {
-        return pt;
-    }
-
-    public void setPt(String pt) {
-        this.pt = pt;
+    public void setAf(Integer af) {
+        this.af = af;
     }
 
     public Long getId() {
@@ -106,6 +70,70 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getUa() {
+        return ua;
+    }
+
+    public void setUa(Integer ua) {
+        this.ua = ua;
+    }
+
+    public Integer getUb() {
+        return ub;
+    }
+
+    public void setUb(Integer ub) {
+        this.ub = ub;
+    }
+
+    public Integer getUc() {
+        return uc;
+    }
+
+    public void setUc(Integer uc) {
+        this.uc = uc;
+    }
+
+    public Integer getLa() {
+        return la;
+    }
+
+    public void setLa(Integer la) {
+        this.la = la;
+    }
+
+    public Integer getLb() {
+        return lb;
+    }
+
+    public void setLb(Integer lb) {
+        this.lb = lb;
+    }
+
+    public Integer getLc() {
+        return lc;
+    }
+
+    public void setLc(Integer lc) {
+        this.lc = lc;
+    }
+
+    public Integer getSt() {
+        return st;
+    }
+
+    public void setSt(Integer st) {
+        this.st = st;
+    }
+
+    public Integer getPt() {
+        return pt;
+    }
+
+    public void setPt(Integer pt) {
+        this.pt = pt;
     }
 
     @Override

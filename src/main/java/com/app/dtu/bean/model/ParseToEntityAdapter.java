@@ -39,6 +39,4 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
         }
         return generateEntity(buildMessage());
     }
-
-
 }
