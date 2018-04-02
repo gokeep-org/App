@@ -16,7 +16,7 @@ import java.util.List;
  * 电器火灾监监控设备-01
  */
 @Entity
-@Table(name = DtuConfig.DTU_TABLE_PRIFIX + "combustible_gas_monitor_device")
+@Table(name = DtuConfig.DTU_TABLE_PRIFIX + "electrical_fire_monitor_device")
 public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<ElectricalFireMonitorDevice> {
     private static final Logger logger = LoggerFactory.getLogger(ElectricalFireMonitorDevice.class);
 
@@ -240,7 +240,7 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
                 }
             }
         }
-        return null;
+        return this;
     }
 
     public Integer getUa() {

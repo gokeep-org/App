@@ -1,21 +1,22 @@
 package com.app.dtu.bean.model.device;
 
+import com.app.dtu.bean.DataMsg;
 import com.app.dtu.bean.Message;
-import com.app.dtu.bean.model.DeviceDataDeal;
-import com.app.dtu.bean.model.ParseToEntityAdapter;
-import com.app.dtu.bean.model.RedundancyDeviceData;
+import com.app.dtu.bean.model.*;
 import com.app.dtu.config.DtuConfig;
 import com.app.dtu.service.ServiceItem;
+import com.app.dtu.util.DtuUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * 智能电力设监控设别-02
  */
 @Entity
-@Table(name =  DtuConfig.DTU_TABLE_PRIFIX +"intelligent_power_monitor_device")
+@Table(name = DtuConfig.DTU_TABLE_PRIFIX + "intelligent_power_monitor_device")
 public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<IntelligentPowerMonitorDevice> {
     private static final Logger logger = LoggerFactory.getLogger(IntelligentPowerMonitorDevice.class);
 
@@ -30,38 +31,56 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     private Integer ua;
     private Integer ub;
     private Integer uc;
-    private Integer la;
-    private Integer lb;
-    private Integer lc;
+    private Integer ia;
+    private Integer ib;
+    private Integer ic;
     private Integer st;
     private Integer pt;
 
-    private Integer u;
-    private Integer i;
-    private Integer af;
 
-    public Integer getU() {
-        return u;
+    @Override
+    public boolean execute() {
+        try {
+            ServiceItem.intelligentPowerService.save(this.generateEntity(getMessage()));
+        } catch (Throwable e) {
+            logger.error("Execute add data to db or generate entity is error");
+        }
+        return true;
     }
 
-    public void setU(Integer u) {
-        this.u = u;
+    @Override
+    public IntelligentPowerMonitorDevice buildDevice() {
+        return this;
     }
 
-    public Integer getI() {
-        return i;
+    @Override
+    public Message buildMessage() {
+        return getMessage();
     }
 
-    public void setI(Integer i) {
-        this.i = i;
-    }
-
-    public Integer getAf() {
-        return af;
-    }
-
-    public void setAf(Integer af) {
-        this.af = af;
+    @Override
+    public IntelligentPowerMonitorDevice generateEntity(Message message) {
+        buildRedunancyDeviceInfo();
+        for (int i = 0; i < message.getDataMsgs().size(); i++) {
+            DataMsg dataMsg = message.getDataMsgs().get(i);
+            List<Integer> dataMsgs = dataMsg.getDatas();
+            if (message.parseDeviceModelEnum() == DeviceTypeName.INTELLIGENT_POWER_MONITOR_0201) {
+                if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_03) {
+                    ua = DtuUtil.getValue(dataMsgs, 0);
+                    ub = DtuUtil.getValue(dataMsgs, 1);
+                    uc = DtuUtil.getValue(dataMsgs, 2);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_04) {
+                    ia = DtuUtil.getValue(dataMsgs, 0);
+                    ib = DtuUtil.getValue(dataMsgs, 1);
+                    ic = DtuUtil.getValue(dataMsgs, 2);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01) {
+                    st = DtuUtil.getValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02) {
+                    pt = DtuUtil.getValue(dataMsgs, 0);
+                }
+            }
+        }
+        return this;
     }
 
     public Long getId() {
@@ -96,30 +115,6 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
         this.uc = uc;
     }
 
-    public Integer getLa() {
-        return la;
-    }
-
-    public void setLa(Integer la) {
-        this.la = la;
-    }
-
-    public Integer getLb() {
-        return lb;
-    }
-
-    public void setLb(Integer lb) {
-        this.lb = lb;
-    }
-
-    public Integer getLc() {
-        return lc;
-    }
-
-    public void setLc(Integer lc) {
-        this.lc = lc;
-    }
-
     public Integer getSt() {
         return st;
     }
@@ -136,28 +131,31 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
         this.pt = pt;
     }
 
-    @Override
-    public boolean execute() {
-        try{
-            ServiceItem.intelligentPowerService.save(this.generateEntity(getMessage()));
-        }catch (Throwable e){
-            logger.error("Execute add data to db or generate entity is error");
-        }
-        return true;
+    public static Logger getLogger() {
+        return logger;
     }
 
-    @Override
-    public IntelligentPowerMonitorDevice buildDevice() {
-        return null;
+    public Integer getIa() {
+        return ia;
     }
 
-    @Override
-    public Message buildMessage() {
-        return getMessage();
+    public void setIa(Integer ia) {
+        this.ia = ia;
     }
 
-    @Override
-    public IntelligentPowerMonitorDevice generateEntity(Message message) {
-        return null;
+    public Integer getIb() {
+        return ib;
+    }
+
+    public void setIb(Integer ib) {
+        this.ib = ib;
+    }
+
+    public Integer getIc() {
+        return ic;
+    }
+
+    public void setIc(Integer ic) {
+        this.ic = ic;
     }
 }

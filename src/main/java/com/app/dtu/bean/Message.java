@@ -73,6 +73,8 @@ public class Message {
 
     /**
      * 解析设备型号
+     * TODO： 这里需要解决终端机上传和设备上传的两种形式
+     * 目前是仅仅支持直接设备上传的
      * @return
      */
     public String parseModelCode(){
@@ -92,7 +94,7 @@ public class Message {
 
 
     /**
-     * 获取到具体的设备处理
+     * 获取到具体的设备实体对象
      * @return
      */
     public DeviceDataDeal getDevice(){

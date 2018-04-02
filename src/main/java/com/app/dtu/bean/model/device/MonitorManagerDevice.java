@@ -19,7 +19,7 @@ import java.util.List;
  * 监控管理设备实体-00
  */
 @Entity
-@Table(name =  DtuConfig.DTU_TABLE_PRIFIX +"monitor_manager_device")
+@Table(name = DtuConfig.DTU_TABLE_PRIFIX + "monitor_manager_device")
 public class MonitorManagerDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<MonitorManagerDevice> {
     private static final Logger logger = LoggerFactory.getLogger(MonitorManagerDevice.class);
     private Integer x1;
@@ -38,7 +38,7 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @Override
     public MonitorManagerDevice buildDevice() {
         return this;
@@ -51,28 +51,25 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
 
     /**
      * 解析消息实体到数据传输对象实体
+     *
      * @param message
      * @return
      */
     @Override
     public MonitorManagerDevice generateEntity(Message message) {
         buildRedunancyDeviceInfo();
-        for (int i=0; i < message.getDataMsgs().size(); i++){
+        for (int i = 0; i < message.getDataMsgs().size(); i++) {
             DataMsg dataMsg = message.getDataMsgs().get(i);
             if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_80) {
-                try{
-                    List<Integer> dataMsgs = dataMsg.getDatas();
-                    x1 = DtuUtil.getValue(dataMsgs, 0);
-                    x2 = DtuUtil.getValue(dataMsgs, 1);
-                    x3 = DtuUtil.getValue(dataMsgs, 2);
-                    x4 = DtuUtil.getValue(dataMsgs, 3);
-                    x5 = DtuUtil.getValue(dataMsgs, 4);
-                    x6 = DtuUtil.getValue(dataMsgs, 5);
-                    x7 = DtuUtil.getValue(dataMsgs, 6);
-                    x8 = DtuUtil.getValue(dataMsgs, 7);
-                }catch (Throwable e){
-                    logger.info("set data is success");
-                }
+                List<Integer> dataMsgs = dataMsg.getDatas();
+                x1 = DtuUtil.getValue(dataMsgs, 0);
+                x2 = DtuUtil.getValue(dataMsgs, 1);
+                x3 = DtuUtil.getValue(dataMsgs, 2);
+                x4 = DtuUtil.getValue(dataMsgs, 3);
+                x5 = DtuUtil.getValue(dataMsgs, 4);
+                x6 = DtuUtil.getValue(dataMsgs, 5);
+                x7 = DtuUtil.getValue(dataMsgs, 6);
+                x8 = DtuUtil.getValue(dataMsgs, 7);
             }
         }
         return this;
@@ -81,9 +78,9 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
     // 执行数据存储
     @Override
     public boolean execute() {
-        try{
+        try {
             ServiceItem.monitorManagerService.save(generateEntity(getMessage()));
-        }catch (Throwable e){
+        } catch (Throwable e) {
             logger.error("Execute add data to db or generate entity is error");
         }
         return true;

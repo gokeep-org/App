@@ -16,7 +16,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name =  DtuConfig.DTU_TABLE_PRIFIX +"scree_monitor_device")
+@Table(name =  DtuConfig.DTU_TABLE_PRIFIX +"smoke_feel_monitor_device")
 public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<SmokeFeelMonitorDevice> {
     private static final Logger logger = LoggerFactory.getLogger(SmokeFeelMonitorDevice.class);
 

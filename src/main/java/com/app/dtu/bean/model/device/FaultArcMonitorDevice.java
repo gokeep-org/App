@@ -28,7 +28,6 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     public Long getId() {
         return id;
     }
