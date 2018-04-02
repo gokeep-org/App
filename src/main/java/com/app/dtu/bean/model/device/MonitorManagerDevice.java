@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
+import java.lang.reflect.Field;
 
 /**
  * 监控管理设备实体-00
@@ -59,9 +60,21 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
         buildRedunancyDeviceInfo();
         for (int i=0; i < message.getDataMsgs().size(); i++){
             DataMsg dataMsg = message.getDataMsgs().get(i);
-            if (dataMsg.getType() == 0x0001){
-                dataMsg.getDatas();
-                this.x1 = dataMsg.getDatas().get(0);
+            if (dataMsg.getType() == 0x80) {
+                Field[] fields = this.getClass().getDeclaredFields();
+                try{
+                    x1 = dataMsg.getDatas().get(0);
+                    x2 = dataMsg.getDatas().get(1);
+                    x3 = dataMsg.getDatas().get(2);
+                    x4 = dataMsg.getDatas().get(3);
+                    x5 = dataMsg.getDatas().get(4);
+                    x6 = dataMsg.getDatas().get(5);
+                    x7 = dataMsg.getDatas().get(6);
+                    x8 = dataMsg.getDatas().get(7);
+                }catch (Throwable e){
+                    logger.info("set data is success");
+                }
+
             }
         }
         return this;

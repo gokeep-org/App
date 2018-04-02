@@ -2,6 +2,7 @@ package com.app.dtu.bean.model;
 
 import com.app.dtu.bean.Message;
 
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.Date;
@@ -9,8 +10,8 @@ import java.util.Date;
 /**
  * 可以作为基础的数据存储被其他的设备类继承， 不是一张单独的表
  */
+@MappedSuperclass
 public class RedundancyDeviceData implements Serializable{
-
     // 设备的型号
     private String modelCode;
 
@@ -47,6 +48,17 @@ public class RedundancyDeviceData implements Serializable{
     public void setMessageId(String messageId) {
         this.messageId = messageId;
     }
+
+//    /**
+//     * 反射生成子类
+//     * @param classes
+//     * @return
+//     * @throws IllegalAccessException
+//     * @throws InstantiationException
+//     */
+//    public RedundancyDeviceData ReferenceField(Class classes) throws IllegalAccessException, InstantiationException {
+//
+//    }
 
     @Transient
     private Message message;
