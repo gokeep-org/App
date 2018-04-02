@@ -23,7 +23,78 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String ua;
+    private String ub;
+    private String uc;
+    private String la;
+    private String lb;
+    private String lc;
+    private String st;
+    private String pt;
 
+    public String getUa() {
+        return ua;
+    }
+
+    public void setUa(String ua) {
+        this.ua = ua;
+    }
+
+    public String getUb() {
+        return ub;
+    }
+
+    public void setUb(String ub) {
+        this.ub = ub;
+    }
+
+    public String getUc() {
+        return uc;
+    }
+
+    public void setUc(String uc) {
+        this.uc = uc;
+    }
+
+    public String getLa() {
+        return la;
+    }
+
+    public void setLa(String la) {
+        this.la = la;
+    }
+
+    public String getLb() {
+        return lb;
+    }
+
+    public void setLb(String lb) {
+        this.lb = lb;
+    }
+
+    public String getLc() {
+        return lc;
+    }
+
+    public void setLc(String lc) {
+        this.lc = lc;
+    }
+
+    public String getSt() {
+        return st;
+    }
+
+    public void setSt(String st) {
+        this.st = st;
+    }
+
+    public String getPt() {
+        return pt;
+    }
+
+    public void setPt(String pt) {
+        this.pt = pt;
+    }
 
     public Long getId() {
         return id;

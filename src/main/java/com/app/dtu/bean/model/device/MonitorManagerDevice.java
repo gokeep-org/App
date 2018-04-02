@@ -28,7 +28,6 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
     private int x7;
     private int x8;
 
-
     public MonitorManagerDevice(Message message) {
         setMessage(message);
     }
@@ -62,7 +61,7 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
             DataMsg dataMsg = message.getDataMsgs().get(i);
             if (dataMsg.getType() == 0x0001){
                 dataMsg.getDatas();
-                this.x1 = dataMsg.getDatas()
+                this.x1 = dataMsg.getDatas().get(0);
             }
         }
         return this;
