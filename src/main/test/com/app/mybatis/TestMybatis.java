@@ -2,7 +2,7 @@ package com.app.mybatis;
 
 
 import com.app.AppStart;
-import com.app.dtu.bean.DeviceTypeName;
+import com.app.dtu.bean.model.DeviceTypeName;
 import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.Device;
 import com.app.dtu.bean.model.ParseToEntityAdapter;

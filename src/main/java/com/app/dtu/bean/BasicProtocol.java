@@ -2,6 +2,10 @@ package com.app.dtu.bean;
 
 import java.util.Arrays;
 
+/**
+ * 该方法被废弃，不使用
+ */
+@Deprecated
 public class BasicProtocol {
     /**
      * 消息的开头的信息标志

@@ -2,6 +2,7 @@ package com.app.dtu.bean;
 
 import com.app.dtu.bean.model.Device;
 import com.app.dtu.bean.model.DeviceDataDeal;
+import com.app.dtu.bean.model.DeviceTypeName;
 import com.app.dtu.bean.model.device.*;
 import org.springframework.util.StringUtils;
 

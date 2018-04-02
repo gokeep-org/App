@@ -1,4 +1,4 @@
-package com.app.dtu.bean;
+package com.app.dtu.bean.model;
 
 import org.springframework.util.CollectionUtils;
 

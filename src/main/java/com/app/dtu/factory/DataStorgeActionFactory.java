@@ -1,6 +1,6 @@
 package com.app.dtu.factory;
 
-import com.app.dtu.bean.DeviceTypeName;
+import com.app.dtu.bean.model.DeviceTypeName;
 import com.app.dtu.service.DataService;
 
 /**
