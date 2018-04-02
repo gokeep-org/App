@@ -5,6 +5,9 @@ import com.app.dtu.bean.model.DeviceDataDeal;
 import com.app.dtu.bean.model.ParseToEntityAdapter;
 import com.app.dtu.bean.model.RedundancyDeviceData;
 import com.app.dtu.config.DtuConfig;
+import com.app.dtu.service.ServiceItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 
@@ -15,6 +18,7 @@ import javax.persistence.*;
 @Entity
 @Table(name =  DtuConfig.DTU_TABLE_PRIFIX +"scree_monitor_device")
 public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<SmokeFeelMonitorDevice> {
+    private static final Logger logger = LoggerFactory.getLogger(SmokeFeelMonitorDevice.class);
 
     public SmokeFeelMonitorDevice(Message message) {
         setMessage(message);
@@ -34,7 +38,12 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
 
     @Override
     public boolean execute() {
-        return false;
+        try{
+            ServiceItem.somkeFeeService.save(this.generateEntity(getMessage()));
+        }catch (Throwable e){
+            logger.error("Execute add data to db or generate entity is error");
+        }
+        return true;
     }
 
     @Override

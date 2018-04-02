@@ -5,6 +5,9 @@ import com.app.dtu.bean.model.DeviceDataDeal;
 import com.app.dtu.bean.model.ParseToEntityAdapter;
 import com.app.dtu.bean.model.RedundancyDeviceData;
 import com.app.dtu.config.DtuConfig;
+import com.app.dtu.service.ServiceItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 
@@ -14,6 +17,7 @@ import javax.persistence.*;
 @Entity
 @Table(name =  DtuConfig.DTU_TABLE_PRIFIX + "hydraulic_pressure_monitor_device")
 public class HydraulicPressureMonitorDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<HydraulicPressureMonitorDevice> {
+    private static final Logger logger = LoggerFactory.getLogger(HydraulicPressureMonitorDevice.class);
 
     public HydraulicPressureMonitorDevice(Message message) {
         setMessage(message);
@@ -35,7 +39,12 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
 
     @Override
     public boolean execute() {
-        return false;
+        try{
+            ServiceItem.hydraulicPressureService.save(this.generateEntity(getMessage()));
+        }catch (Throwable e){
+            logger.error("Execute add data to db or generate entity is error");
+        }
+        return true;
     }
 
     @Override
