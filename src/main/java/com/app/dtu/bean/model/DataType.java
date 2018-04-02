@@ -7,7 +7,6 @@ import java.util.List;
  * 数据类型定义枚举
  */
 public enum DataType {
-
     DATA_TYPE_01(0x01, "漏电实时数据"),
     DATA_TYPE_02(0x02, "温度实时数据"),
     DATA_TYPE_03(0x03, "电压实时数据"),

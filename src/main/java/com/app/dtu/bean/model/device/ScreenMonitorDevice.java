@@ -28,8 +28,6 @@ public class ScreenMonitorDevice extends RedundancyDeviceData implements DeviceD
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-
     public Long getId() {
         return id;
     }
@@ -61,6 +59,6 @@ public class ScreenMonitorDevice extends RedundancyDeviceData implements DeviceD
 
     @Override
     public ScreenMonitorDevice generateEntity(Message message) {
-        return null;
+        return this;
     }
 }
