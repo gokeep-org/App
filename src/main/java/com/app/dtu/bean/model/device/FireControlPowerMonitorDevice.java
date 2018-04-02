@@ -41,12 +41,12 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
 
     @Override
     public FireControlPowerMonitorDevice buildDevice() {
-        return null;
+        return this;
     }
 
     @Override
     public Message buildMessage() {
-        return null;
+        return getMessage();
     }
 
     @Override

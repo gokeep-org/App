@@ -116,7 +116,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
 
     @Override
     public Message buildMessage() {
-        return null;
+        return getMessage();
     }
 
     @Override

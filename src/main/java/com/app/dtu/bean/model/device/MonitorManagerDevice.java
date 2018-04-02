@@ -7,11 +7,12 @@ import com.app.dtu.bean.model.ParseToEntityAdapter;
 import com.app.dtu.bean.model.RedundancyDeviceData;
 import com.app.dtu.config.DtuConfig;
 import com.app.dtu.service.ServiceItem;
+import com.app.dtu.util.DtuUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
-import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * 监控管理设备实体-00
@@ -20,14 +21,14 @@ import java.lang.reflect.Field;
 @Table(name =  DtuConfig.DTU_TABLE_PRIFIX +"monitor_manager_device")
 public class MonitorManagerDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<MonitorManagerDevice> {
     private static final Logger logger = LoggerFactory.getLogger(MonitorManagerDevice.class);
-    private int x1;
-    private int x2;
-    private int x3;
-    private int x4;
-    private int x5;
-    private int x6;
-    private int x7;
-    private int x8;
+    private Integer x1;
+    private Integer x2;
+    private Integer x3;
+    private Integer x4;
+    private Integer x5;
+    private Integer x6;
+    private Integer x7;
+    private Integer x8;
 
     public MonitorManagerDevice(Message message) {
         setMessage(message);
@@ -36,9 +37,6 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-//    private
-
     
     @Override
     public MonitorManagerDevice buildDevice() {
@@ -61,20 +59,19 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
         for (int i=0; i < message.getDataMsgs().size(); i++){
             DataMsg dataMsg = message.getDataMsgs().get(i);
             if (dataMsg.getType() == 0x80) {
-                Field[] fields = this.getClass().getDeclaredFields();
                 try{
-                    x1 = dataMsg.getDatas().get(0);
-                    x2 = dataMsg.getDatas().get(1);
-                    x3 = dataMsg.getDatas().get(2);
-                    x4 = dataMsg.getDatas().get(3);
-                    x5 = dataMsg.getDatas().get(4);
-                    x6 = dataMsg.getDatas().get(5);
-                    x7 = dataMsg.getDatas().get(6);
-                    x8 = dataMsg.getDatas().get(7);
+                    List<Integer> dataMsgs = dataMsg.getDatas();
+                    x1 = DtuUtil.getValue(dataMsgs, 0);
+                    x2 = DtuUtil.getValue(dataMsgs, 1);
+                    x3 = DtuUtil.getValue(dataMsgs, 2);
+                    x4 = DtuUtil.getValue(dataMsgs, 3);
+                    x5 = DtuUtil.getValue(dataMsgs, 4);
+                    x6 = DtuUtil.getValue(dataMsgs, 5);
+                    x7 = DtuUtil.getValue(dataMsgs, 6);
+                    x8 = DtuUtil.getValue(dataMsgs, 7);
                 }catch (Throwable e){
                     logger.info("set data is success");
                 }
-
             }
         }
         return this;

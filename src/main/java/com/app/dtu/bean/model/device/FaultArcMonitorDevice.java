@@ -26,6 +26,7 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
 
 
 
+
     public Long getId() {
         return id;
     }
@@ -41,12 +42,12 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
 
     @Override
     public FaultArcMonitorDevice buildDevice() {
-        return null;
+        return this;
     }
 
     @Override
     public Message buildMessage() {
-        return null;
+        return getMessage();
     }
 
     @Override

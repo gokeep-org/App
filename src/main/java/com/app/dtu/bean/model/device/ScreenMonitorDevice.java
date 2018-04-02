@@ -40,12 +40,12 @@ public class ScreenMonitorDevice extends RedundancyDeviceData implements DeviceD
 
     @Override
     public ScreenMonitorDevice buildDevice() {
-        return null;
+        return this;
     }
 
     @Override
     public Message buildMessage() {
-        return null;
+        return getMessage();
     }
 
 

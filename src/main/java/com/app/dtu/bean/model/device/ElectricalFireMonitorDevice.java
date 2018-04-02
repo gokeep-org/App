@@ -23,250 +23,250 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String ua;
-    private String ub;
-    private String uc;
-    private String la;
-    private String lb;
-    private String lc;
-    private String st;
-    private String pta;
-    private String ptb;
-    private String ptc;
-    private String ptn;
+    private Integer ua;
+    private Integer ub;
+    private Integer uc;
+    private Integer la;
+    private Integer lb;
+    private Integer lc;
+    private Integer st;
+    private Integer pta;
+    private Integer ptb;
+    private Integer ptc;
+    private Integer ptn;
 
-    private String st1;
-    private String st2;
-    private String st3;
-    private String st4;
-    private String st5;
-    private String st6;
-    private String st7;
-    private String st8;
+    private Integer st1;
+    private Integer st2;
+    private Integer st3;
+    private Integer st4;
+    private Integer st5;
+    private Integer st6;
+    private Integer st7;
+    private Integer st8;
 
 
-    private String pt1;
-    private String pt2;
-    private String pt3;
-    private String pt4;
-    private String pt5;
-    private String pt6;
-    private String pt7;
-    private String pt8;
+    private Integer pt1;
+    private Integer pt2;
+    private Integer pt3;
+    private Integer pt4;
+    private Integer pt5;
+    private Integer pt6;
+    private Integer pt7;
+    private Integer pt8;
 
-    public String getUa() {
+    public Integer getUa() {
         return ua;
     }
 
-    public void setUa(String ua) {
+    public void setUa(Integer ua) {
         this.ua = ua;
     }
 
-    public String getUb() {
+    public Integer getUb() {
         return ub;
     }
 
-    public void setUb(String ub) {
+    public void setUb(Integer ub) {
         this.ub = ub;
     }
 
-    public String getUc() {
+    public Integer getUc() {
         return uc;
     }
 
-    public void setUc(String uc) {
+    public void setUc(Integer uc) {
         this.uc = uc;
     }
 
-    public String getLa() {
+    public Integer getLa() {
         return la;
     }
 
-    public void setLa(String la) {
+    public void setLa(Integer la) {
         this.la = la;
     }
 
-    public String getLb() {
+    public Integer getLb() {
         return lb;
     }
 
-    public void setLb(String lb) {
+    public void setLb(Integer lb) {
         this.lb = lb;
     }
 
-    public String getLc() {
+    public Integer getLc() {
         return lc;
     }
 
-    public void setLc(String lc) {
+    public void setLc(Integer lc) {
         this.lc = lc;
     }
 
-    public String getSt() {
+    public Integer getSt() {
         return st;
     }
 
-    public void setSt(String st) {
+    public void setSt(Integer st) {
         this.st = st;
     }
 
-    public String getPta() {
+    public Integer getPta() {
         return pta;
     }
 
-    public void setPta(String pta) {
+    public void setPta(Integer pta) {
         this.pta = pta;
     }
 
-    public String getPtb() {
+    public Integer getPtb() {
         return ptb;
     }
 
-    public void setPtb(String ptb) {
+    public void setPtb(Integer ptb) {
         this.ptb = ptb;
     }
 
-    public String getPtc() {
+    public Integer getPtc() {
         return ptc;
     }
 
-    public void setPtc(String ptc) {
+    public void setPtc(Integer ptc) {
         this.ptc = ptc;
     }
 
-    public String getPtn() {
+    public Integer getPtn() {
         return ptn;
     }
 
-    public void setPtn(String ptn) {
+    public void setPtn(Integer ptn) {
         this.ptn = ptn;
     }
 
-    public String getSt1() {
+    public Integer getSt1() {
         return st1;
     }
 
-    public void setSt1(String st1) {
+    public void setSt1(Integer st1) {
         this.st1 = st1;
     }
 
-    public String getSt2() {
+    public Integer getSt2() {
         return st2;
     }
 
-    public void setSt2(String st2) {
+    public void setSt2(Integer st2) {
         this.st2 = st2;
     }
 
-    public String getSt3() {
+    public Integer getSt3() {
         return st3;
     }
 
-    public void setSt3(String st3) {
+    public void setSt3(Integer st3) {
         this.st3 = st3;
     }
 
-    public String getSt4() {
+    public Integer getSt4() {
         return st4;
     }
 
-    public void setSt4(String st4) {
+    public void setSt4(Integer st4) {
         this.st4 = st4;
     }
 
-    public String getSt5() {
+    public Integer getSt5() {
         return st5;
     }
 
-    public void setSt5(String st5) {
+    public void setSt5(Integer st5) {
         this.st5 = st5;
     }
 
-    public String getSt6() {
+    public Integer getSt6() {
         return st6;
     }
 
-    public void setSt6(String st6) {
+    public void setSt6(Integer st6) {
         this.st6 = st6;
     }
 
-    public String getSt7() {
+    public Integer getSt7() {
         return st7;
     }
 
-    public void setSt7(String st7) {
+    public void setSt7(Integer st7) {
         this.st7 = st7;
     }
 
-    public String getSt8() {
+    public Integer getSt8() {
         return st8;
     }
 
-    public void setSt8(String st8) {
+    public void setSt8(Integer st8) {
         this.st8 = st8;
     }
 
-    public String getPt1() {
+    public Integer getPt1() {
         return pt1;
     }
 
-    public void setPt1(String pt1) {
+    public void setPt1(Integer pt1) {
         this.pt1 = pt1;
     }
 
-    public String getPt2() {
+    public Integer getPt2() {
         return pt2;
     }
 
-    public void setPt2(String pt2) {
+    public void setPt2(Integer pt2) {
         this.pt2 = pt2;
     }
 
-    public String getPt3() {
+    public Integer getPt3() {
         return pt3;
     }
 
-    public void setPt3(String pt3) {
+    public void setPt3(Integer pt3) {
         this.pt3 = pt3;
     }
 
-    public String getPt4() {
+    public Integer getPt4() {
         return pt4;
     }
 
-    public void setPt4(String pt4) {
+    public void setPt4(Integer pt4) {
         this.pt4 = pt4;
     }
 
-    public String getPt5() {
+    public Integer getPt5() {
         return pt5;
     }
 
-    public void setPt5(String pt5) {
+    public void setPt5(Integer pt5) {
         this.pt5 = pt5;
     }
 
-    public String getPt6() {
+    public Integer getPt6() {
         return pt6;
     }
 
-    public void setPt6(String pt6) {
+    public void setPt6(Integer pt6) {
         this.pt6 = pt6;
     }
 
-    public String getPt7() {
+    public Integer getPt7() {
         return pt7;
     }
 
-    public void setPt7(String pt7) {
+    public void setPt7(Integer pt7) {
         this.pt7 = pt7;
     }
 
-    public String getPt8() {
+    public Integer getPt8() {
         return pt8;
     }
 
-    public void setPt8(String pt8) {
+    public void setPt8(Integer pt8) {
         this.pt8 = pt8;
     }
 
@@ -285,12 +285,12 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
 
     @Override
     public ElectricalFireMonitorDevice buildDevice() {
-        return null;
+        return this;
     }
 
     @Override
     public Message buildMessage() {
-        return null;
+        return getMessage();
     }
 
     @Override

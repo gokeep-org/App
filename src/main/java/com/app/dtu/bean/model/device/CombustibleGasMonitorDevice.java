@@ -38,7 +38,7 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
 
     @Override
     public CombustibleGasMonitorDevice buildDevice() {
-        return null;
+        return this;
     }
 
     @Override

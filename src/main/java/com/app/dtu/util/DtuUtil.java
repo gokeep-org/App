@@ -3,6 +3,9 @@ package com.app.dtu.util;
 import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.DeviceDataDeal;
 import com.app.dtu.bean.model.device.MonitorManagerDevice;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
 
 public class DtuUtil {
     private DtuUtil(){}
@@ -22,5 +25,16 @@ public class DtuUtil {
             case "12" : return new MonitorManagerDevice(message);
             default: return null;
         }
+    }
+
+    public static final Integer getValue(List<Integer> values, int index){
+        if (CollectionUtils.isEmpty(values)){
+            return null;
+        }
+        int count = values.size();
+        if (index >= count){
+            return null;
+        }
+        return values.get(index);
     }
 }

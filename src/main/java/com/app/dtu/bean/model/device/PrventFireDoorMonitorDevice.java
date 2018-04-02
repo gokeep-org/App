@@ -40,12 +40,12 @@ public class PrventFireDoorMonitorDevice extends RedundancyDeviceData implements
 
     @Override
     public PrventFireDoorMonitorDevice buildDevice() {
-        return null;
+        return this;
     }
 
     @Override
     public Message buildMessage() {
-        return null;
+        return getMessage();
     }
 
     @Override
