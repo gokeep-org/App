@@ -67,7 +67,7 @@ public class Message {
      * @return
      */
     public String parseTypeCode(){
-        return this.id.substring(8, 10);
+        return this.id.substring(6, 8);
     }
 
 
