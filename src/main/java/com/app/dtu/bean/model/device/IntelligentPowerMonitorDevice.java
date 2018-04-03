@@ -36,6 +36,10 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     private Integer ic;
     private Integer st;
     private Integer pt;
+    private Integer umax;
+    private Integer umin;
+    private Integer imax;
+
 
 
     @Override
@@ -77,6 +81,11 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                     st = DtuUtil.getValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02) {
                     pt = DtuUtil.getValue(dataMsgs, 0);
+                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83){
+                    umax = DtuUtil.getValue(dataMsgs, 0);
+                    umin = DtuUtil.getValue(dataMsgs, 1);
+                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84){
+                    imax = DtuUtil.getValue(dataMsgs, 0);
                 }
             }
         }
@@ -157,5 +166,29 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
 
     public void setIc(Integer ic) {
         this.ic = ic;
+    }
+
+    public Integer getUmax() {
+        return umax;
+    }
+
+    public void setUmax(Integer umax) {
+        this.umax = umax;
+    }
+
+    public Integer getUmin() {
+        return umin;
+    }
+
+    public void setUmin(Integer umin) {
+        this.umin = umin;
+    }
+
+    public Integer getImax() {
+        return imax;
+    }
+
+    public void setImax(Integer imax) {
+        this.imax = imax;
     }
 }

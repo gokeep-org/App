@@ -61,6 +61,17 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
     private Integer ub4;
     private Integer uc4;
 
+    private Integer umax;
+    private Integer umin;
+    private Integer imax1;
+    private Integer imax2;
+    private Integer imax3;
+    private Integer imax4;
+    private Integer imax5;
+    private Integer imax6;
+    private Integer ptmax;
+    private Integer stmax;
+
 
 
     @Override
@@ -81,6 +92,13 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
                     st = DtuUtil.getValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02) {
                     pt = DtuUtil.getValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83) {
+                    umax = DtuUtil.getValue(dataMsgs, 0);
+                    umin = DtuUtil.getValue(dataMsgs, 1);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
+                    stmax = DtuUtil.getValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
+                    imax1 = DtuUtil.getValue(dataMsgs, 0);
                 }
             } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0402) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_03) {
@@ -95,6 +113,15 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
                     ia = DtuUtil.getValue(dataMsgs, 0);
                     ib = DtuUtil.getValue(dataMsgs, 1);
                     ic = DtuUtil.getValue(dataMsgs, 2);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83) {
+                    umax = DtuUtil.getValue(dataMsgs, 0);
+                    umin = DtuUtil.getValue(dataMsgs, 1);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
+                    stmax = DtuUtil.getValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
+                    imax1 = DtuUtil.getValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82) {
+                    ptmax = DtuUtil.getValue(dataMsgs, 0);
                 }
             } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0403) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01) {
@@ -108,6 +135,17 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
                     ia2 = DtuUtil.getValue(dataMsgs, 3);
                     ib2 = DtuUtil.getValue(dataMsgs, 4);
                     ic2 = DtuUtil.getValue(dataMsgs, 5);
+                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
+                    stmax = DtuUtil.getValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
+                    imax1 = DtuUtil.getValue(dataMsgs, 0);
+                    imax2 = DtuUtil.getValue(dataMsgs, 1);
+                    imax3 = DtuUtil.getValue(dataMsgs, 2);
+                    imax4 = DtuUtil.getValue(dataMsgs, 3);
+                    imax5 = DtuUtil.getValue(dataMsgs, 4);
+                    imax6 = DtuUtil.getValue(dataMsgs, 5);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82) {
+                    ptmax = DtuUtil.getValue(dataMsgs, 0);
                 }
             } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0404) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01) {
@@ -128,6 +166,20 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
                     ua2 = DtuUtil.getValue(dataMsgs, 3);
                     ub2 = DtuUtil.getValue(dataMsgs, 4);
                     uc2 = DtuUtil.getValue(dataMsgs, 5);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83) {
+                    umax = DtuUtil.getValue(dataMsgs, 0);
+                    umin = DtuUtil.getValue(dataMsgs, 1);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
+                    stmax = DtuUtil.getValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
+                    imax1 = DtuUtil.getValue(dataMsgs, 0);
+                    imax2 = DtuUtil.getValue(dataMsgs, 1);
+                    imax3 = DtuUtil.getValue(dataMsgs, 2);
+                    imax4 = DtuUtil.getValue(dataMsgs, 3);
+                    imax5 = DtuUtil.getValue(dataMsgs, 4);
+                    imax6 = DtuUtil.getValue(dataMsgs, 5);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82) {
+                    ptmax = DtuUtil.getValue(dataMsgs, 0);
                 }
             } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0405) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01) {
@@ -154,6 +206,20 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
                     ua4 = DtuUtil.getValue(dataMsgs, 9);
                     ub4 = DtuUtil.getValue(dataMsgs, 10);
                     ub4 = DtuUtil.getValue(dataMsgs, 11);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83) {
+                    umax = DtuUtil.getValue(dataMsgs, 0);
+                    umin = DtuUtil.getValue(dataMsgs, 1);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
+                    stmax = DtuUtil.getValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
+                    imax1 = DtuUtil.getValue(dataMsgs, 0);
+                    imax2 = DtuUtil.getValue(dataMsgs, 1);
+                    imax3 = DtuUtil.getValue(dataMsgs, 2);
+                    imax4 = DtuUtil.getValue(dataMsgs, 3);
+                    imax5 = DtuUtil.getValue(dataMsgs, 4);
+                    imax6 = DtuUtil.getValue(dataMsgs, 5);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82) {
+                    ptmax = DtuUtil.getValue(dataMsgs, 0);
                 }
             }
         }

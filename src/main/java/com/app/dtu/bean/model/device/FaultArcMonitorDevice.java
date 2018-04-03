@@ -35,7 +35,7 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
     private Integer h1;
 
     private Integer umax1;
-    private Integer umax2;
+    private Integer umin1;
 
     private Integer imax1;
 
@@ -59,7 +59,7 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
                     hmax = DtuUtil.getValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83) {
                     umax1 = DtuUtil.getValue(dataMsgs, 0);
-                    umax2 = DtuUtil.getValue(dataMsgs, 1);
+                    umin1 = DtuUtil.getValue(dataMsgs, 1);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
                     imax1 = DtuUtil.getValue(dataMsgs, 0);
                 }
@@ -125,12 +125,12 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
         this.umax1 = umax1;
     }
 
-    public Integer getUmax2() {
-        return umax2;
+    public Integer getUmin1() {
+        return umin1;
     }
 
-    public void setUmax2(Integer umax2) {
-        this.umax2 = umax2;
+    public void setUmin1(Integer umin1) {
+        this.umin1 = umin1;
     }
 
     public Integer getImax1() {
