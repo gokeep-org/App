@@ -123,7 +123,7 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
         for (int i = 0; i < message.getDataMsgs().size(); i++) {
             DataMsg dataMsg = message.getDataMsgs().get(i);
             List<Integer> dataMsgs = dataMsg.getDatas();
-            if (message.parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0101){
+            if (message.parseDeviceModelEnum() == DeviceTypeName.INTELLIGENT_POWER_MONITOR_0201){
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_03) {
                     ua = DtuUtil.getValue(dataMsgs, 0);
                     ub = DtuUtil.getValue(dataMsgs, 1);
