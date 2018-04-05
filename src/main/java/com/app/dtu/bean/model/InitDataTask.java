@@ -25,6 +25,7 @@ public class InitDataTask extends Thread{
             return;
         }
         try {
+            initFetchDeviceModelCodeTask();
             if (isNeedInitDeviceTypeData()){
                 initDeviceModelTable();
             }
@@ -58,5 +59,9 @@ public class InitDataTask extends Thread{
         if (!CollectionUtils.isEmpty(devices)){
             deviceRepository.save(devices);
         }
+    }
+
+    public void initFetchDeviceModelCodeTask(){
+        ScheduleUpdateLocalCache.updateDeviceModelCode();
     }
 }

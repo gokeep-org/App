@@ -4,6 +4,7 @@ import com.app.dtu.util.JdbcUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -16,7 +17,7 @@ import java.util.Map;
 public class ScheduleUpdateLocalCache {
     private static final Logger logger = LoggerFactory.getLogger(ScheduleUpdateLocalCache.class);
 
-//    @Scheduled(cron = "0 2/0 0 0 0 0 0" )
+    @Scheduled(cron = "0 0 0/1 * * ?" )
     public static void updateDeviceModelCode() {
         List<DeviceRelation> deviceRelations = new ArrayList<>();
         try {
