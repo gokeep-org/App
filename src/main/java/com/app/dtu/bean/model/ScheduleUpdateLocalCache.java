@@ -47,6 +47,7 @@ public class ScheduleUpdateLocalCache {
             if (!CollectionUtils.isEmpty(deviceRelations)){
                 LocalCache.updateDeviceRelation(deviceRelations);
             }
+            logger.info("Update device model code local cache is success, total num is {}", LocalCache.getDeviceRelationCache().size());
         } catch (SQLException e) {
             logger.error("update local cache search is error");
         }finally {
