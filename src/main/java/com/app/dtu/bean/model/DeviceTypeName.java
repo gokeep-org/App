@@ -26,7 +26,7 @@ public enum DeviceTypeName {
     // 电气火灾监控设备
 
     ELECTRICAL_FIRE_MONITOR_0101("01", "电气火灾监控", "0101", "组合式电气火灾监控探测器", "JTL-DQ"),
-    ELECTRICAL_FIRE_MONITOR_0102("02", "电气火灾监控", "0102", "剩余电流式电气火灾监控探测器", "DH-A-FT/N"),
+    ELECTRICAL_FIRE_MONITOR_0102("01", "电气火灾监控", "0102", "剩余电流式电气火灾监控探测器", "DH-A-FT/N"),
     ELECTRICAL_FIRE_MONITOR_0103("01", "电气火灾监控", "0103", "测温式电气火灾监控探测器", "DH-A-FT/P"),
     ELECTRICAL_FIRE_MONITOR_0104("01", "电气火灾监控", "0104", "剩余电流式电气火灾监控探测器", "DH-A-FT/N8"),
     ELECTRICAL_FIRE_MONITOR_0105("01", "电气火灾监控", "0105", "剩余电流式电气火灾监控探测器", "DH-A-FD/N"),
