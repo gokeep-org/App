@@ -3,9 +3,11 @@ package com.app.dtu.config;
 import com.app.dtu.handlers.DtuMsgHeaderHandler;
 import com.app.dtu.handlers.DtuResDestroyHandler;
 import com.app.dtu.handlers.DtuServerHandler;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +21,7 @@ public class DtuServerInitializer extends ChannelInitializer<SocketChannel> {
 
     private static final Logger logger = LoggerFactory.getLogger(DtuServerInitializer.class);
 
+    private static final byte[] protocalFoot = new byte[]{0x26,0x3A};
     /**
      * 这里不使用解码，编码器， 只是实现消息的处理
      * @param socketChannel
@@ -42,6 +45,8 @@ public class DtuServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast("frameEncoder", new LengthFieldPrepender(4));
         pipeline.addLast(new FixedLengthFrameDecoder(6));
         */
+
+        pipeline.addLast("delimiter-frame", new DelimiterBasedFrameDecoder(20480, Unpooled.copiedBuffer(protocalFoot)));
         pipeline.addLast("msg-filter-handler", new DtuMsgHeaderHandler());
         pipeline.addLast("dtu-handler", new DtuServerHandler());
         if (!DtuConfig.ENABLE_KEEP_ALIVE_CONNECTION){

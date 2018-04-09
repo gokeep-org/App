@@ -1,7 +1,6 @@
 package com.app.dtu.handlers;
 
 import com.app.dtu.bean.DataMsg;
-import com.app.dtu.bean.Header;
 import com.app.dtu.bean.Message;
 import com.app.dtu.config.Const;
 import com.app.dtu.parser.ByteUtils;
@@ -36,8 +35,7 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
          * result.resetReaderIndex();
          */
 
-        String id;
-        if(Header.compare(headBytes)){
+            String id;
             result.readBytes(headBytes, 0, 5);
             id = ByteUtils.bytesToHexString(headBytes, 5);
             result.readBytes(headBytes, 0, 2);
@@ -49,7 +47,7 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
             message.setControCmd(result.readUnsignedByte());
             message.setDataLen(result.readUnsignedShort());
             // 这里取出的字节码剩余大小包含自己，如果为4那么会继续走一次，从而读取异常， 剩下的为校验码和帧尾
-            while (result.readableBytes() - 5 > 0){
+            while (result.readableBytes() - 3 > 0){
                 DataMsg dataMsg = new DataMsg();
                 dataMsg.setType(result.readUnsignedByte());
                 dataMsg.setLen(result.readUnsignedByte());
@@ -61,9 +59,6 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
             }
             // 释放字节码流
             result.release();
-        }else {
-            return;
-        }
         // 把解析后的消息交给下一个pipline做处理
         ctx.fireChannelRead(message);
     }
