@@ -17,6 +17,10 @@ import java.util.Map;
 public class ScheduleUpdateLocalCache {
     private static final Logger logger = LoggerFactory.getLogger(ScheduleUpdateLocalCache.class);
 
+    /**
+     * 每一小时执行一次更新操作，更新本地缓存
+     * 获取到设备id，sn，型号码
+     */
     @Scheduled(cron = "0 0 0/1 * * ?" )
     public static void updateDeviceModelCode() {
         List<DeviceRelation> deviceRelations = new ArrayList<>();
@@ -51,7 +55,8 @@ public class ScheduleUpdateLocalCache {
         } catch (SQLException e) {
             logger.error("update local cache search is error");
         }finally {
-            JdbcUtils.close();
+            // 这里是一个连接，不需要关闭数据库连接
+            // JdbcUtils.close();
         }
     }
 }

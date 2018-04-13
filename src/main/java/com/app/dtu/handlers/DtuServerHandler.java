@@ -58,7 +58,6 @@ public class DtuServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         logger.info("Netty socket server start process socket message");
         Message message = (Message) msg;
-//        message.getBasicDeviceInfoDeal().execute();
         DeviceDataDeal deviceDataDeal = message.getDevice();
         boolean executeResult = Objects.isNull(deviceDataDeal) ? false : deviceDataDeal.execute();
         if (executeResult)

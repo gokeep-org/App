@@ -1,18 +1,24 @@
 package com.app.dtu.bean;
 
-import com.app.dtu.bean.model.Device;
-import com.app.dtu.bean.model.DeviceDataDeal;
-import com.app.dtu.bean.model.DeviceTypeName;
+import com.app.config.CommonConfig;
+import com.app.dtu.bean.model.*;
 import com.app.dtu.bean.model.device.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 消息传输实体
  */
 public class Message {
+    @Transient
+    private static final Logger logger = LoggerFactory.getLogger(Message.class);
     private String id;
     private int warnList;
     private int controCmd;
@@ -78,7 +84,22 @@ public class Message {
      * @return
      */
     public String parseModelCode(){
-        return this.id.substring(6, 10);
+        if (CommonConfig.LOCAL_DEV_ONALY_FORWARD){
+            return this.id.substring(6, 10);
+        }
+        // 这里是终端代传的首选方式，也可以支持直传的方式
+        if (CollectionUtils.isEmpty(LocalCache.getDeviceRelationCache())){
+            logger.error("parse device code by db is error, local cache is null or nor has model");
+            return null;
+        }
+        List<DeviceRelation> deviceRelations = LocalCache.getDeviceRelationCache().stream().filter(deviceRelation -> {
+            return deviceRelation.getDevice_id().equalsIgnoreCase(id);
+        }).collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(deviceRelations)){
+            logger.error("parse device code by db is error, local cache is null or nor has model");
+            return null;
+        }
+        return deviceRelations.get(0).getDevice_model_code();
     }
 
     /**
