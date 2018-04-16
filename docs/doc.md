@@ -17,7 +17,6 @@
     mzq1 -> 煤制气
 
 ### electrical_fire_monitor_device（电器火灾监监控设备）
-    
      ua ->  第1路电压报警
      ub ->  第2路电压报警
      uc ->  第3路电压报警
@@ -96,7 +95,7 @@
 ### fire_control_power_monitor_device （消防设备电源监控）
     ua1 -> 第1路电压报警
     ub1 -> 第1路电压报警
-    uc1 ->
+    uc1 -> 
     ua2 ->
     ub2 ->
     uc2 ->
