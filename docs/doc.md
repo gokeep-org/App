@@ -121,8 +121,8 @@
     uc4 -> 第12路电压
     
 ### smoke_feel_monitor_device
-    pt -> 1路烟感
-    y1 -> 1路温度
+    pt -> 1路温度
+    y1 -> 1路烟感
     
 ### combustible_gas_monitor_device
     trq1 -> 1路天然气
