@@ -101,22 +101,40 @@
     uc2 -> 第6路电压
     st ->  1路漏电数
     pt ->  1路温度数
-    ua ->  第1路电压（这种情况下表示另一种型号）
+    ua ->  第1路电压（这种情况下表示另一种型号, 下面同此相同）
     ub ->  第2路电压
     uc ->  第3路电压
     ia ->  第1路电流
     ib ->  第2路电流
     ic ->  第3路电流
-    ia1 ->
-    ib1 ->
-    ic1 ->
-    ia2 ->
-    ib2 ->
-    ic2 ->
-    ua3 ->
-    ub3 ->
-    uc3 ->
-    ua4 ->
-    ub4 ->
-    uc4 ->
+    ia1 -> 第1路电流
+    ib1 -> 第1路电流 
+    ic1 -> 第2路电流
+    ia2 -> 第4路电流
+    ib2 -> 第5路电流
+    ic2 -> 第6路电流
+    ua3 -> 第7路电压
+    ub3 -> 第8路电压
+    uc3 -> 第9路电压
+    ua4 -> 第10路电压
+    ub4 -> 第11路电压
+    uc4 -> 第12路电压
+    
+### smoke_feel_monitor_device
+    pt -> 1路烟感
+    y1 -> 1路温度
+    
+### combustible_gas_monitor_device
+    trq1 -> 1路天然气
+    yhq1 -> 1路液化气
+    mzq1 -> 1路煤制气
+    
+### prvent_fire_door_monitor_device
+    status -> 状态
+    
+### screen_monitor_device
+    status -> 状态
+    
+### hydraulic_pressure_monitor_device
+    sy1 -> 1路水压
     
