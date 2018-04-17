@@ -25,7 +25,7 @@ public class InitDataTask extends Thread{
             return;
         }
         try {
-            initFetchDeviceModelCodeTask();
+//            initFetchDeviceModelCodeTask();
             if (isNeedInitDeviceTypeData()){
                 initDeviceModelTable();
             }
@@ -62,6 +62,6 @@ public class InitDataTask extends Thread{
     }
 
     public void initFetchDeviceModelCodeTask(){
-        ScheduleUpdateLocalCache.updateDeviceModelCode();
+//        ScheduleUpdateLocalCache.updateDeviceModelCode();
     }
 }

@@ -26,9 +26,6 @@ public final class LocalCache {
      * @param updateResult
      */
     public static void updateDeviceRelation(List<DeviceRelation> updateResult){
-        if (CollectionUtils.isEmpty(updateResult)){
-            return;
-        }
         deviceRelationCache.clear();
         deviceRelationCache.addAll(updateResult);
     }

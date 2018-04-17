@@ -2,8 +2,10 @@ package com.app.util;
 
 import com.app.dtu.NettyServer;
 import com.app.dtu.bean.model.InitDataTask;
+import com.app.dtu.bean.model.ScheduleUpdateLocalCache;
 import com.app.dtu.service.ServiceBeanNames;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
@@ -15,11 +17,13 @@ public class ApplicationContextHolder implements ApplicationContextAware {
     public static ApplicationContext getContext() {
         return context;
     }
-
+    @Autowired
+    ScheduleUpdateLocalCache scheduleUpdateLocalCache;
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         context = applicationContext;
         new NettyServerThread().start();
+        new InitDeviceSiIdWhenStartServer().start();
         ((InitDataTask)applicationContext.getBean(ServiceBeanNames.INIT_MODEL_TYPE_TABLE_DATA_SERVICE)).start();
     }
 
@@ -34,4 +38,13 @@ public class ApplicationContextHolder implements ApplicationContextAware {
         }
     }
 
+    /**
+     * 当项目启动的时候需要需要初始化数据到本地缓存
+     */
+    class InitDeviceSiIdWhenStartServer extends Thread{
+        @Override
+        public void run() {
+            scheduleUpdateLocalCache.updateDeviceModelCode();
+        }
+    }
 }
