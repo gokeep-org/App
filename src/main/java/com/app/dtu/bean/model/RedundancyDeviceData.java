@@ -30,6 +30,8 @@ public class RedundancyDeviceData implements Serializable{
     // 数据长度
     private int dataLen;
 
+    private Long handle_date;
+
     /**
      * 报警列表详情
      */
@@ -97,6 +99,15 @@ public class RedundancyDeviceData implements Serializable{
 
     @Transient
     private Message message;
+
+
+    public Long getHandle_date() {
+        return handle_date;
+    }
+
+    public void setHandle_date(Long handle_date) {
+        this.handle_date = handle_date;
+    }
 
     public String getModelCode() {
         return modelCode;
