@@ -96,4 +96,13 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
     public void setY1(Integer y1) {
         this.y1 = y1;
     }
+
+    @Override
+    public String toString() {
+        return "SmokeFeelMonitorDevice{" +
+                "id=" + id +
+                ", pt=" + pt +
+                ", y1=" + y1 +
+                '}';
+    }
 }

@@ -726,4 +726,70 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
     public void setStmax8(Integer stmax8) {
         this.stmax8 = stmax8;
     }
+
+    @Override
+    public String toString() {
+        return "ElectricalFireMonitorDevice{" +
+                "id=" + id +
+                ", ua=" + ua +
+                ", ub=" + ub +
+                ", uc=" + uc +
+                ", ia=" + ia +
+                ", ib=" + ib +
+                ", ic=" + ic +
+                ", st=" + st +
+                ", pta=" + pta +
+                ", ptb=" + ptb +
+                ", ptc=" + ptc +
+                ", ptn=" + ptn +
+                ", st1=" + st1 +
+                ", st2=" + st2 +
+                ", st3=" + st3 +
+                ", st4=" + st4 +
+                ", st5=" + st5 +
+                ", st6=" + st6 +
+                ", st7=" + st7 +
+                ", st8=" + st8 +
+                ", pt1=" + pt1 +
+                ", pt2=" + pt2 +
+                ", pt3=" + pt3 +
+                ", pt4=" + pt4 +
+                ", pt5=" + pt5 +
+                ", pt6=" + pt6 +
+                ", pt7=" + pt7 +
+                ", pt8=" + pt8 +
+                ", umax1=" + umax1 +
+                ", umax2=" + umax2 +
+                ", umax3=" + umax3 +
+                ", umax4=" + umax4 +
+                ", umax5=" + umax5 +
+                ", umax6=" + umax6 +
+                ", umax7=" + umax7 +
+                ", umax8=" + umax8 +
+                ", imax1=" + imax1 +
+                ", imax2=" + imax2 +
+                ", imax3=" + imax3 +
+                ", imax4=" + imax4 +
+                ", imax5=" + imax5 +
+                ", imax6=" + imax6 +
+                ", imax7=" + imax7 +
+                ", imax8=" + imax8 +
+                ", ptmax1=" + ptmax1 +
+                ", ptmax2=" + ptmax2 +
+                ", ptmax3=" + ptmax3 +
+                ", ptmax4=" + ptmax4 +
+                ", ptmax5=" + ptmax5 +
+                ", ptmax6=" + ptmax6 +
+                ", ptmax7=" + ptmax7 +
+                ", ptmax8=" + ptmax8 +
+                ", stmax1=" + stmax1 +
+                ", stmax2=" + stmax2 +
+                ", stmax3=" + stmax3 +
+                ", stmax4=" + stmax4 +
+                ", stmax5=" + stmax5 +
+                ", stmax6=" + stmax6 +
+                ", stmax7=" + stmax7 +
+                ", stmax8=" + stmax8 +
+                '}';
+    }
 }

@@ -84,4 +84,11 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
     }
 
 
+    @Override
+    public String toString() {
+        return "HydraulicPressureMonitorDevice{" +
+                "id=" + id +
+                ", sy1=" + sy1 +
+                '}';
+    }
 }

@@ -1,6 +1,8 @@
 package com.app.dtu.bean.model;
 
 import com.app.dtu.bean.Message;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
@@ -9,6 +11,7 @@ import java.util.Objects;
  * 所有的实体类对象均实现这个接口
  */
 public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
+    public Logger logger = LoggerFactory.getLogger(ParseToEntityAdapter.class);
     /**
      * 默认的解析实现，如果某一个实体有特殊的需求，那么重写execute方法即可
      *
@@ -34,9 +37,13 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
 
     // 获取实体类
     default T parseEntity(){
+        logger.info("Receiver message is {}", buildMessage().toString());
         if (checkMessage(buildMessage()) || checkDevice()){
+            logger.info("Receiver message is null");
             return null;
         }
-        return generateEntity(buildMessage());
+        T entity =  generateEntity(buildMessage());
+        logger.info("Parse message is {}", Objects.isNull(entity) ? null : entity.toString());
+        return entity;
     }
 }

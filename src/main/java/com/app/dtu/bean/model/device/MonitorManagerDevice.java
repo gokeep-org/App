@@ -149,4 +149,19 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
     public void setX8(int x8) {
         this.x8 = x8;
     }
+
+    @Override
+    public String toString() {
+        return "MonitorManagerDevice{" +
+                "x1=" + x1 +
+                ", x2=" + x2 +
+                ", x3=" + x3 +
+                ", x4=" + x4 +
+                ", x5=" + x5 +
+                ", x6=" + x6 +
+                ", x7=" + x7 +
+                ", x8=" + x8 +
+                ", id=" + id +
+                '}';
+    }
 }

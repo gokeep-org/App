@@ -191,4 +191,22 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     public void setImax(Integer imax) {
         this.imax = imax;
     }
+
+    @Override
+    public String toString() {
+        return "IntelligentPowerMonitorDevice{" +
+                "id=" + id +
+                ", ua=" + ua +
+                ", ub=" + ub +
+                ", uc=" + uc +
+                ", ia=" + ia +
+                ", ib=" + ib +
+                ", ic=" + ic +
+                ", st=" + st +
+                ", pt=" + pt +
+                ", umax=" + umax +
+                ", umin=" + umin +
+                ", imax=" + imax +
+                '}';
+    }
 }

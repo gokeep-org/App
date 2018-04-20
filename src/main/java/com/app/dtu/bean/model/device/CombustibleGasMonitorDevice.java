@@ -113,4 +113,14 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
     public void setMzq1(Integer mzq1) {
         this.mzq1 = mzq1;
     }
+
+    @Override
+    public String toString() {
+        return "CombustibleGasMonitorDevice{" +
+                "id=" + id +
+                ", trq1=" + trq1 +
+                ", yhq1=" + yhq1 +
+                ", mzq1=" + mzq1 +
+                '}';
+    }
 }

@@ -284,4 +284,34 @@ public class RedundancyDeviceData implements Serializable{
     public void setWarn16(int warn16) {
         this.warn16 = warn16;
     }
+
+    @Override
+    public String toString() {
+        return "RedundancyDeviceData{" +
+                "modelCode='" + modelCode + '\'' +
+                ", createDate=" + createDate +
+                ", messageId='" + messageId + '\'' +
+                ", warnList=" + warnList +
+                ", controCmd=" + controCmd +
+                ", dataLen=" + dataLen +
+                ", handle_date=" + handle_date +
+                ", warn1=" + warn1 +
+                ", warn2=" + warn2 +
+                ", warn3=" + warn3 +
+                ", warn4=" + warn4 +
+                ", warn5=" + warn5 +
+                ", warn6=" + warn6 +
+                ", warn7=" + warn7 +
+                ", warn8=" + warn8 +
+                ", warn9=" + warn9 +
+                ", warn10=" + warn10 +
+                ", warn11=" + warn11 +
+                ", warn12=" + warn12 +
+                ", warn13=" + warn13 +
+                ", warn14=" + warn14 +
+                ", warn15=" + warn15 +
+                ", warn16=" + warn16 +
+                ", message=" + message +
+                '}';
+    }
 }

@@ -155,4 +155,18 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
     public void setId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "FaultArcMonitorDevice{" +
+                "id=" + id +
+                ", ua=" + ua +
+                ", ia=" + ia +
+                ", h1=" + h1 +
+                ", umax1=" + umax1 +
+                ", umin1=" + umin1 +
+                ", imax1=" + imax1 +
+                ", hmax=" + hmax +
+                '}';
+    }
 }
