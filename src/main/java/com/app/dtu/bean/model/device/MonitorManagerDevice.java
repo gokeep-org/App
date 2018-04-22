@@ -31,6 +31,9 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
     private Integer x6;
     private Integer x7;
     private Integer x8;
+    private Integer zdx;
+    private Integer bdx;
+    private Integer scx;
 
     public MonitorManagerDevice(Message message) {
         setMessage(message);
@@ -71,6 +74,10 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
                 x6 = DtuUtil.getValue(dataMsgs, 5);
                 x7 = DtuUtil.getValue(dataMsgs, 6);
                 x8 = DtuUtil.getValue(dataMsgs, 7);
+                zdx = DtuUtil.getValue(dataMsgs, 8);
+                bdx = DtuUtil.getValue(dataMsgs, 9);
+                scx = DtuUtil.getValue(dataMsgs, 10);
+
             }
         }
         return this;

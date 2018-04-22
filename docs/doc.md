@@ -2,6 +2,20 @@
 
 ### 数据库字段说明
 
+#### 字段含义描述
+    0：x*-> 总线故障
+    1：u*-> 电压
+    2：i*-> 电流
+    3：pt*-> 温度
+    4：st->漏电
+    5：*max或*min-> 阈值， 如前缀加umax表示电压最大阈值
+    6：h*-> 电弧
+    7：y*->烟感
+    8：trq -> 天然气
+    9: yhq -> 液化气
+    10:mzq -> 煤制气
+    11:status->状态
+    
 #### 通用字段（所有的设备表均含有以下字段）
     1：modelCode -> 设备型号
     2：createDate -> 创建时间
@@ -10,11 +24,39 @@
     5：controCmd -> 控制命令
     6：dataLen -> 数据长度
     7: id -> 表的自增ID
+    8：handle_data: 处理时间
+    8：warn1~warn16: 最大15种报警，顺序排列，需要参考协议文档描述
+    
+    
+    
+#### monitor_manager_device（监控管理设备）
+    x1: 第一路总线故障
+    x2: 第二路总线故障
+    x3: 第三路总线故障
+    x4: 第四路总线故障
+    x5: 第五路总线故障
+    x6: 第六路总线故障
+    x7: 第七路总线故障
+    x8: 第八路总线故障
+    x8: 第一路总线故障
+    zdx: 主电故障
+    bdx：备电故障
+    scx: 输出故障
+    报警：
+    {
+        warn1~warn8: 第一路到第八路总线故障
+        warn9: 主电故障
+        warn: 备电故障
+        warn: 输出故障
+    }
+    
     
 #### combustible_gas_monitor_device（可燃气体监控）
     trq1 -> 天然气
     yhq1 -> 液化气
     mzq1 -> 煤制气
+    
+    
 
 ### electrical_fire_monitor_device（电器火灾监监控设备）
      ua ->  第1路电压报警
@@ -120,21 +162,21 @@
     ub4 -> 第11路电压
     uc4 -> 第12路电压
     
-### smoke_feel_monitor_device
+### smoke_feel_monitor_device（烟感监控）
     pt -> 1路温度
     y1 -> 1路烟感
     
-### combustible_gas_monitor_device
+### combustible_gas_monitor_device（可燃气体监控）
     trq1 -> 1路天然气
     yhq1 -> 1路液化气
     mzq1 -> 1路煤制气
     
-### prvent_fire_door_monitor_device
+### prvent_fire_door_monitor_device（防火门监控设备）
     status -> 状态
     
-### screen_monitor_device
+### screen_monitor_device（视屏监控）
     status -> 状态
     
-### hydraulic_pressure_monitor_device
+### hydraulic_pressure_monitor_device（水压监控设备）
     sy1 -> 1路水压
     
