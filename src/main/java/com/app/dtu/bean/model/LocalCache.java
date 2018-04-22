@@ -2,8 +2,8 @@ package com.app.dtu.bean.model;
 
 import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 
 /**
@@ -14,7 +14,7 @@ public final class LocalCache {
 
 
     // 设备关系缓存，每隔1小时自动更新一次
-    private static List<DeviceRelation> deviceRelationCache = new CopyOnWriteArrayList<>();
+    private static List<DeviceRelation> deviceRelationCache = new ArrayList<>();
 
     public static List<DeviceRelation> getDeviceRelationCache() {
         return deviceRelationCache;

@@ -142,4 +142,16 @@ public class Message {
     public DeviceDataDeal getBasicDeviceInfoDeal(){
         return new Device(this);
     }
+
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id='" + id + '\'' +
+                ", warnList=" + warnList +
+                ", controCmd=" + controCmd +
+                ", dataLen=" + dataLen +
+                ", dataMsgs=" + dataMsgs +
+                '}';
+    }
 }

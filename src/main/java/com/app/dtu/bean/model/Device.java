@@ -161,4 +161,18 @@ public class Device implements DeviceDataDeal, ParseToEntityAdapter<Device>, Ser
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Device{" +
+                "id=" + id +
+                ", typeCode='" + typeCode + '\'' +
+                ", typeName='" + typeName + '\'' +
+                ", modelCode='" + modelCode + '\'' +
+                ", modelName='" + modelName + '\'' +
+                ", model='" + model + '\'' +
+                ", createTime=" + createTime +
+                ", message=" + message +
+                '}';
+    }
 }

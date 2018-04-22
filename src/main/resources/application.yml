@@ -9,7 +9,7 @@ spring:
       charset: utf-8
       force: true
   profiles:
-    active: dev
+    active: produce
 #mybatis:
 #  mapperLocations: classpath*:mybatis/*Mapper.xml
 #  typeAliasesPackage: com.app.dtu.bean.model

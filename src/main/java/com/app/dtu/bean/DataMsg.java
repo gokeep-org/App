@@ -36,4 +36,13 @@ public class DataMsg {
         }
         datas.add(data);
     }
+
+    @Override
+    public String toString() {
+        return "DataMsg{" +
+                "type=" + type +
+                ", len=" + len +
+                ", datas=" + datas +
+                '}';
+    }
 }

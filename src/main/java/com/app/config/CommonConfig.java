@@ -13,4 +13,5 @@ public class CommonConfig {
     public static final String SCAN_REST_PACKAGE = DefaultRestPackage.name;
     public static final boolean ENABLE_WEB_SERVER = false;
     public static final boolean LOCAL_DEV_ONALY_FORWARD = false;
+    public static final boolean ENABLE_BUBUG_MODE = true;
 }

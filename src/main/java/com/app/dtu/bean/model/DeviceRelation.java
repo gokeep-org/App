@@ -39,5 +39,14 @@ public class DeviceRelation {
     public void setDevice_model_code(String device_model_code) {
         this.device_model_code = device_model_code;
     }
+
+    @Override
+    public String toString() {
+        return "DeviceRelation{" +
+                "device_id='" + device_id + '\'' +
+                ", device_sn='" + device_sn + '\'' +
+                ", device_model_code='" + device_model_code + '\'' +
+                '}';
+    }
 }
 

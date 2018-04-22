@@ -4,18 +4,34 @@ import com.app.dtu.bean.DataMsg;
 import com.app.dtu.bean.Message;
 import com.app.dtu.config.Const;
 import com.app.dtu.parser.ByteUtils;
+import com.app.dtu.util.DtuUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
 
 /**
  *  处理消息
  */
 public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
+    private static final Logger loggger = LoggerFactory.getLogger(DtuServerHandler.class);
+
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
+        // 打印接受原始数据
+
         // 转成netty的Bytebuf对象
         ByteBuf result = (ByteBuf) msg;
+        if (Objects.isNull(result)){
+            loggger.error("Receiver message data is null");
+        }
+        byte[] logBytes = new byte[result.readableBytes()];
+        result.asReadOnly().readBytes(logBytes, 0, logBytes.length);
+        // 打印去掉包尾的原始数据
+        loggger.info("Receiver message data is [{}]", DtuUtil.bytesToHexString(logBytes));
         // 计算该消息总的数据长度
         int len = result.readableBytes();
         // 判断如果数据长度小于0， 那么不做处理
@@ -59,6 +75,7 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
             }
             // 释放字节码流
             result.release();
+            loggger.info("Parse data to message is {}", Objects.isNull(message) ? null : message.toString());
         // 把解析后的消息交给下一个pipline做处理
         ctx.fireChannelRead(message);
     }

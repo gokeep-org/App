@@ -26,6 +26,53 @@ public class DtuUtil {
         }catch (Throwable e){
             return null;
         }
+    }
 
+    public static String bytesToHexString(byte[] src){
+        if (null == src || src.length == 0){
+            return null;
+        }
+        StringBuilder stringBuilder = new StringBuilder("");
+        if (src == null || src.length <= 0) {
+            return null;
+        }
+        for (int i = 0; i < src.length; i++) {
+            int v = src[i] & 0xFF;
+            String hv = Integer.toHexString(v);
+            if (hv.length() < 2) {
+                stringBuilder.append(0);
+            }
+            stringBuilder.append(hv);
+        }
+        return stringBuilder.toString();
+    }
+
+    /**
+     * 不再使用该方法
+     * @param src
+     * @return
+     */
+    public static String bytesToHexFormatString(byte[] src){
+        if (null == src || src.length == 0){
+            return null;
+        }
+        StringBuilder stringBuilder = new StringBuilder("");
+        if (src == null || src.length <= 0) {
+            return null;
+        }
+        for (int i = 0; i < src.length; i++) {
+            int v = src[i] & 0xFF;
+            String hv = Integer.toHexString(v);
+            if (hv.length() < 2) {
+                stringBuilder.append(0);
+            }
+            stringBuilder.append(hv);
+        }
+        String format = new String();
+        char[] result = stringBuilder.toString().toCharArray();
+        for (int i = 0; i < result.length; i = i + 2){
+            format += result[i]  + result[i+1] + "";
+        }
+        return format;
     }
 }

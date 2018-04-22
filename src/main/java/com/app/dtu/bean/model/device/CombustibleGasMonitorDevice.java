@@ -59,7 +59,7 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
     @Override
     public boolean execute() {
         try{
-            ServiceItem.combustibleGasMonitorService.save(this.generateEntity(getMessage()));
+            ServiceItem.combustibleGasMonitorService.save(parseEntity());
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");
         }

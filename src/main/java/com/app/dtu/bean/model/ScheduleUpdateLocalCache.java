@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.CollectionUtils;
 
@@ -21,12 +22,13 @@ public class ScheduleUpdateLocalCache {
      * 每一小时执行一次更新操作，更新本地缓存
      * 获取到设备id，sn，型号码
      */
+    @Async
     @Scheduled(cron = "0 0 0/1 * * ?")
     public void updateDeviceModelCode() {
         List<DeviceRelation> deviceRelations = new ArrayList<>();
         List<DeviceSnid> deviceSnids = deviceSnidReponsitory.findAll();
         if (CollectionUtils.isEmpty(deviceSnids)) {
-            logger.error("Update device model code local cache is error, total num is {}", LocalCache.getDeviceRelationCache().size());
+            logger.warn("Update device model code local cache is error, total num is {}", LocalCache.getDeviceRelationCache().size());
             return;
         }
         deviceSnids.stream().forEach(deviceSnid -> {
