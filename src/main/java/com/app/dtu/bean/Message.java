@@ -1,8 +1,8 @@
 package com.app.dtu.bean;
 
-import com.app.config.CommonConfig;
 import com.app.dtu.bean.model.*;
 import com.app.dtu.bean.model.device.*;
+import com.app.dtu.config.DtuConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
@@ -84,7 +84,7 @@ public class Message {
      * @return
      */
     public String parseModelCode(){
-        if (CommonConfig.LOCAL_DEV_ONALY_FORWARD){
+        if (DtuConfig.LOCAL_DEV_ONALY_FORWARD){
             return this.id.substring(6, 10);
         }
         // 这里是终端代传的首选方式，也可以支持直传的方式

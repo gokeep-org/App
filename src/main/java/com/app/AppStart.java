@@ -12,7 +12,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableJpaRepositories
 @SpringBootApplication
-
 public class AppStart {
     public static void main(String[] args) {
         new SpringApplicationBuilder(AppStart.class)

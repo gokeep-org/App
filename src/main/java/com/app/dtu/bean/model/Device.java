@@ -155,7 +155,7 @@ public class Device implements DeviceDataDeal, ParseToEntityAdapter<Device>, Ser
     @Override
     public boolean execute() {
         try{
-            ServiceItem.deviceService.save(generateEntity(this.message));
+            ServiceItem.deviceService.save(getStorageEntity());
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");
         }

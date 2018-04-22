@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 监控管理设备实体-00
@@ -79,7 +80,11 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
     @Override
     public boolean execute() {
         try {
-            ServiceItem.monitorManagerService.save(generateEntity(getMessage()));
+            DeviceDataDeal deviceDataDeal = getStorageEntity();
+            if (Objects.isNull(deviceDataDeal)){
+                return false;
+            }
+            ServiceItem.monitorManagerService.save(deviceDataDeal);
         } catch (Throwable e) {
             logger.error("Execute add data to db or generate entity is error");
         }

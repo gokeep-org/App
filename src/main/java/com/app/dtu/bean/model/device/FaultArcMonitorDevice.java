@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 故障电弧监控-03
@@ -70,7 +71,11 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
     @Override
     public boolean execute() {
         try{
-            ServiceItem.faultArcMonitorService.save(this.generateEntity(getMessage()));
+            DeviceDataDeal deviceDataDeal = getStorageEntity();
+            if (Objects.isNull(deviceDataDeal)){
+                return false;
+            }
+            ServiceItem.faultArcMonitorService.save(deviceDataDeal);
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");
         }

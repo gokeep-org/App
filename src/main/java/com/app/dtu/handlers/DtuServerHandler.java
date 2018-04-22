@@ -61,9 +61,9 @@ public class DtuServerHandler extends ChannelInboundHandlerAdapter {
         DeviceDataDeal deviceDataDeal = message.getDevice();
         boolean executeResult = Objects.isNull(deviceDataDeal) ? false : deviceDataDeal.execute();
         if (executeResult)
-            logger.info("Add device data result is {}", executeResult);
+            logger.info("Add device data result to db is {}", executeResult);
         else
-            logger.error("Add device data result is {}", executeResult);
+            logger.error("Add device data result to db is {}", executeResult);
         if (!DtuConfig.ENABLE_KEEP_ALIVE_CONNECTION) {
             ctx.fireChannelRead(msg);
         }

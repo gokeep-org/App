@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 烟感设备
@@ -51,7 +52,11 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
     @Override
     public boolean execute() {
         try{
-            ServiceItem.somkeFeeService.save(this.generateEntity(getMessage()));
+            DeviceDataDeal deviceDataDeal = getStorageEntity();
+            if (Objects.isNull(deviceDataDeal)){
+                return false;
+            }
+            ServiceItem.somkeFeeService.save(deviceDataDeal);
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");
         }

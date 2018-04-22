@@ -61,7 +61,7 @@ public class TestMybatis {
         Message message = new Message();
         message.setId("9170000101000511");
         ParseToEntityAdapter parseToEntityAdapter = new MonitorManagerDevice(message);
-        MonitorManagerDevice device = (MonitorManagerDevice) parseToEntityAdapter.parseEntity();
+        MonitorManagerDevice device = (MonitorManagerDevice) parseToEntityAdapter.getStorageEntity();
         monitorManagerDeviceReponsitory.save(device);
         logger.info("ok");
     }

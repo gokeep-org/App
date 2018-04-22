@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 电器火灾监监控设备-01
@@ -100,7 +101,11 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
     @Override
     public boolean execute() {
         try {
-            ServiceItem.electricalFireMonitorService.save(this.generateEntity(getMessage()));
+            DeviceDataDeal deviceDataDeal = getStorageEntity();
+            if (Objects.isNull(deviceDataDeal)){
+                return false;
+            }
+            ServiceItem.electricalFireMonitorService.save(deviceDataDeal);
         } catch (Throwable e) {
             logger.error("Execute add data to db or generate entity is error");
         }

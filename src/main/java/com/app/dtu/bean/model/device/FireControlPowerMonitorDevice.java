@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 消防设备电源监控-04
@@ -237,7 +238,11 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
     @Override
     public boolean execute() {
         try{
-            ServiceItem.fireControlPowerService.save(this.generateEntity(getMessage()));
+            DeviceDataDeal deviceDataDeal = getStorageEntity();
+            if (Objects.isNull(deviceDataDeal)){
+                return false;
+            }
+            ServiceItem.fireControlPowerService.save(deviceDataDeal);
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");
         }

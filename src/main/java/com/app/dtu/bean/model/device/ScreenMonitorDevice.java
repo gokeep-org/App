@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 视屏监控08
@@ -51,7 +52,11 @@ public class ScreenMonitorDevice extends RedundancyDeviceData implements DeviceD
     @Override
     public boolean execute() {
         try{
-            ServiceItem.screenMonitorService.save(this.generateEntity(getMessage()));
+            DeviceDataDeal deviceDataDeal = getStorageEntity();
+            if (Objects.isNull(deviceDataDeal)){
+                return false;
+            }
+            ServiceItem.screenMonitorService.save(deviceDataDeal);
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");
         }

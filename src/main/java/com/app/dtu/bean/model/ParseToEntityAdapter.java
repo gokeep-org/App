@@ -36,14 +36,13 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
     }
 
     // 获取实体类
-    default T parseEntity(){
-        logger.info("Receiver message is {}", buildMessage().toString());
+    default T getStorageEntity(){
         if (checkMessage(buildMessage()) || checkDevice()){
             logger.info("Receiver message is null");
             return null;
         }
         T entity =  generateEntity(buildMessage());
-        logger.info("Parse message is {}", Objects.isNull(entity) ? null : entity.toString());
+        logger.info("Parse to entity is {}", Objects.isNull(entity) ? null : entity.toString());
         return entity;
     }
 }

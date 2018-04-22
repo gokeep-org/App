@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 水压监控-12
@@ -66,7 +67,11 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
     @Override
     public boolean execute() {
         try{
-            ServiceItem.hydraulicPressureService.save(this.generateEntity(getMessage()));
+            DeviceDataDeal deviceDataDeal = getStorageEntity();
+            if (Objects.isNull(deviceDataDeal)){
+                return false;
+            }
+            ServiceItem.hydraulicPressureService.save(deviceDataDeal);
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");
         }

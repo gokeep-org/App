@@ -1,5 +1,6 @@
 package com.app.dtu.bean.model;
 
+import com.app.dtu.config.DtuConfig;
 import com.app.dtu.repository.DeviceSnidReponsitory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +24,12 @@ public class ScheduleUpdateLocalCache {
      * 获取到设备id，sn，型号码
      */
     @Async
-    @Scheduled(cron = "0 0 0/1 * * ?")
+    @Scheduled(cron = DtuConfig.LOCAL_CACHE_CRON)
     public void updateDeviceModelCode() {
+        // 如果启动debug模式，会直接读取本地的初始化缓存，这里是不获取本地缓存的
+        if (DtuConfig.ENABLE_BUBUG_MODE){
+            return;
+        }
         List<DeviceRelation> deviceRelations = new ArrayList<>();
         List<DeviceSnid> deviceSnids = deviceSnidReponsitory.findAll();
         if (CollectionUtils.isEmpty(deviceSnids)) {

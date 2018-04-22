@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 智能电力设监控设别-02
@@ -45,7 +46,11 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     @Override
     public boolean execute() {
         try {
-            ServiceItem.intelligentPowerService.save(this.generateEntity(getMessage()));
+            DeviceDataDeal deviceDataDeal = getStorageEntity();
+            if (Objects.isNull(deviceDataDeal)){
+                return false;
+            }
+            ServiceItem.intelligentPowerService.save(deviceDataDeal);
         } catch (Throwable e) {
             logger.error("Execute add data to db or generate entity is error");
         }

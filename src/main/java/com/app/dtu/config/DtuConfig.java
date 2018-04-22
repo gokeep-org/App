@@ -17,13 +17,18 @@ public class DtuConfig {
     public static final String DTU_TABLE_PRIFIX = "dtu_";
     // 是否需要服务启动检查并初始化设备类型数据
     public static final boolean IS_CHECK_INIT_DEVICE_MODEL_DATA = true;
+    // 使用本地开发模式，会优先使用本地初始化型号型号缓存，不支持代传模式
+    public static final boolean LOCAL_DEV_ONALY_FORWARD = false;
+    // 启动debug模式，只会一次初始化任务
+    public static final boolean ENABLE_BUBUG_MODE = false;
 
-    // 定时任务数据库更新配置信息
+    public static final String LOCAL_CACHE_CRON = "0 0 0/1 * * ?";
+
+    // 定时任务数据库更新配置信息, 以下配置是为了方便快速开发调用sql的util，目前不再使用
     public static final String cacheHost = "118.89.240.60";
     public static final String cachePort = "3306";
     public static final String cacheDbName = "fms";
     public static final String cacheUsername = "root";
     public static final String cachePassword = "qwe@w1#gg$v_";
-
 
 }

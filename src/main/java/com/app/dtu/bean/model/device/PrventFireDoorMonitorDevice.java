@@ -2,7 +2,9 @@ package com.app.dtu.bean.model.device;
 
 import com.app.dtu.bean.DataMsg;
 import com.app.dtu.bean.Message;
-import com.app.dtu.bean.model.*;
+import com.app.dtu.bean.model.DeviceDataDeal;
+import com.app.dtu.bean.model.ParseToEntityAdapter;
+import com.app.dtu.bean.model.RedundancyDeviceData;
 import com.app.dtu.config.DtuConfig;
 import com.app.dtu.service.ServiceItem;
 import com.app.dtu.util.DtuUtil;
@@ -11,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 防火门监控设备
@@ -52,7 +55,11 @@ public class PrventFireDoorMonitorDevice extends RedundancyDeviceData implements
     @Override
     public boolean execute() {
         try{
-            ServiceItem.preventFireDoorService.save(this.generateEntity(getMessage()));
+            DeviceDataDeal deviceDataDeal = getStorageEntity();
+            if (Objects.isNull(deviceDataDeal)){
+                return false;
+            }
+            ServiceItem.preventFireDoorService.save(deviceDataDeal);
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");
         }
