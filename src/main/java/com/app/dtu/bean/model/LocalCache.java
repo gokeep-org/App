@@ -1,5 +1,6 @@
 package com.app.dtu.bean.model;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * 本地缓存实现
  */
-public final class LocalCache {
+public class LocalCache {
     private LocalCache(){}
 
 
@@ -25,6 +26,7 @@ public final class LocalCache {
      * 设备关系缓存实现, 每想个一定的时间去更新这个缓存
      * @param updateResult
      */
+    @Async
     public static void updateDeviceRelation(List<DeviceRelation> updateResult){
         deviceRelationCache.clear();
         deviceRelationCache.addAll(updateResult);

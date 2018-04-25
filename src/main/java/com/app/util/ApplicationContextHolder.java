@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Async;
 
 @Configuration
 public class ApplicationContextHolder implements ApplicationContextAware {
@@ -41,6 +42,9 @@ public class ApplicationContextHolder implements ApplicationContextAware {
     /**
      * 当项目启动的时候需要需要初始化数据到本地缓存
      */
+
+
+    @Async
     class InitDeviceSiIdWhenStartServer extends Thread{
         @Override
         public void run() {

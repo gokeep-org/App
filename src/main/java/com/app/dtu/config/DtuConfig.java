@@ -22,9 +22,9 @@ public class DtuConfig {
     // 启动debug模式，只会一次初始化任务
     public static final boolean ENABLE_BUBUG_MODE = false;
 
-    public static final String LOCAL_CACHE_CRON = "0 0 0/1 * * ?";
+    public static final String LOCAL_CACHE_CRON = "0 0 0/12 * * ?";
 
-    // 定时任务数据库更新配置信息, 以下配置是为了方便快速开发调用sql的util，目前不再使用
+    // 定时任务数据库更新配置信息, 以下配置是为了方便快速开发调用sql的util，目前不再使用，仅做保留
     public static final String cacheHost = "118.89.240.60";
     public static final String cachePort = "3306";
     public static final String cacheDbName = "fms";
