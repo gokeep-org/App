@@ -27,6 +27,9 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
         setMessage(message);
     }
 
+    public FireControlPowerMonitorDevice() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

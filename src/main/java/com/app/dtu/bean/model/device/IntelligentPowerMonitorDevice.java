@@ -25,6 +25,9 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
         setMessage(message);
     }
 
+    public IntelligentPowerMonitorDevice() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

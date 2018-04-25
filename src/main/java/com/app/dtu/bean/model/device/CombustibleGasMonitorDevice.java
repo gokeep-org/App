@@ -25,6 +25,9 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
         setMessage(message);
     }
 
+    public CombustibleGasMonitorDevice() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

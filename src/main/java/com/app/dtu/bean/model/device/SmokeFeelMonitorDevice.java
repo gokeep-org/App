@@ -26,6 +26,9 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
         setMessage(message);
     }
 
+    public SmokeFeelMonitorDevice() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

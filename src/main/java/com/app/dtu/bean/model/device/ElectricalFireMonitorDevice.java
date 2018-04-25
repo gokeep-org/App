@@ -25,6 +25,9 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
         setMessage(message);
     }
 
+    public ElectricalFireMonitorDevice() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

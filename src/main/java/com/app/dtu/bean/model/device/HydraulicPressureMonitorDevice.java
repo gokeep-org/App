@@ -25,6 +25,8 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
         setMessage(message);
     }
 
+    public HydraulicPressureMonitorDevice() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

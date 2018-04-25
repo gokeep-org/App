@@ -27,6 +27,9 @@ public class PrventFireDoorMonitorDevice extends RedundancyDeviceData implements
         setMessage(message);
     }
 
+    public PrventFireDoorMonitorDevice() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

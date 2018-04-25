@@ -28,6 +28,9 @@ public class ScreenMonitorDevice extends RedundancyDeviceData implements DeviceD
         setMessage(message);
     }
 
+    public ScreenMonitorDevice() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

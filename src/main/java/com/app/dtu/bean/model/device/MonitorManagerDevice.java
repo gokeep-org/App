@@ -39,6 +39,9 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
         setMessage(message);
     }
 
+    public MonitorManagerDevice() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

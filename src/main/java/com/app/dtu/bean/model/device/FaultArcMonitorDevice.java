@@ -22,6 +22,9 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
 
     private static final Logger logger = LoggerFactory.getLogger(FaultArcMonitorDevice.class);
 
+    public FaultArcMonitorDevice() {
+    }
+
     public FaultArcMonitorDevice(Message message) {
         setMessage(message);
     }

@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.CollectionUtils;
 
@@ -23,7 +22,6 @@ public class ScheduleUpdateLocalCache {
      * 每一小时执行一次更新操作，更新本地缓存
      * 获取到设备id，sn，型号码
      */
-    @Async
     @Scheduled(cron = DtuConfig.LOCAL_CACHE_CRON)
     public void updateDeviceModelCode() {
         // 如果启动debug模式，会直接读取本地的初始化缓存，这里是不获取本地缓存的
