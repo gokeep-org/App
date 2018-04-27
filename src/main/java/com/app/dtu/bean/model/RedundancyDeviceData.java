@@ -52,6 +52,51 @@ public class RedundancyDeviceData implements Serializable{
     private int warn15;
     private int warn16;
 
+
+    // 正常状态
+    private Boolean statusNormal;
+    // 报警状态
+    private Boolean statusWarn;
+    // 故障状态
+    private Boolean statusFault;
+    // 离线状态
+    private Boolean statusOffline;
+
+    /**
+     * 设备离线设置
+     */
+    private void buildDeviceNormalSttaus(){
+        if (warnList == 0  && controCmd != 28){
+            this.statusNormal = true;
+            return;
+        }
+        this.statusNormal = true;
+    }
+
+
+    /**
+     * 构建设备状态消息
+     * @param statusWarn
+     * @param statusFault
+     */
+    public void buildDeviceStatus(Boolean statusWarn, Boolean statusFault){
+        buildDeviceNormalSttaus();
+        buildDeviceStatusOnline();
+        this.statusWarn = statusWarn;
+        this.statusFault = statusFault;
+    }
+    /**
+     * 判断是不是离线消息
+     */
+    private void buildDeviceStatusOnline(){
+        if (warnList == 0 && controCmd == 28){
+            this.statusOffline = true;
+            return;
+        }
+        this.statusOffline = false;
+
+    }
+
     /**
      * 解析报警列表
      */
