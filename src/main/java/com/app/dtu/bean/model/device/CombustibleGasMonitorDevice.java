@@ -59,6 +59,13 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
         return this;
     }
 
+    @Override
+    public void parseDeviceStatus() {
+        if (isOnlineAndExistWarnOrFault()){
+            buildDeviceStatus(true, false);
+        }
+    }
+
 
     @Override
     public boolean execute() {

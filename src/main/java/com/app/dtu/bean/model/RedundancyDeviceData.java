@@ -56,11 +56,11 @@ public class RedundancyDeviceData implements Serializable{
     // 正常状态
     private Boolean statusNormal;
     // 报警状态
-    private Boolean statusWarn;
+    private Boolean statusWarn ;
     // 故障状态
-    private Boolean statusFault;
+    private Boolean statusFault = false;
     // 离线状态
-    private Boolean statusOffline;
+    private Boolean statusOffline = false;
 
     /**
      * 设备离线设置
@@ -70,7 +70,25 @@ public class RedundancyDeviceData implements Serializable{
             this.statusNormal = true;
             return;
         }
-        this.statusNormal = true;
+        this.statusNormal = false;
+    }
+
+
+    /**
+     * 判断是否是离线
+     * @return
+     */
+    public boolean isOneline(){
+        return controCmd != 28 ? true : false;
+    }
+
+
+    /**
+     * 判断是离线而且存在报警
+     * @return
+     */
+    public boolean isOnlineAndExistWarnOrFault(){
+        return isOneline() && (warnList != 0);
     }
 
 
@@ -85,6 +103,21 @@ public class RedundancyDeviceData implements Serializable{
         this.statusWarn = statusWarn;
         this.statusFault = statusFault;
     }
+
+
+    public void buildAllIsFault(){
+        if (isOnlineAndExistWarnOrFault()){
+            buildDeviceStatus(false, true);
+        }
+    }
+
+    public void buildAllIsWarn(){
+        if (isOnlineAndExistWarnOrFault()){
+            buildDeviceStatus(false, true);
+        }
+    }
+
+
     /**
      * 判断是不是离线消息
      */

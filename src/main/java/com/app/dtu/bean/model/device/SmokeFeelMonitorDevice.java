@@ -53,6 +53,11 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
     }
 
     @Override
+    public void parseDeviceStatus() {
+
+    }
+
+    @Override
     public boolean execute() {
         try{
             DeviceDataDeal deviceDataDeal = getStorageEntity();

@@ -100,6 +100,11 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
         return this;
     }
 
+    @Override
+    public void parseDeviceStatus() {
+
+    }
+
     public Long getId() {
         return id;
     }
