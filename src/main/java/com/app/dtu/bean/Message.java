@@ -24,7 +24,7 @@ public class Message {
     private int controCmd;
     private int dataLen;
     private List<DataMsg> dataMsgs;
-
+    private int status;
     public String getId() {
         return id;
     }
@@ -153,5 +153,13 @@ public class Message {
                 ", dataLen=" + dataLen +
                 ", dataMsgs=" + dataMsgs +
                 '}';
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getStatus() {
+        return status;
     }
 }

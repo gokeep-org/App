@@ -73,11 +73,6 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
     }
 
     @Override
-    public void parseDeviceStatus() {
-
-    }
-
-    @Override
     public boolean execute() {
         try{
             DeviceDataDeal deviceDataDeal = getStorageEntity();

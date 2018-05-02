@@ -47,11 +47,6 @@ public class PrventFireDoorMonitorDevice extends RedundancyDeviceData implements
         return this;
     }
 
-    @Override
-    public void parseDeviceStatus() {
-
-    }
-
     public Long getId() {
         return id;
     }

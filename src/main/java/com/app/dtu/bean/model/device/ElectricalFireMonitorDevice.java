@@ -251,31 +251,6 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
         return this;
     }
 
-    @Override
-    public void parseDeviceStatus() {
-        if (isOneline()) {
-            if (this.getMessage().parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0101) {
-
-            } else if (getMessage().parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0102) {
-
-            }
-        }
-
-        if (getMessage().parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0101){
-            buildAllIsWarn();
-        }else if (getMessage().parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0102 ||
-                getMessage().parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0105){
-            buildAllIsFault();
-        }else if (getMessage().parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0103 ||
-                getMessage().parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0106){
-
-        }else if (getMessage().parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0104 ||
-                getMessage().parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0107){
-
-        }else if (getMessage().parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0108){
-
-        }
-    }
     public Integer getUa() {
         return ua;
     }

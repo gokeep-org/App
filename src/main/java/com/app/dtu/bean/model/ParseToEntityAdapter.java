@@ -27,7 +27,6 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
     /**
      * 这里只需要关系和分离出来报警和故障两种情况
      */
-    void parseDeviceStatus();
 
     // 校验消息
     default boolean checkMessage(Message message){
@@ -46,7 +45,6 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
             return null;
         }
         T entity =  generateEntity(buildMessage());
-        parseDeviceStatus();
         logger.info("Parse to entity is {}", Objects.isNull(entity) ? null : entity.toString());
         return entity;
     }

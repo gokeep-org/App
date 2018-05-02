@@ -90,11 +90,6 @@ public class ScreenMonitorDevice extends RedundancyDeviceData implements DeviceD
     }
 
     @Override
-    public void parseDeviceStatus() {
-
-    }
-
-    @Override
     public String toString() {
         return "ScreenMonitorDevice{" +
                 "id=" + id +

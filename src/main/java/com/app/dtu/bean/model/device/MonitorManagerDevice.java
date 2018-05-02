@@ -86,11 +86,6 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
         return this;
     }
 
-    @Override
-    public void parseDeviceStatus() {
-        buildAllIsFault();
-    }
-
     // 执行数据存储
     @Override
     public boolean execute() {

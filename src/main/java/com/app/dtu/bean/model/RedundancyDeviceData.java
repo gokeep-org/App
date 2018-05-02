@@ -11,7 +11,7 @@ import java.util.Date;
  * 可以作为基础的数据存储被其他的设备类继承， 不是一张单独的表
  */
 @MappedSuperclass
-public class RedundancyDeviceData implements Serializable{
+public class RedundancyDeviceData implements Serializable {
     // 设备的型号
     private String modelCode;
 
@@ -52,89 +52,123 @@ public class RedundancyDeviceData implements Serializable{
     private int warn15;
     private int warn16;
 
-
     // 正常状态
-    private Boolean statusNormal;
+    private Boolean yhf＿state = true;
     // 报警状态
-    private Boolean statusWarn ;
+    private Boolean bj_state = false;
     // 故障状态
-    private Boolean statusFault = false;
+    private Boolean gz＿state = false;
     // 离线状态
-    private Boolean statusOffline = false;
+    private Boolean lx＿state = false;
+    // 是否是老数据
+    private Boolean old＿flag = true;
 
-    /**
-     * 设备离线设置
-     */
-    private void buildDeviceNormalSttaus(){
-        if (warnList == 0  && controCmd != 28){
-            this.statusNormal = true;
-            return;
-        }
-        this.statusNormal = false;
-    }
-
-
-    /**
-     * 判断是否是离线
-     * @return
-     */
-    public boolean isOneline(){
-        return controCmd != 28 ? true : false;
-    }
-
-
-    /**
-     * 判断是离线而且存在报警
-     * @return
-     */
-    public boolean isOnlineAndExistWarnOrFault(){
-        return isOneline() && (warnList != 0);
-    }
-
-
-    /**
-     * 构建设备状态消息
-     * @param statusWarn
-     * @param statusFault
-     */
-    public void buildDeviceStatus(Boolean statusWarn, Boolean statusFault){
-        buildDeviceNormalSttaus();
-        buildDeviceStatusOnline();
-        this.statusWarn = statusWarn;
-        this.statusFault = statusFault;
-    }
-
-
-    public void buildAllIsFault(){
-        if (isOnlineAndExistWarnOrFault()){
-            buildDeviceStatus(false, true);
+    public void buildDeviceStatus() {
+        int status = message.getStatus();
+        if (status == 0) {
+            yhf＿state = true;
+            bj_state = false;
+            gz＿state = false;
+            lx＿state = false;
+        } else if (status == 1) {
+            yhf＿state = false;
+            bj_state = true;
+            gz＿state = false;
+            lx＿state = false;
+        } else if (status == 2) {
+            yhf＿state = false;
+            bj_state = false;
+            gz＿state = true;
+            lx＿state = false;
+        } else if (status == 3) {
+            yhf＿state = false;
+            bj_state = true;
+            gz＿state = true;
+            lx＿state = false;
+        } else if (status == 4) {
+            yhf＿state = false;
+            bj_state = false;
+            gz＿state = false;
+            lx＿state = true;
         }
     }
 
-    public void buildAllIsWarn(){
-        if (isOnlineAndExistWarnOrFault()){
-            buildDeviceStatus(false, true);
-        }
-    }
-
-
-    /**
-     * 判断是不是离线消息
-     */
-    private void buildDeviceStatusOnline(){
-        if (warnList == 0 && controCmd == 28){
-            this.statusOffline = true;
-            return;
-        }
-        this.statusOffline = false;
-
-    }
+//    /**
+//     * 设备离线设置
+//     */
+//    private void buildDeviceNormalSttaus() {
+//        if (warnList == 0 && controCmd != 28) {
+//            this.yhf＿state = true;
+//            return;
+//        }
+//        this.yhf＿state = false;
+//    }
+//
+//
+//    /**
+//     * 判断是否是离线
+//     *
+//     * @return
+//     */
+//    public boolean isOneline() {
+//        return controCmd != 28 ? true : false;
+//    }
+//
+//
+//    /**
+//     * 判断是离线而且存在报警
+//     *
+//     * @return
+//     */
+//    public boolean isOnlineAndExistWarnOrFault() {
+//        return isOneline() && (warnList != 0);
+//    }
+//
+//
+//    /**
+//     * 构建设备状态消息
+//     *
+//     * @param statusWarn
+//     * @param statusFault
+//     */
+//    public void buildDeviceStatus(Boolean statusWarn, Boolean statusFault) {
+//        buildDeviceNormalSttaus();
+//        buildDeviceStatusOnline();
+//        this.bj_state = statusWarn;
+//        this.gz＿state = statusFault;
+//    }
+//
+//
+//    public void buildAllIsFault() {
+//        if (isOnlineAndExistWarnOrFault()) {
+//            buildDeviceStatus(false, true);
+//        }
+//    }
+//
+//    public void buildAllIsWarn() {
+//        if (isOnlineAndExistWarnOrFault()) {
+//            buildDeviceStatus(false, true);
+//        }
+//    }
+//
+//
+//    /**
+//     * 判断是不是离线消息
+//     */
+//    private void buildDeviceStatusOnline() {
+//        if (warnList == 0 && controCmd == 28) {
+//            this.lx＿state = true;
+//            return;
+//        }
+//        this.lx＿state = false;
+//
+//    }
 
     /**
      * 解析报警列表
      */
-    private void buildWarnValues(){
-        if (this.warnList == 0){
+    private void buildWarnValues() {
+        if (this.warnList == 0) {
             return;
         }
         warn1 = (warnList & (1)) == 0 ? 0 : 1;
@@ -155,10 +189,11 @@ public class RedundancyDeviceData implements Serializable{
         warn16 = (warnList & (32768)) == 0 ? 0 : 1;
 
     }
+
     /**
      * 设置消息元数据信息
      */
-    public void buildRedunancyDeviceInfo(){
+    public void buildRedunancyDeviceInfo() {
         setMessageId(message.getId());
         setCreateDate(new Date().getTime());
         setModelCode(message.parseModelCode());
@@ -166,7 +201,9 @@ public class RedundancyDeviceData implements Serializable{
         setDataLen(message.getDataLen());
         setWarnList(message.getWarnList());
         buildWarnValues();
+        buildDeviceStatus();
     }
+
     public String getMessageId() {
         return messageId;
     }
@@ -363,6 +400,46 @@ public class RedundancyDeviceData implements Serializable{
         this.warn16 = warn16;
     }
 
+    public Boolean getYhf＿state() {
+        return yhf＿state;
+    }
+
+    public void setYhf＿state(Boolean yhf＿state) {
+        this.yhf＿state = yhf＿state;
+    }
+
+    public Boolean getBj_state() {
+        return bj_state;
+    }
+
+    public void setBj_state(Boolean bj_state) {
+        this.bj_state = bj_state;
+    }
+
+    public Boolean getGz＿state() {
+        return gz＿state;
+    }
+
+    public void setGz＿state(Boolean gz＿state) {
+        this.gz＿state = gz＿state;
+    }
+
+    public Boolean getLx＿state() {
+        return lx＿state;
+    }
+
+    public void setLx＿state(Boolean lx＿state) {
+        this.lx＿state = lx＿state;
+    }
+
+    public Boolean getOld＿flag() {
+        return old＿flag;
+    }
+
+    public void setOld＿flag(Boolean old＿flag) {
+        this.old＿flag = old＿flag;
+    }
+
     @Override
     public String toString() {
         return "RedundancyDeviceData{" +
@@ -389,6 +466,11 @@ public class RedundancyDeviceData implements Serializable{
                 ", warn14=" + warn14 +
                 ", warn15=" + warn15 +
                 ", warn16=" + warn16 +
+                ", yhf＿state=" + yhf＿state +
+                ", bj_state=" + bj_state +
+                ", gz＿state=" + gz＿state +
+                ", lx＿state=" + lx＿state +
+                ", old＿flag=" + old＿flag +
                 ", message=" + message +
                 '}';
     }
