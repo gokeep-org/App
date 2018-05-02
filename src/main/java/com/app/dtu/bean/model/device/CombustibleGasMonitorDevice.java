@@ -68,6 +68,8 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
             if (Objects.isNull(deviceDataDeal)){
                 return false;
             }
+            // 一定注意前后顺序，这个很重要
+            ServiceItem.combustibleGasMonitorService.updateOldDataStatus(getMessageId());
             ServiceItem.combustibleGasMonitorService.save(deviceDataDeal);
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");

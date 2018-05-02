@@ -18,4 +18,10 @@ public class FireControlPowerMonitorServiceImpl extends BaseService implements D
         fireControlPowerMonitorReponstory.save(deviceData);
         return true;
     }
+
+    @Override
+    public boolean updateOldDataStatus(String messageId) {
+        fireControlPowerMonitorReponstory.updateOldDataStatus(messageId);
+        return true;
+    }
 }

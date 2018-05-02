@@ -62,6 +62,7 @@ public class PrventFireDoorMonitorDevice extends RedundancyDeviceData implements
             if (Objects.isNull(deviceDataDeal)){
                 return false;
             }
+            ServiceItem.preventFireDoorService.updateOldDataStatus(getMessageId());
             ServiceItem.preventFireDoorService.save(deviceDataDeal);
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");

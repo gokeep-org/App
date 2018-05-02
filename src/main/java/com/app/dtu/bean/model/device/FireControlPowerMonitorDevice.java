@@ -245,6 +245,7 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
             if (Objects.isNull(deviceDataDeal)){
                 return false;
             }
+            ServiceItem.fireControlPowerService.updateOldDataStatus(getMessageId());
             ServiceItem.fireControlPowerService.save(deviceDataDeal);
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");

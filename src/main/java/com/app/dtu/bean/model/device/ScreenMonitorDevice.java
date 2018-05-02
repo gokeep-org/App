@@ -59,6 +59,7 @@ public class ScreenMonitorDevice extends RedundancyDeviceData implements DeviceD
             if (Objects.isNull(deviceDataDeal)){
                 return false;
             }
+            ServiceItem.screenMonitorService.updateOldDataStatus(getMessageId());
             ServiceItem.screenMonitorService.save(deviceDataDeal);
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");

@@ -18,4 +18,10 @@ public class FaultArcMonitorServiceImpl extends BaseService implements DataServi
         faultArcMonitorReponsitory.save(deviceData);
         return true;
     }
+
+    @Override
+    public boolean updateOldDataStatus(String messageId) {
+        faultArcMonitorReponsitory.updateOldDataStatus(messageId);
+        return true;
+    }
 }

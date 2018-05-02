@@ -53,6 +53,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
             if (Objects.isNull(deviceDataDeal)){
                 return false;
             }
+            ServiceItem.intelligentPowerService.updateOldDataStatus(getMessageId());
             ServiceItem.intelligentPowerService.save(deviceDataDeal);
         } catch (Throwable e) {
             logger.error("Execute add data to db or generate entity is error");

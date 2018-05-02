@@ -27,4 +27,9 @@ public class DeviceServiceImpl  extends BaseService implements DataService<Devic
         deviceRepository.save(deviceData);
         return true;
     }
+
+    @Override
+    public boolean updateOldDataStatus(String messageId) {
+        return false;
+    }
 }

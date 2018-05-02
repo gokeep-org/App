@@ -17,4 +17,10 @@ public class ScreenFeeMonitorServiceImpl extends BaseService implements DataServ
         screenMonitorReponsitory.save(deviceData);
         return true;
     }
+
+    @Override
+    public boolean updateOldDataStatus(String messageId) {
+        screenMonitorReponsitory.updateOldDataStatus(messageId);
+        return true;
+    }
 }

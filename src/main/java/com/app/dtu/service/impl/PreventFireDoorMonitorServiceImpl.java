@@ -18,4 +18,10 @@ public class PreventFireDoorMonitorServiceImpl extends BaseService implements Da
         preventFireDoorMonitorReponsitory.save(deviceData);
         return true;
     }
+
+    @Override
+    public boolean updateOldDataStatus(String messageId) {
+        preventFireDoorMonitorReponsitory.updateOldDataStatus(messageId);
+        return true;
+    }
 }

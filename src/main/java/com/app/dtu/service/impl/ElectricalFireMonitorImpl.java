@@ -18,4 +18,10 @@ public class ElectricalFireMonitorImpl extends BaseService implements DataServic
         electricalFireMonitorReponsitory.save(deviceData);
         return true;
     }
+
+    @Override
+    public boolean updateOldDataStatus(String messageId) {
+        electricalFireMonitorReponsitory.updateOldDataStatus(messageId);
+        return true;
+    }
 }

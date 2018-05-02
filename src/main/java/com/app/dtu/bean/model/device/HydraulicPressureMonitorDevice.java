@@ -74,6 +74,7 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
             if (Objects.isNull(deviceDataDeal)){
                 return false;
             }
+            ServiceItem.hydraulicPressureService.updateOldDataStatus(getMessageId());
             ServiceItem.hydraulicPressureService.save(deviceDataDeal);
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");

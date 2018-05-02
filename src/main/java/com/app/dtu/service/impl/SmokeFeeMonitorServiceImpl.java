@@ -18,4 +18,10 @@ public class SmokeFeeMonitorServiceImpl extends BaseService implements DataServi
         smokeFeeMonitorReponsitory.save(deviceData);
         return true;
     }
+
+    @Override
+    public boolean updateOldDataStatus(String messageId) {
+        smokeFeeMonitorReponsitory.updateOldDataStatus(messageId);
+        return true;
+    }
 }

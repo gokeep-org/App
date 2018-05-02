@@ -18,4 +18,10 @@ public class HydraulicPressureMonitorServiceImpl extends BaseService implements 
         hydraulicPressureMonitorReponsitory.save(deviceData);
         return true;
     }
+
+    @Override
+    public boolean updateOldDataStatus(String messageId) {
+        hydraulicPressureMonitorReponsitory.updateOldDataStatus(messageId);
+        return true;
+    }
 }

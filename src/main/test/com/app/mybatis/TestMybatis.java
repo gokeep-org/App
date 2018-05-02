@@ -6,7 +6,9 @@ import com.app.dtu.bean.model.DeviceTypeName;
 import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.Device;
 import com.app.dtu.bean.model.ParseToEntityAdapter;
+import com.app.dtu.bean.model.device.CombustibleGasMonitorDevice;
 import com.app.dtu.bean.model.device.MonitorManagerDevice;
+import com.app.dtu.repository.CombustibleGasMonitorReponsitory;
 import com.app.dtu.repository.DeviceRepository;
 import com.app.dtu.repository.MonitorManagerDeviceReponsitory;
 import org.junit.Test;
@@ -34,6 +36,8 @@ public class TestMybatis {
     @Autowired
     MonitorManagerDeviceReponsitory monitorManagerDeviceReponsitory;
 
+    @Autowired
+    CombustibleGasMonitorReponsitory combustibleGasMonitorReponsitory;
     @Autowired
     DeviceRepository deviceRepository;
 
@@ -64,5 +68,14 @@ public class TestMybatis {
         MonitorManagerDevice device = (MonitorManagerDevice) parseToEntityAdapter.getStorageEntity();
         monitorManagerDeviceReponsitory.save(device);
         logger.info("ok");
+    }
+
+    @Test
+    public void testCombustible(){
+        CombustibleGasMonitorDevice device = new CombustibleGasMonitorDevice();
+        device.setMessageId("1802080602000153");
+        device.setOld_flag(1);
+        combustibleGasMonitorReponsitory.updateOldDataStatus("1802080602000153");
+        logger.info("");
     }
 }

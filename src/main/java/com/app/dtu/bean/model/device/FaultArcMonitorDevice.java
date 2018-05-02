@@ -79,6 +79,7 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
             if (Objects.isNull(deviceDataDeal)){
                 return false;
             }
+            ServiceItem.faultArcMonitorService.updateOldDataStatus(getMessageId());
             ServiceItem.faultArcMonitorService.save(deviceDataDeal);
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");

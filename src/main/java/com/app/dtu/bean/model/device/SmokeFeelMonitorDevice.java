@@ -59,6 +59,7 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
             if (Objects.isNull(deviceDataDeal)){
                 return false;
             }
+            ServiceItem.somkeFeeService.updateOldDataStatus(getMessageId());
             ServiceItem.somkeFeeService.save(deviceDataDeal);
         }catch (Throwable e){
             logger.error("Execute add data to db or generate entity is error");

@@ -53,47 +53,87 @@ public class RedundancyDeviceData implements Serializable {
     private int warn16;
 
     // 正常状态
-    private Boolean yhf＿state = true;
+    private Integer yhf_state = 1;
     // 报警状态
-    private Boolean bj_state = false;
+    private Integer bj_state = 0;
     // 故障状态
-    private Boolean gz＿state = false;
+    private Integer gz_state = 0;
     // 离线状态
-    private Boolean lx＿state = false;
+    private Integer lx_state = 0;
     // 是否是老数据
-    private Boolean old＿flag = true;
+    private Integer old_flag = 0;
 
     public void buildDeviceStatus() {
         int status = message.getStatus();
         if (status == 0) {
-            yhf＿state = true;
-            bj_state = false;
-            gz＿state = false;
-            lx＿state = false;
+            yhf_state = 1;
+            bj_state = 0;
+            gz_state = 0;
+            lx_state = 0;
         } else if (status == 1) {
-            yhf＿state = false;
-            bj_state = true;
-            gz＿state = false;
-            lx＿state = false;
+            yhf_state = 0;
+            bj_state = 1;
+            gz_state = 0;
+            lx_state = 0;
         } else if (status == 2) {
-            yhf＿state = false;
-            bj_state = false;
-            gz＿state = true;
-            lx＿state = false;
+            yhf_state = 0;
+            bj_state = 0;
+            gz_state = 1;
+            lx_state = 0;
         } else if (status == 3) {
-            yhf＿state = false;
-            bj_state = true;
-            gz＿state = true;
-            lx＿state = false;
+            yhf_state = 0;
+            bj_state = 1;
+            gz_state = 1;
+            lx_state = 0;
         } else if (status == 4) {
-            yhf＿state = false;
-            bj_state = false;
-            gz＿state = false;
-            lx＿state = true;
+            yhf_state = 0;
+            bj_state = 0;
+            gz_state = 0;
+            lx_state = 1;
         }
     }
 
-//    /**
+    public Integer getYhf_state() {
+        return yhf_state;
+    }
+
+    public void setYhf_state(Integer yhf_state) {
+        this.yhf_state = yhf_state;
+    }
+
+    public Integer getBj_state() {
+        return bj_state;
+    }
+
+    public void setBj_state(Integer bj_state) {
+        this.bj_state = bj_state;
+    }
+
+    public Integer getGz_state() {
+        return gz_state;
+    }
+
+    public void setGz_state(Integer gz_state) {
+        this.gz_state = gz_state;
+    }
+
+    public Integer getLx_state() {
+        return lx_state;
+    }
+
+    public void setLx_state(Integer lx_state) {
+        this.lx_state = lx_state;
+    }
+
+    public Integer getOld_flag() {
+        return old_flag;
+    }
+
+    public void setOld_flag(Integer old_flag) {
+        this.old_flag = old_flag;
+    }
+
+    //    /**
 //     * 设备离线设置
 //     */
 //    private void buildDeviceNormalSttaus() {
@@ -400,46 +440,6 @@ public class RedundancyDeviceData implements Serializable {
         this.warn16 = warn16;
     }
 
-    public Boolean getYhf＿state() {
-        return yhf＿state;
-    }
-
-    public void setYhf＿state(Boolean yhf＿state) {
-        this.yhf＿state = yhf＿state;
-    }
-
-    public Boolean getBj_state() {
-        return bj_state;
-    }
-
-    public void setBj_state(Boolean bj_state) {
-        this.bj_state = bj_state;
-    }
-
-    public Boolean getGz＿state() {
-        return gz＿state;
-    }
-
-    public void setGz＿state(Boolean gz＿state) {
-        this.gz＿state = gz＿state;
-    }
-
-    public Boolean getLx＿state() {
-        return lx＿state;
-    }
-
-    public void setLx＿state(Boolean lx＿state) {
-        this.lx＿state = lx＿state;
-    }
-
-    public Boolean getOld＿flag() {
-        return old＿flag;
-    }
-
-    public void setOld＿flag(Boolean old＿flag) {
-        this.old＿flag = old＿flag;
-    }
-
     @Override
     public String toString() {
         return "RedundancyDeviceData{" +
@@ -466,11 +466,11 @@ public class RedundancyDeviceData implements Serializable {
                 ", warn14=" + warn14 +
                 ", warn15=" + warn15 +
                 ", warn16=" + warn16 +
-                ", yhf＿state=" + yhf＿state +
+                ", yhf_state=" + yhf_state +
                 ", bj_state=" + bj_state +
-                ", gz＿state=" + gz＿state +
-                ", lx＿state=" + lx＿state +
-                ", old＿flag=" + old＿flag +
+                ", gz_state=" + gz_state +
+                ", lx_state=" + lx_state +
+                ", old_flag=" + old_flag +
                 ", message=" + message +
                 '}';
     }

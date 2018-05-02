@@ -30,4 +30,10 @@ public class MonitorManagerDeviceServiceImpl extends BaseService implements Data
         monitorManagerDeviceReponsitory.save(deviceData);
         return true;
     }
+
+    @Override
+    public boolean updateOldDataStatus(String messageId) {
+        monitorManagerDeviceReponsitory.updateOldDataStatus(messageId);
+        return true;
+    }
 }

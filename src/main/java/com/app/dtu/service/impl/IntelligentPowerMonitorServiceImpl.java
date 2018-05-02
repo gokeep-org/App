@@ -18,4 +18,10 @@ public class IntelligentPowerMonitorServiceImpl extends BaseService implements D
         intelligentPowerMonitorReponsitory.save(deviceData);
         return true;
     }
+
+    @Override
+    public boolean updateOldDataStatus(String messageId) {
+        intelligentPowerMonitorReponsitory.updateOldDataStatus(messageId);
+        return true;
+    }
 }
