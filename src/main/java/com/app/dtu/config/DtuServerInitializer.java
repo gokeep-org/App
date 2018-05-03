@@ -7,7 +7,6 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +45,7 @@ public class DtuServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new FixedLengthFrameDecoder(6));
         */
 
-        pipeline.addLast("delimiter-frame", new DelimiterBasedFrameDecoder(20480, Unpooled.copiedBuffer(protocalFoot)));
+        pipeline.addLast("delimiter-frame", new CustomerDelimiterBasedFrameDecoder(20480, Unpooled.copiedBuffer(protocalFoot)));
         pipeline.addLast("msg-filter-handler", new DtuMsgHeaderHandler());
         pipeline.addLast("dtu-handler", new DtuServerHandler());
         if (!DtuConfig.ENABLE_KEEP_ALIVE_CONNECTION){
