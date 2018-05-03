@@ -1,6 +1,8 @@
 package com.app.dtu.bean.model;
 
 import com.app.dtu.bean.Message;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
@@ -12,6 +14,7 @@ import java.util.Date;
  */
 @MappedSuperclass
 public class RedundancyDeviceData implements Serializable {
+    private static final Logger logegr = LoggerFactory.getLogger(RedundancyDeviceData.class);
     // 设备的型号
     private String modelCode;
 
@@ -91,6 +94,7 @@ public class RedundancyDeviceData implements Serializable {
             gz_state = 0;
             lx_state = 1;
         }
+        logegr.info("Parse message status is {}", status);
     }
 
     public Integer getYhf_state() {
@@ -132,77 +136,6 @@ public class RedundancyDeviceData implements Serializable {
     public void setOld_flag(Integer old_flag) {
         this.old_flag = old_flag;
     }
-
-    //    /**
-//     * 设备离线设置
-//     */
-//    private void buildDeviceNormalSttaus() {
-//        if (warnList == 0 && controCmd != 28) {
-//            this.yhf＿state = true;
-//            return;
-//        }
-//        this.yhf＿state = false;
-//    }
-//
-//
-//    /**
-//     * 判断是否是离线
-//     *
-//     * @return
-//     */
-//    public boolean isOneline() {
-//        return controCmd != 28 ? true : false;
-//    }
-//
-//
-//    /**
-//     * 判断是离线而且存在报警
-//     *
-//     * @return
-//     */
-//    public boolean isOnlineAndExistWarnOrFault() {
-//        return isOneline() && (warnList != 0);
-//    }
-//
-//
-//    /**
-//     * 构建设备状态消息
-//     *
-//     * @param statusWarn
-//     * @param statusFault
-//     */
-//    public void buildDeviceStatus(Boolean statusWarn, Boolean statusFault) {
-//        buildDeviceNormalSttaus();
-//        buildDeviceStatusOnline();
-//        this.bj_state = statusWarn;
-//        this.gz＿state = statusFault;
-//    }
-//
-//
-//    public void buildAllIsFault() {
-//        if (isOnlineAndExistWarnOrFault()) {
-//            buildDeviceStatus(false, true);
-//        }
-//    }
-//
-//    public void buildAllIsWarn() {
-//        if (isOnlineAndExistWarnOrFault()) {
-//            buildDeviceStatus(false, true);
-//        }
-//    }
-//
-//
-//    /**
-//     * 判断是不是离线消息
-//     */
-//    private void buildDeviceStatusOnline() {
-//        if (warnList == 0 && controCmd == 28) {
-//            this.lx＿state = true;
-//            return;
-//        }
-//        this.lx＿state = false;
-//
-//    }
 
     /**
      * 解析报警列表

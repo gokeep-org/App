@@ -143,7 +143,6 @@ public class Message {
         return new Device(this);
     }
 
-
     @Override
     public String toString() {
         return "Message{" +
@@ -152,6 +151,7 @@ public class Message {
                 ", controCmd=" + controCmd +
                 ", dataLen=" + dataLen +
                 ", dataMsgs=" + dataMsgs +
+                ", status=" + status +
                 '}';
     }
 
