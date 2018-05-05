@@ -3,6 +3,7 @@ package com.app.dtu.bean;
 import com.app.dtu.bean.model.*;
 import com.app.dtu.bean.model.device.*;
 import com.app.dtu.config.DtuConfig;
+import com.app.exception.AppException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
@@ -90,14 +91,14 @@ public class Message {
         // 这里是终端代传的首选方式，也可以支持直传的方式
         if (CollectionUtils.isEmpty(LocalCache.getDeviceRelationCache())){
             logger.error("parse device code by db is error, local cache is null or nor has model");
-            return null;
+            throw new AppException("Not find devidce model num");
         }
         List<DeviceRelation> deviceRelations = LocalCache.getDeviceRelationCache().stream().filter(deviceRelation -> {
             return deviceRelation.getDevice_id().equalsIgnoreCase(id);
         }).collect(Collectors.toList());
         if (CollectionUtils.isEmpty(deviceRelations)){
             logger.error("parse device code by db is error, local cache is null or nor has model");
-            return null;
+            throw new AppException("Not find devidce model num");
         }
         return deviceRelations.get(0).getDevice_model_code();
     }
