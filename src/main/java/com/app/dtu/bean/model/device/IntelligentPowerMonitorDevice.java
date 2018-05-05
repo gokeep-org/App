@@ -57,6 +57,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
             ServiceItem.intelligentPowerService.save(deviceDataDeal);
         } catch (Throwable e) {
             logger.error("Execute add data to db or generate entity is error");
+            return false;
         }
         return true;
     }

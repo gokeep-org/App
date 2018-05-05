@@ -112,6 +112,7 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
             ServiceItem.electricalFireMonitorService.save(deviceDataDeal);
         } catch (Throwable e) {
             logger.error("Execute add data to db or generate entity is error");
+            return false;
         }
         return true;
     }
