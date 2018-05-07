@@ -24,4 +24,9 @@ public class PreventFireDoorMonitorServiceImpl extends BaseService implements Da
         preventFireDoorMonitorReponsitory.updateOldDataStatus(messageId);
         return true;
     }
+
+    @Override
+    public boolean updateOffLineData(String messageId) {
+        return false;
+    }
 }

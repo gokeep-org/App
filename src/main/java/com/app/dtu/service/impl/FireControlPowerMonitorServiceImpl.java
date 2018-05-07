@@ -24,4 +24,9 @@ public class FireControlPowerMonitorServiceImpl extends BaseService implements D
         fireControlPowerMonitorReponstory.updateOldDataStatus(messageId);
         return true;
     }
+
+    @Override
+    public boolean updateOffLineData(String messageId) {
+        return false;
+    }
 }

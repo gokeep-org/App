@@ -1,5 +1,7 @@
-package com.app.dtu.bean.model;
+package com.app.dtu.task;
 
+import com.app.dtu.bean.model.DeviceRelation;
+import com.app.dtu.bean.model.DeviceSnid;
 import com.app.dtu.config.DtuConfig;
 import com.app.dtu.repository.DeviceSnidReponsitory;
 import org.slf4j.Logger;

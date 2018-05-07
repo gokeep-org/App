@@ -24,4 +24,9 @@ public class HydraulicPressureMonitorServiceImpl extends BaseService implements 
         hydraulicPressureMonitorReponsitory.updateOldDataStatus(messageId);
         return true;
     }
+
+    @Override
+    public boolean updateOffLineData(String messageId) {
+        return false;
+    }
 }

@@ -1,5 +1,7 @@
-package com.app.dtu.bean.model;
+package com.app.dtu.task;
 
+import com.app.dtu.bean.model.Device;
+import com.app.dtu.bean.model.DeviceTypeName;
 import com.app.dtu.config.DtuConfig;
 import com.app.dtu.repository.DeviceRepository;
 import com.app.dtu.service.ServiceBeanNames;

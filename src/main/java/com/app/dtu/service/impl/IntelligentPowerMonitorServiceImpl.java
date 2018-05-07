@@ -24,4 +24,9 @@ public class IntelligentPowerMonitorServiceImpl extends BaseService implements D
         intelligentPowerMonitorReponsitory.updateOldDataStatus(messageId);
         return true;
     }
+
+    @Override
+    public boolean updateOffLineData(String messageId) {
+        return false;
+    }
 }

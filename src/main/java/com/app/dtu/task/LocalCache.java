@@ -1,5 +1,7 @@
-package com.app.dtu.bean.model;
+package com.app.dtu.task;
 
+import com.app.dtu.bean.model.DeviceRelation;
+import com.app.dtu.bean.model.DeviceTypeName;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.util.CollectionUtils;
 

@@ -36,4 +36,9 @@ public class MonitorManagerDeviceServiceImpl extends BaseService implements Data
         monitorManagerDeviceReponsitory.updateOldDataStatus(messageId);
         return true;
     }
+
+    @Override
+    public boolean updateOffLineData(String messageId) {
+        return false;
+    }
 }

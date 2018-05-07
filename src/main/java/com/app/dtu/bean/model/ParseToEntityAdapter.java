@@ -1,8 +1,12 @@
 package com.app.dtu.bean.model;
 
+import cn.networklab.requests.Requests;
+import cn.networklab.requests.core.RequestImpl;
 import com.app.dtu.bean.Message;
+import com.app.dtu.config.DtuConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 
@@ -11,6 +15,9 @@ import java.util.Objects;
  * 所有的实体类对象均实现这个接口
  */
 public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
+
+    static Requests httpClient = new RequestImpl();
+
     public Logger logger = LoggerFactory.getLogger(ParseToEntityAdapter.class);
     /**
      * 默认的解析实现，如果某一个实体有特殊的需求，那么重写execute方法即可
@@ -28,6 +35,8 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
      * 这里只需要关系和分离出来报警和故障两种情况
      */
 
+    public Message getMessage();
+
     // 校验消息
     default boolean checkMessage(Message message){
         return Objects.isNull(message);
@@ -38,6 +47,25 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
         return Objects.isNull(buildDevice());
     }
 
+    // 发送报警信息到fms系统
+    default void sendWarnInfoToFmsSystem(){
+        String request = "";
+        if (Objects.isNull(getMessage()) || getMessage().getId() != null){
+            request = String.format(DtuConfig.FMS_SYS_WARN_NOTICE_PATH, getMessage().getId());
+            if (!StringUtils.isEmpty(request)){
+                try{
+                    Message message = getMessage();
+                    if (message.getStatus() != 0){
+                        logger.info("Send warn notice url [{}] is successful",  request);
+                        httpClient.post(request);
+                    }
+                }catch (Throwable e){
+                    logger.error("Send warn notice error, cause {}", e.getMessage());
+                }
+            }
+        }
+    }
+
     // 获取实体类
     default T getStorageEntity(){
         if (checkMessage(buildMessage()) || checkDevice()){
@@ -45,6 +73,8 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
             return null;
         }
         T entity =  generateEntity(buildMessage());
+        // 这里先发送报警信息
+        sendWarnInfoToFmsSystem();
         logger.info("Parse to entity is {}", Objects.isNull(entity) ? null : entity.toString());
         return entity;
     }

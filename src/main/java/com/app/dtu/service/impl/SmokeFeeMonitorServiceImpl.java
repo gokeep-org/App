@@ -24,4 +24,9 @@ public class SmokeFeeMonitorServiceImpl extends BaseService implements DataServi
         smokeFeeMonitorReponsitory.updateOldDataStatus(messageId);
         return true;
     }
+
+    @Override
+    public boolean updateOffLineData(String messageId) {
+        return false;
+    }
 }

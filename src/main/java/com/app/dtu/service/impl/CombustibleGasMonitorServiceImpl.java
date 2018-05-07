@@ -39,4 +39,9 @@ public class CombustibleGasMonitorServiceImpl extends BaseService implements Dat
         combustibleGasMonitorReponsitory.updateOldDataStatus(messageId);
         return true;
     }
+
+    @Override
+    public boolean updateOffLineData(String messageId) {
+        return false;
+    }
 }

@@ -24,4 +24,9 @@ public class ElectricalFireMonitorImpl extends BaseService implements DataServic
         electricalFireMonitorReponsitory.updateOldDataStatus(messageId);
         return true;
     }
+
+    @Override
+    public boolean updateOffLineData(String messageId) {
+        return false;
+    }
 }

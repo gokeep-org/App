@@ -9,4 +9,5 @@ import com.app.dtu.bean.model.DeviceDataDeal;
 public interface DataService <T extends DeviceDataDeal>{
     public boolean save(T deviceData);
     public boolean updateOldDataStatus(String messageId);
+    public boolean updateOffLineData(String messageId);
 }

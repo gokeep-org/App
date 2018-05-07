@@ -1,8 +1,8 @@
 package com.app.util;
 
 import com.app.dtu.NettyServer;
-import com.app.dtu.bean.model.InitDataTask;
-import com.app.dtu.bean.model.ScheduleUpdateLocalCache;
+import com.app.dtu.task.InitDataTask;
+import com.app.dtu.task.ScheduleUpdateLocalCache;
 import com.app.dtu.service.ServiceBeanNames;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;

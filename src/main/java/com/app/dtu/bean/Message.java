@@ -3,6 +3,7 @@ package com.app.dtu.bean;
 import com.app.dtu.bean.model.*;
 import com.app.dtu.bean.model.device.*;
 import com.app.dtu.config.DtuConfig;
+import com.app.dtu.task.LocalCache;
 import com.app.exception.AppException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,10 +71,15 @@ public class Message {
     }
 
     /**
-     * 解析终端类型， 如01， 02
+     * 解析终端类型， 如01， 02, 要不要统一处理呢
      * @return
      */
     public String parseTypeCode(){
+        // 如果是代传
+        if (!StringUtils.isEmpty(this.id) && this.id.startsWith("9")){
+           return this.id.substring(8, 10);
+        }
+        // 非代传
         return this.id.substring(6, 8);
     }
 

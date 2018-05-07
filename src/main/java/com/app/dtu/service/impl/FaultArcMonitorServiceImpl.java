@@ -24,4 +24,9 @@ public class FaultArcMonitorServiceImpl extends BaseService implements DataServi
         faultArcMonitorReponsitory.updateOldDataStatus(messageId);
         return true;
     }
+
+    @Override
+    public boolean updateOffLineData(String messageId) {
+        return false;
+    }
 }
