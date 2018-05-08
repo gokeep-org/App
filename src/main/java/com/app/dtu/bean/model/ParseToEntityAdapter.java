@@ -51,7 +51,7 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
     default void sendWarnInfoToFmsSystem(){
         String request = "";
         if (Objects.isNull(getMessage()) || getMessage().getId() != null){
-            request = String.format(DtuConfig.FMS_SYS_WARN_NOTICE_PATH, getMessage().getId());
+            request = String.format(DtuConfig.FMS_SYS_WARN_NOTICE_PATH, getMessage().getId(), getMessage().parseTypeCode());
             if (!StringUtils.isEmpty(request)){
                 try{
                     Message message = getMessage();
