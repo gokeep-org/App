@@ -2,6 +2,7 @@ package com.app.dtu.task;
 
 import com.app.dtu.bean.model.DeviceRelation;
 import com.app.dtu.bean.model.DeviceTypeName;
+import com.app.dtu.config.DtuConfig;
 import com.app.dtu.service.DataService;
 import com.app.dtu.service.ServiceBeanNames;
 import com.app.dtu.service.ServiceItem;
@@ -23,7 +24,7 @@ import java.util.Objects;
 public class ScheduleOffLineDeviceUpdate {
     @Qualifier(ServiceBeanNames.INTELLIGENT_POWER_SERVICE)
 
-    @Scheduled(fixedRate = 0)
+    @Scheduled(cron = DtuConfig.LOCAL_OFF_LINE_UPDATE_CRON)
     public void updateOffLineData() {
         List<DeviceRelation> relations = LocalCache.getDeviceRelationCache();
         if (CollectionUtils.isEmpty(relations)) {
