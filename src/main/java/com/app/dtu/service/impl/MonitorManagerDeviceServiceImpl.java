@@ -38,7 +38,7 @@ public class MonitorManagerDeviceServiceImpl extends BaseService implements Data
     }
 
     @Override
-    public boolean updateOffLineData(String messageId) {
+    public boolean updateOffLineData() {
         return false;
     }
 }

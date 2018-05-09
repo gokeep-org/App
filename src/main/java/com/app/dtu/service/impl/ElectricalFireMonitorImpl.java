@@ -26,7 +26,7 @@ public class ElectricalFireMonitorImpl extends BaseService implements DataServic
     }
 
     @Override
-    public boolean updateOffLineData(String messageId) {
+    public boolean updateOffLineData() {
         return false;
     }
 }

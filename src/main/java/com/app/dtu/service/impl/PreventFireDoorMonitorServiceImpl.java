@@ -26,7 +26,7 @@ public class PreventFireDoorMonitorServiceImpl extends BaseService implements Da
     }
 
     @Override
-    public boolean updateOffLineData(String messageId) {
+    public boolean updateOffLineData() {
         return false;
     }
 }

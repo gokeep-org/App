@@ -26,7 +26,7 @@ public class HydraulicPressureMonitorServiceImpl extends BaseService implements 
     }
 
     @Override
-    public boolean updateOffLineData(String messageId) {
+    public boolean updateOffLineData() {
         return false;
     }
 }

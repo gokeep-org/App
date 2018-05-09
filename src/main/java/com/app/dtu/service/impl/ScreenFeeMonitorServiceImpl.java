@@ -25,7 +25,7 @@ public class ScreenFeeMonitorServiceImpl extends BaseService implements DataServ
     }
 
     @Override
-    public boolean updateOffLineData(String messageId) {
+    public boolean updateOffLineData() {
         return false;
     }
 }

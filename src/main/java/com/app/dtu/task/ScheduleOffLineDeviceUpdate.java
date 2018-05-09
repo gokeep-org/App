@@ -1,12 +1,10 @@
 package com.app.dtu.task;
 
-import com.app.dtu.config.DtuConfig;
 import com.app.dtu.service.DataService;
 import com.app.dtu.service.ServiceBeanNames;
 import com.app.dtu.service.ServiceItem;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Arrays;
@@ -21,7 +19,7 @@ import java.util.List;
 public class ScheduleOffLineDeviceUpdate {
     @Qualifier(ServiceBeanNames.INTELLIGENT_POWER_SERVICE)
 
-    @Scheduled(cron = DtuConfig.LOCAL_OFF_LINE_UPDATE_CRON)
+//    @Scheduled(cron = DtuConfig.LOCAL_OFF_LINE_UPDATE_CRON)
     public void updateOffLineData() {
         if (CollectionUtils.isEmpty(getDataServiceLists())) {
             return;

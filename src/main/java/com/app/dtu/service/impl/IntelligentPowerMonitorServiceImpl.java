@@ -26,7 +26,7 @@ public class IntelligentPowerMonitorServiceImpl extends BaseService implements D
     }
 
     @Override
-    public boolean updateOffLineData(String messageId) {
+    public boolean updateOffLineData() {
         return false;
     }
 }

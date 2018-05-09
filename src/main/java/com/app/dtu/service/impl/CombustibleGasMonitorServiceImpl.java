@@ -41,7 +41,8 @@ public class CombustibleGasMonitorServiceImpl extends BaseService implements Dat
     }
 
     @Override
-    public boolean updateOffLineData(String messageId) {
+    public boolean updateOffLineData() {
+
         return false;
     }
 }

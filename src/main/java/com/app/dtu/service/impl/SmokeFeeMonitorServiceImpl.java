@@ -26,7 +26,7 @@ public class SmokeFeeMonitorServiceImpl extends BaseService implements DataServi
     }
 
     @Override
-    public boolean updateOffLineData(String messageId) {
+    public boolean updateOffLineData() {
         return false;
     }
 }
