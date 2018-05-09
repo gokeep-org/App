@@ -11,11 +11,15 @@ import com.app.dtu.bean.model.device.MonitorManagerDevice;
 import com.app.dtu.repository.CombustibleGasMonitorReponsitory;
 import com.app.dtu.repository.DeviceRepository;
 import com.app.dtu.repository.MonitorManagerDeviceReponsitory;
+import com.app.dtu.service.DataService;
+import com.app.dtu.service.ServiceBeanNames;
+import com.app.dtu.util.DtuUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -38,6 +42,11 @@ public class TestMybatis {
 
     @Autowired
     CombustibleGasMonitorReponsitory combustibleGasMonitorReponsitory;
+
+    @Autowired
+    @Qualifier(ServiceBeanNames.COMBUSTIBLE_GAS_SERVICE)
+    DataService dataService;
+
     @Autowired
     DeviceRepository deviceRepository;
 
@@ -76,6 +85,18 @@ public class TestMybatis {
         device.setMessageId("1802080602000153");
         device.setOld_flag(1);
         combustibleGasMonitorReponsitory.updateOldDataStatus("1802080602000153");
+        logger.info("");
+    }
+
+    @Test
+    public void testThandNowTime(){
+        List<CombustibleGasMonitorDevice> combustibleGasMonitorDevices = combustibleGasMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getBeforeTimeFor48Hors());
+        logger.info(combustibleGasMonitorDevices.toString());
+    }
+
+    @Test
+    public void testDataSevieOffline(){
+        dataService.updateOffLineData("1802080601000152");
         logger.info("");
     }
 }

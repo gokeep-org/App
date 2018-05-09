@@ -4,9 +4,13 @@ import com.app.dtu.bean.model.device.ElectricalFireMonitorDevice;
 import com.app.dtu.repository.ElectricalFireMonitorReponsitory;
 import com.app.dtu.service.DataService;
 import com.app.dtu.service.ServiceBeanNames;
+import com.app.dtu.util.DtuUtil;
 import com.app.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
 
 @Service(ServiceBeanNames.ELECTRICAL_FIRE_SERVICE)
 public class ElectricalFireMonitorImpl extends BaseService implements DataService<ElectricalFireMonitorDevice> {
@@ -26,7 +30,20 @@ public class ElectricalFireMonitorImpl extends BaseService implements DataServic
     }
 
     @Override
-    public boolean updateOffLineData() {
-        return false;
+    public boolean updateOffLineData(String messageId) {
+        try{
+            List<ElectricalFireMonitorDevice> devices = electricalFireMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getBeforeTimeFor48Hors());
+            if (CollectionUtils.isEmpty(devices)){
+                // 加一条
+                ElectricalFireMonitorDevice device = new ElectricalFireMonitorDevice();
+                device.setMessage(device.getOfflineMessage(messageId));
+                device.generateEntity(device.getOfflineMessage(messageId));
+                updateOldDataStatus(messageId);
+                electricalFireMonitorReponsitory.save(device);
+            }
+            return true;
+        }catch (Throwable e){
+            return false;
+        }
     }
 }

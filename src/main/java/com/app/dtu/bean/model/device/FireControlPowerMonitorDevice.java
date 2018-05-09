@@ -8,6 +8,7 @@ import com.app.dtu.service.ServiceItem;
 import com.app.dtu.util.DtuUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import java.util.List;
@@ -81,6 +82,9 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
     @Override
     public FireControlPowerMonitorDevice generateEntity(Message message) {
         buildRedunancyDeviceInfo();
+        if (CollectionUtils.isEmpty(message.getDataMsgs())){
+            return this;
+        }
         for (int i = 0; i < message.getDataMsgs().size(); i++) {
             DataMsg dataMsg = message.getDataMsgs().get(i);
             List<Integer> dataMsgs = dataMsg.getDatas();

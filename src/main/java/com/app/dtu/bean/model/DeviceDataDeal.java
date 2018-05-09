@@ -10,4 +10,5 @@ public interface DeviceDataDeal{
     boolean execute();
 
 
+
 }

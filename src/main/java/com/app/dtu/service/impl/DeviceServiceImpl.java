@@ -34,7 +34,7 @@ public class DeviceServiceImpl  extends BaseService implements DataService<Devic
     }
 
     @Override
-    public boolean updateOffLineData() {
-        return false;
+    public boolean updateOffLineData(String messageId) {
+        return true;
     }
 }

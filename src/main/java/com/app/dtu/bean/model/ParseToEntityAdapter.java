@@ -2,6 +2,7 @@ package com.app.dtu.bean.model;
 
 import cn.networklab.requests.Requests;
 import cn.networklab.requests.core.RequestImpl;
+import com.app.dtu.bean.DataMsg;
 import com.app.dtu.bean.Message;
 import com.app.dtu.config.DtuConfig;
 import org.slf4j.Logger;
@@ -78,4 +79,17 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
         logger.info("Parse to entity is {}", Objects.isNull(entity) ? null : entity.toString());
         return entity;
     }
+
+    default Message getOfflineMessage(String messageId){
+        Message message = new Message();
+        message.setId(messageId);
+        message.setStatus(4);
+        message.setControCmd(28);
+        message.setDataLen(0);
+        message.setWarnList(0);
+        message.addDataMsgs(new DataMsg());
+        return message;
+    }
+
+
 }

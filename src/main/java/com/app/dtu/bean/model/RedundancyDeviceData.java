@@ -13,7 +13,7 @@ import java.util.Date;
  * 可以作为基础的数据存储被其他的设备类继承， 不是一张单独的表
  */
 @MappedSuperclass
-public class RedundancyDeviceData implements Serializable {
+public class RedundancyDeviceData implements DeviceDataDeal, Serializable{
     private static final Logger logegr = LoggerFactory.getLogger(RedundancyDeviceData.class);
     // 设备的型号
     private String modelCode;
@@ -65,6 +65,13 @@ public class RedundancyDeviceData implements Serializable {
     private Integer lx_state = 0;
     // 是否是老数据
     private Integer old_flag = 0;
+
+    public RedundancyDeviceData() {
+    }
+
+    public RedundancyDeviceData(Message message) {
+        this.message = message;
+    }
 
     public void buildDeviceStatus() {
         int status = message.getStatus();
@@ -406,5 +413,10 @@ public class RedundancyDeviceData implements Serializable {
                 ", old_flag=" + old_flag +
                 ", message=" + message +
                 '}';
+    }
+
+    @Override
+    public boolean execute() {
+        return true;
     }
 }

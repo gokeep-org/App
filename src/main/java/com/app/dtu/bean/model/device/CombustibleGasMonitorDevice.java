@@ -8,6 +8,7 @@ import com.app.dtu.service.ServiceItem;
 import com.app.dtu.util.DtuUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import java.util.List;
@@ -36,9 +37,14 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
     private Integer yhq1;
     private Integer mzq1;
 
+
+
     @Override
     public CombustibleGasMonitorDevice generateEntity(Message message) {
         buildRedunancyDeviceInfo();
+        if (CollectionUtils.isEmpty(message.getDataMsgs())){
+            return this;
+        }
         for (int i = 0; i < message.getDataMsgs().size(); i++) {
             DataMsg dataMsg = message.getDataMsgs().get(i);
             List<Integer> dataMsgs = dataMsg.getDatas();
@@ -134,5 +140,9 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
                 ", yhq1=" + yhq1 +
                 ", mzq1=" + mzq1 +
                 '}';
+    }
+
+    public CombustibleGasMonitorDevice getOfflineDeviceData(String messageId){
+        return generateEntity(getOfflineMessage(messageId));
     }
 }

@@ -25,7 +25,7 @@ public class DtuConfig {
     // 本地缓存定时任务
     public static final String LOCAL_CACHE_CRON = "0 0 0/12 * * ?";
     // 离线数据更新任务
-    public static final String LOCAL_OFF_LINE_UPDATE_CRON = "0 0/1 * * * ?";
+    public static final String LOCAL_OFF_LINE_UPDATE_CRON = "0 0 0/48 * * ?";
 
     // FMS系统路径
     public static final String FMS_SYS_API_PATH = "http://118.89.240.60:9999/FMS/V1-API";
