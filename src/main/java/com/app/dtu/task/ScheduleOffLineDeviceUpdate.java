@@ -4,9 +4,10 @@ import com.app.dtu.bean.model.DeviceRelation;
 import com.app.dtu.bean.model.DeviceTypeName;
 import com.app.dtu.config.DtuConfig;
 import com.app.dtu.service.DataService;
-import com.app.dtu.service.ServiceBeanNames;
 import com.app.dtu.service.ServiceItem;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.app.dtu.util.DtuUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.util.CollectionUtils;
@@ -22,10 +23,12 @@ import java.util.Objects;
 
 @Configuration
 public class ScheduleOffLineDeviceUpdate {
-    @Qualifier(ServiceBeanNames.INTELLIGENT_POWER_SERVICE)
+    private static final Logger logger = LoggerFactory.getLogger(ScheduleOffLineDeviceUpdate.class);
 
     @Scheduled(cron = DtuConfig.LOCAL_OFF_LINE_UPDATE_CRON)
     public void updateOffLineData() {
+        logger.info("Start execute update offline data process schedule");
+        long startTime = DtuUtil.getCurrentTimestrap();
         List<DeviceRelation> relations = LocalCache.getDeviceRelationCache();
         if (CollectionUtils.isEmpty(relations)) {
             return;
@@ -42,6 +45,8 @@ public class ScheduleOffLineDeviceUpdate {
             }
             dataService.updateOffLineData(relation.getDevice_id());
         });
+        long endTime = DtuUtil.getCurrentTimestrap();
+        logger.info("Update off line data schedule sum time is {}s, data num is {}", (endTime - startTime)/1000, relations.size());
     }
 
     public List<DataService> getDataServiceLists() {
