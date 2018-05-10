@@ -44,14 +44,28 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     private Integer umax;
     private Integer umin;
     private Integer imax;
+    private Integer ptmax;
+    private Integer ibh;
+    // 频率
+    private Integer pl;
+    //    ③包含有功功率P,无功功率Q,视在功率S,字节数4*3=12B;
+    private Integer yggl;
+    private Integer wggl;
+    private Integer szgl;
+
+    // 总功率
+    private Integer zglys;
 
 
+    // 电能
+    private Integer zxygdn;
+    private Integer zxwgdn;
 
     @Override
     public boolean execute() {
         try {
             DeviceDataDeal deviceDataDeal = getStorageEntity();
-            if (Objects.isNull(deviceDataDeal)){
+            if (Objects.isNull(deviceDataDeal)) {
                 return false;
             }
             ServiceItem.intelligentPowerService.updateOldDataStatus(getMessageId());
@@ -76,7 +90,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     @Override
     public IntelligentPowerMonitorDevice generateEntity(Message message) {
         buildRedunancyDeviceInfo();
-        if (CollectionUtils.isEmpty(message.getDataMsgs())){
+        if (CollectionUtils.isEmpty(message.getDataMsgs())) {
             return this;
         }
         for (int i = 0; i < message.getDataMsgs().size(); i++) {
@@ -95,11 +109,25 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                     st = DtuUtil.getValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02) {
                     pt = DtuUtil.getValue(dataMsgs, 0);
-                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83){
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83) {
                     umax = DtuUtil.getValue(dataMsgs, 0);
                     umin = DtuUtil.getValue(dataMsgs, 1);
-                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84){
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
                     imax = DtuUtil.getValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82) {
+                    ptmax = DtuUtil.getValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_8B) {
+                    ibh = DtuUtil.getValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_0D) {
+                    if (message.getControCmd() == 11) {
+                        pl = DtuUtil.getValue(dataMsgs, 0);
+                        yggl = DtuUtil.getValue(dataMsgs, 1);
+                        wggl = DtuUtil.getValue(dataMsgs, 2);
+                        szgl = DtuUtil.getValue(dataMsgs, 3);
+                        zglys = DtuUtil.getValue(dataMsgs, 4);
+                        szgl = DtuUtil.getValue(dataMsgs, 5);
+                        zxygdn = DtuUtil.getValue(dataMsgs, 6);
+                    }
                 }
             }
         }
@@ -207,6 +235,79 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
         this.imax = imax;
     }
 
+
+    public Integer getPtmax() {
+        return ptmax;
+    }
+
+    public void setPtmax(Integer ptmax) {
+        this.ptmax = ptmax;
+    }
+
+    public Integer getIbh() {
+        return ibh;
+    }
+
+    public void setIbh(Integer ibh) {
+        this.ibh = ibh;
+    }
+
+    public Integer getPl() {
+        return pl;
+    }
+
+    public void setPl(Integer pl) {
+        this.pl = pl;
+    }
+
+    public Integer getYggl() {
+        return yggl;
+    }
+
+    public void setYggl(Integer yggl) {
+        this.yggl = yggl;
+    }
+
+    public Integer getWggl() {
+        return wggl;
+    }
+
+    public void setWggl(Integer wggl) {
+        this.wggl = wggl;
+    }
+
+    public Integer getSzgl() {
+        return szgl;
+    }
+
+    public void setSzgl(Integer szgl) {
+        this.szgl = szgl;
+    }
+
+    public Integer getZglys() {
+        return zglys;
+    }
+
+    public void setZglys(Integer zglys) {
+        this.zglys = zglys;
+    }
+
+    public Integer getZxygdn() {
+        return zxygdn;
+    }
+
+    public void setZxygdn(Integer zxygdn) {
+        this.zxygdn = zxygdn;
+    }
+
+    public Integer getZxwgdn() {
+        return zxwgdn;
+    }
+
+    public void setZxwgdn(Integer zxwgdn) {
+        this.zxwgdn = zxwgdn;
+    }
+
     @Override
     public String toString() {
         return "IntelligentPowerMonitorDevice{" +
@@ -222,6 +323,6 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                 ", umax=" + umax +
                 ", umin=" + umin +
                 ", imax=" + imax +
-                '}';
+                '}' ;
     }
 }
