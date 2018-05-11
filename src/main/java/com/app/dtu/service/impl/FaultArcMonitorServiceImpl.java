@@ -32,7 +32,7 @@ public class FaultArcMonitorServiceImpl extends BaseService implements DataServi
     @Override
     public boolean updateOffLineData(String messageId) {
         try{
-            List<FaultArcMonitorDevice> devices = faultArcMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getBeforeTimeFor48Hors());
+            List<FaultArcMonitorDevice> devices = faultArcMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
                 // 加一条
                 FaultArcMonitorDevice device = new FaultArcMonitorDevice();

@@ -1,5 +1,6 @@
 package com.app.dtu.util;
 
+import com.app.dtu.config.DtuConfig;
 import org.springframework.util.CollectionUtils;
 
 import java.text.SimpleDateFormat;
@@ -160,7 +161,9 @@ public class DtuUtil {
      * 获取48小时之前的时间戳
      * @return
      */
-    public static long getBeforeTimeFor48Hors(){
-        return getBeforeTimeForHors(48);
+    public static long getUpdateOfflineTaskTime(){
+        return getBrforeTime(DtuConfig.LOCAL_OFF_LINE_UPDATE_BEFORE_TIME_SCAN);
     }
+
+
 }

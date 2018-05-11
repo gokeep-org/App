@@ -33,7 +33,7 @@ public class SmokeFeeMonitorServiceImpl extends BaseService implements DataServi
     @Override
     public boolean updateOffLineData(String messageId) {
         try{
-            List<SmokeFeelMonitorDevice> devices = smokeFeeMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getBeforeTimeFor48Hors());
+            List<SmokeFeelMonitorDevice> devices = smokeFeeMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
                 // 加一条
                 SmokeFeelMonitorDevice device = new SmokeFeelMonitorDevice();

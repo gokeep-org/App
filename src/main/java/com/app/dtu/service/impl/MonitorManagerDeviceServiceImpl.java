@@ -42,7 +42,7 @@ public class MonitorManagerDeviceServiceImpl extends BaseService implements Data
     @Override
     public boolean updateOffLineData(String messageId) {
         try{
-            List<MonitorManagerDevice> devices = monitorManagerDeviceReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getBeforeTimeFor48Hors());
+            List<MonitorManagerDevice> devices = monitorManagerDeviceReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
                 // 加一条
                 MonitorManagerDevice device = new MonitorManagerDevice();

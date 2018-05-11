@@ -24,8 +24,11 @@ public class DtuConfig {
 
     // 本地缓存定时任务
     public static final String LOCAL_CACHE_CRON = "0 0 0/12 * * ?";
-    // 离线数据更新任务
+    // 离线数据更新任务cron
     public static final String LOCAL_OFF_LINE_UPDATE_CRON = "0 0/14 * * * ?";
+    // 默认是0.15小时更新一次
+    public static final int LOCAL_OFF_LINE_UPDATE_BEFORE_TIME_SCAN = 250 * 3600;
+
 
     // FMS系统路径
     public static final String FMS_SYS_API_PATH = "http://118.89.240.60:9999/FMS/V1-API";
@@ -37,5 +40,6 @@ public class DtuConfig {
     public static final String cacheDbName = "fms";
     public static final String cacheUsername = "root";
     public static final String cachePassword = "qwe@w1#gg$v_";
+
 
 }

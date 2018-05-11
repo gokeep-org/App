@@ -31,7 +31,7 @@ public class ScreenFeeMonitorServiceImpl extends BaseService implements DataServ
     @Override
     public boolean updateOffLineData(String messageId) {
         try{
-            List<ScreenMonitorDevice> devices = screenMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getBeforeTimeFor48Hors());
+            List<ScreenMonitorDevice> devices = screenMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
                 // 加一条
                 ScreenMonitorDevice device = new ScreenMonitorDevice();

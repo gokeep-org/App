@@ -46,7 +46,7 @@ public class CombustibleGasMonitorServiceImpl extends BaseService implements Dat
     @Override
     public boolean updateOffLineData(String messageId) {
         try{
-            List<CombustibleGasMonitorDevice> devices = combustibleGasMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getBeforeTimeFor48Hors());
+            List<CombustibleGasMonitorDevice> devices = combustibleGasMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
                 CombustibleGasMonitorDevice device = new CombustibleGasMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));

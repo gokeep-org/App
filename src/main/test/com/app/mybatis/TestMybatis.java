@@ -90,7 +90,7 @@ public class TestMybatis {
 
     @Test
     public void testThandNowTime(){
-        List<CombustibleGasMonitorDevice> combustibleGasMonitorDevices = combustibleGasMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getBeforeTimeFor48Hors());
+        List<CombustibleGasMonitorDevice> combustibleGasMonitorDevices = combustibleGasMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getUpdateOfflineTaskTime());
         logger.info(combustibleGasMonitorDevices.toString());
     }
 
