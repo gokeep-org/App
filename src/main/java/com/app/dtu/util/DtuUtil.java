@@ -33,6 +33,11 @@ public class DtuUtil {
         }
     }
 
+    /**
+     * 16
+     * @param src
+     * @return
+     */
     public static String bytesToHexString(byte[] src){
         if (null == src || src.length == 0){
             return null;
