@@ -1,6 +1,8 @@
 package com.app.dtu.util;
 
+import com.app.dtu.bean.Message;
 import com.app.dtu.config.DtuConfig;
+import com.google.gson.Gson;
 import org.springframework.util.CollectionUtils;
 
 import java.text.SimpleDateFormat;
@@ -11,7 +13,7 @@ import java.util.List;
 public class DtuUtil {
     private DtuUtil(){}
     private static final SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
+    private static final Gson gson = new Gson();
     /**
      * 获取设备的上传数据的值根据索引位置
      * @param values
@@ -170,5 +172,9 @@ public class DtuUtil {
         return getBrforeTime(DtuConfig.LOCAL_OFF_LINE_UPDATE_BEFORE_TIME_SCAN);
     }
 
+
+    public static String getJsonByMessage(Message message){
+        return gson.toJson(message, Message.class);
+    }
 
 }

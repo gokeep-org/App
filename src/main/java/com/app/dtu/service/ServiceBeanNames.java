@@ -19,7 +19,8 @@ public class ServiceBeanNames {
 
 
     public static final String INIT_MODEL_TYPE_TABLE_DATA_SERVICE = "init_device_model_data_service";
-//    public st
-// atic final String ELECTRICAL_FIRE_MONITOR_SERVICE = "";
+
+
+    public static final String RABBITMQ_LOG_SENDER = "rabbitmq_sender_service";
 
 }

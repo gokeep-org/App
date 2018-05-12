@@ -3,6 +3,10 @@ package com.app.dtu.handlers;
 import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.DeviceDataDeal;
 import com.app.dtu.config.DtuConfig;
+import com.app.dtu.mq.Sender;
+import com.app.dtu.service.ServiceBeanNames;
+import com.app.dtu.util.DtuUtil;
+import com.app.util.ApplicationContextHolder;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -50,6 +54,7 @@ public class DtuServerHandler extends ChannelInboundHandlerAdapter {
      * 这里是关闭之前的操作最后业务处理操作应该，需要处理
      * 这里实际是封装成对象进行操作，传递给下一个pipline进行入库操作
      * 这里不再关心数据是如何存储的，只需要写设备的存储业务逻辑即可
+     *
      * @param ctx
      * @param msg
      * @throws Exception
@@ -58,12 +63,21 @@ public class DtuServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         logger.info("Netty socket server start process socket message");
         Message message = (Message) msg;
-        DeviceDataDeal deviceDataDeal = message.getDevice();
-        boolean executeResult = Objects.isNull(deviceDataDeal) ? false : deviceDataDeal.execute();
-        if (executeResult)
-            logger.info("Add device data result to db is {}", executeResult);
-        else
-            logger.error("Add device data result to db is {}", executeResult);
+        if (DtuConfig.ENABLE_MQ_MODE) {
+            try {
+                Sender mqClient = (Sender) ApplicationContextHolder.getContext().getBean(ServiceBeanNames.RABBITMQ_LOG_SENDER);
+                mqClient.send(DtuUtil.getJsonByMessage(message));
+            } catch (Throwable e) {
+                logger.error("Send message to rabbitmq is error, cause is {}", e.getMessage());
+            }
+        } else {
+            DeviceDataDeal deviceDataDeal = message.getDevice();
+            boolean executeResult = Objects.isNull(deviceDataDeal) ? false : deviceDataDeal.execute();
+            if (executeResult)
+                logger.info("Add device data result to db is {}", executeResult);
+            else
+                logger.error("Add device data result to db is {}", executeResult);
+        }
         if (!DtuConfig.ENABLE_KEEP_ALIVE_CONNECTION) {
             ctx.fireChannelRead(msg);
         }
@@ -82,4 +96,6 @@ public class DtuServerHandler extends ChannelInboundHandlerAdapter {
         logger.error("Listen socket connection {} exception, {}", incoming.remoteAddress(), cause.getMessage());
         ctx.close();
     }
+
+
 }

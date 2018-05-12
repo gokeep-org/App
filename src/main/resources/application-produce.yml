@@ -15,6 +15,13 @@ spring:
           idle-timeout: 10000
           maximum-pool-size: 10
           pool-name: hikari-pool
+  rabbitmq:
+    host: 59.110.9.17
+    port: 5672
+    username: admin
+    password: xuning!
+    listener:
+      prefetch: 1
   jpa:
     show-sql: false
     hibernate:
