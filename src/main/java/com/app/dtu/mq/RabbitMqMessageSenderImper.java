@@ -27,13 +27,13 @@ public class RabbitMqMessageSenderImper implements Sender{
     private RabbitTemplate rabbitTemplate;
 
     @Override
-    public void send(String msg) {
-        if (StringUtils.isEmpty(msg)) {
-            LOGGER.info("RabbitMQ: push to elasticsearch message is null");
+    public void send(String message) {
+        if (StringUtils.isEmpty(message)) {
+            LOGGER.info("RabbitMQ: push message is null");
         } else {
             CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
-            LOGGER.info("RabbitMQ: Send log message correlation id is: " + correlationData.getId());
-            this.rabbitTemplate.convertAndSend(DtuConfig.MQ_NAME, msg);
+            LOGGER.info("RabbitMQ: Send device message correlation id is: {}, message is [{}]",  correlationData.getId(), message);
+            this.rabbitTemplate.convertAndSend(DtuConfig.MQ_NAME, message);
         }
     }
 }

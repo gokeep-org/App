@@ -14,6 +14,7 @@ public class DtuConfig {
     public static final boolean ENABLE_KEEP_ALIVE_CONNECTION = false;
     // 是否开启队列模式，这里使用的RabbitMq, 无论启动会创建连接，用于动态修改模式
     public static final boolean ENABLE_MQ_MODE = true;
+    // 数据消息上传的消息队列名称
     public static final String MQ_NAME = "DTU_MESSAGE";
 
 
@@ -28,7 +29,7 @@ public class DtuConfig {
     public static final boolean ENABLE_BUBUG_MODE = false;
 
     // 本地缓存定时任务
-    public static final String LOCAL_CACHE_CRON = "0 0 0/12 * * ?";
+    public static final String LOCAL_CACHE_CRON = "0 0 0/4 * * ?";
     // 离线数据更新任务cron
     public static final String LOCAL_OFF_LINE_UPDATE_CRON = "0 0/14 * * * ?";
     // 默认是0.15小时更新一次
@@ -37,6 +38,7 @@ public class DtuConfig {
 
     // FMS系统路径
     public static final String FMS_SYS_API_PATH = "http://118.89.240.60:9999/FMS/V1-API";
+    // FMS报警接口路径
     public static final String FMS_SYS_WARN_NOTICE_PATH = FMS_SYS_API_PATH + "/notice/warn?id=%s&dt=%s";
 
     // 定时任务数据库更新配置信息, 以下配置是为了方便快速开发调用sql的util，目前不再使用，仅做保留
