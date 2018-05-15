@@ -32,7 +32,7 @@ public class HydraulicPressureMonitorServiceImpl extends BaseService implements 
     @Override
     public boolean updateOffLineData(String messageId) {
         try{
-            List<HydraulicPressureMonitorDevice> devices = hydraulicPressureMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getUpdateOfflineTaskTime());
+            List<HydraulicPressureMonitorDevice> devices = hydraulicPressureMonitorReponsitory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
                 // 加一条
                 HydraulicPressureMonitorDevice device = new HydraulicPressureMonitorDevice();

@@ -32,7 +32,7 @@ public class FireControlPowerMonitorServiceImpl extends BaseService implements D
     @Override
     public boolean updateOffLineData(String messageId) {
         try{
-            List<FireControlPowerMonitorDevice> devices = fireControlPowerMonitorReponstory.findByCreateDateGreaterThanEqual(DtuUtil.getUpdateOfflineTaskTime());
+            List<FireControlPowerMonitorDevice> devices = fireControlPowerMonitorReponstory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
                 // 加一条
                 FireControlPowerMonitorDevice device = new FireControlPowerMonitorDevice();

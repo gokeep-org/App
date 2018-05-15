@@ -15,5 +15,5 @@ public interface PreventFireDoorMonitorReponsitory  extends JpaRepository<Prvent
     @Query(value = "UPDATE PrventFireDoorMonitorDevice device SET device.old_flag=1 where device.messageId = :message_id")
     void updateOldDataStatus(@Param("message_id") String messageId);
 
-    List<PrventFireDoorMonitorDevice> findByCreateDateGreaterThanEqual(long time);
+    List<PrventFireDoorMonitorDevice> findByMessageIdAndCreateDateGreaterThanEqual(String messageId, long time);
 }

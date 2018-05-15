@@ -31,7 +31,7 @@ public class PreventFireDoorMonitorServiceImpl extends BaseService implements Da
     @Override
     public boolean updateOffLineData(String messageId) {
         try{
-            List<PrventFireDoorMonitorDevice> devices = preventFireDoorMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getUpdateOfflineTaskTime());
+            List<PrventFireDoorMonitorDevice> devices = preventFireDoorMonitorReponsitory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
                 // 加一条
                 PrventFireDoorMonitorDevice device = new PrventFireDoorMonitorDevice();

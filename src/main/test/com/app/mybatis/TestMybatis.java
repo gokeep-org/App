@@ -7,9 +7,11 @@ import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.Device;
 import com.app.dtu.bean.model.ParseToEntityAdapter;
 import com.app.dtu.bean.model.device.CombustibleGasMonitorDevice;
+import com.app.dtu.bean.model.device.ElectricalFireMonitorDevice;
 import com.app.dtu.bean.model.device.MonitorManagerDevice;
 import com.app.dtu.repository.CombustibleGasMonitorReponsitory;
 import com.app.dtu.repository.DeviceRepository;
+import com.app.dtu.repository.ElectricalFireMonitorReponsitory;
 import com.app.dtu.repository.MonitorManagerDeviceReponsitory;
 import com.app.dtu.service.DataService;
 import com.app.dtu.service.ServiceBeanNames;
@@ -39,6 +41,9 @@ public class TestMybatis {
 
     @Autowired
     MonitorManagerDeviceReponsitory monitorManagerDeviceReponsitory;
+
+    @Autowired
+    ElectricalFireMonitorReponsitory electricalFireMonitorReponsitory;
 
     @Autowired
     CombustibleGasMonitorReponsitory combustibleGasMonitorReponsitory;
@@ -98,5 +103,11 @@ public class TestMybatis {
     public void testDataSevieOffline(){
         dataService.updateOffLineData("1802080601000152");
         logger.info("");
+    }
+
+    @Test
+    public void testMessageAngGrantEqual(){
+        List<ElectricalFireMonitorDevice> devices = electricalFireMonitorReponsitory.findByMessageIdAndCreateDateGreaterThanEqual("180408010200000", 0);
+        logger.info(devices.toString());
     }
 }

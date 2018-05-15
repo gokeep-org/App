@@ -15,5 +15,5 @@ public interface SmokeFeeMonitorReponsitory extends JpaRepository<SmokeFeelMonit
     @Query(value = "UPDATE SmokeFeelMonitorDevice device SET device.old_flag=1 where device.messageId = :message_id")
     void updateOldDataStatus(@Param("message_id") String messageId);
 
-    List<SmokeFeelMonitorDevice> findByCreateDateGreaterThanEqual(long time);
+    List<SmokeFeelMonitorDevice> findByMessageIdAndCreateDateGreaterThanEqual(String messageId, long time);
 }

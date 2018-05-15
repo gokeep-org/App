@@ -32,7 +32,7 @@ public class IntelligentPowerMonitorServiceImpl extends BaseService implements D
     @Override
     public boolean updateOffLineData(String messageId) {
         try{
-            List<IntelligentPowerMonitorDevice> devices = intelligentPowerMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getUpdateOfflineTaskTime());
+            List<IntelligentPowerMonitorDevice> devices = intelligentPowerMonitorReponsitory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
                 // 加一条
                 IntelligentPowerMonitorDevice device = new IntelligentPowerMonitorDevice();

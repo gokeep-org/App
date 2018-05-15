@@ -15,5 +15,5 @@ public interface MonitorManagerDeviceReponsitory extends JpaRepository<MonitorMa
     @Query(value = "UPDATE MonitorManagerDevice device SET device.old_flag=1 where device.messageId = :message_id")
     void updateOldDataStatus(@Param("message_id") String messageId);
 
-    List<MonitorManagerDevice> findByCreateDateGreaterThanEqual(long time);
+    List<MonitorManagerDevice> findByMessageIdAndCreateDateGreaterThanEqual(String messageId, long time);
 }

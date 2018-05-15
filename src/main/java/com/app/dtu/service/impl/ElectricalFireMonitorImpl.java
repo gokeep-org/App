@@ -32,7 +32,7 @@ public class ElectricalFireMonitorImpl extends BaseService implements DataServic
     @Override
     public boolean updateOffLineData(String messageId) {
         try{
-            List<ElectricalFireMonitorDevice> devices = electricalFireMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getUpdateOfflineTaskTime());
+            List<ElectricalFireMonitorDevice> devices = electricalFireMonitorReponsitory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
                 // 加一条
                 ElectricalFireMonitorDevice device = new ElectricalFireMonitorDevice();

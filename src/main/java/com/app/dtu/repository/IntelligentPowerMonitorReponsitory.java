@@ -15,5 +15,5 @@ public interface IntelligentPowerMonitorReponsitory extends JpaRepository<Intell
     @Query(value = "UPDATE IntelligentPowerMonitorDevice device SET device.old_flag=1 where device.messageId = :message_id")
     void updateOldDataStatus(@Param("message_id") String messageId);
 
-    List<IntelligentPowerMonitorDevice> findByCreateDateGreaterThanEqual(long time);
+    List<IntelligentPowerMonitorDevice> findByMessageIdAndCreateDateGreaterThanEqual(String messageId, long time);
 }

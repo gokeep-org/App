@@ -15,5 +15,5 @@ public interface HydraulicPressureMonitorReponsitory  extends JpaRepository<Hydr
     @Query(value = "UPDATE HydraulicPressureMonitorDevice device SET device.old_flag=1 where device.messageId = :message_id")
     void updateOldDataStatus(@Param("message_id") String messageId);
 
-    List<HydraulicPressureMonitorDevice> findByCreateDateGreaterThanEqual(long time);
+    List<HydraulicPressureMonitorDevice> findByMessageIdAndCreateDateGreaterThanEqual(String messageId, long time);
 }
