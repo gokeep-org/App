@@ -73,6 +73,9 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
             dataMsg.setLen(result.readUnsignedByte());
             // 这个区是取出的两个
             for (int i = 0; i < dataMsg.getLen(); i += 2) {
+                if (result.readableBytes() < 2){
+                    break;
+                }
                 dataMsg.addData(result.readUnsignedShort());
             }
             message.addDataMsgs(dataMsg);
