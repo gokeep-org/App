@@ -47,6 +47,4 @@ public class DtuConfig {
     public static final String cacheDbName = "fms";
     public static final String cacheUsername = "root";
     public static final String cachePassword = "qwe@w1#gg$v_";
-
-
 }

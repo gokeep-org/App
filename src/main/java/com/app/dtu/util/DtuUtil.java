@@ -3,6 +3,8 @@ package com.app.dtu.util;
 import com.app.dtu.bean.Message;
 import com.app.dtu.config.DtuConfig;
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
 import java.text.SimpleDateFormat;
@@ -12,6 +14,7 @@ import java.util.List;
 
 public class DtuUtil {
     private DtuUtil(){}
+    private static final Logger logger = LoggerFactory.getLogger(DtuUtil.class);
     private static final SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static final Gson gson = new Gson();
     /**
@@ -44,10 +47,7 @@ public class DtuUtil {
         if (null == src || src.length == 0){
             return null;
         }
-        StringBuilder stringBuilder = new StringBuilder("");
-        if (src == null || src.length <= 0) {
-            return null;
-        }
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < src.length; i++) {
             int v = src[i] & 0xFF;
             String hv = Integer.toHexString(v);
@@ -56,6 +56,7 @@ public class DtuUtil {
             }
             stringBuilder.append(hv);
         }
+        logger.info("bate string builer lenght is {}", stringBuilder.length());
         return stringBuilder.toString();
     }
 
