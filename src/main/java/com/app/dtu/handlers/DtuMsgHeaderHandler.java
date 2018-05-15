@@ -67,13 +67,13 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
         message.setControCmd(result.readUnsignedByte());
         message.setDataLen(result.readUnsignedShort());
         // 这里取出的字节码剩余大小包含自己，如果为4那么会继续走一次，从而读取异常， 剩下的为校验码和帧尾
-        while (result.readableBytes() - 3 > 0) {
+        while (result.readableBytes() > 2) {
             DataMsg dataMsg = new DataMsg();
             dataMsg.setType(result.readUnsignedByte());
             dataMsg.setLen(result.readUnsignedByte());
             // 这个区是取出的两个
             for (int i = 0; i < dataMsg.getLen(); i += 2) {
-                if (result.readableBytes() < 2){
+                if (result.readableBytes() < 4){
                     break;
                 }
                 dataMsg.addData(result.readUnsignedShort());
