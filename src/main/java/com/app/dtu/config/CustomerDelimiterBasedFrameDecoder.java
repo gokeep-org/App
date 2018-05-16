@@ -19,21 +19,21 @@ public class CustomerDelimiterBasedFrameDecoder extends DelimiterBasedFrameDecod
 
     @Override
     protected Object decode(ChannelHandlerContext ctx, ByteBuf buffer) throws Exception {
-        byte[] logBytes = new byte[buffer.readableBytes()];
-        buffer.asReadOnly().readBytes(logBytes, 0, logBytes.length);
-        // 打印去掉包尾的原始数据
-        logger.info("Receiver decode message data is [{}]", DtuUtil.bytesToHexString(logBytes));
-        logger.info("bate decode string builer lenght is {}", logBytes.length);
+//        byte[] logBytes = new byte[buffer.readableBytes()];
+//        buffer.asReadOnly().readBytes(logBytes, 0, logBytes.length);
+//        // 打印去掉包尾的原始数据
+//        logger.info("Receiver decode message data is [{}]", DtuUtil.bytesToHexString(logBytes));
+//        logger.info("bate decode string builer lenght is {}", logBytes.length);
         return super.decode(ctx, buffer);
     }
 
     @Override
     protected void decodeLast(ChannelHandlerContext ctx, ByteBuf buffer, List<Object> out) throws Exception {
-        byte[] logBytes = new byte[buffer.readableBytes()];
-        buffer.asReadOnly().readBytes(logBytes, 0, logBytes.length);
-        // 打印去掉包尾的原始数据
-        logger.info("Receiver decodeLast message data is [{}]", DtuUtil.bytesToHexString(logBytes));
-        logger.info("bate decodeLast string builer lenght is {}", logBytes.length);
+//        byte[] logBytes = new byte[buffer.readableBytes()];
+//        buffer.asReadOnly().readBytes(logBytes, 0, logBytes.length);
+//        // 打印去掉包尾的原始数据
+//        logger.info("Receiver decodeLast message data is [{}]", DtuUtil.bytesToHexString(logBytes));
+//        logger.info("bate decodeLast string builer lenght is {}", logBytes.length);
 
         super.decodeLast(ctx, buffer, out);
     }
