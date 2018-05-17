@@ -57,7 +57,7 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
 
         Message message = new Message();
 
-        byte[] headBytes = new byte[16];
+        byte[] headBytes = new byte[result.readableBytes()];
 
         int readLen = result.readableBytes();
 
