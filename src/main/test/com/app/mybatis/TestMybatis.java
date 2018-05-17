@@ -92,12 +92,12 @@ public class TestMybatis {
         combustibleGasMonitorReponsitory.updateOldDataStatus("1802080602000153");
         logger.info("");
     }
-
-    @Test
-    public void testThandNowTime(){
-        List<CombustibleGasMonitorDevice> combustibleGasMonitorDevices = combustibleGasMonitorReponsitory.findByCreateDateGreaterThanEqual(DtuUtil.getUpdateOfflineTaskTime());
-        logger.info(combustibleGasMonitorDevices.toString());
-    }
+//
+//    @Test
+//    public void testThandNowTime(){
+//        List<CombustibleGasMonitorDevice> combustibleGasMonitorDevices = combustibleGasMonitorReponsitory.findByMessageIdAndCreateDateGreaterThanEqual(DtuUtil.getUpdateOfflineTaskTime());
+//        logger.info(combustibleGasMonitorDevices.toString());
+//    }
 
     @Test
     public void testDataSevieOffline(){
