@@ -49,7 +49,7 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
         // 打印去掉包尾的原始数据
         loggger.info("Receiver message data is [{}]", DtuUtil.bytesToHexString(logBytes));
         // 计算该消息总的数据长度
-        int len = result.readableBytes();
+        int len = logBytes.length;
         // 判断如果数据长度小于0， 那么不做处理
         if (len < Const.FIXED_LEN) {
             return;
@@ -59,8 +59,12 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
 
         byte[] headBytes = new byte[16];
 
+        int readLen = result.readableBytes();
+
+        int off=4+(readLen-len);
+
         // 先读取帧头，不做处理
-        result.readBytes(headBytes, 0, 4);
+        result.readBytes(headBytes, 0, off);
         /**
          * 用来重置到当前标记的指针位置
          * result.markReaderIndex();
