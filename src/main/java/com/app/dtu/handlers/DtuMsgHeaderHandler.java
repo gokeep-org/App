@@ -1,16 +1,20 @@
 package com.app.dtu.handlers;
 
 import com.app.dtu.bean.DataMsg;
+import com.app.dtu.bean.Header;
 import com.app.dtu.bean.Message;
 import com.app.dtu.config.Const;
 import com.app.dtu.parser.ByteUtils;
+import com.app.dtu.util.CRC;
 import com.app.dtu.util.DtuUtil;
+import com.app.dtu.util.HexString;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -20,15 +24,26 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
     private static final Logger loggger = LoggerFactory.getLogger(DtuServerHandler.class);
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         // 打印接受原始数据
 
         // 转成netty的Bytebuf对象
         ByteBuf result = (ByteBuf) msg;
+
         if (Objects.isNull(result)) {
             loggger.error("Receiver message data is null");
         }
         byte[] logBytes = new byte[result.readableBytes()];
+        String logHexString = HexString.bytesToHexString(logBytes, 0, logBytes.length);
+        String headerHexString = HexString.bytesToHexString(Header.header, 0, Header.header.length);
+        if (logHexString.indexOf(headerHexString)!=0){
+            String newLogHexString = logHexString.split(headerHexString)[1];//缺少贞头
+            logHexString=headerHexString+newLogHexString;//加上贞头
+            logBytes=HexString.hexStringToBytes(logHexString);
+        }
+
+        CRC.check(logBytes);
+
         result.asReadOnly().readBytes(logBytes, 0, logBytes.length);
         // 打印去掉包尾的原始数据
         loggger.info("Receiver message data is [{}]", DtuUtil.bytesToHexString(logBytes));
