@@ -14,7 +14,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -33,7 +32,9 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
         if (Objects.isNull(result)) {
             loggger.error("Receiver message data is null");
         }
+
         byte[] logBytes = new byte[result.readableBytes()];
+        result.asReadOnly().readBytes(logBytes, 0, logBytes.length);
         String logHexString = HexString.bytesToHexString(logBytes, 0, logBytes.length);
         String headerHexString = HexString.bytesToHexString(Header.header, 0, Header.header.length);
         if (logHexString.indexOf(headerHexString)!=0){
@@ -44,7 +45,7 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
 
         CRC.check(logBytes);
 
-        result.asReadOnly().readBytes(logBytes, 0, logBytes.length);
+
         // 打印去掉包尾的原始数据
         loggger.info("Receiver message data is [{}]", DtuUtil.bytesToHexString(logBytes));
         // 计算该消息总的数据长度

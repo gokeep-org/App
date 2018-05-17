@@ -139,19 +139,19 @@ public class CRC {
             if (Header.header[i]!=bytes[off+i])
                 throw new Exception("protocol header error-->" + HexString.bytesToHexString(bytes, off, 4));
         }
-        short length= (short)(bytes[off + 14]<<8);
-        length+=(short)(bytes[off + 15])+19;
+        short length= (short)(bytes[off + 16]<<8);
+        length+=(short)(bytes[off + 17])+20;
         // 校验长度
         if (length != len) {
-            throw new Exception("protocol length error-->" + ((short)(bytes[off + 14]<<8))+((short)bytes[off + 15]));
+            throw new Exception("protocol length error-->" + ((short)(bytes[off + 16]<<8))+((short)bytes[off + 17]));
         }
-        // 校验码
-        int sourceCrc = ((int)(bytes[len - 4]<<8))+((int)bytes[len - 3]);
-        int targetCrc = compute(bytes, off, len - 1);
-//        int targetCrc = compute2(bytes, len-1);
-        if (sourceCrc != targetCrc) {
-            throw new Exception("protocol CRC error-->" + (bytes[off + len - 1] & 0xff));
-        }
+//        // 校验码
+//        int sourceCrc = ((int)(bytes[len - 4]<<8))+((int)bytes[len - 3]);
+//        int targetCrc = compute(bytes, off, len - 1);
+////        int targetCrc = compute2(bytes, len-1);
+//        if (sourceCrc != targetCrc) {
+//            throw new Exception("protocol CRC error-->" + (bytes[off + len - 1] & 0xff));
+//        }
         return true;
     }
 
