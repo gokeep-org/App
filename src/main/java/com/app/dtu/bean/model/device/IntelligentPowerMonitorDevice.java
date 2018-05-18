@@ -116,6 +116,8 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     private String ibfft;
     private String icfft;
 
+    private Integer xbtype;
+
 
 
     @Override
@@ -153,6 +155,8 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
         List<String> gldws = new ArrayList<>();
         List<String> glvalues = new ArrayList<>();
         List<String> fxs = new ArrayList<>();
+        List<String> pfs = new ArrayList<>();
+        List<String> xbs = new ArrayList<>();
         buildRedunancyDeviceInfo();
         if (CollectionUtils.isEmpty(message.getDataMsgs())) {
             return this;
@@ -260,6 +264,95 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                         zx = DtuUtil.getIntegerValue(dataMsgs, 10) * 65536 + DtuUtil.getIntegerValue(dataMsgs, 11);
                         zxwgdn = String.valueOf(zx/ 10.00f);
 
+                    }
+                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_0F) {
+                    if (message.getControCmd() == 0x13) {
+                        xbtype = 0x13;
+                        for (int k=0; k < 32; k++){
+                            float value = DtuUtil.getIntegerValue(dataMsgs, k) / 100.00f;
+                            String xb =String.valueOf( + value) +  "%";
+                            xbs.add(xb);
+                        }
+                        logger.info("");
+                    }else if (message.getControCmd() == 0x14) {
+                        float value = DtuUtil.getIntegerValue(dataMsgs, 0) / 100.00f;
+                        ubfft =String.valueOf( + value) +  "%";
+                    }else if (message.getControCmd() == 0x15) {
+                        float value = DtuUtil.getIntegerValue(dataMsgs, 0) / 100.00f;
+                        ucfft =String.valueOf( + value) +  "%";
+                    }else if (message.getControCmd() == 0x16) {
+                        float value = DtuUtil.getIntegerValue(dataMsgs, 0) / 100.00f;
+                        iafft =String.valueOf( + value) +  "%";
+                    }else if (message.getControCmd() == 0x17) {
+                        float value = DtuUtil.getIntegerValue(dataMsgs, 0) / 100.00f;
+                        ibfft =String.valueOf( + value) +  "%";
+                    }else if (message.getControCmd() == 0x18) {
+                        float value = DtuUtil.getIntegerValue(dataMsgs, 0) / 100.00f;
+                        icfft =String.valueOf( + value) +  "%";
+                    }
+                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_0E) {
+//                        private String uaxw;
+//                        private String ubxw;
+//                        private String ucxw;
+                    uaxw =  String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 0) /10f);
+                    ubxw =  String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 1) /10f);
+                    ucxw =  String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 2) /10f);
+
+                    ubphd = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 3) /100f) + "%";
+                    iaxw =  String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 4) /10f);
+                    ibxw =  String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 5) /10f);
+                    icxw =  String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 6) /10f);
+                    ibphd = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 7) /100f) + "%";
+
+                    // 各项有功功率
+                    for (int m=0; m < 3; m++){
+                        Integer uaInt = DtuUtil.getIntegerValue(dataMsgs, m * 2 + 8);
+                        byte[] bytes = intToByte(uaInt);
+                        int fxdw = bytes[0] / 16; // 1个单位
+                        int dw = bytes[0] & 0x0F; // 1个单位
+                        if (fxdw == 0) {
+                            gldws.add("");
+                        }else{
+                            gldws.add("-");
+                        }
+
+                        int xsw = bytes[1] / 16; // 小数位
+                        int wa = (bytes[1] & 0X0F) * 65536; // 数据冗余，当数据比较大的时候
+                        dw_ua = dw == 0 ? "W" : dw == 1 ? "KW" : "MW";
+                        // TODO:变量没有定义
+
+                        int aa = DtuUtil.getIntegerValue(dataMsgs, 9 + m*2) + wa;
+                        glvalues.add(toFloatString(aa, xsw));// 电压的完整数据值
+                        gldws.add(dw_ua);
+                    }
+                    // 各项无功功率
+                    for (int m=0; m < 3; m++){
+                        Integer uaInt = DtuUtil.getIntegerValue(dataMsgs, m * 2 + 14);
+                        byte[] bytes = intToByte(uaInt);
+                        int fxdw = bytes[0] / 16; // 1个单位
+                        int dw = bytes[0] & 0x0F; // 1个单位
+                        if (fxdw == 0) {
+                            gldws.add("");
+                        }else{
+                            gldws.add("-");
+                        }
+
+                        int xsw = bytes[1] / 16; // 小数位
+                        int wa = (bytes[1] & 0X0F) * 65536; // 数据冗余，当数据比较大的时候
+                        dw_ua = dw == 0 ? "var": dw == 1 ? "Kvar" : "Mvar";
+                        // TODO:变量没有定义
+
+                        int aa = DtuUtil.getIntegerValue(dataMsgs, 15 + m*2) + wa;
+                        glvalues.add(toFloatString(aa, xsw));// 电压的完整数据值
+                        gldws.add(dw_ua);
+                    }// 各项功率因数
+                    for (int j=0; j < 3; j++){
+                        Integer uaInt = DtuUtil.getIntegerValue(dataMsgs, j + 20);
+                        byte[] bytes = intToByte(uaInt);
+                        int fxdw = bytes[0] & 0x80; // 方向
+                        String fx = fxdw == 0 ? "": "-";
+                        int wa = (bytes[0] & 0X7F) * 256 + (bytes[1] & 0xFF); // 数据冗余，当数据比较大的时候
+                        pfs.add(fx + toFloatString(wa, 3));// 电压的完整数据值
                     }
                 }
             }
