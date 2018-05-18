@@ -47,7 +47,7 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
             List<Integer> dataMsgs = dataMsg.getDatas();
             if (message.parseDeviceModelEnum() == DeviceTypeName.HYDRAULIC_PRESSURE_MONITOR_1201) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_10) {
-                    sy1 = DtuUtil.getValue(dataMsgs, 0);
+                    sy1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }
         }

@@ -34,6 +34,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     private Long id;
 
     private Integer ua;
+
     private Integer ub;
     private Integer uc;
     private Integer ia;
@@ -43,9 +44,13 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     private Integer pt;
     private Integer umax;
     private Integer umin;
+    private Integer usum;
+    private Integer isum;
+
     private Integer imax;
     private Integer ptmax;
     private Integer ibh;
+    private Integer stmax;
     // 频率
     private Integer pl;
     //    ③包含有功功率P,无功功率Q,视在功率S,字节数4*3=12B;
@@ -60,6 +65,8 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     // 电能
     private Integer zxygdn;
     private Integer zxwgdn;
+
+
 
     @Override
     public boolean execute() {
@@ -93,40 +100,42 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
         if (CollectionUtils.isEmpty(message.getDataMsgs())) {
             return this;
         }
+
+        // TODO:
         for (int i = 0; i < message.getDataMsgs().size(); i++) {
             DataMsg dataMsg = message.getDataMsgs().get(i);
             List<Integer> dataMsgs = dataMsg.getDatas();
             if (message.parseDeviceModelEnum() == DeviceTypeName.INTELLIGENT_POWER_MONITOR_0201) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_03) {
-                    ua = DtuUtil.getValue(dataMsgs, 0);
-                    ub = DtuUtil.getValue(dataMsgs, 1);
-                    uc = DtuUtil.getValue(dataMsgs, 2);
+                    ua = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    ub = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    uc = DtuUtil.getIntegerValue(dataMsgs, 2);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_04) {
-                    ia = DtuUtil.getValue(dataMsgs, 0);
-                    ib = DtuUtil.getValue(dataMsgs, 1);
-                    ic = DtuUtil.getValue(dataMsgs, 2);
+                    ia = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    ib = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    ic = DtuUtil.getIntegerValue(dataMsgs, 2);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01) {
-                    st = DtuUtil.getValue(dataMsgs, 0);
+                    st = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02) {
-                    pt = DtuUtil.getValue(dataMsgs, 0);
+                    pt = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83) {
-                    umax = DtuUtil.getValue(dataMsgs, 0);
-                    umin = DtuUtil.getValue(dataMsgs, 1);
+                    umax = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    umin = DtuUtil.getIntegerValue(dataMsgs, 1);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
-                    imax = DtuUtil.getValue(dataMsgs, 0);
+                    imax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82) {
-                    ptmax = DtuUtil.getValue(dataMsgs, 0);
+                    ptmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_8B) {
-                    ibh = DtuUtil.getValue(dataMsgs, 0);
+                    ibh = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_0D) {
                     if (message.getControCmd() == 11) {
-                        pl = DtuUtil.getValue(dataMsgs, 0);
-                        yggl = DtuUtil.getValue(dataMsgs, 1);
-                        wggl = DtuUtil.getValue(dataMsgs, 2);
-                        szgl = DtuUtil.getValue(dataMsgs, 3);
-                        zglys = DtuUtil.getValue(dataMsgs, 4);
-                        szgl = DtuUtil.getValue(dataMsgs, 5);
-                        zxygdn = DtuUtil.getValue(dataMsgs, 6);
+                        pl = DtuUtil.getIntegerValue(dataMsgs, 0);
+                        yggl = DtuUtil.getIntegerValue(dataMsgs, 1);
+                        wggl = DtuUtil.getIntegerValue(dataMsgs, 2);
+                        szgl = DtuUtil.getIntegerValue(dataMsgs, 3);
+                        zglys = DtuUtil.getIntegerValue(dataMsgs, 4);
+                        szgl = DtuUtil.getIntegerValue(dataMsgs, 5);
+                        zxygdn = DtuUtil.getIntegerValue(dataMsgs, 6);
                     }
                 }
             }

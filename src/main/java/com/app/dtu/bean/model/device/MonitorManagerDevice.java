@@ -73,17 +73,17 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
             DataMsg dataMsg = message.getDataMsgs().get(i);
             if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_80) {
                 List<Integer> dataMsgs = dataMsg.getDatas();
-                x1 = DtuUtil.getValue(dataMsgs, 0);
-                x2 = DtuUtil.getValue(dataMsgs, 1);
-                x3 = DtuUtil.getValue(dataMsgs, 2);
-                x4 = DtuUtil.getValue(dataMsgs, 3);
-                x5 = DtuUtil.getValue(dataMsgs, 4);
-                x6 = DtuUtil.getValue(dataMsgs, 5);
-                x7 = DtuUtil.getValue(dataMsgs, 6);
-                x8 = DtuUtil.getValue(dataMsgs, 7);
-                zdx = DtuUtil.getValue(dataMsgs, 8);
-                bdx = DtuUtil.getValue(dataMsgs, 9);
-                scx = DtuUtil.getValue(dataMsgs, 10);
+                x1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                x2 = DtuUtil.getIntegerValue(dataMsgs, 1);
+                x3 = DtuUtil.getIntegerValue(dataMsgs, 2);
+                x4 = DtuUtil.getIntegerValue(dataMsgs, 3);
+                x5 = DtuUtil.getIntegerValue(dataMsgs, 4);
+                x6 = DtuUtil.getIntegerValue(dataMsgs, 5);
+                x7 = DtuUtil.getIntegerValue(dataMsgs, 6);
+                x8 = DtuUtil.getIntegerValue(dataMsgs, 7);
+                zdx = DtuUtil.getIntegerValue(dataMsgs, 8);
+                bdx = DtuUtil.getIntegerValue(dataMsgs, 9);
+                scx = DtuUtil.getIntegerValue(dataMsgs, 10);
 
             }
         }

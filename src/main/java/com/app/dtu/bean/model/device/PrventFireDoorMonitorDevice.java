@@ -46,7 +46,7 @@ public class PrventFireDoorMonitorDevice extends RedundancyDeviceData implements
         for (int i = 0; i < message.getDataMsgs().size(); i++) {
             DataMsg dataMsg = message.getDataMsgs().get(i);
             List<Integer> dataMsgs = dataMsg.getDatas();
-            status = DtuUtil.getValue(dataMsgs, 0);
+            status = DtuUtil.getIntegerValue(dataMsgs, 0);
         }
         return this;
     }

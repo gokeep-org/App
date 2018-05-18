@@ -47,9 +47,9 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
             List<Integer> dataMsgs = dataMsg.getDatas();
             if (message.parseDeviceModelEnum() == DeviceTypeName.SMOKE_FEE_MONITOR_0501) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02) {
-                    pt = DtuUtil.getValue(dataMsgs, 0);
+                    pt = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_06) {
-                    y1 = DtuUtil.getValue(dataMsgs, 0);
+                    y1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }
         }

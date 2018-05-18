@@ -139,118 +139,118 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
             List<Integer> dataMsgs = dataMsg.getDatas();
             if (message.parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0101){
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_03) {
-                    ua = DtuUtil.getValue(dataMsgs, 0);
-                    ub = DtuUtil.getValue(dataMsgs, 1);
-                    uc = DtuUtil.getValue(dataMsgs, 2);
+                    ua = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    ub = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    uc = DtuUtil.getIntegerValue(dataMsgs, 2);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_04){
-                    ia = DtuUtil.getValue(dataMsgs, 0);
-                    ib = DtuUtil.getValue(dataMsgs, 1);
-                    ic = DtuUtil.getValue(dataMsgs, 2);
+                    ia = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    ib = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    ic = DtuUtil.getIntegerValue(dataMsgs, 2);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01){
-                    st = DtuUtil.getValue(dataMsgs, 0);
+                    st = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02){
-                    pt1 = DtuUtil.getValue(dataMsgs, 0);
-                    pt2 = DtuUtil.getValue(dataMsgs, 1);
-                    pt3 = DtuUtil.getValue(dataMsgs, 2);
-                    pt4 = DtuUtil.getValue(dataMsgs, 3);
+                    pt1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    pt2 = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    pt3 = DtuUtil.getIntegerValue(dataMsgs, 2);
+                    pt4 = DtuUtil.getIntegerValue(dataMsgs, 3);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83){
-                    umax1 = DtuUtil.getValue(dataMsgs, 0);
-                    umax2 = DtuUtil.getValue(dataMsgs, 1);
+                    umax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    umax2 = DtuUtil.getIntegerValue(dataMsgs, 1);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81){
-                    stmax1 = DtuUtil.getValue(dataMsgs, 0);
+                    stmax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82){
-                    ptmax1 = DtuUtil.getValue(dataMsgs, 0);
+                    ptmax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }else if (message.parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0102 ||
                     message.parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0105){
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01){
-                    st1 = DtuUtil.getValue(dataMsgs, 0);
-                    st2 = DtuUtil.getValue(dataMsgs, 1);
-                    st3 = DtuUtil.getValue(dataMsgs, 2);
-                    st4 = DtuUtil.getValue(dataMsgs, 3);
-                    st5 = DtuUtil.getValue(dataMsgs, 4);
-                    st6 = DtuUtil.getValue(dataMsgs, 5);
-                    st7 = DtuUtil.getValue(dataMsgs, 6);
-                    st8 = DtuUtil.getValue(dataMsgs, 7);
+                    st1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    st2 = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    st3 = DtuUtil.getIntegerValue(dataMsgs, 2);
+                    st4 = DtuUtil.getIntegerValue(dataMsgs, 3);
+                    st5 = DtuUtil.getIntegerValue(dataMsgs, 4);
+                    st6 = DtuUtil.getIntegerValue(dataMsgs, 5);
+                    st7 = DtuUtil.getIntegerValue(dataMsgs, 6);
+                    st8 = DtuUtil.getIntegerValue(dataMsgs, 7);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81){
-                    stmax1 = DtuUtil.getValue(dataMsgs, 0);
-                    stmax2 = DtuUtil.getValue(dataMsgs, 1);
-                    stmax3 = DtuUtil.getValue(dataMsgs, 2);
-                    stmax4 = DtuUtil.getValue(dataMsgs, 3);
-                    stmax5 = DtuUtil.getValue(dataMsgs, 4);
-                    stmax6 = DtuUtil.getValue(dataMsgs, 5);
-                    stmax7 = DtuUtil.getValue(dataMsgs, 6);
-                    stmax8 = DtuUtil.getValue(dataMsgs, 7);
+                    stmax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    stmax2 = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    stmax3 = DtuUtil.getIntegerValue(dataMsgs, 2);
+                    stmax4 = DtuUtil.getIntegerValue(dataMsgs, 3);
+                    stmax5 = DtuUtil.getIntegerValue(dataMsgs, 4);
+                    stmax6 = DtuUtil.getIntegerValue(dataMsgs, 5);
+                    stmax7 = DtuUtil.getIntegerValue(dataMsgs, 6);
+                    stmax8 = DtuUtil.getIntegerValue(dataMsgs, 7);
                 }
             }else if (message.parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0103 ||
                     message.parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0106){
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02){
-                    pt1 = DtuUtil.getValue(dataMsgs, 0);
-                    pt2 = DtuUtil.getValue(dataMsgs, 1);
-                    pt3 = DtuUtil.getValue(dataMsgs, 2);
-                    pt4 = DtuUtil.getValue(dataMsgs, 3);
-                    pt5 = DtuUtil.getValue(dataMsgs, 4);
-                    pt6 = DtuUtil.getValue(dataMsgs, 5);
-                    pt7 = DtuUtil.getValue(dataMsgs, 6);
-                    pt8 = DtuUtil.getValue(dataMsgs, 7);
+                    pt1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    pt2 = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    pt3 = DtuUtil.getIntegerValue(dataMsgs, 2);
+                    pt4 = DtuUtil.getIntegerValue(dataMsgs, 3);
+                    pt5 = DtuUtil.getIntegerValue(dataMsgs, 4);
+                    pt6 = DtuUtil.getIntegerValue(dataMsgs, 5);
+                    pt7 = DtuUtil.getIntegerValue(dataMsgs, 6);
+                    pt8 = DtuUtil.getIntegerValue(dataMsgs, 7);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82){
-                    ptmax1 = DtuUtil.getValue(dataMsgs, 0);
-                    ptmax2 = DtuUtil.getValue(dataMsgs, 1);
-                    ptmax3 = DtuUtil.getValue(dataMsgs, 2);
-                    ptmax4 = DtuUtil.getValue(dataMsgs, 3);
-                    ptmax5 = DtuUtil.getValue(dataMsgs, 4);
-                    ptmax6 = DtuUtil.getValue(dataMsgs, 5);
-                    ptmax7 = DtuUtil.getValue(dataMsgs, 6);
-                    ptmax8 = DtuUtil.getValue(dataMsgs, 7);
+                    ptmax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    ptmax2 = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    ptmax3 = DtuUtil.getIntegerValue(dataMsgs, 2);
+                    ptmax4 = DtuUtil.getIntegerValue(dataMsgs, 3);
+                    ptmax5 = DtuUtil.getIntegerValue(dataMsgs, 4);
+                    ptmax6 = DtuUtil.getIntegerValue(dataMsgs, 5);
+                    ptmax7 = DtuUtil.getIntegerValue(dataMsgs, 6);
+                    ptmax8 = DtuUtil.getIntegerValue(dataMsgs, 7);
                 }
             }else if (message.parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0104 ||
                     message.parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0107){
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01){
-                    st1 = DtuUtil.getValue(dataMsgs, 0);
-                    st2 = DtuUtil.getValue(dataMsgs, 1);
-                    st3 = DtuUtil.getValue(dataMsgs, 2);
-                    st4 = DtuUtil.getValue(dataMsgs, 3);
-                    st5 = DtuUtil.getValue(dataMsgs, 4);
-                    st6 = DtuUtil.getValue(dataMsgs, 5);
-                    st7 = DtuUtil.getValue(dataMsgs, 6);
-                    st8 = DtuUtil.getValue(dataMsgs, 7);
+                    st1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    st2 = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    st3 = DtuUtil.getIntegerValue(dataMsgs, 2);
+                    st4 = DtuUtil.getIntegerValue(dataMsgs, 3);
+                    st5 = DtuUtil.getIntegerValue(dataMsgs, 4);
+                    st6 = DtuUtil.getIntegerValue(dataMsgs, 5);
+                    st7 = DtuUtil.getIntegerValue(dataMsgs, 6);
+                    st8 = DtuUtil.getIntegerValue(dataMsgs, 7);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02){
-                    pt1 = DtuUtil.getValue(dataMsgs, 0);
-                    pt2 = DtuUtil.getValue(dataMsgs, 1);
-                    pt3 = DtuUtil.getValue(dataMsgs, 2);
-                    pt4 = DtuUtil.getValue(dataMsgs, 3);
-                    pt5 = DtuUtil.getValue(dataMsgs, 4);
-                    pt6 = DtuUtil.getValue(dataMsgs, 5);
-                    pt7 = DtuUtil.getValue(dataMsgs, 6);
-                    pt8 = DtuUtil.getValue(dataMsgs, 7);
+                    pt1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    pt2 = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    pt3 = DtuUtil.getIntegerValue(dataMsgs, 2);
+                    pt4 = DtuUtil.getIntegerValue(dataMsgs, 3);
+                    pt5 = DtuUtil.getIntegerValue(dataMsgs, 4);
+                    pt6 = DtuUtil.getIntegerValue(dataMsgs, 5);
+                    pt7 = DtuUtil.getIntegerValue(dataMsgs, 6);
+                    pt8 = DtuUtil.getIntegerValue(dataMsgs, 7);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81){
-                    stmax1 = DtuUtil.getValue(dataMsgs, 0);
-                    stmax2 = DtuUtil.getValue(dataMsgs, 1);
-                    stmax3 = DtuUtil.getValue(dataMsgs, 2);
-                    stmax4 = DtuUtil.getValue(dataMsgs, 3);
-                    stmax5 = DtuUtil.getValue(dataMsgs, 4);
-                    stmax6 = DtuUtil.getValue(dataMsgs, 5);
-                    stmax7 = DtuUtil.getValue(dataMsgs, 6);
-                    stmax8 = DtuUtil.getValue(dataMsgs, 7);
+                    stmax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    stmax2 = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    stmax3 = DtuUtil.getIntegerValue(dataMsgs, 2);
+                    stmax4 = DtuUtil.getIntegerValue(dataMsgs, 3);
+                    stmax5 = DtuUtil.getIntegerValue(dataMsgs, 4);
+                    stmax6 = DtuUtil.getIntegerValue(dataMsgs, 5);
+                    stmax7 = DtuUtil.getIntegerValue(dataMsgs, 6);
+                    stmax8 = DtuUtil.getIntegerValue(dataMsgs, 7);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82){
-                    ptmax1 = DtuUtil.getValue(dataMsgs, 0);
-                    ptmax2 = DtuUtil.getValue(dataMsgs, 1);
-                    ptmax3 = DtuUtil.getValue(dataMsgs, 2);
-                    ptmax4 = DtuUtil.getValue(dataMsgs, 3);
-                    ptmax5 = DtuUtil.getValue(dataMsgs, 4);
-                    ptmax6 = DtuUtil.getValue(dataMsgs, 5);
-                    ptmax7 = DtuUtil.getValue(dataMsgs, 6);
-                    ptmax8 = DtuUtil.getValue(dataMsgs, 7);
+                    ptmax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    ptmax2 = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    ptmax3 = DtuUtil.getIntegerValue(dataMsgs, 2);
+                    ptmax4 = DtuUtil.getIntegerValue(dataMsgs, 3);
+                    ptmax5 = DtuUtil.getIntegerValue(dataMsgs, 4);
+                    ptmax6 = DtuUtil.getIntegerValue(dataMsgs, 5);
+                    ptmax7 = DtuUtil.getIntegerValue(dataMsgs, 6);
+                    ptmax8 = DtuUtil.getIntegerValue(dataMsgs, 7);
                 }
             }else if (message.parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0108){
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01){
-                    st1 = DtuUtil.getValue(dataMsgs, 0);
+                    st1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02){
-                    pt1 = DtuUtil.getValue(dataMsgs, 0);
+                    pt1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81){
-                    stmax1 = DtuUtil.getValue(dataMsgs, 0);
+                    stmax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82){
-                    ptmax1 = DtuUtil.getValue(dataMsgs, 0);
+                    ptmax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }
         }

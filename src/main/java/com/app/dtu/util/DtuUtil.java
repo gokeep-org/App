@@ -20,7 +20,7 @@ public class DtuUtil {
      * @param index
      * @return
      */
-    public static final Integer getValue(List<Integer> values, int index){
+    public static final Integer getIntegerValue(List<Integer> values, int index){
         try{
             if (CollectionUtils.isEmpty(values)){
                 return null;
@@ -34,6 +34,7 @@ public class DtuUtil {
             return null;
         }
     }
+
 
     /**
      * 16

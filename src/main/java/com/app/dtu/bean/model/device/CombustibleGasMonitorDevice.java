@@ -50,15 +50,15 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
             List<Integer> dataMsgs = dataMsg.getDatas();
             if (message.parseDeviceModelEnum() == DeviceTypeName.COMBUSTIBLE_GAS_MONITOR_0601) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_08) {
-                    trq1 = DtuUtil.getValue(dataMsgs, 0);
+                    trq1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }else if (message.parseDeviceModelEnum() == DeviceTypeName.COMBUSTIBLE_GAS_MONITOR_0602) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_09) {
-                    yhq1 = DtuUtil.getValue(dataMsgs, 0);
+                    yhq1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }else if (message.parseDeviceModelEnum() == DeviceTypeName.COMBUSTIBLE_GAS_MONITOR_0603) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_0A) {
-                    mzq1 = DtuUtil.getValue(dataMsgs, 0);
+                    mzq1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }
         }

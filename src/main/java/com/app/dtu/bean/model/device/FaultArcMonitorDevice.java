@@ -58,18 +58,18 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
             List<Integer> dataMsgs = dataMsg.getDatas();
             if (message.parseDeviceModelEnum() == DeviceTypeName.FAULT_ARC_MONITOR_0301) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_03) {
-                    ua = DtuUtil.getValue(dataMsgs, 0);
+                    ua = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_04) {
-                    ia = DtuUtil.getValue(dataMsgs, 0);
+                    ia = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_05) {
-                    h1 = DtuUtil.getValue(dataMsgs, 0);
+                    h1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_85) {
-                    hmax = DtuUtil.getValue(dataMsgs, 0);
+                    hmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83) {
-                    umax1 = DtuUtil.getValue(dataMsgs, 0);
-                    umin1 = DtuUtil.getValue(dataMsgs, 1);
+                    umax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    umin1 = DtuUtil.getIntegerValue(dataMsgs, 1);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
-                    imax1 = DtuUtil.getValue(dataMsgs, 0);
+                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }
         }
