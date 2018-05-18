@@ -29,7 +29,7 @@ public class DtuConfig {
     public static final boolean ENABLE_BUBUG_MODE = false;
 
     // 本地缓存定时任务
-    public static final String LOCAL_CACHE_CRON = "0 0 0/4 * * ?";
+    public static final String LOCAL_CACHE_CRON = "0 0 0/1 * * ?";
     // 离线数据更新任务cron
     public static final String LOCAL_OFF_LINE_UPDATE_CRON = "0 0/14 * * * ?";
     // 默认是0.15小时更新一次
