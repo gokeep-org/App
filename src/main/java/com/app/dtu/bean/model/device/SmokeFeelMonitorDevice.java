@@ -34,7 +34,9 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer pt;
+    private Integer ptstatus;
     private Integer y1;
+    private Integer maxy1;
 
     @Override
     public SmokeFeelMonitorDevice generateEntity(Message message) {
@@ -50,6 +52,10 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
                     pt = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_06) {
                     y1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_07) {
+                    ptstatus = DtuUtil.getIntegerValue(dataMsgs, 0);
+                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_87) {
+                    maxy1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }
         }
@@ -82,6 +88,21 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
         return getMessage();
     }
 
+    public Integer getPtstatus() {
+        return ptstatus;
+    }
+
+    public void setPtstatus(Integer ptstatus) {
+        this.ptstatus = ptstatus;
+    }
+
+    public Integer getMaxy1() {
+        return maxy1;
+    }
+
+    public void setMaxy1(Integer maxy1) {
+        this.maxy1 = maxy1;
+    }
 
     public Long getId() {
         return id;
@@ -116,7 +137,9 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
         return "SmokeFeelMonitorDevice{" +
                 "id=" + id +
                 ", pt=" + pt +
+                ", ptstatus=" + ptstatus +
                 ", y1=" + y1 +
+                ", maxy1=" + maxy1 +
                 '}';
     }
 }

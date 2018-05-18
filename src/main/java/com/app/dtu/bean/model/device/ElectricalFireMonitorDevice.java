@@ -36,9 +36,9 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
     private Integer ua;
     private Integer ub;
     private Integer uc;
-    private Integer ia;
-    private Integer ib;
-    private Integer ic;
+    private String ia;
+    private String ib;
+    private String ic;
     private Integer st;
     private Integer pta;
     private Integer ptb;
@@ -144,9 +144,9 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
                     ub = DtuUtil.getIntegerValue(dataMsgs, 1);
                     uc = DtuUtil.getIntegerValue(dataMsgs, 2);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_04){
-                    ia = DtuUtil.getIntegerValue(dataMsgs, 0);
-                    ib = DtuUtil.getIntegerValue(dataMsgs, 1);
-                    ic = DtuUtil.getIntegerValue(dataMsgs, 2);
+                    ia = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 0) /10);
+                    ib = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 1) /10);
+                    ic = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 2) /10);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01){
                     st = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02){
@@ -165,6 +165,7 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
             }else if (message.parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0102 ||
                     message.parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0105){
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01){
+                    st = DtuUtil.getIntegerValue(dataMsgs, 0);
                     st1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                     st2 = DtuUtil.getIntegerValue(dataMsgs, 1);
                     st3 = DtuUtil.getIntegerValue(dataMsgs, 2);
@@ -282,27 +283,27 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
         this.uc = uc;
     }
 
-    public Integer getIa() {
+    public String getIa() {
         return ia;
     }
 
-    public void setIa(Integer ia) {
+    public void setIa(String ia) {
         this.ia = ia;
     }
 
-    public Integer getIb() {
+    public String getIb() {
         return ib;
     }
 
-    public void setIb(Integer ib) {
+    public void setIb(String ib) {
         this.ib = ib;
     }
 
-    public Integer getIc() {
+    public String getIc() {
         return ic;
     }
 
-    public void setIc(Integer ic) {
+    public void setIc(String ic) {
         this.ic = ic;
     }
 
@@ -749,9 +750,9 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
                 ", ua=" + ua +
                 ", ub=" + ub +
                 ", uc=" + uc +
-                ", ia=" + ia +
-                ", ib=" + ib +
-                ", ic=" + ic +
+                ", ia='" + ia + '\'' +
+                ", ib='" + ib + '\'' +
+                ", ic='" + ic + '\'' +
                 ", st=" + st +
                 ", pta=" + pta +
                 ", ptb=" + ptb +

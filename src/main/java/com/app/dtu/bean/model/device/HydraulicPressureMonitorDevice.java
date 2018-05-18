@@ -35,7 +35,7 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
 
     private Integer sy1;
 
-
+    private Integer maxsy1;
     @Override
     public HydraulicPressureMonitorDevice generateEntity(Message message) {
         buildRedunancyDeviceInfo();
@@ -48,6 +48,8 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
             if (message.parseDeviceModelEnum() == DeviceTypeName.HYDRAULIC_PRESSURE_MONITOR_1201) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_10) {
                     sy1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_90){
+                    maxsy1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }
         }
@@ -69,6 +71,14 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
 
     public void setSy1(Integer sy1) {
         this.sy1 = sy1;
+    }
+
+    public Integer getMaxsy1() {
+        return maxsy1;
+    }
+
+    public void setMaxsy1(Integer maxsy1) {
+        this.maxsy1 = maxsy1;
     }
 
     @Override
@@ -103,6 +113,7 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
         return "HydraulicPressureMonitorDevice{" +
                 "id=" + id +
                 ", sy1=" + sy1 +
+                ", maxsy1=" + maxsy1 +
                 '}';
     }
 }

@@ -84,7 +84,6 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
                 zdx = DtuUtil.getIntegerValue(dataMsgs, 8);
                 bdx = DtuUtil.getIntegerValue(dataMsgs, 9);
                 scx = DtuUtil.getIntegerValue(dataMsgs, 10);
-
             }
         }
         return this;
@@ -171,6 +170,71 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
         this.x8 = x8;
     }
 
+
+    public void setX1(Integer x1) {
+        this.x1 = x1;
+    }
+
+    public void setX2(Integer x2) {
+        this.x2 = x2;
+    }
+
+    public void setX3(Integer x3) {
+        this.x3 = x3;
+    }
+
+    public void setX4(Integer x4) {
+        this.x4 = x4;
+    }
+
+    public void setX5(Integer x5) {
+        this.x5 = x5;
+    }
+
+    public void setX6(Integer x6) {
+        this.x6 = x6;
+    }
+
+    public void setX7(Integer x7) {
+        this.x7 = x7;
+    }
+
+    public void setX8(Integer x8) {
+        this.x8 = x8;
+    }
+
+    public Integer getZdx() {
+        return zdx;
+    }
+
+    public void setZdx(Integer zdx) {
+        this.zdx = zdx;
+    }
+
+    public Integer getBdx() {
+        return bdx;
+    }
+
+    public void setBdx(Integer bdx) {
+        this.bdx = bdx;
+    }
+
+    public Integer getScx() {
+        return scx;
+    }
+
+    public void setScx(Integer scx) {
+        this.scx = scx;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "MonitorManagerDevice{" +
@@ -182,6 +246,9 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
                 ", x6=" + x6 +
                 ", x7=" + x7 +
                 ", x8=" + x8 +
+                ", zdx=" + zdx +
+                ", bdx=" + bdx +
+                ", scx=" + scx +
                 ", id=" + id +
                 '}';
     }

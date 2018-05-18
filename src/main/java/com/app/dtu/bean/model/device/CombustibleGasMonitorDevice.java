@@ -34,8 +34,11 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
     private Long id;
 
     private Integer trq1;
+    private Integer maxtrq1;
     private Integer yhq1;
+    private Integer maxyhq1;
     private Integer mzq1;
+    private Integer maxmzq1;
 
 
 
@@ -51,14 +54,20 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
             if (message.parseDeviceModelEnum() == DeviceTypeName.COMBUSTIBLE_GAS_MONITOR_0601) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_08) {
                     trq1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_88){
+                    maxtrq1 =  DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }else if (message.parseDeviceModelEnum() == DeviceTypeName.COMBUSTIBLE_GAS_MONITOR_0602) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_09) {
                     yhq1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_89){
+                    maxyhq1 =  DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }else if (message.parseDeviceModelEnum() == DeviceTypeName.COMBUSTIBLE_GAS_MONITOR_0603) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_0A) {
                     mzq1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_8A){
+                    maxmzq1 =  DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }
         }
@@ -132,13 +141,40 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
         this.mzq1 = mzq1;
     }
 
+    public Integer getMaxtrq1() {
+        return maxtrq1;
+    }
+
+    public void setMaxtrq1(Integer maxtrq1) {
+        this.maxtrq1 = maxtrq1;
+    }
+
+    public Integer getMaxyhq1() {
+        return maxyhq1;
+    }
+
+    public void setMaxyhq1(Integer maxyhq1) {
+        this.maxyhq1 = maxyhq1;
+    }
+
+    public Integer getMaxmzq1() {
+        return maxmzq1;
+    }
+
+    public void setMaxmzq1(Integer maxmzq1) {
+        this.maxmzq1 = maxmzq1;
+    }
+
     @Override
     public String toString() {
         return "CombustibleGasMonitorDevice{" +
                 "id=" + id +
                 ", trq1=" + trq1 +
+                ", maxtrq1=" + maxtrq1 +
                 ", yhq1=" + yhq1 +
+                ", maxyhq1=" + maxyhq1 +
                 ", mzq1=" + mzq1 +
+                ", maxmzq1=" + maxmzq1 +
                 '}';
     }
 

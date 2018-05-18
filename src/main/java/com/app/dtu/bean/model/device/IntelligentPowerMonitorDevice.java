@@ -472,6 +472,101 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
         return byteNum;
     }
 
+    @Override
+    public String toString() {
+        return "IntelligentPowerMonitorDevice{" +
+                "id=" + id +
+                ", ua='" + ua + '\'' +
+                ", dw_ua='" + dw_ua + '\'' +
+                ", ub='" + ub + '\'' +
+                ", dw_ub='" + dw_ub + '\'' +
+                ", uc='" + uc + '\'' +
+                ", dw_uc='" + dw_uc + '\'' +
+                ", ia='" + ia + '\'' +
+                ", dw_ia='" + dw_ia + '\'' +
+                ", ib='" + ib + '\'' +
+                ", dw_ib='" + dw_ib + '\'' +
+                ", ic='" + ic + '\'' +
+                ", dw_ic='" + dw_ic + '\'' +
+                ", st=" + st +
+                ", pt=" + pt +
+                ", umax=" + umax +
+                ", umin=" + umin +
+                ", usum='" + usum + '\'' +
+                ", isum='" + isum + '\'' +
+                ", imax=" + imax +
+                ", ptmax=" + ptmax +
+                ", ibh=" + ibh +
+                ", stmax=" + stmax +
+                ", pl='" + pl + '\'' +
+                ", yggl='" + yggl + '\'' +
+                ", dw_yggl='" + dw_yggl + '\'' +
+                ", wggl='" + wggl + '\'' +
+                ", dw_wggl='" + dw_wggl + '\'' +
+                ", szgl='" + szgl + '\'' +
+                ", dw_szgl='" + dw_szgl + '\'' +
+                ", zglys='" + zglys + '\'' +
+                ", zxygdn='" + zxygdn + '\'' +
+                ", zxwgdn='" + zxwgdn + '\'' +
+                ", uaxw='" + uaxw + '\'' +
+                ", ubxw='" + ubxw + '\'' +
+                ", ucxw='" + ucxw + '\'' +
+                ", ubphd='" + ubphd + '\'' +
+                ", ibphd='" + ibphd + '\'' +
+                ", iaxw='" + iaxw + '\'' +
+                ", ibxw='" + ibxw + '\'' +
+                ", icxw='" + icxw + '\'' +
+                ", pa='" + pa + '\'' +
+                ", dw_pa='" + dw_pa + '\'' +
+                ", pb='" + pb + '\'' +
+                ", dw_pb='" + dw_pb + '\'' +
+                ", pc='" + pc + '\'' +
+                ", dw_pc='" + dw_pc + '\'' +
+                ", qa='" + qa + '\'' +
+                ", dw_qa='" + dw_qa + '\'' +
+                ", qb='" + qb + '\'' +
+                ", dw_qb='" + dw_qb + '\'' +
+                ", qc='" + qc + '\'' +
+                ", dw_qc='" + dw_qc + '\'' +
+                ", pfa='" + pfa + '\'' +
+                ", pfb='" + pfb + '\'' +
+                ", pfc='" + pfc + '\'' +
+                ", xbtype=" + xbtype +
+                ", xb2='" + xb2 + '\'' +
+                ", xb3='" + xb3 + '\'' +
+                ", xb4='" + xb4 + '\'' +
+                ", xb5='" + xb5 + '\'' +
+                ", xb6='" + xb6 + '\'' +
+                ", xb7='" + xb7 + '\'' +
+                ", xb8='" + xb8 + '\'' +
+                ", xb9='" + xb9 + '\'' +
+                ", xb10='" + xb10 + '\'' +
+                ", xb11='" + xb11 + '\'' +
+                ", xb12='" + xb12 + '\'' +
+                ", xb13='" + xb13 + '\'' +
+                ", xb14='" + xb14 + '\'' +
+                ", xb15='" + xb15 + '\'' +
+                ", xb16='" + xb16 + '\'' +
+                ", xb17='" + xb17 + '\'' +
+                ", xb18='" + xb18 + '\'' +
+                ", xb19='" + xb19 + '\'' +
+                ", xb20='" + xb20 + '\'' +
+                ", xb21='" + xb21 + '\'' +
+                ", xb22='" + xb22 + '\'' +
+                ", xb23='" + xb23 + '\'' +
+                ", xb24='" + xb24 + '\'' +
+                ", xb25='" + xb25 + '\'' +
+                ", xb26='" + xb26 + '\'' +
+                ", xb27='" + xb27 + '\'' +
+                ", xb28='" + xb28 + '\'' +
+                ", xb29='" + xb29 + '\'' +
+                ", xb30='" + xb30 + '\'' +
+                ", xb31='" + xb31 + '\'' +
+                ", xb32='" + xb32 + '\'' +
+                ", xb33='" + xb33 + '\'' +
+                '}';
+    }
+
     /**
      * //                    // TODO: 分成各1个byte位
      //                    byte[] bytes = intToByte(uaInt);
