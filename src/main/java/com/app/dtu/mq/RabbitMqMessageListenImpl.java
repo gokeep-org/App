@@ -27,7 +27,6 @@ public class RabbitMqMessageListenImpl implements Receiver {
     private static final Gson serialize = new Gson();
 
     @Override
-    @Async
     @RabbitHandler
     public void process(String message) {
         if (StringUtils.isEmpty(message)) {
