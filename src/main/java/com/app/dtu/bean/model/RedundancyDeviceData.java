@@ -162,7 +162,7 @@ public class RedundancyDeviceData implements DeviceDataDeal, Serializable{
         warn9 = (warnList & (256)) == 0 ? 0 : 1;
         warn10 = (warnList & (512)) == 0 ? 0 : 1;
         warn11 = (warnList & (1024)) == 0 ? 0 : 1;
-        warn12 = (warnList & (2018)) == 0 ? 0 : 1;
+        warn12 = (warnList & (2048)) == 0 ? 0 : 1;
         warn13 = (warnList & (4096)) == 0 ? 0 : 1;
         warn14 = (warnList & (8192)) == 0 ? 0 : 1;
         warn15 = (warnList & (16384)) == 0 ? 0 : 1;

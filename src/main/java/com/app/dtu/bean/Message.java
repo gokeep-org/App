@@ -63,6 +63,10 @@ public class Message {
         return dataMsgs;
     }
 
+    public void setDataMsgs(List<DataMsg> dataMsgs) {
+        this.dataMsgs = dataMsgs;
+    }
+
     public void addDataMsgs(DataMsg dataMsg) {
         if (dataMsgs == null){
             dataMsgs = new ArrayList<>();

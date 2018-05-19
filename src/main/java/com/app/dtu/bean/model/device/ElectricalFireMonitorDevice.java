@@ -73,6 +73,7 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
     private Integer umax7;
     private Integer umax8;
 
+    private Integer imax;
     private Integer imax1;
     private Integer imax2;
     private Integer imax3;
@@ -144,9 +145,9 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
                     ub = DtuUtil.getIntegerValue(dataMsgs, 1);
                     uc = DtuUtil.getIntegerValue(dataMsgs, 2);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_04){
-                    ia = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 0) /10);
-                    ib = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 1) /10);
-                    ic = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 2) /10);
+                    ia = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 0) /10.0f);
+                    ib = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 1) /10.0f);
+                    ic = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 2) /10.0f);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01){
                     st = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02){
@@ -161,6 +162,8 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
                     stmax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82){
                     ptmax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84){
+                   imax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }else if (message.parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0102 ||
                     message.parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0105){

@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,8 +21,8 @@ import java.util.Objects;
  */
 
 @Entity
-@Table(name = DtuConfig.DTU_TABLE_PRIFIX +"fire_control_power_monitor_device")
-public class FireControlPowerMonitorDevice  extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<FireControlPowerMonitorDevice> {
+@Table(name = DtuConfig.DTU_TABLE_PRIFIX + "fire_control_power_monitor_device")
+public class FireControlPowerMonitorDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<FireControlPowerMonitorDevice> {
 
     private static final Logger logger = LoggerFactory.getLogger(FireControlPowerMonitorDevice.class);
 
@@ -48,16 +50,18 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
     private Integer ua;
     private Integer ub;
     private Integer uc;
-    private Integer ia;
-    private Integer ib;
-    private Integer ic;
-
-    private Integer ia1;
-    private Integer ib1;
-    private Integer ic1;
-    private Integer ia2;
-    private Integer ib2;
-    private Integer ic2;
+    private String ia;
+    private String ib;
+    private String ic;
+    // 电流变比
+    private Integer ibb1;
+    private Integer ibb2;
+    private String ia1;
+    private String ib1;
+    private String ic1;
+    private String ia2;
+    private String ib2;
+    private String ic2;
 
     private Integer ua3;
     private Integer ub3;
@@ -78,12 +82,19 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
     private Integer stmax;
 
 
-
     @Override
     public FireControlPowerMonitorDevice generateEntity(Message message) {
         buildRedunancyDeviceInfo();
-        if (CollectionUtils.isEmpty(message.getDataMsgs())){
+        if (CollectionUtils.isEmpty(message.getDataMsgs())) {
             return this;
+        }
+        // TODO: 把变比放到最前面， 调整到每一个设备类型中操作
+        if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0402){
+            message.setDataMsgs(setFirstValue(message.getDataMsgs(), 4));
+        }else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0403){
+            message.setDataMsgs(setFirstValue(message.getDataMsgs(), 2));
+        } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0404){
+            message.setDataMsgs(setFirstValue(message.getDataMsgs(), 4));
         }
         for (int i = 0; i < message.getDataMsgs().size(); i++) {
             DataMsg dataMsg = message.getDataMsgs().get(i);
@@ -95,7 +106,7 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
                     uc1 = DtuUtil.getIntegerValue(dataMsgs, 2);
                     ua2 = DtuUtil.getIntegerValue(dataMsgs, 3);
                     ub2 = DtuUtil.getIntegerValue(dataMsgs, 4);
-                    ub3 = DtuUtil.getIntegerValue(dataMsgs, 5);
+                    uc2 = DtuUtil.getIntegerValue(dataMsgs, 5);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01) {
                     st = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02) {
@@ -113,21 +124,51 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
                     ua = DtuUtil.getIntegerValue(dataMsgs, 0);
                     ub = DtuUtil.getIntegerValue(dataMsgs, 1);
                     uc = DtuUtil.getIntegerValue(dataMsgs, 2);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_8B) {
+                    ibb1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01) {
                     st = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02) {
                     pt = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_04) {
-                    ia = DtuUtil.getIntegerValue(dataMsgs, 0);
-                    ib = DtuUtil.getIntegerValue(dataMsgs, 1);
-                    ic = DtuUtil.getIntegerValue(dataMsgs, 2);
+
+                    float temIa =( DtuUtil.getIntegerValue(dataMsgs, 0) * ibb1 )/ 1000f;
+                    if (temIa < 10) {
+                        ia = getFloatString(temIa, 3);
+                    } else if (temIa >= 10 && temIa < 100) {
+                        ia = getFloatString(temIa, 2);
+                    } else if (temIa >= 100 && temIa < 1000) {
+                        ia = getFloatString(temIa, 1);
+                    } else {
+                        ia = String.valueOf(temIa);
+                    }
+                    float temIb = (DtuUtil.getIntegerValue(dataMsgs, 1) * ibb1) / 1000f;
+                    if (temIb < 10) {
+                        ib = getFloatString(temIb, 3);
+                    } else if (temIb >= 10 && temIb < 100) {
+                        ib = getFloatString(temIb, 2);
+                    } else if (temIb >= 100 && temIb < 1000) {
+                        ib = getFloatString(temIb, 1);
+                    } else {
+                        ib = String.valueOf(temIb);
+                    }
+                    float temIc = (DtuUtil.getIntegerValue(dataMsgs, 2) * ibb1) / 1000f;
+                    if (temIc < 10) {
+                        ic = getFloatString(temIc, 3);
+                    } else if (temIc >= 10 && temIc < 100) {
+                        ic = getFloatString(temIc, 2);
+                    } else if (temIc >= 100 && temIc < 1000) {
+                        ic = getFloatString(temIc, 1);
+                    } else {
+                        ic = String.valueOf(temIc);
+                    }
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83) {
                     umax = DtuUtil.getIntegerValue(dataMsgs, 0);
                     umin = DtuUtil.getIntegerValue(dataMsgs, 1);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
                     stmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
-                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0) * ibb1;
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82) {
                     ptmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
@@ -136,18 +177,21 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
                     st = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02) {
                     pt = DtuUtil.getIntegerValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_8B) {
+                    ibb1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    ibb2 = DtuUtil.getIntegerValue(dataMsgs, 1);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_04) {
-                    ia1 = DtuUtil.getIntegerValue(dataMsgs, 0);
-                    ib1 = DtuUtil.getIntegerValue(dataMsgs, 1);
-                    ic1 = DtuUtil.getIntegerValue(dataMsgs, 2);
-                    ia2 = DtuUtil.getIntegerValue(dataMsgs, 3);
-                    ib2 = DtuUtil.getIntegerValue(dataMsgs, 4);
-                    ic2 = DtuUtil.getIntegerValue(dataMsgs, 5);
-                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
+                    ia1 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 0), ibb1);
+                    ib1 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 1), ibb1);
+                    ic1 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 2), ibb1);
+                    ia2 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 3), ibb2);
+                    ib2 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 4), ibb2);
+                    ic2 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 5), ibb2);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
                     stmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
-                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
-                    imax2 = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0) * ibb1;
+                    imax2 = DtuUtil.getIntegerValue(dataMsgs, 1) * ibb2;
                     imax3 = DtuUtil.getIntegerValue(dataMsgs, 2);
                     imax4 = DtuUtil.getIntegerValue(dataMsgs, 3);
                     imax5 = DtuUtil.getIntegerValue(dataMsgs, 4);
@@ -158,15 +202,18 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
             } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0404) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01) {
                     st = DtuUtil.getIntegerValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_8B) {
+                    ibb1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    ibb2 = DtuUtil.getIntegerValue(dataMsgs, 1);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02) {
                     pt = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_04) {
-                    ia1 = DtuUtil.getIntegerValue(dataMsgs, 0);
-                    ib1 = DtuUtil.getIntegerValue(dataMsgs, 1);
-                    ic1 = DtuUtil.getIntegerValue(dataMsgs, 2);
-                    ia2 = DtuUtil.getIntegerValue(dataMsgs, 3);
-                    ib2 = DtuUtil.getIntegerValue(dataMsgs, 4);
-                    ic2 = DtuUtil.getIntegerValue(dataMsgs, 5);
+                    ia1 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 0), ibb1);
+                    ib1 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 1), ibb1);
+                    ic1 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 2), ibb1);
+                    ia2 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 3), ibb2);
+                    ib2 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 4), ibb2);
+                    ic2 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 5), ibb2);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_03) {
                     ua1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                     ub1 = DtuUtil.getIntegerValue(dataMsgs, 1);
@@ -180,8 +227,8 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
                     stmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
-                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
-                    imax2 = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0) *ibb1;
+                    imax2 = DtuUtil.getIntegerValue(dataMsgs, 1) *ibb2;
                     imax3 = DtuUtil.getIntegerValue(dataMsgs, 2);
                     imax4 = DtuUtil.getIntegerValue(dataMsgs, 3);
                     imax5 = DtuUtil.getIntegerValue(dataMsgs, 4);
@@ -192,15 +239,18 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
             } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0405) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01) {
                     st = DtuUtil.getIntegerValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_8B) {
+                    ibb1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    ibb2 = DtuUtil.getIntegerValue(dataMsgs, 1);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02) {
                     pt = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_04) {
-                    ia1 = DtuUtil.getIntegerValue(dataMsgs, 0);
-                    ib1 = DtuUtil.getIntegerValue(dataMsgs, 1);
-                    ic1 = DtuUtil.getIntegerValue(dataMsgs, 2);
-                    ia2 = DtuUtil.getIntegerValue(dataMsgs, 3);
-                    ib2 = DtuUtil.getIntegerValue(dataMsgs, 4);
-                    ic2 = DtuUtil.getIntegerValue(dataMsgs, 5);
+                    ia1 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 0), ibb1);
+                    ib1 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 1), ibb1);
+                    ic1 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 2), ibb1);
+                    ia2 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 3), ibb2);
+                    ib2 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 4), ibb2);
+                    ic2 = getValidIValue(DtuUtil.getIntegerValue(dataMsgs, 5), ibb2);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_03) {
                     ua1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                     ub1 = DtuUtil.getIntegerValue(dataMsgs, 1);
@@ -220,8 +270,8 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
                     stmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
-                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
-                    imax2 = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0) * ibb1;
+                    imax2 = DtuUtil.getIntegerValue(dataMsgs, 1) * ibb2;
                     imax3 = DtuUtil.getIntegerValue(dataMsgs, 2);
                     imax4 = DtuUtil.getIntegerValue(dataMsgs, 3);
                     imax5 = DtuUtil.getIntegerValue(dataMsgs, 4);
@@ -244,14 +294,14 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
 
     @Override
     public boolean execute() {
-        try{
+        try {
             DeviceDataDeal deviceDataDeal = getStorageEntity();
-            if (Objects.isNull(deviceDataDeal)){
+            if (Objects.isNull(deviceDataDeal)) {
                 return false;
             }
             ServiceItem.fireControlPowerService.updateOldDataStatus(getMessageId());
             ServiceItem.fireControlPowerService.save(deviceDataDeal);
-        }catch (Throwable e){
+        } catch (Throwable e) {
             logger.error("Execute add data to db or generate entity is error");
             return false;
         }
@@ -269,259 +319,39 @@ public class FireControlPowerMonitorDevice  extends RedundancyDeviceData impleme
     }
 
 
-
-    public static Logger getLogger() {
-        return logger;
+    public String getFloatString(float value, int n) {
+        BigDecimal b = new BigDecimal(value);
+        return String.valueOf(b.setScale(n, BigDecimal.ROUND_HALF_UP).floatValue());
     }
 
-    public Integer getUa1() {
-        return ua1;
+    /**
+     * 获取变比数据电流
+     *
+     * @param bb
+     * @return
+     */
+    public String getValidIValue(Integer var, int bb) {
+        float temI = (var * bb) / 1000f;
+        String value = "0";
+        if (temI < 10) {
+            value = getFloatString(temI, 3);
+        } else if (temI >= 10 && temI < 100) {
+            value = getFloatString(temI, 2);
+        } else if (temI >= 100 && temI < 1000) {
+            value = getFloatString(temI, 1);
+        } else {
+            value = String.valueOf(temI);
+        }
+        return value;
     }
 
-    public void setUa1(Integer ua1) {
-        this.ua1 = ua1;
+    public static List<DataMsg>  setFirstValue(List<DataMsg> dataMsgs, int index){
+        List<DataMsg> finalDataMsgs = new ArrayList<>();
+        finalDataMsgs.add(dataMsgs.get(index));
+        dataMsgs.stream().forEach(dataMsg -> {
+            finalDataMsgs.add(dataMsg);
+        });
+        return finalDataMsgs;
     }
 
-    public Integer getUb1() {
-        return ub1;
-    }
-
-    public void setUb1(Integer ub1) {
-        this.ub1 = ub1;
-    }
-
-    public Integer getUc1() {
-        return uc1;
-    }
-
-    public void setUc1(Integer uc1) {
-        this.uc1 = uc1;
-    }
-
-    public Integer getUa2() {
-        return ua2;
-    }
-
-    public void setUa2(Integer ua2) {
-        this.ua2 = ua2;
-    }
-
-    public Integer getUb2() {
-        return ub2;
-    }
-
-    public void setUb2(Integer ub2) {
-        this.ub2 = ub2;
-    }
-
-    public Integer getUc2() {
-        return uc2;
-    }
-
-    public void setUc2(Integer uc2) {
-        this.uc2 = uc2;
-    }
-
-    public Integer getSt() {
-        return st;
-    }
-
-    public void setSt(Integer st) {
-        this.st = st;
-    }
-
-    public Integer getPt() {
-        return pt;
-    }
-
-    public void setPt(Integer pt) {
-        this.pt = pt;
-    }
-
-    public Integer getUa() {
-        return ua;
-    }
-
-    public void setUa(Integer ua) {
-        this.ua = ua;
-    }
-
-    public Integer getUb() {
-        return ub;
-    }
-
-    public void setUb(Integer ub) {
-        this.ub = ub;
-    }
-
-    public Integer getUc() {
-        return uc;
-    }
-
-    public void setUc(Integer uc) {
-        this.uc = uc;
-    }
-
-    public Integer getIa() {
-        return ia;
-    }
-
-    public void setIa(Integer ia) {
-        this.ia = ia;
-    }
-
-    public Integer getIb() {
-        return ib;
-    }
-
-    public void setIb(Integer ib) {
-        this.ib = ib;
-    }
-
-    public Integer getIc() {
-        return ic;
-    }
-
-    public void setIc(Integer ic) {
-        this.ic = ic;
-    }
-
-    public Integer getIa1() {
-        return ia1;
-    }
-
-    public void setIa1(Integer ia1) {
-        this.ia1 = ia1;
-    }
-
-    public Integer getIb1() {
-        return ib1;
-    }
-
-    public void setIb1(Integer ib1) {
-        this.ib1 = ib1;
-    }
-
-    public Integer getIc1() {
-        return ic1;
-    }
-
-    public void setIc1(Integer ic1) {
-        this.ic1 = ic1;
-    }
-
-    public Integer getIa2() {
-        return ia2;
-    }
-
-    public void setIa2(Integer ia2) {
-        this.ia2 = ia2;
-    }
-
-    public Integer getIb2() {
-        return ib2;
-    }
-
-    public void setIb2(Integer ib2) {
-        this.ib2 = ib2;
-    }
-
-    public Integer getIc2() {
-        return ic2;
-    }
-
-    public void setIc2(Integer ic2) {
-        this.ic2 = ic2;
-    }
-
-    public Integer getUa3() {
-        return ua3;
-    }
-
-    public void setUa3(Integer ua3) {
-        this.ua3 = ua3;
-    }
-
-    public Integer getUb3() {
-        return ub3;
-    }
-
-    public void setUb3(Integer ub3) {
-        this.ub3 = ub3;
-    }
-
-    public Integer getUc3() {
-        return uc3;
-    }
-
-    public void setUc3(Integer uc3) {
-        this.uc3 = uc3;
-    }
-
-    public Integer getUa4() {
-        return ua4;
-    }
-
-    public void setUa4(Integer ua4) {
-        this.ua4 = ua4;
-    }
-
-    public Integer getUb4() {
-        return ub4;
-    }
-
-    public void setUb4(Integer ub4) {
-        this.ub4 = ub4;
-    }
-
-    public Integer getUc4() {
-        return uc4;
-    }
-
-    public void setUc4(Integer uc4) {
-        this.uc4 = uc4;
-    }
-
-    @Override
-    public String toString() {
-        return "FireControlPowerMonitorDevice{" +
-                "id=" + id +
-                ", ua1=" + ua1 +
-                ", ub1=" + ub1 +
-                ", uc1=" + uc1 +
-                ", ua2=" + ua2 +
-                ", ub2=" + ub2 +
-                ", uc2=" + uc2 +
-                ", st=" + st +
-                ", pt=" + pt +
-                ", ua=" + ua +
-                ", ub=" + ub +
-                ", uc=" + uc +
-                ", ia=" + ia +
-                ", ib=" + ib +
-                ", ic=" + ic +
-                ", ia1=" + ia1 +
-                ", ib1=" + ib1 +
-                ", ic1=" + ic1 +
-                ", ia2=" + ia2 +
-                ", ib2=" + ib2 +
-                ", ic2=" + ic2 +
-                ", ua3=" + ua3 +
-                ", ub3=" + ub3 +
-                ", uc3=" + uc3 +
-                ", ua4=" + ua4 +
-                ", ub4=" + ub4 +
-                ", uc4=" + uc4 +
-                ", umax=" + umax +
-                ", umin=" + umin +
-                ", imax1=" + imax1 +
-                ", imax2=" + imax2 +
-                ", imax3=" + imax3 +
-                ", imax4=" + imax4 +
-                ", imax5=" + imax5 +
-                ", imax6=" + imax6 +
-                ", ptmax=" + ptmax +
-                ", stmax=" + stmax +
-                '}';
-    }
 }
