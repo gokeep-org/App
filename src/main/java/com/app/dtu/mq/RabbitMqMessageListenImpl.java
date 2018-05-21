@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -50,7 +49,7 @@ public class RabbitMqMessageListenImpl implements Receiver {
             else
                 logger.error("Add device data result to db is {}", executeResult);
         }catch (Throwable e){
-            logger.error("Parse device messa");
+            logger.error("Parse device message is error", e.getMessage());
         }
 
     }

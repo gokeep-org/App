@@ -12,16 +12,23 @@ spring:
     password: qwe@w1#gg$v_
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
-          idle-timeout: 10000
+          idle-timeout: 6000
           maximum-pool-size: 10
           pool-name: hikari-pool
+          connection-timeout: 6000
   rabbitmq:
     host: 59.110.9.17
     port: 5672
     username: admin
     password: xuning!
     listener:
-      prefetch: 1
+      prefetch: 10
+      retry:
+        enabled: true
+      transaction-size: 1
+    cache:
+      connection:
+        size: 50000
   jpa:
     show-sql: false
     hibernate:
