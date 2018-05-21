@@ -46,7 +46,7 @@ public class DtuResDestroyHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         Channel incoming = ctx.channel();
-        logger.error("Listen socket connection {} exception, {}", incoming.remoteAddress(), cause.getMessage());
+        logger.error("Listen socket connection {} exception, {}， cause is： {}", incoming.remoteAddress(), cause.getMessage(), cause.getCause());
         ctx.close();
     }
 }
