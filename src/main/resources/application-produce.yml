@@ -23,12 +23,7 @@ spring:
     password: xuning!
     listener:
       prefetch: 10
-      retry:
-        enabled: true
       transaction-size: 1
-    cache:
-      connection:
-        size: 50000
   jpa:
     show-sql: false
     hibernate:

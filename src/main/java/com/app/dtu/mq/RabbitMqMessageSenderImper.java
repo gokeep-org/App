@@ -28,12 +28,17 @@ public class RabbitMqMessageSenderImper implements Sender{
 
     @Override
     public void send(String message) {
-        if (StringUtils.isEmpty(message)) {
-            LOGGER.info("RabbitMQ: push message is null");
-        } else {
-            CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
-            LOGGER.info("RabbitMQ: Send device message correlation id is: {}, message is [{}]",  correlationData.getId(), message);
-            this.rabbitTemplate.convertAndSend(DtuConfig.MQ_NAME, message);
+        try{
+            if (StringUtils.isEmpty(message)) {
+                LOGGER.info("RabbitMQ: push message is null");
+            } else {
+                CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
+                LOGGER.info("RabbitMQ: Send device message correlation id is: {}, message is [{}]",  correlationData.getId(), message);
+                this.rabbitTemplate.convertAndSend(DtuConfig.MQ_NAME, message);
+            }
+        }catch (Throwable e){
+            LOGGER.error("RabbitMQ: Send message to dtu queue is error,cause is {}", e.getMessage());
         }
+
     }
 }
