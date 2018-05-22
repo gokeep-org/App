@@ -151,10 +151,10 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01){
                     st = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02){
-                    pt1 = DtuUtil.getIntegerValue(dataMsgs, 0);
-                    pt2 = DtuUtil.getIntegerValue(dataMsgs, 1);
-                    pt3 = DtuUtil.getIntegerValue(dataMsgs, 2);
-                    pt4 = DtuUtil.getIntegerValue(dataMsgs, 3);
+                    pta = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    ptb = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    ptc = DtuUtil.getIntegerValue(dataMsgs, 2);
+                    ptn = DtuUtil.getIntegerValue(dataMsgs, 3);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83){
                     umax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                     umax2 = DtuUtil.getIntegerValue(dataMsgs, 1);
