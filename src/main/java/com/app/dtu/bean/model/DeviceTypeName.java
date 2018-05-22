@@ -146,6 +146,6 @@ public enum DeviceTypeName {
             }
             return false;
         }).collect(Collectors.toList());
-        return CollectionUtils.isEmpty(deviceTypeNames) && deviceTypeNames.size() > 0 ? null : deviceTypeNames.get(0);
+        return CollectionUtils.isEmpty(deviceTypeNames) ? null : deviceTypeNames.get(0);
     }
 }
