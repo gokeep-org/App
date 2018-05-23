@@ -63,7 +63,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     private String usum;
     private String isum;
 
-    private Integer imax;
+    private String imax;
     private String dw_imax;
     private Integer ptmax;
     private Integer ibh;
@@ -274,8 +274,9 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                     umax = DtuUtil.getIntegerValue(dataMsgs, 0);
                     umin = DtuUtil.getIntegerValue(dataMsgs, 1);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
-                    imax = (DtuUtil.getIntegerValue(dataMsgs, 0) * ibh)/1000;
-                    dw_imax = imax < 1000? "A":"KA";
+                    float imaxValue  = (DtuUtil.getIntegerValue(dataMsgs, 0) * ibh)/1000;
+                    imax = String.valueOf(imaxValue);
+                    dw_imax = imaxValue < 1000? "A":"KA";
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82) {
                     ptmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_8B) {
