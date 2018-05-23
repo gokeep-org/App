@@ -72,8 +72,8 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
 
     private Integer umax;
     private Integer umin;
-    private Integer imax1;
-    private Integer imax2;
+    private String imax1;
+    private String imax2;
     private Integer imax3;
     private Integer imax4;
     private Integer imax5;
@@ -117,7 +117,7 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
                     stmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
-                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    imax1 = String.valueOf((DtuUtil.getIntegerValue(dataMsgs, 0) * ibb1)/1000f);
                 }
             } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0402) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_03) {
@@ -168,7 +168,7 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
                     stmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
-                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0) * ibb1;
+                    imax1 = String.valueOf((DtuUtil.getIntegerValue(dataMsgs, 0) * ibb1)/1000f);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82) {
                     ptmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
@@ -190,8 +190,8 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
                     stmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
-                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0) * ibb1;
-                    imax2 = DtuUtil.getIntegerValue(dataMsgs, 1) * ibb2;
+                    imax1 = String.valueOf((DtuUtil.getIntegerValue(dataMsgs, 0) * ibb1)/1000.f);
+                    imax2 = String.valueOf((DtuUtil.getIntegerValue(dataMsgs, 1) * ibb2) /1000.f);
                     imax3 = DtuUtil.getIntegerValue(dataMsgs, 2);
                     imax4 = DtuUtil.getIntegerValue(dataMsgs, 3);
                     imax5 = DtuUtil.getIntegerValue(dataMsgs, 4);
@@ -227,8 +227,8 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
                     stmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
-                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0) *ibb1;
-                    imax2 = DtuUtil.getIntegerValue(dataMsgs, 1) *ibb2;
+                    imax1 = String.valueOf((DtuUtil.getIntegerValue(dataMsgs, 0) *ibb1) / 1000.f);
+                    imax2 = String.valueOf((DtuUtil.getIntegerValue(dataMsgs, 1) *ibb2 /1000.f));
                     imax3 = DtuUtil.getIntegerValue(dataMsgs, 2);
                     imax4 = DtuUtil.getIntegerValue(dataMsgs, 3);
                     imax5 = DtuUtil.getIntegerValue(dataMsgs, 4);
@@ -270,8 +270,8 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_81) {
                     stmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
-                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0) * ibb1;
-                    imax2 = DtuUtil.getIntegerValue(dataMsgs, 1) * ibb2;
+                    imax1 = String.valueOf((DtuUtil.getIntegerValue(dataMsgs, 0) * ibb1) /1000.f);
+                    imax2 = String.valueOf((DtuUtil.getIntegerValue(dataMsgs, 1) * ibb2) /1000.f);
                     imax3 = DtuUtil.getIntegerValue(dataMsgs, 2);
                     imax4 = DtuUtil.getIntegerValue(dataMsgs, 3);
                     imax5 = DtuUtil.getIntegerValue(dataMsgs, 4);
