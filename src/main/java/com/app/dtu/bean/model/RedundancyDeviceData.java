@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 可以作为基础的数据存储被其他的设备类继承， 不是一张单独的表
@@ -175,7 +174,7 @@ public class RedundancyDeviceData implements DeviceDataDeal, Serializable{
      */
     public void buildRedunancyDeviceInfo() {
         setMessageId(message.getId());
-        setCreateDate(new Date().getTime());
+        setCreateDate(message.getCreateTime());
         setModelCode(message.parseModelCode());
         setControCmd(message.getControCmd());
         setDataLen(message.getDataLen());

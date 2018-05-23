@@ -100,6 +100,8 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
             }
             message.addDataMsgs(dataMsg);
         }
+        // 设置当前的创建时间
+        message.setCreateTime(System.currentTimeMillis());
         // 释放字节码流
         result.release();
         loggger.info("Parse data to message is {}", Objects.isNull(message) ? null : message.toString());

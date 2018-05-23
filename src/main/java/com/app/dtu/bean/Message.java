@@ -27,6 +27,16 @@ public class Message {
     private int dataLen;
     private List<DataMsg> dataMsgs;
     private int status;
+    private long createTime;
+
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
+
     public String getId() {
         return id;
     }
