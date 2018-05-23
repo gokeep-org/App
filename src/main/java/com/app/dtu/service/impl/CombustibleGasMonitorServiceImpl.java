@@ -48,10 +48,11 @@ public class CombustibleGasMonitorServiceImpl extends BaseService implements Dat
         try{
             List<CombustibleGasMonitorDevice> devices = combustibleGasMonitorReponsitory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
+                updateOldDataStatus(messageId);
                 CombustibleGasMonitorDevice device = new CombustibleGasMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
-                updateOldDataStatus(messageId);
+
                 combustibleGasMonitorReponsitory.save(device);
             }
             return true;

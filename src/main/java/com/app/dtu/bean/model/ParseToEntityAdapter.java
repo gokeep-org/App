@@ -5,6 +5,7 @@ import cn.networklab.requests.core.RequestImpl;
 import com.app.dtu.bean.DataMsg;
 import com.app.dtu.bean.Message;
 import com.app.dtu.config.DtuConfig;
+import com.app.dtu.util.DtuUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -87,6 +88,7 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
         message.setControCmd(28);
         message.setDataLen(0);
         message.setWarnList(0);
+        message.setCreateTime(DtuUtil.getCurrentTimestrap());
         message.addDataMsgs(new DataMsg());
         return message;
     }

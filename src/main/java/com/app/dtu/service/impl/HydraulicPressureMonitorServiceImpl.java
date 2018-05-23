@@ -34,11 +34,11 @@ public class HydraulicPressureMonitorServiceImpl extends BaseService implements 
         try{
             List<HydraulicPressureMonitorDevice> devices = hydraulicPressureMonitorReponsitory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
+                updateOldDataStatus(messageId);
                 // 加一条
                 HydraulicPressureMonitorDevice device = new HydraulicPressureMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
-                updateOldDataStatus(messageId);
                 hydraulicPressureMonitorReponsitory.save(device);
             }
             return true;

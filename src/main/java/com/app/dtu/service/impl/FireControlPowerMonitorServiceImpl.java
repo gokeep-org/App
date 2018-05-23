@@ -34,11 +34,11 @@ public class FireControlPowerMonitorServiceImpl extends BaseService implements D
         try{
             List<FireControlPowerMonitorDevice> devices = fireControlPowerMonitorReponstory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
+                updateOldDataStatus(messageId);
                 // 加一条
                 FireControlPowerMonitorDevice device = new FireControlPowerMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
-                updateOldDataStatus(messageId);
                 fireControlPowerMonitorReponstory.save(device);
             }
             return true;

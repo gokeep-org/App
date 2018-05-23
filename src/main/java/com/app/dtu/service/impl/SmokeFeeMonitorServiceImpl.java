@@ -35,11 +35,12 @@ public class SmokeFeeMonitorServiceImpl extends BaseService implements DataServi
         try{
             List<SmokeFeelMonitorDevice> devices = smokeFeeMonitorReponsitory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
+                updateOldDataStatus(messageId);
                 // 加一条
                 SmokeFeelMonitorDevice device = new SmokeFeelMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
-                updateOldDataStatus(messageId);
+
                 smokeFeeMonitorReponsitory.save(device);
             }
             return true;

@@ -34,11 +34,11 @@ public class FaultArcMonitorServiceImpl extends BaseService implements DataServi
         try{
             List<FaultArcMonitorDevice> devices = faultArcMonitorReponsitory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
+                updateOldDataStatus(messageId);
                 // 加一条
                 FaultArcMonitorDevice device = new FaultArcMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
-                updateOldDataStatus(messageId);
                 faultArcMonitorReponsitory.save(device);
             }
             return true;

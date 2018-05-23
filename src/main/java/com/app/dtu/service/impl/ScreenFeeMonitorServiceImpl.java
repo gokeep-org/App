@@ -33,11 +33,12 @@ public class ScreenFeeMonitorServiceImpl extends BaseService implements DataServ
         try{
             List<ScreenMonitorDevice> devices = screenMonitorReponsitory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
+                updateOldDataStatus(messageId);
                 // 加一条
                 ScreenMonitorDevice device = new ScreenMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
-                updateOldDataStatus(messageId);
+
                 screenMonitorReponsitory.save(device);
             }
             return true;

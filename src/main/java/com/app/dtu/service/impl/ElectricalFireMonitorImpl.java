@@ -34,11 +34,11 @@ public class ElectricalFireMonitorImpl extends BaseService implements DataServic
         try{
             List<ElectricalFireMonitorDevice> devices = electricalFireMonitorReponsitory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
+                updateOldDataStatus(messageId);
                 // 加一条
                 ElectricalFireMonitorDevice device = new ElectricalFireMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
-                updateOldDataStatus(messageId);
                 electricalFireMonitorReponsitory.save(device);
             }
             return true;

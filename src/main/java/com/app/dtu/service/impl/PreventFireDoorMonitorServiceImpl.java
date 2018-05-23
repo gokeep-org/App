@@ -33,11 +33,11 @@ public class PreventFireDoorMonitorServiceImpl extends BaseService implements Da
         try{
             List<PrventFireDoorMonitorDevice> devices = preventFireDoorMonitorReponsitory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
+                updateOldDataStatus(messageId);
                 // 加一条
                 PrventFireDoorMonitorDevice device = new PrventFireDoorMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
-                updateOldDataStatus(messageId);
                 preventFireDoorMonitorReponsitory.save(device);
             }
             return true;

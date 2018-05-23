@@ -34,11 +34,11 @@ public class IntelligentPowerMonitorServiceImpl extends BaseService implements D
         try{
             List<IntelligentPowerMonitorDevice> devices = intelligentPowerMonitorReponsitory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
+                updateOldDataStatus(messageId);
                 // 加一条
                 IntelligentPowerMonitorDevice device = new IntelligentPowerMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
-                updateOldDataStatus(messageId);
                 intelligentPowerMonitorReponsitory.save(device);
             }
             return true;

@@ -44,11 +44,12 @@ public class MonitorManagerDeviceServiceImpl extends BaseService implements Data
         try{
             List<MonitorManagerDevice> devices = monitorManagerDeviceReponsitory.findByMessageIdAndCreateDateGreaterThanEqual(messageId, DtuUtil.getUpdateOfflineTaskTime());
             if (CollectionUtils.isEmpty(devices)){
+                updateOldDataStatus(messageId);
                 // 加一条
                 MonitorManagerDevice device = new MonitorManagerDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
-                updateOldDataStatus(messageId);
+
                 monitorManagerDeviceReponsitory.save(device);
             }
             return true;
