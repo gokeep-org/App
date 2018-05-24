@@ -166,6 +166,9 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     @Override
     public boolean execute() {
         try {
+            if (getControCmd() != 0x11 && getControCmd() != 0x12) {
+                IntelligentPowerMonitorHarmonic harmonicDevice = new IntelligentPowerMonitorHarmonic();
+            }
             DeviceDataDeal deviceDataDeal = getStorageEntity();
             if (Objects.isNull(deviceDataDeal)) {
                 return false;
@@ -480,6 +483,17 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
         return byteNum;
     }
 
+
+
+    public static List<DataMsg>  setFirstValue(List<DataMsg> dataMsgs, int index){
+        List<DataMsg> finalDataMsgs = new ArrayList<>();
+        finalDataMsgs.add(dataMsgs.get(index));
+        dataMsgs.stream().forEach(dataMsg -> {
+            finalDataMsgs.add(dataMsg);
+        });
+        return finalDataMsgs;
+    }
+
     @Override
     public String toString() {
         return "IntelligentPowerMonitorDevice{" +
@@ -503,6 +517,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                 ", usum='" + usum + '\'' +
                 ", isum='" + isum + '\'' +
                 ", imax=" + imax +
+                ", dw_imax='" + dw_imax + '\'' +
                 ", ptmax=" + ptmax +
                 ", ibh=" + ibh +
                 ", stmax=" + stmax +
@@ -574,39 +589,6 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                 ", xb33='" + xb33 + '\'' +
                 '}';
     }
-
-    public static List<DataMsg>  setFirstValue(List<DataMsg> dataMsgs, int index){
-        List<DataMsg> finalDataMsgs = new ArrayList<>();
-        finalDataMsgs.add(dataMsgs.get(index));
-        dataMsgs.stream().forEach(dataMsg -> {
-            finalDataMsgs.add(dataMsg);
-        });
-        return finalDataMsgs;
-    }
-    /**
-     * //                    // TODO: 分成各1个byte位
-     //                    byte[] bytes = intToByte(uaInt);
-     //                    int fxdw = bytes[0]; // 1个单位
-     //                    int xsw = bytes[1] / 16; // 小数位
-     //                    int wa = (bytes[1] & 0X0F) * 65536; // 数据冗余，当数据比较大的时候
-     //                    dw_ua = fxdw == 0 ? "V" : "KV";
-     //                    int aa = DtuUtil.getIntegerValue(dataMsgs, 1) + wa;
-     //                    ua = toFloatString(aa, xsw);// 电压的完整数据值
-     //
-     //                    Integer ubInt = DtuUtil.getIntegerValue(dataMsgs, 2);
-     //                    // TODO: 分成各1个byte位
-     //                    byte[] bytes1 = intToByte(ubInt);
-     //                    int fxdw1 = bytes1[0]; // 1个单位
-     //                    int xsw1 = bytes1[1] >> 4; // 小数位
-     //                    int wa1 = (bytes1[1] & 0X0F) * 65536; // 数据冗余，当数据比较大的时候
-     //                    dw_ub = fxdw1 == 0 ? "V" : "KV";
-     //                    int aa1 = DtuUtil.getIntegerValue(dataMsgs, 3) + wa1;
-     //                    ub = toFloatString(aa1, xsw1);// 电压的完整数据值
-     //
-     //                    ua = DtuUtil.getIntegerValue(dataMsgs, 1);
-     //                    uc = DtuUtil.getIntegerValue(dataMsgs, 2);
-     // 电流
-     */
 }
 
 
