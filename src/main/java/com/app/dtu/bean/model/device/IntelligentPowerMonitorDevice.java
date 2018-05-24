@@ -166,9 +166,9 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     @Override
     public boolean execute() {
         try {
-            if (getControCmd() != 0x11 && getControCmd() != 0x12) {
-                IntelligentPowerMonitorHarmonic harmonicDevice = new IntelligentPowerMonitorHarmonic();
-            }
+//            if (getControCmd() != 0x11 && getControCmd() != 0x12) {
+//                IntelligentPowerMonitorHarmonic harmonicDevice = new IntelligentPowerMonitorHarmonic();
+//            }
             DeviceDataDeal deviceDataDeal = getStorageEntity();
             if (Objects.isNull(deviceDataDeal)) {
                 return false;
