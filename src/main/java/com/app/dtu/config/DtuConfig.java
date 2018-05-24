@@ -1,5 +1,10 @@
 package com.app.dtu.config;
 
+import com.app.dtu.bean.model.DeviceTypeName;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class DtuConfig {
 
     // 是否启动socket监听服务
@@ -34,7 +39,10 @@ public class DtuConfig {
     public static final String LOCAL_OFF_LINE_UPDATE_CRON = "0 0/15 * * * ?";
     // 0 0 0/1 * * ? 1小时更新1次
     public static final int LOCAL_OFF_LINE_UPDATE_BEFORE_TIME_SCAN = 1000 * 60 * 15;
-
+    // PID时间更新间隔，确保特殊情况下是哪一次发送的数据
+    public static final long PID_UPDATE_TIME = 1000 * 60;
+    // Dtu-Config的更新设备列表
+    public static final List<DeviceTypeName> updateDeviceTypes = new ArrayList<>();
 
     // FMS系统路径
     public static final String FMS_SYS_API_PATH = "http://118.89.240.60:9999/FMS/V1-API";
@@ -47,4 +55,8 @@ public class DtuConfig {
     public static final String cacheDbName = "fms";
     public static final String cacheUsername = "root";
     public static final String cachePassword = "qwe@w1#gg$v_";
+
+    static {
+        updateDeviceTypes.add(DeviceTypeName.INTELLIGENT_POWER_MONITOR_0201);
+    }
 }

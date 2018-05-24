@@ -1,8 +1,10 @@
 package com.app.dtu.task;
 
+import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.DeviceRelation;
 import com.app.dtu.bean.model.DeviceTypeName;
-import org.springframework.scheduling.annotation.Async;
+import com.app.dtu.bean.model.PID;
+import com.app.dtu.config.DtuConfig;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -19,16 +21,37 @@ public class LocalCache {
     // 设备关系缓存，每隔1小时自动更新一次
     private static List<DeviceRelation> deviceRelationCache = new ArrayList<>();
 
+    private static List<PID> pidList = new ArrayList<>();
+
+
     public static List<DeviceRelation> getDeviceRelationCache() {
         return deviceRelationCache;
     }
 
+    public void setPid(PID pid){
+        long existCount = pidList.stream().filter(pidObj -> {
+            if (pidObj.getMessageId().equalsIgnoreCase(pid.getMessageId())){
+                return true;
+            }
+            return false;
+        }).count();
+        if (existCount <= 0){
+            pidList.add(pid);
+        }
+    }
+
+    public String getPid(Message message){
+        if (DtuConfig.updateDeviceTypes.contains(getDeviceModelEnumByDeviceId(message.getId()))){
+            // 执行擦做
+            return "";
+        }
+        return null;
+    }
 
     /**
      * 设备关系缓存实现, 每想个一定的时间去更新这个缓存
      * @param updateResult
      */
-    @Async
     public static void updateDeviceRelation(List<DeviceRelation> updateResult){
         deviceRelationCache.clear();
         deviceRelationCache.addAll(updateResult);
