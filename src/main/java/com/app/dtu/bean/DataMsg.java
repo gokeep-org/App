@@ -30,6 +30,17 @@ public class DataMsg {
         return datas;
     }
 
+    // 特殊场景下的time包
+    public Long time;
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
+    }
+
     public void addData(Integer data) {
         if (CollectionUtils.isEmpty(datas)){
             datas = new ArrayList<>();

@@ -17,7 +17,8 @@ spring:
           pool-name: hikari-pool
           connection-timeout: 8000
   rabbitmq:
-    host: 59.110.9.17
+#    host: 59.110.9.17
+    host: 114.116.23.218
     port: 5672
     username: admin
     password: xuning!
