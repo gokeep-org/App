@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class DtuUtil {
     private DtuUtil(){}
@@ -175,4 +176,8 @@ public class DtuUtil {
         return gson.toJson(message, Message.class);
     }
 
+
+    public static String toJson(Object object){
+        return Objects.isNull(object) ? null : gson.toJson(object);
+    }
 }

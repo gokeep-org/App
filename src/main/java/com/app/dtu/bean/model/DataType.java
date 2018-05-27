@@ -35,7 +35,13 @@ public enum DataType {
     DATA_TYPE_89(0x89, "液化气报警阈值"),
     DATA_TYPE_8A(0x8A, "煤制气报警阈值"),
     DATA_TYPE_8B(0x8B, "电流变比值"),
-    DATA_TYPE_90(0x90, "水压报警阈值");
+    DATA_TYPE_90(0x90, "水压报警阈值"),
+    DATA_TYPE_11(0x11, "Ua谐波含有率"),
+    DATA_TYPE_12(0x12, "Ub谐波含有率"),
+    DATA_TYPE_13(0x13, "Uc谐波含有率"),
+    DATA_TYPE_14(0x14, "Ia谐波含有率"),
+    DATA_TYPE_15(0x15, "Ib谐波含有率"),
+    DATA_TYPE_16(0x16, "Ic谐波含有率");
     public int code;
     public String desc;
 

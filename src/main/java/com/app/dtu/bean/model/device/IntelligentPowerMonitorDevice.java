@@ -127,41 +127,12 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     private String pfb;
     private String pfc;
 
-    // 谐波类型
-    private Integer xbtype;
-    // 电压谐波, 共计32个，这个是要匹配类型的，共有6种
-    private String xb2;
-    private String xb3;
-    private String xb4;
-    private String xb5;
-    private String xb6;
-    private String xb7;
-    private String xb8;
-    private String xb9;
-    private String xb10;
-    private String xb11;
-    private String xb12;
-    private String xb13;
-    private String xb14;
-    private String xb15;
-    private String xb16;
-    private String xb17;
-    private String xb18;
-    private String xb19;
-    private String xb20;
-    private String xb21;
-    private String xb22;
-    private String xb23;
-    private String xb24;
-    private String xb25;
-    private String xb26;
-    private String xb27;
-    private String xb28;
-    private String xb29;
-    private String xb30;
-    private String xb31;
-    private String xb32;
-    private String xb33;
+    private String uaXb;
+    private String ubXb;
+    private String ucXb;
+    private String iaXb;
+    private String ibXb;
+    private String icXb;
 
     @Override
     public boolean execute() {
@@ -328,57 +299,105 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                         zxwgdn = String.valueOf(zx / 10.00f);
 
                     }
-                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_0F) {
+                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_11){
+                    Xb xb = new Xb(DataType.DATA_TYPE_11.getCode());
                     for (int k = 0; k < 32; k++) {
                         float value = DtuUtil.getIntegerValue(dataMsgs, k) / 100.00f;
-                        String xb = String.valueOf(+value) + "%";
-                        xbs.add(xb);
+                        String xbValue = String.valueOf(+value) + "%";
+                        xb.addXb(xbValue);
+                        uaXb = DtuUtil.toJson(xb);
                     }
-                    if (message.getControCmd() == 0x13) {
-                        xbtype = 0x13;
-                    } else if (message.getControCmd() == 0x14) {
-                        xbtype = 0x14;
-                    } else if (message.getControCmd() == 0x15) {
-                        xbtype = 0x15;
-                    } else if (message.getControCmd() == 0x16) {
-                        xbtype = 0x16;
-                    } else if (message.getControCmd() == 0x17) {
-                        xbtype = 0x17;
-                    } else if (message.getControCmd() == 0x18) {
-                        xbtype = 0x18;
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_12){
+                    Xb xb = new Xb(DataType.DATA_TYPE_12.getCode());
+                    for (int k = 0; k < 32; k++) {
+                        float value = DtuUtil.getIntegerValue(dataMsgs, k) / 100.00f;
+                        String xbValue = String.valueOf(+value) + "%";
+                        xb.addXb(xbValue);
+                        ubXb = DtuUtil.toJson(xb);
                     }
-                    xb2 = getValueByList(xbs, 0);
-                    xb3 = getValueByList(xbs, 1);
-                    xb4 = getValueByList(xbs, 2);
-                    xb5 = getValueByList(xbs, 3);
-                    xb6 = getValueByList(xbs, 4);
-                    xb7 = getValueByList(xbs, 5);
-                    xb8 = getValueByList(xbs, 6);
-                    xb9 = getValueByList(xbs, 7);
-                    xb10 = getValueByList(xbs, 8);
-                    xb11 = getValueByList(xbs, 9);
-                    xb12 = getValueByList(xbs, 10);
-                    xb13 = getValueByList(xbs, 11);
-                    xb14 = getValueByList(xbs, 12);
-                    xb15 = getValueByList(xbs, 13);
-                    xb16 = getValueByList(xbs, 14);
-                    xb17 = getValueByList(xbs, 15);
-                    xb18 = getValueByList(xbs, 16);
-                    xb19 = getValueByList(xbs, 17);
-                    xb20 = getValueByList(xbs, 18);
-                    xb21 = getValueByList(xbs, 19);
-                    xb22 = getValueByList(xbs, 20);
-                    xb23 = getValueByList(xbs, 21);
-                    xb24 = getValueByList(xbs, 22);
-                    xb25 = getValueByList(xbs, 23);
-                    xb26 = getValueByList(xbs, 24);
-                    xb27 = getValueByList(xbs, 25);
-                    xb28 = getValueByList(xbs, 26);
-                    xb29 = getValueByList(xbs, 27);
-                    xb30 = getValueByList(xbs, 28);
-                    xb31 = getValueByList(xbs, 29);
-                    xb32 = getValueByList(xbs, 30);
-                    xb33 = getValueByList(xbs, 31);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_13){
+                    Xb xb = new Xb(DataType.DATA_TYPE_13.getCode());
+                    for (int k = 0; k < 32; k++) {
+                        float value = DtuUtil.getIntegerValue(dataMsgs, k) / 100.00f;
+                        String xbValue = String.valueOf(+value) + "%";
+                        xb.addXb(xbValue);
+                        ucXb = DtuUtil.toJson(xb);
+                    }
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_14){
+                    Xb xb = new Xb(DataType.DATA_TYPE_14.getCode());
+                    for (int k = 0; k < 32; k++) {
+                        float value = DtuUtil.getIntegerValue(dataMsgs, k) / 100.00f;
+                        String xbValue = String.valueOf(+value) + "%";
+                        xb.addXb(xbValue);
+                        iaXb = DtuUtil.toJson(xb);
+                    }
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_15){
+                    Xb xb = new Xb(DataType.DATA_TYPE_15.getCode());
+                    for (int k = 0; k < 32; k++) {
+                        float value = DtuUtil.getIntegerValue(dataMsgs, k) / 100.00f;
+                        String xbValue = String.valueOf(+value) + "%";
+                        xb.addXb(xbValue);
+                        ibXb = DtuUtil.toJson(xb);
+                    }
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_16){
+                    Xb xb = new Xb(DataType.DATA_TYPE_16.getCode());
+                    for (int k = 0; k < 32; k++) {
+                        float value = DtuUtil.getIntegerValue(dataMsgs, k) / 100.00f;
+                        String xbValue = String.valueOf(+value) + "%";
+                        xb.addXb(xbValue);
+                        icXb = DtuUtil.toJson(xb);
+                    }
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_0F) {
+//                    for (int k = 0; k < 32; k++) {
+//                        float value = DtuUtil.getIntegerValue(dataMsgs, k) / 100.00f;
+//                        String xb = String.valueOf(+value) + "%";
+//                        xbs.add(xb);
+//                    }
+//                    if (message.getControCmd() == 0x13) {
+//                        xbtype = 0x13;
+//                    } else if (message.getControCmd() == 0x14) {
+//                        xbtype = 0x14;
+//                    } else if (message.getControCmd() == 0x15) {
+//                        xbtype = 0x15;
+//                    } else if (message.getControCmd() == 0x16) {
+//                        xbtype = 0x16;
+//                    } else if (message.getControCmd() == 0x17) {
+//                        xbtype = 0x17;
+//                    } else if (message.getControCmd() == 0x18) {
+//                        xbtype = 0x18;
+//                    }
+//                    xb2 = getValueByList(xbs, 0);
+//                    xb3 = getValueByList(xbs, 1);
+//                    xb4 = getValueByList(xbs, 2);
+//                    xb5 = getValueByList(xbs, 3);
+//                    xb6 = getValueByList(xbs, 4);
+//                    xb7 = getValueByList(xbs, 5);
+//                    xb8 = getValueByList(xbs, 6);
+//                    xb9 = getValueByList(xbs, 7);
+//                    xb10 = getValueByList(xbs, 8);
+//                    xb11 = getValueByList(xbs, 9);
+//                    xb12 = getValueByList(xbs, 10);
+//                    xb13 = getValueByList(xbs, 11);
+//                    xb14 = getValueByList(xbs, 12);
+//                    xb15 = getValueByList(xbs, 13);
+//                    xb16 = getValueByList(xbs, 14);
+//                    xb17 = getValueByList(xbs, 15);
+//                    xb18 = getValueByList(xbs, 16);
+//                    xb19 = getValueByList(xbs, 17);
+//                    xb20 = getValueByList(xbs, 18);
+//                    xb21 = getValueByList(xbs, 19);
+//                    xb22 = getValueByList(xbs, 20);
+//                    xb23 = getValueByList(xbs, 21);
+//                    xb24 = getValueByList(xbs, 22);
+//                    xb25 = getValueByList(xbs, 23);
+//                    xb26 = getValueByList(xbs, 24);
+//                    xb27 = getValueByList(xbs, 25);
+//                    xb28 = getValueByList(xbs, 26);
+//                    xb29 = getValueByList(xbs, 27);
+//                    xb30 = getValueByList(xbs, 28);
+//                    xb31 = getValueByList(xbs, 29);
+//                    xb32 = getValueByList(xbs, 30);
+//                    xb33 = getValueByList(xbs, 31);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_0E) {
                     uaxw = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 0) / 10f);
                     ubxw = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 1) / 10f);
@@ -554,39 +573,12 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                 ", pfa='" + pfa + '\'' +
                 ", pfb='" + pfb + '\'' +
                 ", pfc='" + pfc + '\'' +
-                ", xbtype=" + xbtype +
-                ", xb2='" + xb2 + '\'' +
-                ", xb3='" + xb3 + '\'' +
-                ", xb4='" + xb4 + '\'' +
-                ", xb5='" + xb5 + '\'' +
-                ", xb6='" + xb6 + '\'' +
-                ", xb7='" + xb7 + '\'' +
-                ", xb8='" + xb8 + '\'' +
-                ", xb9='" + xb9 + '\'' +
-                ", xb10='" + xb10 + '\'' +
-                ", xb11='" + xb11 + '\'' +
-                ", xb12='" + xb12 + '\'' +
-                ", xb13='" + xb13 + '\'' +
-                ", xb14='" + xb14 + '\'' +
-                ", xb15='" + xb15 + '\'' +
-                ", xb16='" + xb16 + '\'' +
-                ", xb17='" + xb17 + '\'' +
-                ", xb18='" + xb18 + '\'' +
-                ", xb19='" + xb19 + '\'' +
-                ", xb20='" + xb20 + '\'' +
-                ", xb21='" + xb21 + '\'' +
-                ", xb22='" + xb22 + '\'' +
-                ", xb23='" + xb23 + '\'' +
-                ", xb24='" + xb24 + '\'' +
-                ", xb25='" + xb25 + '\'' +
-                ", xb26='" + xb26 + '\'' +
-                ", xb27='" + xb27 + '\'' +
-                ", xb28='" + xb28 + '\'' +
-                ", xb29='" + xb29 + '\'' +
-                ", xb30='" + xb30 + '\'' +
-                ", xb31='" + xb31 + '\'' +
-                ", xb32='" + xb32 + '\'' +
-                ", xb33='" + xb33 + '\'' +
+                ", uaXb='" + uaXb + '\'' +
+                ", ubXb='" + ubXb + '\'' +
+                ", ucXb='" + ucXb + '\'' +
+                ", iaXb='" + iaXb + '\'' +
+                ", ibXb='" + ibXb + '\'' +
+                ", icXb='" + icXb + '\'' +
                 '}';
     }
 }
