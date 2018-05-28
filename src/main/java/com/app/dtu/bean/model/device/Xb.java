@@ -2,6 +2,7 @@ package com.app.dtu.bean.model.device;
 
 import com.app.config.Ignore;
 import com.app.dtu.util.DtuUtil;
+import com.google.gson.annotations.Expose;
 import org.springframework.util.CollectionUtils;
 
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.util.List;
 public class Xb implements Serializable{
     
     @Ignore
+    @Expose(serialize = false)
     private List<String> xbs;
 
     public void addXb(String xb){
@@ -69,6 +71,11 @@ public class Xb implements Serializable{
     private String xb32;
     private String xb33;
 
+
+    public Xb toEntity(String body){
+        return body == null ? null : DtuUtil.gson.fromJson(body, Xb.class);
+    }
+
     public String toJson(){
         if(CollectionUtils.isEmpty(xbs)){
             return null;
@@ -121,46 +128,6 @@ public class Xb implements Serializable{
 
     public void setXbType(Integer xbType) {
         this.xbType = xbType;
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "Xb{" +
-                "xbType=" + xbType +
-                ", xb2='" + xb2 + '\'' +
-                ", xb3='" + xb3 + '\'' +
-                ", xb4='" + xb4 + '\'' +
-                ", xb5='" + xb5 + '\'' +
-                ", xb6='" + xb6 + '\'' +
-                ", xb7='" + xb7 + '\'' +
-                ", xb8='" + xb8 + '\'' +
-                ", xb9='" + xb9 + '\'' +
-                ", xb10='" + xb10 + '\'' +
-                ", xb11='" + xb11 + '\'' +
-                ", xb12='" + xb12 + '\'' +
-                ", xb13='" + xb13 + '\'' +
-                ", xb14='" + xb14 + '\'' +
-                ", xb15='" + xb15 + '\'' +
-                ", xb16='" + xb16 + '\'' +
-                ", xb17='" + xb17 + '\'' +
-                ", xb18='" + xb18 + '\'' +
-                ", xb19='" + xb19 + '\'' +
-                ", xb20='" + xb20 + '\'' +
-                ", xb21='" + xb21 + '\'' +
-                ", xb22='" + xb22 + '\'' +
-                ", xb23='" + xb23 + '\'' +
-                ", xb24='" + xb24 + '\'' +
-                ", xb25='" + xb25 + '\'' +
-                ", xb26='" + xb26 + '\'' +
-                ", xb27='" + xb27 + '\'' +
-                ", xb28='" + xb28 + '\'' +
-                ", xb29='" + xb29 + '\'' +
-                ", xb30='" + xb30 + '\'' +
-                ", xb31='" + xb31 + '\'' +
-                ", xb32='" + xb32 + '\'' +
-                '}';
     }
 
     public String getXb2() {
@@ -417,5 +384,43 @@ public class Xb implements Serializable{
 
     public void setXb33(String xb33) {
         this.xb33 = xb33;
+    }
+
+    @Override
+    public String toString() {
+        return "Xb{" +
+                "xbType=" + xbType +
+                ", xb2='" + xb2 + '\'' +
+                ", xb3='" + xb3 + '\'' +
+                ", xb4='" + xb4 + '\'' +
+                ", xb5='" + xb5 + '\'' +
+                ", xb6='" + xb6 + '\'' +
+                ", xb7='" + xb7 + '\'' +
+                ", xb8='" + xb8 + '\'' +
+                ", xb9='" + xb9 + '\'' +
+                ", xb10='" + xb10 + '\'' +
+                ", xb11='" + xb11 + '\'' +
+                ", xb12='" + xb12 + '\'' +
+                ", xb13='" + xb13 + '\'' +
+                ", xb14='" + xb14 + '\'' +
+                ", xb15='" + xb15 + '\'' +
+                ", xb16='" + xb16 + '\'' +
+                ", xb17='" + xb17 + '\'' +
+                ", xb18='" + xb18 + '\'' +
+                ", xb19='" + xb19 + '\'' +
+                ", xb20='" + xb20 + '\'' +
+                ", xb21='" + xb21 + '\'' +
+                ", xb22='" + xb22 + '\'' +
+                ", xb23='" + xb23 + '\'' +
+                ", xb24='" + xb24 + '\'' +
+                ", xb25='" + xb25 + '\'' +
+                ", xb26='" + xb26 + '\'' +
+                ", xb27='" + xb27 + '\'' +
+                ", xb28='" + xb28 + '\'' +
+                ", xb29='" + xb29 + '\'' +
+                ", xb30='" + xb30 + '\'' +
+                ", xb31='" + xb31 + '\'' +
+                ", xb32='" + xb32 + '\'' +
+                '}';
     }
 }
