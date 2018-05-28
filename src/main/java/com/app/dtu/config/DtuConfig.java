@@ -14,7 +14,7 @@ public class DtuConfig {
     // Socket 服务的段端口
     public static final int SOCKET_SERVER_PORT = 34885;
     // Socket 连接最大缓存数
-    public static final int SOCKET_SERVER_SO_BACKLOG = 1024;
+    public static final int SOCKET_SERVER_SO_BACKLOG = 65535;
     // 是否开启长连接
     public static final boolean ENABLE_KEEP_ALIVE_CONNECTION = false;
     // 是否开启队列模式，这里使用的RabbitMq, 无论启动会创建连接，用于动态修改模式

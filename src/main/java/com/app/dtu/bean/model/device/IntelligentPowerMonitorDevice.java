@@ -126,12 +126,23 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     private String pfa;
     private String pfb;
     private String pfc;
-
+    @Lob
+    @Basic(fetch=FetchType.LAZY)
     private String uaXb;
+    @Lob
+    @Basic(fetch=FetchType.LAZY)
     private String ubXb;
+    @Lob
+    @Basic(fetch=FetchType.LAZY)
     private String ucXb;
+    @Lob
+    @Basic(fetch=FetchType.LAZY)
     private String iaXb;
+    @Lob
+    @Basic(fetch=FetchType.LAZY)
     private String ibXb;
+    @Lob
+    @Basic(fetch=FetchType.LAZY)
     private String icXb;
 
     @Override
@@ -305,6 +316,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                         float value = DtuUtil.getIntegerValue(dataMsgs, k) / 100.00f;
                         String xbValue = String.valueOf(+value) + "%";
                         xb.addXb(xbValue);
+                        xb.toJson();
                         uaXb = DtuUtil.toJson(xb);
                     }
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_12){
@@ -313,6 +325,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                         float value = DtuUtil.getIntegerValue(dataMsgs, k) / 100.00f;
                         String xbValue = String.valueOf(+value) + "%";
                         xb.addXb(xbValue);
+                        xb.toJson();
                         ubXb = DtuUtil.toJson(xb);
                     }
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_13){
@@ -321,6 +334,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                         float value = DtuUtil.getIntegerValue(dataMsgs, k) / 100.00f;
                         String xbValue = String.valueOf(+value) + "%";
                         xb.addXb(xbValue);
+                        xb.toJson();
                         ucXb = DtuUtil.toJson(xb);
                     }
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_14){
@@ -329,6 +343,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                         float value = DtuUtil.getIntegerValue(dataMsgs, k) / 100.00f;
                         String xbValue = String.valueOf(+value) + "%";
                         xb.addXb(xbValue);
+                        xb.toJson();
                         iaXb = DtuUtil.toJson(xb);
                     }
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_15){
@@ -337,6 +352,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                         float value = DtuUtil.getIntegerValue(dataMsgs, k) / 100.00f;
                         String xbValue = String.valueOf(+value) + "%";
                         xb.addXb(xbValue);
+                        xb.toJson();
                         ibXb = DtuUtil.toJson(xb);
                     }
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_16){
@@ -345,6 +361,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                         float value = DtuUtil.getIntegerValue(dataMsgs, k) / 100.00f;
                         String xbValue = String.valueOf(+value) + "%";
                         xb.addXb(xbValue);
+                        xb.toJson();
                         icXb = DtuUtil.toJson(xb);
                     }
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_0F) {

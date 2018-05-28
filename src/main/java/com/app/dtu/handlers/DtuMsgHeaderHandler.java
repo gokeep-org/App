@@ -5,7 +5,6 @@ import com.app.dtu.bean.Header;
 import com.app.dtu.bean.Message;
 import com.app.dtu.config.Const;
 import com.app.dtu.parser.ByteUtils;
-import com.app.dtu.util.CRC;
 import com.app.dtu.util.DtuUtil;
 import com.app.dtu.util.HexString;
 import io.netty.buffer.ByteBuf;
@@ -43,7 +42,7 @@ public class DtuMsgHeaderHandler extends ChannelInboundHandlerAdapter {
             logBytes=HexString.hexStringToBytes(logHexString);
         }
 
-        CRC.check(logBytes);
+//        CRC.check(logBytes);
 
 
         // 打印去掉包尾的原始数据

@@ -45,7 +45,7 @@ public class DtuServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new FixedLengthFrameDecoder(6));
         */
 
-        pipeline.addLast("delimiter-frame", new CustomerDelimiterBasedFrameDecoder(20480, Unpooled.copiedBuffer(protocalFoot)));
+        pipeline.addLast("delimiter-frame", new CustomerDelimiterBasedFrameDecoder(204800, Unpooled.copiedBuffer(protocalFoot)));
         pipeline.addLast("msg-filter-handler", new DtuMsgHeaderHandler());
         pipeline.addLast("dtu-handler", new DtuServerHandler());
         if (!DtuConfig.ENABLE_KEEP_ALIVE_CONNECTION){
