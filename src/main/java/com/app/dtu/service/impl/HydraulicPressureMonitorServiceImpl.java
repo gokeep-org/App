@@ -39,6 +39,7 @@ public class HydraulicPressureMonitorServiceImpl extends BaseService implements 
                 HydraulicPressureMonitorDevice device = new HydraulicPressureMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
+                device.setOld_flag(0);
                 hydraulicPressureMonitorReponsitory.save(device);
             }
             return true;

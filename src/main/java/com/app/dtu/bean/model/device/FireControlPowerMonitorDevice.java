@@ -354,4 +354,48 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
         return finalDataMsgs;
     }
 
+    @Override
+    public String toString() {
+        return "FireControlPowerMonitorDevice{" +
+                "id=" + id +
+                ", ua1=" + ua1 +
+                ", ub1=" + ub1 +
+                ", uc1=" + uc1 +
+                ", ua2=" + ua2 +
+                ", ub2=" + ub2 +
+                ", uc2=" + uc2 +
+                ", st=" + st +
+                ", pt=" + pt +
+                ", ua=" + ua +
+                ", ub=" + ub +
+                ", uc=" + uc +
+                ", ia='" + ia + '\'' +
+                ", ib='" + ib + '\'' +
+                ", ic='" + ic + '\'' +
+                ", ibb1=" + ibb1 +
+                ", ibb2=" + ibb2 +
+                ", ia1='" + ia1 + '\'' +
+                ", ib1='" + ib1 + '\'' +
+                ", ic1='" + ic1 + '\'' +
+                ", ia2='" + ia2 + '\'' +
+                ", ib2='" + ib2 + '\'' +
+                ", ic2='" + ic2 + '\'' +
+                ", ua3=" + ua3 +
+                ", ub3=" + ub3 +
+                ", uc3=" + uc3 +
+                ", ua4=" + ua4 +
+                ", ub4=" + ub4 +
+                ", uc4=" + uc4 +
+                ", umax=" + umax +
+                ", umin=" + umin +
+                ", imax1='" + imax1 + '\'' +
+                ", imax2='" + imax2 + '\'' +
+                ", imax3=" + imax3 +
+                ", imax4=" + imax4 +
+                ", imax5=" + imax5 +
+                ", imax6=" + imax6 +
+                ", ptmax=" + ptmax +
+                ", stmax=" + stmax +
+                '}';
+    }
 }

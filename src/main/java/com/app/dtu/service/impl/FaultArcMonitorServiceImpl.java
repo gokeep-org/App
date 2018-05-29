@@ -39,6 +39,7 @@ public class FaultArcMonitorServiceImpl extends BaseService implements DataServi
                 FaultArcMonitorDevice device = new FaultArcMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
+                device.setOld_flag(0);
                 faultArcMonitorReponsitory.save(device);
             }
             return true;

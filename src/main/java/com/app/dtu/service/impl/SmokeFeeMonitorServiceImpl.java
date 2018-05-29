@@ -40,7 +40,7 @@ public class SmokeFeeMonitorServiceImpl extends BaseService implements DataServi
                 SmokeFeelMonitorDevice device = new SmokeFeelMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
-
+                device.setOld_flag(0);
                 smokeFeeMonitorReponsitory.save(device);
             }
             return true;

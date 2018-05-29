@@ -43,7 +43,7 @@ public class ScheduleOffLineDeviceUpdate {
             if (Objects.isNull(dataService)) {
                 return;
             }
-            dataService.updateOldDataStatus(relation.getDevice_id());
+//            dataService.updateOldDataStatus(relation.getDevice_id());
             dataService.updateOffLineData(relation.getDevice_id());
         });
         long endTime = DtuUtil.getCurrentTimestrap();

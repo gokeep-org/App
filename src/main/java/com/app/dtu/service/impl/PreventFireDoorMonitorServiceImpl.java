@@ -38,6 +38,7 @@ public class PreventFireDoorMonitorServiceImpl extends BaseService implements Da
                 PrventFireDoorMonitorDevice device = new PrventFireDoorMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
+                device.setOld_flag(0);
                 preventFireDoorMonitorReponsitory.save(device);
             }
             return true;

@@ -38,7 +38,7 @@ public class ScreenFeeMonitorServiceImpl extends BaseService implements DataServ
                 ScreenMonitorDevice device = new ScreenMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
-
+                device.setOld_flag(0);
                 screenMonitorReponsitory.save(device);
             }
             return true;

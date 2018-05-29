@@ -39,6 +39,7 @@ public class IntelligentPowerMonitorServiceImpl extends BaseService implements D
                 IntelligentPowerMonitorDevice device = new IntelligentPowerMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
+                device.setOld_flag(0);
                 intelligentPowerMonitorReponsitory.save(device);
             }
             return true;

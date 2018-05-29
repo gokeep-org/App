@@ -785,6 +785,7 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
                 ", umax6=" + umax6 +
                 ", umax7=" + umax7 +
                 ", umax8=" + umax8 +
+                ", imax=" + imax +
                 ", imax1=" + imax1 +
                 ", imax2=" + imax2 +
                 ", imax3=" + imax3 +

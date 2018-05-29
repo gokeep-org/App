@@ -182,4 +182,9 @@ public class DtuUtil {
     public static String toJson(Object object){
         return Objects.isNull(object) ? null : gson.toJson(object);
     }
+
+    public<T> T getEntity(Object object, T classes){
+        return Objects.isNull(object) ? null : gson.fromJson("", (Class<T>) classes);
+    }
+
 }

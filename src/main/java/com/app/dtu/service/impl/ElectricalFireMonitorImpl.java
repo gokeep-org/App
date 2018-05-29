@@ -39,6 +39,7 @@ public class ElectricalFireMonitorImpl extends BaseService implements DataServic
                 ElectricalFireMonitorDevice device = new ElectricalFireMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
+                device.setOld_flag(0);
                 electricalFireMonitorReponsitory.save(device);
             }
             return true;

@@ -39,6 +39,7 @@ public class FireControlPowerMonitorServiceImpl extends BaseService implements D
                 FireControlPowerMonitorDevice device = new FireControlPowerMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
+                device.setOld_flag(0);
                 fireControlPowerMonitorReponstory.save(device);
             }
             return true;

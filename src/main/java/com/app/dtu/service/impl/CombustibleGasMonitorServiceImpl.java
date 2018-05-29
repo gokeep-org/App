@@ -52,7 +52,7 @@ public class CombustibleGasMonitorServiceImpl extends BaseService implements Dat
                 CombustibleGasMonitorDevice device = new CombustibleGasMonitorDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
-
+                device.setOld_flag(0);
                 combustibleGasMonitorReponsitory.save(device);
             }
             return true;

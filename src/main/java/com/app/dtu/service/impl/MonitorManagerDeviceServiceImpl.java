@@ -49,7 +49,7 @@ public class MonitorManagerDeviceServiceImpl extends BaseService implements Data
                 MonitorManagerDevice device = new MonitorManagerDevice();
                 device.setMessage(device.getOfflineMessage(messageId));
                 device.generateEntity(device.getOfflineMessage(messageId));
-
+                device.setOld_flag(0);
                 monitorManagerDeviceReponsitory.save(device);
             }
             return true;

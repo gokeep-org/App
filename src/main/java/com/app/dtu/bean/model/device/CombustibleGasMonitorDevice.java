@@ -93,6 +93,13 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
         return true;
     }
 
+
+    public CombustibleGasMonitorDevice getOfflineDeviceData(String messageId){
+        return generateEntity(getOfflineMessage(messageId));
+    }
+
+
+
     @Override
     public CombustibleGasMonitorDevice buildDevice() {
         return this;
@@ -165,6 +172,7 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
         this.maxmzq1 = maxmzq1;
     }
 
+
     @Override
     public String toString() {
         return "CombustibleGasMonitorDevice{" +
@@ -176,9 +184,5 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
                 ", mzq1=" + mzq1 +
                 ", maxmzq1=" + maxmzq1 +
                 '}';
-    }
-
-    public CombustibleGasMonitorDevice getOfflineDeviceData(String messageId){
-        return generateEntity(getOfflineMessage(messageId));
     }
 }
