@@ -62,6 +62,11 @@ public class Device implements DeviceDataDeal, ParseToEntityAdapter<Device>, Ser
         return message;
     }
 
+    @Override
+    public boolean isChange() {
+        return false;
+    }
+
     public void setMessage(Message message) {
         this.message = message;
     }

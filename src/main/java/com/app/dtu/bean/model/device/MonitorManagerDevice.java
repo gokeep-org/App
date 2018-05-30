@@ -15,6 +15,7 @@ import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -24,6 +25,7 @@ import java.util.Objects;
 @Table(name = DtuConfig.DTU_TABLE_PRIFIX + "monitor_manager_device")
 public class MonitorManagerDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<MonitorManagerDevice> {
     private static final Logger logger = LoggerFactory.getLogger(MonitorManagerDevice.class);
+
     private Integer x1;
     private Integer x2;
     private Integer x3;
@@ -106,6 +108,16 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
         return true;
     }
 
+    @Override
+    public boolean isChange() {
+        String value = client.get(getMessageId());
+        if (value == null || !value.equalsIgnoreCase(String.valueOf(getWarnList()))){
+            client.set(getMessageId(), String.valueOf(getWarnList()));
+            return true;
+        }else {
+            return false;
+        }
+    }
     public int getX1() {
         return x1;
     }

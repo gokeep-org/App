@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -69,6 +70,16 @@ public class ScreenMonitorDevice extends RedundancyDeviceData implements DeviceD
         return true;
     }
 
+    @Override
+    public boolean isChange() {
+        String value = client.get(getMessageId());
+        if (value == null || !value.equalsIgnoreCase(String.valueOf(getWarnList()))){
+            client.set(getMessageId(), String.valueOf(getWarnList()));
+            return true;
+        }else {
+            return false;
+        }
+    }
     @Override
     public ScreenMonitorDevice buildDevice() {
         return this;

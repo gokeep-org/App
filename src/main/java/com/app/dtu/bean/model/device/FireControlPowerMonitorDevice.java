@@ -14,6 +14,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -81,6 +82,16 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
     private Integer ptmax;
     private Integer stmax;
 
+    @Override
+    public boolean isChange() {
+        String value = client.get(getMessageId());
+        if (value == null || !value.equalsIgnoreCase(String.valueOf(getWarnList()))){
+            client.set(getMessageId(), String.valueOf(getWarnList()));
+            return true;
+        }else {
+            return false;
+        }
+    }
 
     @Override
     public FireControlPowerMonitorDevice generateEntity(Message message) {

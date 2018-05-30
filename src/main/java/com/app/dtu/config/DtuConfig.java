@@ -44,6 +44,7 @@ public class DtuConfig {
     // Dtu-Config的更新设备列表
     public static final List<DeviceTypeName> updateDeviceTypes = new ArrayList<>();
 
+    public static final String REDIS_URL = "114.116.23.218";
     // FMS系统路径
     public static final String FMS_SYS_API_PATH = "http://118.89.240.60:9999/FMS/V1-API";
     // FMS报警接口路径

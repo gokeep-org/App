@@ -1,12 +1,16 @@
 package com.app.dtu.bean.model;
 
 import com.app.dtu.bean.Message;
+import com.app.dtu.redis.RedisClient;
+import com.app.dtu.util.DtuUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 可以作为基础的数据存储被其他的设备类继承， 不是一张单独的表
@@ -14,6 +18,8 @@ import java.io.Serializable;
 @MappedSuperclass
 public class RedundancyDeviceData implements DeviceDataDeal, Serializable{
     private static final Logger logegr = LoggerFactory.getLogger(RedundancyDeviceData.class);
+    @Transient
+    protected RedisClient client = DtuUtil.redisClient;
     // 设备的型号
     private String modelCode;
 
@@ -166,7 +172,27 @@ public class RedundancyDeviceData implements DeviceDataDeal, Serializable{
         warn14 = (warnList & (8192)) == 0 ? 0 : 1;
         warn15 = (warnList & (16384)) == 0 ? 0 : 1;
         warn16 = (warnList & (32768)) == 0 ? 0 : 1;
+    }
 
+    public Map<String, String> getWarnMap(){
+        Map<String, String> result = new HashMap<>();
+        result.put("warn1", String.valueOf(warn1));
+        result.put("warn2", String.valueOf(warn2));
+        result.put("warn3", String.valueOf(warn3));
+        result.put("warn4", String.valueOf(warn4));
+        result.put("warn5", String.valueOf(warn5));
+        result.put("warn6", String.valueOf(warn6));
+        result.put("warn7", String.valueOf(warn7));
+        result.put("warn8", String.valueOf(warn8));
+        result.put("warn9", String.valueOf(warn9));
+        result.put("warn10", String.valueOf(warn10));
+        result.put("warn11", String.valueOf(warn11));
+        result.put("warn12", String.valueOf(warn12));
+        result.put("warn13", String.valueOf(warn13));
+        result.put("warn14", String.valueOf(warn14));
+        result.put("warn15", String.valueOf(warn15));
+        result.put("warn16", String.valueOf(warn16));
+        return result;
     }
 
     /**

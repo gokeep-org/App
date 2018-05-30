@@ -21,6 +21,7 @@ import java.util.Objects;
 @Table(name = DtuConfig.DTU_TABLE_PRIFIX +"fault_arc_monitor_device")
 public class FaultArcMonitorDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<FaultArcMonitorDevice> {
 
+
     private static final Logger logger = LoggerFactory.getLogger(FaultArcMonitorDevice.class);
 
     public FaultArcMonitorDevice() {
@@ -91,7 +92,16 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
         }
         return true;
     }
-
+    @Override
+    public boolean isChange() {
+        String value = client.get(getMessageId());
+        if (value == null || !value.equalsIgnoreCase(String.valueOf(getWarnList()))){
+            client.set(getMessageId(), String.valueOf(getWarnList()));
+            return true;
+        }else {
+            return false;
+        }
+    }
     @Override
     public FaultArcMonitorDevice buildDevice() {
         return this;

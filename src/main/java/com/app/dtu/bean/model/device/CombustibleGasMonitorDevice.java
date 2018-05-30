@@ -12,6 +12,7 @@ import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -21,6 +22,7 @@ import java.util.Objects;
 @Table(name =  DtuConfig.DTU_TABLE_PRIFIX +"combustible_gas_monitor_device")
 public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements DeviceDataDeal, ParseToEntityAdapter<CombustibleGasMonitorDevice>{
     private static final Logger logger = LoggerFactory.getLogger(CombustibleGasMonitorDevice.class);
+
 
     public CombustibleGasMonitorDevice(Message message) {
         setMessage(message);
@@ -75,6 +77,16 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
     }
 
 
+    @Override
+    public boolean isChange() {
+        String value = client.get(getMessageId());
+        if (value == null || !value.equalsIgnoreCase(String.valueOf(getWarnList()))){
+            client.set(getMessageId(), String.valueOf(getWarnList()));
+            return true;
+        }else {
+            return false;
+        }
+    }
 
     @Override
     public boolean execute() {

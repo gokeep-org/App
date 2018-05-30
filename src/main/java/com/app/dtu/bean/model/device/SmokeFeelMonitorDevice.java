@@ -79,6 +79,16 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
     }
 
     @Override
+    public boolean isChange() {
+        String value = client.get(getMessageId());
+        if (value == null || !value.equalsIgnoreCase(String.valueOf(getWarnList()))){
+            client.set(getMessageId(), String.valueOf(getWarnList()));
+            return true;
+        }else {
+            return false;
+        }
+    }
+    @Override
     public SmokeFeelMonitorDevice buildDevice() {
         return this;
     }

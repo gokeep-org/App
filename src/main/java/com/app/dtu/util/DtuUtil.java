@@ -3,6 +3,8 @@ package com.app.dtu.util;
 import com.app.config.IgnoreStrategy;
 import com.app.dtu.bean.Message;
 import com.app.dtu.config.DtuConfig;
+import com.app.dtu.redis.DefaultRedisClient;
+import com.app.dtu.redis.RedisClient;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.util.CollectionUtils;
@@ -17,6 +19,7 @@ public class DtuUtil {
     private DtuUtil(){}
     private static final SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public static final Gson gson = new GsonBuilder().addSerializationExclusionStrategy(new IgnoreStrategy()).create();
+    public static final RedisClient redisClient = new DefaultRedisClient();
     /**
      * 获取设备的上传数据的值根据索引位置
      * @param values

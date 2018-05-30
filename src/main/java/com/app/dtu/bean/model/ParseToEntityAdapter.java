@@ -21,10 +21,7 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
     static Requests httpClient = new RequestImpl();
 
     public Logger logger = LoggerFactory.getLogger(ParseToEntityAdapter.class);
-    /**
-     * 默认的解析实现，如果某一个实体有特殊的需求，那么重写execute方法即可
-     *
-     */
+
     // 获取实体对象
     T buildDevice();
 
@@ -49,17 +46,18 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
         return Objects.isNull(buildDevice());
     }
 
+
     // 发送报警信息到fms系统
-    default void sendWarnInfoToFmsSystem(){
+    default void sendWarnInfoToFmsSystem(T entity){
         String request = "";
         if (Objects.isNull(getMessage()) || getMessage().getId() != null){
             request = String.format(DtuConfig.FMS_SYS_WARN_NOTICE_PATH, getMessage().getId(), getMessage().parseTypeCode());
             if (!StringUtils.isEmpty(request)){
                 try{
                     Message message = getMessage();
-                    if (message.getStatus() != 0){
+                    if (isChange()){
                         logger.info("Send warn notice url [{}] is successful",  request);
-                        httpClient.post(request);
+                        httpClient.post(request, entity, null);
                     }
                 }catch (Throwable e){
                     logger.error("Send warn notice error, cause {}", e.getMessage());
@@ -67,6 +65,8 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
             }
         }
     }
+
+    public boolean isChange();
 
     // 获取实体类
     default T getStorageEntity(){
@@ -76,7 +76,7 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
         }
         T entity =  generateEntity(buildMessage());
         // 这里先发送报警信息
-        sendWarnInfoToFmsSystem();
+        sendWarnInfoToFmsSystem(entity);
         logger.info("Parse to entity is {}", Objects.isNull(entity) ? null : entity.toString());
         return entity;
     }

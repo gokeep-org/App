@@ -488,6 +488,17 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
         return this;
     }
 
+    @Override
+    public boolean isChange() {
+        String value = client.get(getMessageId());
+        if (value == null || !value.equalsIgnoreCase(String.valueOf(getWarnList()))){
+            client.set(getMessageId(), String.valueOf(getWarnList()));
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     private String getValueByList(List<String> values, int i) {
         if (CollectionUtils.isEmpty(values) || values.size() - 1 < i) {
             return null;

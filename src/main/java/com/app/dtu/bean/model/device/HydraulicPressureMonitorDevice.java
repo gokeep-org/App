@@ -55,8 +55,16 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
         }
         return this;
     }
-
-
+    @Override
+    public boolean isChange() {
+        String value = client.get(getMessageId());
+        if (value == null || !value.equalsIgnoreCase(String.valueOf(getWarnList()))){
+            client.set(getMessageId(), String.valueOf(getWarnList()));
+            return true;
+        }else {
+            return false;
+        }
+    }
     public Long getId() {
         return id;
     }
