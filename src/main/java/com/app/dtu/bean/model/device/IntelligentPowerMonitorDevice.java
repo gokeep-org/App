@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -61,7 +62,9 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     private Integer umax;
     private Integer umin;
     private String usum;
+    private String dw_usum;
     private String isum;
+    private String dw_isum;
 
     private Integer imax;
     private String dw_imax;
@@ -233,6 +236,9 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                     dw_ub = getValueByList(udws, 1);
                     uc = getValueByList(uValues, 2);
                     dw_uc = getValueByList(udws, 2);
+                    usum = getValueByList(uValues, 3);
+                    dw_usum = getValueByList(udws, 3);
+
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_04) {
                     for (int j = 0; j < 4; j++) {
                         Integer uaInt = DtuUtil.getIntegerValue(dataMsgs, j * 2);
@@ -251,6 +257,8 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                     dw_ib = getValueByList(idws, 1);
                     ic = getValueByList(iValues, 2);
                     dw_ic = getValueByList(idws, 2);
+                    isum = getValueByList(iValues, 3);
+                    dw_isum = getValueByList(idws, 3);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01) {
                     st = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_02) {
@@ -305,9 +313,11 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                         dw_szgl = getValueByList(qpsdws, 2);
                         zglys = String.valueOf((float) DtuUtil.getIntegerValue(dataMsgs, 7) / 1000.00f);
                         double zx = DtuUtil.getIntegerValue(dataMsgs, 8) * 65536 + DtuUtil.getIntegerValue(dataMsgs, 9);
-                        zxygdn = String.valueOf(zx / 10.00f);
+//                        zxygdn = String.valueOf(zx / 10.00f);
+                        zxygdn = new BigDecimal(zx / 10.00f).setScale(1, BigDecimal.ROUND_HALF_UP).toPlainString();
                         zx = DtuUtil.getIntegerValue(dataMsgs, 10) * 65536 + DtuUtil.getIntegerValue(dataMsgs, 11);
-                        zxwgdn = String.valueOf(zx / 10.00f);
+//                        zxwgdn = String.valueOf(zx / 10.00f);
+                        zxwgdn = new BigDecimal(zx / 10.00f).setScale(1, BigDecimal.ROUND_HALF_UP).toPlainString();
 
                     }
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_11){
