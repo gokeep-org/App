@@ -247,7 +247,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                         int xsw = bytes[1] / 16; // 小数位
                         int wa = (bytes[1] & 0X0F) * 65536; // 数据冗余，当数据比较大的时候
                         String dw = fxdw == 0 ? "A" : "KA";
-                        int aa = DtuUtil.getIntegerValue(dataMsgs, 1 + j * 2) + wa;
+                        int aa = (DtuUtil.getIntegerValue(dataMsgs, 1 + j * 2) + wa) * ibh;
                         iValues.add(toFloatString(aa, xsw));// 电压的完整数据值
                         idws.add(dw);
                     }
@@ -451,11 +451,11 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                         yggldws.add(yggldw);
                     }
                     pa = getValueByList(ygglvalues, 0);
-                    dw_pa = getValueByList(yggldws, 0);
+                    dw_pa = getValueByList(yggldws, 3);
                     pb = getValueByList(ygglvalues, 1);
-                    dw_pb = getValueByList(yggldws, 1);
+                    dw_pb = getValueByList(yggldws, 4);
                     pc = getValueByList(ygglvalues, 2);
-                    dw_pc = getValueByList(yggldws, 2);
+                    dw_pc = getValueByList(yggldws, 5);
                     // 各项无功功率
                     for (int m = 0; m < 3; m++) {
                         Integer uaInt = DtuUtil.getIntegerValue(dataMsgs, m * 2 + 14);
