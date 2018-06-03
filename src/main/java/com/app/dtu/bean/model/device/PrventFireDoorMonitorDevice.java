@@ -61,19 +61,20 @@ public class PrventFireDoorMonitorDevice extends RedundancyDeviceData implements
         if (CollectionUtils.isEmpty(values) || values.size() < 2) {
             isChange = true;
         }else {
-            if (!values.get(0).equalsIgnoreCase(String.valueOf(getWarnList()))){
+            if (values.get(0) == null || values.get(1) == null || !values.get(0).equalsIgnoreCase(String.valueOf(getWarnList()))){
                 isChange = true;
             }else{
                 isChange = false;
             }
         }
-        if (!isChange) {
+        if (isChange) {
             Map<String, String> hashValue = new HashMap<>();
             hashValue.put("warn", String.valueOf(getWarnList()));
             hashValue.put("id", String.valueOf(getId()));
             client.hmset(getMessageId(),hashValue);
             logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
-            ServiceItem.preventFireDoorService.updatePreviousDataStatus(getId(), 2);
+        }else {
+            ServiceItem.preventFireDoorService.updatePreviousDataStatus(values.get(1), 2);
         }
         return isChange;
     }
