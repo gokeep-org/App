@@ -60,4 +60,17 @@ public class CombustibleGasMonitorServiceImpl extends BaseService implements Dat
             return false;
         }
     }
+
+    @Override
+    public boolean PreviousDataStatus(String id, Integer status) {
+        if (id == null) {
+            return false;
+        }
+        try {
+            combustibleGasMonitorReponsitory.updatePreviousDataStatus(id, status);
+            return true;
+        }catch (Throwable e){
+            return false;
+        }
+    }
 }

@@ -47,4 +47,17 @@ public class IntelligentPowerMonitorServiceImpl extends BaseService implements D
             return false;
         }
     }
+
+    @Override
+    public boolean PreviousDataStatus(String id, Integer status) {
+        if (id == null) {
+            return false;
+        }
+        try {
+            intelligentPowerMonitorReponsitory.updatePreviousDataStatus(id, status);
+            return true;
+        }catch (Throwable e){
+            return false;
+        }
+    }
 }

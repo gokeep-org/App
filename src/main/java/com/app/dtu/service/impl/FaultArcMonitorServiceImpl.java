@@ -47,4 +47,17 @@ public class FaultArcMonitorServiceImpl extends BaseService implements DataServi
             return false;
         }
     }
+
+    @Override
+    public boolean PreviousDataStatus(String id, Integer status) {
+        if (id == null) {
+            return false;
+        }
+        try {
+            faultArcMonitorReponsitory.updatePreviousDataStatus(id, status);
+            return true;
+        }catch (Throwable e){
+            return false;
+        }
+    }
 }

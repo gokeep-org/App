@@ -47,4 +47,17 @@ public class HydraulicPressureMonitorServiceImpl extends BaseService implements 
             return false;
         }
     }
+
+    @Override
+    public boolean PreviousDataStatus(String id, Integer status) {
+        if (id == null) {
+            return false;
+        }
+        try {
+            hydraulicPressureMonitorReponsitory.updatePreviousDataStatus(id, status);
+            return true;
+        }catch (Throwable e){
+            return false;
+        }
+    }
 }

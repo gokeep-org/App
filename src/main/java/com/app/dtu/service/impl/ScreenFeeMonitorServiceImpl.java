@@ -46,4 +46,17 @@ public class ScreenFeeMonitorServiceImpl extends BaseService implements DataServ
             return false;
         }
     }
+
+    @Override
+    public boolean PreviousDataStatus(String id, Integer status) {
+        if (id == null) {
+            return false;
+        }
+        try {
+            screenMonitorReponsitory.updatePreviousDataStatus(id, status);
+            return true;
+        }catch (Throwable e){
+            return false;
+        }
+    }
 }

@@ -32,6 +32,10 @@ public class RedundancyDeviceData implements DeviceDataDeal, Serializable{
 
     @Transient
     protected RedisClient client = DtuUtil.redisClient;
+
+    @Transient
+    private Integer isDuplicate;
+
     // 设备的型号
     private String modelCode;
 
@@ -159,6 +163,14 @@ public class RedundancyDeviceData implements DeviceDataDeal, Serializable{
 
     public void setOld_flag(Integer old_flag) {
         this.old_flag = old_flag;
+    }
+
+    public Integer getIsDuplicate() {
+        return isDuplicate;
+    }
+
+    public void setIsDuplicate(Integer isDuplicate) {
+        this.isDuplicate = isDuplicate;
     }
 
     /**

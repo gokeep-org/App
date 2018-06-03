@@ -20,6 +20,8 @@ import java.util.Set;
 public interface RedisClient {
 
 
+    public void select(Integer database);
+
     public String set(String key, String value);
 
     public String set(String key, String value, String nxxx, String expx, long time);

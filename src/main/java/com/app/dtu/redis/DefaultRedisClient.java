@@ -25,7 +25,10 @@ public class DefaultRedisClient implements RedisClient {
         jedis = JedisUtil.getInstance().getJedis();
     }
 
-
+    public void select(Integer database){
+        database = database == null ? 0 : database;
+        jedis.select(database);
+    }
     @Override
     public String set(String key, String value) {
         return jedis.set(key, value);
