@@ -9,11 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface IntelligentPowerMonitorReponsitory extends JpaRepository<IntelligentPowerMonitorDevice, Long> {
+public interface IntelligentPowerMonitorReponsitory extends JpaRepository<IntelligentPowerMonitorDevice, String> {
     @Modifying
     @Transactional
     @Query(value = "UPDATE IntelligentPowerMonitorDevice device SET device.old_flag=1 where device.messageId = :message_id")
     void updateOldDataStatus(@Param("message_id") String messageId);
 
     List<IntelligentPowerMonitorDevice> findByMessageIdAndCreateDateGreaterThanEqual(String messageId, long time);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE IntelligentPowerMonitorDevice device SET device.old_flag=:status where device.id = :id")
+    void updatePreviousDataStatus(@Param("id") String id, @Param("status") Integer status);
 }

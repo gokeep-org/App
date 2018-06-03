@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface CombustibleGasMonitorReponsitory extends JpaRepository<CombustibleGasMonitorDevice, Long> {
+public interface CombustibleGasMonitorReponsitory extends JpaRepository<CombustibleGasMonitorDevice, String> {
 
     @Modifying
     @Transactional
@@ -17,4 +17,9 @@ public interface CombustibleGasMonitorReponsitory extends JpaRepository<Combusti
     void updateOldDataStatus(@Param("message_id") String messageId);
 
     List<CombustibleGasMonitorDevice> findByMessageIdAndCreateDateGreaterThanEqual(String messageId, long time);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE CombustibleGasMonitorDevice device SET device.old_flag=:status where device.id = :id")
+    void updatePreviousDataStatus(@Param("id") String id, @Param("status") Integer status);
 }

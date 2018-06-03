@@ -10,10 +10,7 @@ import com.google.gson.GsonBuilder;
 import org.springframework.util.CollectionUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class DtuUtil {
     private DtuUtil(){}
@@ -190,4 +187,7 @@ public class DtuUtil {
         return Objects.isNull(object) ? null : gson.fromJson("", (Class<T>) classes);
     }
 
+    public static String getUUID(){
+        return UUID.randomUUID().toString();
+    }
 }

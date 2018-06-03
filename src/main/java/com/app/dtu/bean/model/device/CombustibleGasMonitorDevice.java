@@ -10,9 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -30,10 +30,6 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
 
     public CombustibleGasMonitorDevice() {
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     private Integer trq1;
     private Integer maxtrq1;
@@ -122,16 +118,6 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
         return getMessage();
     }
 
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public static Logger getLogger() {
         return logger;
     }
@@ -188,8 +174,8 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
     @Override
     public String toString() {
         return "CombustibleGasMonitorDevice{" +
-                "id=" + id +
-                ", trq1=" + trq1 +
+                "id=" + getId() +
+                "trq1=" + trq1 +
                 ", maxtrq1=" + maxtrq1 +
                 ", yhq1=" + yhq1 +
                 ", maxyhq1=" + maxyhq1 +

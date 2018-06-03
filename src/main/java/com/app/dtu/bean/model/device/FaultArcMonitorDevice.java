@@ -31,9 +31,9 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
         setMessage(message);
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     private Integer ua;
     private Integer ia;
@@ -173,18 +173,11 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
     public void setHmax(Integer hmax) {
         this.hmax = hmax;
     }
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public String toString() {
         return "FaultArcMonitorDevice{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", ua=" + ua +
                 ", ia=" + ia +
                 ", h1=" + h1 +

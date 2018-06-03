@@ -10,11 +10,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -34,9 +34,9 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
     public FireControlPowerMonitorDevice() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     private Integer ua1;
     private Integer ub1;
@@ -295,13 +295,6 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
         return this;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public boolean execute() {
@@ -368,7 +361,7 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
     @Override
     public String toString() {
         return "FireControlPowerMonitorDevice{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", ua1=" + ua1 +
                 ", ub1=" + ub1 +
                 ", uc1=" + uc1 +

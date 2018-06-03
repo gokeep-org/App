@@ -9,11 +9,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface MonitorManagerDeviceReponsitory extends JpaRepository<MonitorManagerDevice, Long> {
+public interface MonitorManagerDeviceReponsitory extends JpaRepository<MonitorManagerDevice, String> {
     @Modifying
     @Transactional
     @Query(value = "UPDATE MonitorManagerDevice device SET device.old_flag=1 where device.messageId = :message_id")
     void updateOldDataStatus(@Param("message_id") String messageId);
 
     List<MonitorManagerDevice> findByMessageIdAndCreateDateGreaterThanEqual(String messageId, long time);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE MonitorManagerDevice device SET device.old_flag=:status where device.id = :id")
+    void updatePreviousDataStatus(@Param("id") String id, @Param("status") Integer status);
 }
+

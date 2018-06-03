@@ -12,9 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -32,9 +32,9 @@ public class PrventFireDoorMonitorDevice extends RedundancyDeviceData implements
     public PrventFireDoorMonitorDevice() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     private Integer status;
 
@@ -63,14 +63,6 @@ public class PrventFireDoorMonitorDevice extends RedundancyDeviceData implements
         }
     }
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public boolean execute() {
@@ -111,7 +103,7 @@ public class PrventFireDoorMonitorDevice extends RedundancyDeviceData implements
     @Override
     public String toString() {
         return "PrventFireDoorMonitorDevice{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", status=" + status +
                 '}';
     }

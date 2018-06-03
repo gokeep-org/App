@@ -29,9 +29,9 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
     public ElectricalFireMonitorDevice() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     private Integer ua;
     private Integer ub;
@@ -489,14 +489,6 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
         this.pt8 = pt8;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public static Logger getLogger() {
         return logger;
     }
@@ -760,7 +752,7 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
     @Override
     public String toString() {
         return "ElectricalFireMonitorDevice{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", ua=" + ua +
                 ", ub=" + ub +
                 ", uc=" + uc +

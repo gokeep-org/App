@@ -35,7 +35,7 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(AppStart.class)
-@ActiveProfiles(value = "dev")
+@ActiveProfiles(value = "produce")
 public class TestMybatis {
     private static final Logger logger = LoggerFactory.getLogger(TestMybatis.class);
 
@@ -87,10 +87,21 @@ public class TestMybatis {
     @Test
     public void testCombustible(){
         CombustibleGasMonitorDevice device = new CombustibleGasMonitorDevice();
+        device.setId("aabbcc");
         device.setMessageId("1802080602000153");
         device.setOld_flag(1);
-        combustibleGasMonitorReponsitory.updateOldDataStatus("1802080602000153");
+        combustibleGasMonitorReponsitory.save(device);
+//        combustibleGasMonitorReponsitory.updateOldDataStatus("1802080602000153");
         logger.info("");
+    }
+
+    @Test
+    public void testUpdatePreviousOldFlag(){
+        CombustibleGasMonitorDevice device = new CombustibleGasMonitorDevice();
+        device.setId("aabbcc");
+        device.setMessageId("1802080602000153");
+        device.setOld_flag(1);
+        combustibleGasMonitorReponsitory.updatePreviousDataStatus("aabbcc", 2);
     }
 //
 //    @Test

@@ -15,7 +15,6 @@ import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -239,9 +238,9 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
         this.scx = scx;
     }
 
-    public long getId() {
-        return id;
-    }
+//    public long getId() {
+//        return id;
+//    }
 
     public void setId(long id) {
         this.id = id;
@@ -250,6 +249,7 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
     @Override
     public String toString() {
         return "MonitorManagerDevice{" +
+                "id=" + getId() +
                 "x1=" + x1 +
                 ", x2=" + x2 +
                 ", x3=" + x3 +

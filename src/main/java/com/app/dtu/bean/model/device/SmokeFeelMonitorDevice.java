@@ -30,9 +30,9 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
     public SmokeFeelMonitorDevice() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
     private Integer pt;
     private Integer ptstatus;
     private Integer y1;
@@ -114,14 +114,6 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
         this.maxy1 = maxy1;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public static Logger getLogger() {
         return logger;
     }
@@ -145,7 +137,7 @@ public class SmokeFeelMonitorDevice extends RedundancyDeviceData implements Devi
     @Override
     public String toString() {
         return "SmokeFeelMonitorDevice{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", pt=" + pt +
                 ", ptstatus=" + ptstatus +
                 ", y1=" + y1 +

@@ -6,6 +6,7 @@ import com.app.dtu.util.DtuUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import java.io.Serializable;
@@ -18,6 +19,17 @@ import java.util.Map;
 @MappedSuperclass
 public class RedundancyDeviceData implements DeviceDataDeal, Serializable{
     private static final Logger logegr = LoggerFactory.getLogger(RedundancyDeviceData.class);
+    @Id
+    private String id = DtuUtil.getUUID();
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     @Transient
     protected RedisClient client = DtuUtil.redisClient;
     // 设备的型号

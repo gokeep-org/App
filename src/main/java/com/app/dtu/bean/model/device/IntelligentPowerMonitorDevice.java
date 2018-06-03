@@ -35,10 +35,6 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     public IntelligentPowerMonitorDevice() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     // 电压参数
     private String ua;
     private String dw_ua;
@@ -554,8 +550,8 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     @Override
     public String toString() {
         return "IntelligentPowerMonitorDevice{" +
-                "id=" + id +
-                ", ua='" + ua + '\'' +
+                "id=" + getId() +
+                "ua='" + ua + '\'' +
                 ", dw_ua='" + dw_ua + '\'' +
                 ", ub='" + ub + '\'' +
                 ", dw_ub='" + dw_ub + '\'' +
@@ -572,7 +568,9 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
                 ", umax=" + umax +
                 ", umin=" + umin +
                 ", usum='" + usum + '\'' +
+                ", dw_usum='" + dw_usum + '\'' +
                 ", isum='" + isum + '\'' +
+                ", dw_isum='" + dw_isum + '\'' +
                 ", imax=" + imax +
                 ", dw_imax='" + dw_imax + '\'' +
                 ", ptmax=" + ptmax +

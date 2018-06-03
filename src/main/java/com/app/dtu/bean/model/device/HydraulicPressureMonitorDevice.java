@@ -29,9 +29,9 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
     public HydraulicPressureMonitorDevice() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
 
     private Integer sy1;
 
@@ -65,13 +65,7 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
             return false;
         }
     }
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Integer getSy1() {
         return sy1;
@@ -119,7 +113,7 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
     @Override
     public String toString() {
         return "HydraulicPressureMonitorDevice{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", sy1=" + sy1 +
                 ", maxsy1=" + maxsy1 +
                 '}';
