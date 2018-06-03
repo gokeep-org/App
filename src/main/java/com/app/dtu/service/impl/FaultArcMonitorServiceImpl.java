@@ -49,7 +49,7 @@ public class FaultArcMonitorServiceImpl extends BaseService implements DataServi
     }
 
     @Override
-    public boolean PreviousDataStatus(String id, Integer status) {
+    public boolean updatePreviousDataStatus(String id, Integer status) {
         if (id == null) {
             return false;
         }

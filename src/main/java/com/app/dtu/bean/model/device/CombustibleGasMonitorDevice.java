@@ -88,11 +88,13 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
                 isChange = false;
             }
         }
-        if (isChange) {
+        if (!isChange) {
             Map<String, String> hashValue = new HashMap<>();
             hashValue.put("warn", String.valueOf(getWarnList()));
             hashValue.put("id", String.valueOf(getId()));
             client.hmset(getMessageId(),hashValue);
+            logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
+            ServiceItem.combustibleGasMonitorService.updatePreviousDataStatus(getId(), 2);
         }
         return isChange;
     }

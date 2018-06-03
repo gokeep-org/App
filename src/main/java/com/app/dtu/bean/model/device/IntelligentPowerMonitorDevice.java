@@ -12,9 +12,7 @@ import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * 智能电力设监控设别-02
@@ -496,13 +494,26 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
 
     @Override
     public boolean isChange() {
-        String value = client.get(getMessageId());
-        if (value == null || !value.equalsIgnoreCase(String.valueOf(getWarnList()))){
-            client.set(getMessageId(), String.valueOf(getWarnList()));
-            return true;
+        boolean isChange = false;
+        List<String> values = client.hmget(getMessageId(), "warn", "id");
+        if (CollectionUtils.isEmpty(values) || values.size() < 2) {
+            isChange = true;
         }else {
-            return false;
+            if (!values.get(0).equalsIgnoreCase(String.valueOf(getWarnList()))){
+                isChange = true;
+            }else{
+                isChange = false;
+            }
         }
+        if (!isChange) {
+            Map<String, String> hashValue = new HashMap<>();
+            hashValue.put("warn", String.valueOf(getWarnList()));
+            hashValue.put("id", String.valueOf(getId()));
+            client.hmset(getMessageId(),hashValue);
+            logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
+            ServiceItem.intelligentPowerService.updatePreviousDataStatus(getId(), 2);
+        }
+        return isChange;
     }
 
     private String getValueByList(List<String> values, int i) {

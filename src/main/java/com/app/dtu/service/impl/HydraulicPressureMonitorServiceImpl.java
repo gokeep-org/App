@@ -49,7 +49,7 @@ public class HydraulicPressureMonitorServiceImpl extends BaseService implements 
     }
 
     @Override
-    public boolean PreviousDataStatus(String id, Integer status) {
+    public boolean updatePreviousDataStatus(String id, Integer status) {
         if (id == null) {
             return false;
         }

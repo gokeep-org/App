@@ -10,8 +10,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -94,13 +97,26 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
     }
     @Override
     public boolean isChange() {
-        String value = client.get(getMessageId());
-        if (value == null || !value.equalsIgnoreCase(String.valueOf(getWarnList()))){
-            client.set(getMessageId(), String.valueOf(getWarnList()));
-            return true;
+        boolean isChange = false;
+        List<String> values = client.hmget(getMessageId(), "warn", "id");
+        if (CollectionUtils.isEmpty(values) || values.size() < 2) {
+            isChange = true;
         }else {
-            return false;
+            if (!values.get(0).equalsIgnoreCase(String.valueOf(getWarnList()))){
+                isChange = true;
+            }else{
+                isChange = false;
+            }
         }
+        if (!isChange) {
+            Map<String, String> hashValue = new HashMap<>();
+            hashValue.put("warn", String.valueOf(getWarnList()));
+            hashValue.put("id", String.valueOf(getId()));
+            client.hmset(getMessageId(),hashValue);
+            logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
+            ServiceItem.faultArcMonitorService.updatePreviousDataStatus(getId(), 2);
+        }
+        return isChange;
     }
     @Override
     public FaultArcMonitorDevice buildDevice() {

@@ -10,5 +10,5 @@ public interface DataService <T extends DeviceDataDeal>{
     public boolean save(T deviceData);
     public boolean updateOldDataStatus(String messageId);
     public boolean updateOffLineData(String messageId);
-    public boolean PreviousDataStatus(String id, Integer status);
+    public boolean updatePreviousDataStatus(String id, Integer status);
 }

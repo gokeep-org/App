@@ -49,7 +49,7 @@ public class IntelligentPowerMonitorServiceImpl extends BaseService implements D
     }
 
     @Override
-    public boolean PreviousDataStatus(String id, Integer status) {
+    public boolean updatePreviousDataStatus(String id, Integer status) {
         if (id == null) {
             return false;
         }
