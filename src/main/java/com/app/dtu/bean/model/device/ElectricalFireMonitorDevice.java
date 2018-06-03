@@ -36,9 +36,9 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
 
-    private Integer ua;
-    private Integer ub;
-    private Integer uc;
+    private String ua;
+    private String ub;
+    private String uc;
     private String ia;
     private String ib;
     private String ic;
@@ -144,9 +144,9 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
             List<Integer> dataMsgs = dataMsg.getDatas();
             if (message.parseDeviceModelEnum() == DeviceTypeName.ELECTRICAL_FIRE_MONITOR_0101){
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_03) {
-                    ua = DtuUtil.getIntegerValue(dataMsgs, 0);
-                    ub = DtuUtil.getIntegerValue(dataMsgs, 1);
-                    uc = DtuUtil.getIntegerValue(dataMsgs, 2);
+                    ua = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 0));
+                    ub = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 1));
+                    uc = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 2));
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_04){
                     ia = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 0) /10.0f);
                     ib = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 1) /10.0f);
@@ -290,28 +290,36 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
         return isChange;
     }
 
-    public Integer getUa() {
+    public String getUa() {
         return ua;
     }
 
-    public void setUa(Integer ua) {
+    public void setUa(String ua) {
         this.ua = ua;
     }
 
-    public Integer getUb() {
+    public String getUb() {
         return ub;
     }
 
-    public void setUb(Integer ub) {
+    public void setUb(String ub) {
         this.ub = ub;
     }
 
-    public Integer getUc() {
+    public String getUc() {
         return uc;
     }
 
-    public void setUc(Integer uc) {
+    public void setUc(String uc) {
         this.uc = uc;
+    }
+
+    public Integer getImax() {
+        return imax;
+    }
+
+    public void setImax(Integer imax) {
+        this.imax = imax;
     }
 
     public String getIa() {
