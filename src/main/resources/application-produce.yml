@@ -4,10 +4,10 @@ logging:
   level: info
   file: ./log/app.log
 spring:
+  # Database connection info
   datasource:
     name: dataSource
     type: com.zaxxer.hikari.HikariDataSource
-#    url: jdbc:mysql://118.89.240.60/fms?useUnicode=true&characterEncoding=utf8&useSSL=false
     url: jdbc:mysql://114.116.23.218/fms?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: qwe@w1#gg$v_
@@ -17,8 +17,12 @@ spring:
           maximum-pool-size: 40
           pool-name: hikari-pool
           connection-timeout: 8000
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+  # Message queue config
   rabbitmq:
-#    host: 59.110.9.17
     host: 114.116.23.218
     port: 5672
     username: admin
@@ -26,9 +30,18 @@ spring:
     listener:
       prefetch: 1
       transaction-size: 1
-  jpa:
-    show-sql: false
-    hibernate:
-      ddl-auto: update
+  # Redis cache config
+#  redis:
+#    host: 114.116.23.218
+#    database: 0
+#    port: 6379
+#    timeout: 0
+#    pool:
+#      max-active: 50
+#      max-idle: 50
+#      min-idle: 0
+#      max-wait: 10
+
+  # Auto active produce env
   profiles:
     active: produce

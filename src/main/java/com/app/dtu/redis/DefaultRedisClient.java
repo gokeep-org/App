@@ -27,7 +27,6 @@ public class DefaultRedisClient implements RedisClient {
 
     public void select(Integer database){
         database = database == null ? 0 : database;
-        jedis.exp
         jedis.select(database);
     }
     @Override

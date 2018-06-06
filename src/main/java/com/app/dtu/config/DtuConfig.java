@@ -23,7 +23,6 @@ public class DtuConfig {
     public static final String MQ_NAME = "DTU_MESSAGE";
 
 
-
     // 数据库表名前缀
     public static final String DTU_TABLE_PRIFIX = "dtu_";
     // 是否需要服务启动检查并初始化设备类型数据
@@ -46,7 +45,7 @@ public class DtuConfig {
 
     public static final String REDIS_URL = "114.116.23.218";
     // FMS系统路径
-    public static final String FMS_SYS_API_PATH = "http://118.89.240.60:9999/FMS/V1-API";
+    public static final String FMS_SYS_API_PATH = "http://114.116.23.218:9999/FMS/V1-API";
     // FMS报警接口路径
     public static final String FMS_SYS_WARN_NOTICE_PATH = FMS_SYS_API_PATH + "/notice/warn?id=%s&dt=%s";
 
