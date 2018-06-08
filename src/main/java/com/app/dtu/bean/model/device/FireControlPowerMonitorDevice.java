@@ -111,14 +111,17 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
         if (CollectionUtils.isEmpty(message.getDataMsgs())) {
             return this;
         }
-        // TODO: 把变比放到最前面， 调整到每一个设备类型中操作
-        if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0402){
-            message.setDataMsgs(setFirstValue(message.getDataMsgs(), 4));
-        }else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0403){
-            message.setDataMsgs(setFirstValue(message.getDataMsgs(), 2));
-        } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0404){
-            message.setDataMsgs(setFirstValue(message.getDataMsgs(), 4));
+        if (message.getStatus() != 4) {
+            if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0402){
+                message.setDataMsgs(setFirstValue(message.getDataMsgs(), 4));
+            }else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0403){
+                message.setDataMsgs(setFirstValue(message.getDataMsgs(), 2));
+            } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0404){
+                message.setDataMsgs(setFirstValue(message.getDataMsgs(), 4));
+            }
         }
+        // TODO: 把变比放到最前面， 调整到每一个设备类型中操作
+
         for (int i = 0; i < message.getDataMsgs().size(); i++) {
             DataMsg dataMsg = message.getDataMsgs().get(i);
             List<Integer> dataMsgs = dataMsg.getDatas();
@@ -318,7 +321,7 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
             ServiceItem.fireControlPowerService.updateOldDataStatus(getMessageId());
             ServiceItem.fireControlPowerService.save(deviceDataDeal);
         } catch (Throwable e) {
-            logger.error("Execute add data to db or generate entity is error");
+            logger.error("Execute add data to db or generate entity is error", e.getMessage());
             return false;
         }
         return true;
