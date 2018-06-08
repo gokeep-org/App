@@ -46,9 +46,11 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
     public MonitorManagerDevice() {
     }
 
+    //    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private long id;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id = DtuUtil.getUUID();
 
     @Override
     public MonitorManagerDevice buildDevice() {
@@ -69,7 +71,7 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
     @Override
     public MonitorManagerDevice generateEntity(Message message) {
         buildRedunancyDeviceInfo();
-        if (CollectionUtils.isEmpty(message.getDataMsgs())){
+        if (CollectionUtils.isEmpty(message.getDataMsgs())) {
             return this;
         }
         for (int i = 0; i < message.getDataMsgs().size(); i++) {
@@ -97,7 +99,7 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
     public boolean execute() {
         try {
             DeviceDataDeal deviceDataDeal = getStorageEntity();
-            if (Objects.isNull(deviceDataDeal)){
+            if (Objects.isNull(deviceDataDeal)) {
                 return false;
             }
             ServiceItem.monitorManagerService.updateOldDataStatus(getMessageId());
@@ -115,10 +117,10 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
         List<String> values = client.hmget(getMessageId(), "warn", "id");
         if (CollectionUtils.isEmpty(values) || values.size() < 2) {
             isChange = true;
-        }else {
-            if (values.get(0) == null || values.get(1) == null || !values.get(0).equalsIgnoreCase(String.valueOf(getWarnList()))){
+        } else {
+            if (values.get(0) == null || values.get(1) == null || !values.get(0).equalsIgnoreCase(String.valueOf(getWarnList()))) {
                 isChange = true;
-            }else{
+            } else {
                 isChange = false;
             }
         }
@@ -126,13 +128,14 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
             Map<String, String> hashValue = new HashMap<>();
             hashValue.put("warn", String.valueOf(getWarnList()));
             hashValue.put("id", String.valueOf(getId()));
-            client.hmset(getMessageId(),hashValue);
+            client.hmset(getMessageId(), hashValue);
             logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
-        }else {
+        } else {
             ServiceItem.monitorManagerService.updatePreviousDataStatus(values.get(1), 2);
         }
         return isChange;
     }
+
     public int getX1() {
         return x1;
     }
@@ -254,11 +257,13 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
         this.scx = scx;
     }
 
-//    public long getId() {
-//        return id;
-//    }
+    @Override
+    public String getId() {
+        return id;
+    }
 
-    public void setId(long id) {
+    @Override
+    public void setId(String id) {
         this.id = id;
     }
 
