@@ -12,9 +12,24 @@ public class PreviousData {
     private String deviceId;
     private Data data;
 
-    public PreviousData build() {
+    public static PreviousData build() {
         return new PreviousData();
     }
+
+    public PreviousData buildData(String deviceId, String strongId, String warnList, Integer status){
+        PreviousData.Data data = new PreviousData.Data(warnList, strongId, status);
+        this.deviceId = deviceId;
+        return this;
+    }
+
+    public Map<String, String> getDataMap(){
+        return this.data.toMap();
+    }
+
+    public PreviousData get(){
+        return this;
+    }
+
 
     public PreviousData build(String devideId, String warnValue, String id){
         return build().deviceId(deviceId).warn(warnValue).id(id);
@@ -35,6 +50,10 @@ public class PreviousData {
     public PreviousData id(String id){
         this.data.setId(id);
         return this;
+    }
+
+    public Data getData() {
+        return data;
     }
 
     public void setData(Data data) {
@@ -60,21 +79,40 @@ public class PreviousData {
     }
 
 
+    /**
+     *  这里添加上一次的消息缓存策略
+     *  这里的id为存储的主键id
+     */
     class Data {
         private String warn;
         private String id;
+        private Integer status;
 
         public Data(String warn, String id) {
             this.warn = warn;
             this.id = id;
         }
 
+        public Data(String warn, String id, Integer status) {
+            this.warn = warn;
+            this.id = id;
+            this.status = status;
+        }
 
         public Map<String, String> toMap(){
             Map<String, String> result = new HashMap<>();
             result.put("warn", this.warn);
             result.put("id", this.id);
+            result.put("status", String.valueOf(this.status));
             return result;
+        }
+
+        public Integer getStatus() {
+            return status;
+        }
+
+        public void setStatus(Integer status) {
+            this.status = status;
         }
 
         public String getWarn() {
