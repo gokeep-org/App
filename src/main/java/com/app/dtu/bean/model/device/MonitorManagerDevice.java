@@ -7,13 +7,16 @@ import com.app.dtu.bean.model.DeviceDataDeal;
 import com.app.dtu.bean.model.ParseToEntityAdapter;
 import com.app.dtu.bean.model.RedundancyDeviceData;
 import com.app.dtu.config.DtuConfig;
+import com.app.dtu.redis.RedisClient;
 import com.app.dtu.service.ServiceItem;
 import com.app.dtu.util.DtuUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -134,6 +137,11 @@ public class MonitorManagerDevice extends RedundancyDeviceData implements Device
             ServiceItem.monitorManagerService.updatePreviousDataStatus(values.get(1), 2);
         }
         return isChange;
+    }
+
+    @Override
+    public RedisClient redisClient() {
+        return redisClient();
     }
 
     public int getX1() {

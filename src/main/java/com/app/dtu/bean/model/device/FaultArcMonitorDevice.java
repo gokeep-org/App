@@ -4,6 +4,7 @@ import com.app.dtu.bean.DataMsg;
 import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.*;
 import com.app.dtu.config.DtuConfig;
+import com.app.dtu.redis.RedisClient;
 import com.app.dtu.service.ServiceItem;
 import com.app.dtu.util.DtuUtil;
 import org.slf4j.Logger;
@@ -191,7 +192,10 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
     public void setHmax(Integer hmax) {
         this.hmax = hmax;
     }
-
+    @Override
+    public RedisClient redisClient() {
+        return redisClient();
+    }
     @Override
     public String toString() {
         return "FaultArcMonitorDevice{" +

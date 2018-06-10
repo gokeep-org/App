@@ -6,6 +6,7 @@ import com.app.dtu.bean.model.DeviceDataDeal;
 import com.app.dtu.bean.model.ParseToEntityAdapter;
 import com.app.dtu.bean.model.RedundancyDeviceData;
 import com.app.dtu.config.DtuConfig;
+import com.app.dtu.redis.RedisClient;
 import com.app.dtu.service.ServiceItem;
 import com.app.dtu.util.DtuUtil;
 import org.slf4j.Logger;
@@ -99,7 +100,10 @@ public class ScreenMonitorDevice extends RedundancyDeviceData implements DeviceD
         return getMessage();
     }
 
-
+    @Override
+    public RedisClient redisClient() {
+        return redisClient();
+    }
 
     @Override
     public ScreenMonitorDevice generateEntity(Message message) {

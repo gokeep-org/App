@@ -36,6 +36,8 @@ public class DtuConfig {
     public static final String LOCAL_CACHE_CRON = "0 0 0/1 * * ?";
     // 离线数据更新任务cron
     public static final String LOCAL_OFF_LINE_UPDATE_CRON = "0 0/15 * * * ?";
+    // 定时任务执行缓存数据到数据库, 每1小时执行一次
+    public static final String CACHE_PREVIOUS_DATA = "0 0 /1 * * ?";
     // 0 0 0/1 * * ? 1小时更新1次
     public static final int LOCAL_OFF_LINE_UPDATE_BEFORE_TIME_SCAN = 1000 * 60 * 15;
     // PID时间更新间隔，确保特殊情况下是哪一次发送的数据

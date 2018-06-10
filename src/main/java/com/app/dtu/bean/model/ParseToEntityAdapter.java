@@ -5,6 +5,7 @@ import cn.networklab.requests.core.RequestImpl;
 import com.app.dtu.bean.DataMsg;
 import com.app.dtu.bean.Message;
 import com.app.dtu.config.DtuConfig;
+import com.app.dtu.redis.RedisClient;
 import com.app.dtu.util.DtuUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,15 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
     // 校验消息
     default boolean checkMessage(Message message){
         return Objects.isNull(message);
+    }
+
+    /**
+     * 同步更新redis缓存
+     */
+    default void updateCache() {
+        String deviceId = getMessage().getId();
+        PreviousData previousData = PreviousData.build().buildData(deviceId, getId(), String.valueOf(getMessage().getWarnList()), getMessage().getStatus());
+        redisClient().hmset(previousData.getDeviceId(), previousData.getData().toMap());
     }
 
     // 校验设备
@@ -93,5 +103,13 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
         return message;
     }
 
+    /**
+     * 获取到每一条存储数据的uuid
+     * @return
+     */
+    public String getId();
+
+
+    public RedisClient redisClient();
 
 }

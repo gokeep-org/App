@@ -2,6 +2,7 @@ package com.app.dtu.bean.model;
 
 import com.app.dtu.bean.Message;
 import com.app.dtu.config.DtuConfig;
+import com.app.dtu.redis.RedisClient;
 import com.app.dtu.service.ServiceItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,6 +68,11 @@ public class Device implements DeviceDataDeal, ParseToEntityAdapter<Device>, Ser
         return false;
     }
 
+    @Override
+    public String getId() {
+        return String.valueOf(id);
+    }
+
     public void setMessage(Message message) {
         this.message = message;
     }
@@ -81,8 +87,9 @@ public class Device implements DeviceDataDeal, ParseToEntityAdapter<Device>, Ser
         return message;
     }
 
-    public long getId() {
-        return id;
+    @Override
+    public RedisClient redisClient() {
+        return redisClient();
     }
 
     public void setId(long id) {
