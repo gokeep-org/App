@@ -38,7 +38,8 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
 
     private Integer sy1;
 
-    private Integer maxsy1;
+    // TODO: 要除1000
+    private String maxsy1;
     @Override
     public HydraulicPressureMonitorDevice generateEntity(Message message) {
         buildRedunancyDeviceInfo();
@@ -52,7 +53,7 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_10) {
                     sy1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_90){
-                    maxsy1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    maxsy1 = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 0)/ 1000f);
                 }
             }
         }
@@ -92,11 +93,11 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
         this.sy1 = sy1;
     }
 
-    public Integer getMaxsy1() {
+    public String getMaxsy1() {
         return maxsy1;
     }
 
-    public void setMaxsy1(Integer maxsy1) {
+    public void setMaxsy1(String maxsy1) {
         this.maxsy1 = maxsy1;
     }
 
