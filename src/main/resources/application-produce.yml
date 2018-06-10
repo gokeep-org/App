@@ -31,16 +31,15 @@ spring:
       prefetch: 1
       transaction-size: 1
   # Redis cache config
-#  redis:
-#    host: 114.116.23.218
-#    database: 0
-#    port: 6379
-#    timeout: 0
-#    pool:
-#      max-active: 50
-#      max-idle: 50
-#      min-idle: 0
-#      max-wait: 10
+  redis:
+    host: 114.116.23.218
+    database: 0
+    port: 6379
+    timeout: 3000
+    pool:
+      max-active: 2000
+      max-idle: 500
+      min-idle: 50
 
   # Auto active produce env
   profiles:
