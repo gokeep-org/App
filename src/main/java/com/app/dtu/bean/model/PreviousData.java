@@ -1,6 +1,10 @@
 package com.app.dtu.bean.model;
 
-import java.util.HashMap;
+import com.app.dtu.config.DtuConfig;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Map;
 
 /**
@@ -8,22 +12,31 @@ import java.util.Map;
  * key'为设备ID
  * value为Data对象hashMap
  */
-public class PreviousData {
+
+@Entity
+@Table(name =  DtuConfig.DTU_TABLE_PRIFIX +"redis_cache_previous_data")
+public class PreviousData extends Data{
+    @Id
     private String deviceId;
-    private Data data;
+
+    public PreviousData(String warn, String id) {
+        super(warn, id);
+    }
+
+    public PreviousData(){}
 
     public static PreviousData build() {
         return new PreviousData();
     }
 
     public PreviousData buildData(String deviceId, String strongId, String warnList, Integer status){
-        PreviousData.Data data = new PreviousData.Data(warnList, strongId, status);
+        Data data = new Data(warnList, strongId, status);
         this.deviceId = deviceId;
         return this;
     }
 
     public Map<String, String> getDataMap(){
-        return this.data.toMap();
+        return getData().toMap();
     }
 
     public PreviousData get(){
@@ -43,21 +56,21 @@ public class PreviousData {
 
 
     public PreviousData warn(String warnValue) {
-        this.data.setWarn(warnValue);
+        getData().setWarn(warnValue);
         return this;
     }
 
     public PreviousData id(String id){
-        this.data.setId(id);
+        getData().setId(id);
         return this;
     }
 
     public Data getData() {
-        return data;
+        return getData();
     }
 
     public void setData(Data data) {
-        this.data = data;
+        setData(data);
     }
 
 
@@ -74,70 +87,7 @@ public class PreviousData {
     public String toString() {
         return "PreviousData{" +
                 "deviceId='" + deviceId + '\'' +
-                ", data=" + data +
+                ", data=" + getData() +
                 '}';
-    }
-
-
-    /**
-     *  这里添加上一次的消息缓存策略
-     *  这里的id为存储的主键id
-     */
-    class Data {
-        private String warn;
-        private String id;
-        private Integer status;
-
-        public Data(String warn, String id) {
-            this.warn = warn;
-            this.id = id;
-        }
-
-        public Data(String warn, String id, Integer status) {
-            this.warn = warn;
-            this.id = id;
-            this.status = status;
-        }
-
-        public Map<String, String> toMap(){
-            Map<String, String> result = new HashMap<>();
-            result.put("warn", this.warn);
-            result.put("id", this.id);
-            result.put("status", String.valueOf(this.status));
-            return result;
-        }
-
-        public Integer getStatus() {
-            return status;
-        }
-
-        public void setStatus(Integer status) {
-            this.status = status;
-        }
-
-        public String getWarn() {
-            return warn;
-        }
-
-        public void setWarn(String warn) {
-            this.warn = warn;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        @Override
-        public String toString() {
-            return "Data{" +
-                    "warn='" + warn + '\'' +
-                    ", id='" + id + '\'' +
-                    '}';
-        }
-
     }
 }
