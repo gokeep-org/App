@@ -45,7 +45,7 @@ public class NettyTest {
             int readed = in.read(buff);
             if (readed > 0) {
                 String str = new String(buff, 4, readed);
-                logger.info("client received msg from server:" + str);
+                logger.info("redisClient received msg from server:" + str);
             }
             out.close();
         } catch (UnknownHostException e) {

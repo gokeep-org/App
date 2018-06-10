@@ -51,6 +51,6 @@ public class DtuServerInitializer extends ChannelInitializer<SocketChannel> {
         if (!DtuConfig.ENABLE_KEEP_ALIVE_CONNECTION){
             pipeline.addLast("destroy-res-handler", new DtuResDestroyHandler());
         }
-        logger.info("Netty socket server listen client connection, [ip: {}]", socketChannel.remoteAddress());
+        logger.info("Netty socket server listen redisClient connection, [ip: {}]", socketChannel.remoteAddress());
     }
 }

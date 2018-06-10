@@ -21,19 +21,19 @@
 ////        System.out.println(jedis.lrange("aaa", 0, -1));
 ////        System.out.println(jedis.exists("aaa"));
 ////        String res= DefaultRedisClient.get().get("aaa");
-//        RedisClient client = new DefaultRedisClient();
-////        String res = client.set("name", "aaa");
+//        RedisClient redisClient = new DefaultRedisClient();
+////        String res = redisClient.set("name", "aaa");
 //        Map<String, String> map = new HashMap<>();
 //        map.put("111", "aaa333444");
 //        map.put("22", "bbb");
-////        client.close();
-////        JedisUtil.getInstance().closeJedis(client);
+////        redisClient.close();
+////        JedisUtil.getInstance().closeJedis(redisClient);
 ////        System.out.println(res);
-////        RedisClient client = new DefaultRedisClient();
-//        client.hmset("name1", map);
-////        System.out.println(client.get("name"));
-////        System.out.println(client.lrange("aaa", 0 , -1));
-//        System.out.println(client.hmget("name1", "111"));
+////        RedisClient redisClient = new DefaultRedisClient();
+//        redisClient.hmset("name1", map);
+////        System.out.println(redisClient.get("name"));
+////        System.out.println(redisClient.lrange("aaa", 0 , -1));
+//        System.out.println(redisClient.hmget("name1", "111"));
 //
 //    }
 //}

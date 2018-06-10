@@ -2,8 +2,6 @@ package com.app.dtu.config;
 
 import cn.networklab.requests.Requests;
 import cn.networklab.requests.core.RequestImpl;
-import com.app.dtu.redis.DefaultRedisClient;
-import com.app.dtu.redis.RedisClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,8 +14,8 @@ public class ApplicationBeanConfig {
         return new RequestImpl();
     }
 
-    @Bean
-    public RedisClient redisClient(){
-        return new DefaultRedisClient();
-    }
+//    @Bean
+//    public RedisClient redisClient(){
+//        return new DefaultRedisClient();
+//    }
 }

@@ -34,7 +34,7 @@ public class DtuResDestroyHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelInactive(ChannelHandlerContext ctx) {
         Channel incoming = ctx.channel();
-        logger.info("Listen client {} is not connection", incoming.remoteAddress());
+        logger.info("Listen redisClient {} is not connection", incoming.remoteAddress());
     }
 
     /**

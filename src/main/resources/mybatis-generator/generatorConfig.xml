@@ -57,7 +57,7 @@
 
         <!--生成对应表和类名-->
         <!--<table schema="hms"-->
-               <!--tableName="client"-->
+               <!--tableName="redisClient"-->
                <!--enableCountByExample="false"-->
                <!--enableUpdateByExample="false"-->
                <!--enableDeleteByExample="false"-->

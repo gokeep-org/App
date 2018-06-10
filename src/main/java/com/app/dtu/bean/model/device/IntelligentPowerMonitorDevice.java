@@ -496,11 +496,11 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
     @Override
     public boolean isChange() {
         boolean isChange = false;
-        List<String> values = client.hmget(getMessageId(), "warn", "id");
+        List<Object> values = redisClient.opsForHash().multiGet(getMessageId(),  Arrays.asList(new String[]{"warn", "id"}));
         if (CollectionUtils.isEmpty(values) || values.size() < 2) {
             isChange = true;
         }else {
-            if (values.get(0) == null || values.get(1) == null || !values.get(0).equalsIgnoreCase(String.valueOf(getWarnList()))){
+            if (values.get(0) == null || values.get(1) == null || !String.valueOf(values.get(0)).equalsIgnoreCase(String.valueOf(getWarnList()))){
                 isChange = true;
             }else{
                 isChange = false;
@@ -510,10 +510,10 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
             Map<String, String> hashValue = new HashMap<>();
             hashValue.put("warn", String.valueOf(getWarnList()));
             hashValue.put("id", String.valueOf(getId()));
-            client.hmset(getMessageId(),hashValue);
+            redisClient.opsForHash().putAll(getMessageId(),hashValue);
             logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
         }else {
-            ServiceItem.intelligentPowerService.updatePreviousDataStatus(values.get(1), 2);
+            ServiceItem.intelligentPowerService.updatePreviousDataStatus(String.valueOf(values.get(1)), 2);
         }
         return isChange;
     }

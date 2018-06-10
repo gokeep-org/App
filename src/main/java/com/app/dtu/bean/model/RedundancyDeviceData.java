@@ -1,10 +1,12 @@
 package com.app.dtu.bean.model;
 
 import com.app.dtu.bean.Message;
-import com.app.dtu.redis.RedisClient;
 import com.app.dtu.util.DtuUtil;
+import com.app.util.ApplicationContextHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -30,8 +32,9 @@ public class RedundancyDeviceData implements DeviceDataDeal, Serializable{
         this.id = id;
     }
 
+    @Autowired
     @Transient
-    protected RedisClient client = DtuUtil.redisClient;
+    protected StringRedisTemplate redisClient = ApplicationContextHolder.getContext().getBean(StringRedisTemplate.class);
 
     @Transient
     private Integer isDuplicate;
