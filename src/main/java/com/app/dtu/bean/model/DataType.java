@@ -36,6 +36,7 @@ public enum DataType {
     DATA_TYPE_8A(0x8A, "煤制气报警阈值"),
     DATA_TYPE_8B(0x8B, "电流变比值"),
     DATA_TYPE_90(0x90, "水压报警阈值"),
+    DATA_TYPE_91(0x91, "报警列表"),
     DATA_TYPE_11(0x11, "Ua谐波含有率"),
     DATA_TYPE_12(0x12, "Ub谐波含有率"),
     DATA_TYPE_13(0x13, "Uc谐波含有率"),

@@ -81,6 +81,8 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
     private Integer ptmax;
     private Integer stmax;
 
+    private Integer warnList2;
+
     @Override
     public boolean isChange() {
         boolean isChange = false;
@@ -106,6 +108,10 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
         return isChange;
     }
 
+    public void buildWarnList(){
+
+    }
+
     @Override
     public FireControlPowerMonitorDevice generateEntity(Message message) {
         buildRedunancyDeviceInfo();
@@ -119,6 +125,8 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
                 message.setDataMsgs(setFirstValue(message.getDataMsgs(), 2));
             } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0404){
                 message.setDataMsgs(setFirstValue(message.getDataMsgs(), 4));
+            }else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0405){
+                message.setDataMsgs(setFirstValue(message.getDataMsgs(), 11));
             }
         }
         // TODO: 把变比放到最前面， 调整到每一个设备类型中操作
@@ -145,6 +153,8 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
                     stmax = DtuUtil.getIntegerValue(dataMsgs, 0);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
                     imax1 = String.valueOf((DtuUtil.getIntegerValue(dataMsgs, 0) * ibb1)/1000f);
+                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_91) {
+                    warnList2 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0402) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_03) {
@@ -198,6 +208,8 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
                     imax1 = String.valueOf((DtuUtil.getIntegerValue(dataMsgs, 0) * ibb1)/1000f);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82) {
                     ptmax = DtuUtil.getIntegerValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_91) {
+                    warnList2 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0403) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01) {
@@ -225,6 +237,8 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
                     imax6 = DtuUtil.getIntegerValue(dataMsgs, 5);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82) {
                     ptmax = DtuUtil.getIntegerValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_91) {
+                    warnList2 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0404) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01) {
@@ -262,6 +276,8 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
                     imax6 = DtuUtil.getIntegerValue(dataMsgs, 5);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82) {
                     ptmax = DtuUtil.getIntegerValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_91) {
+                    warnList2 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0405) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_01) {
@@ -305,6 +321,8 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
                     imax6 = DtuUtil.getIntegerValue(dataMsgs, 5);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_82) {
                     ptmax = DtuUtil.getIntegerValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_91) {
+                    warnList2 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }
         }
