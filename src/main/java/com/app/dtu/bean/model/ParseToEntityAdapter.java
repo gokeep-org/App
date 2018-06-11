@@ -67,7 +67,7 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
                     Message message = getMessage();
                     if (isChange()){
                         logger.info("Send warn notice url [{}] is successful",  request);
-                        httpClient.post(request, entity, null);
+                        httpClient.post(request);
                     }
                 }catch (Throwable e){
                     logger.error("Send warn notice error, cause {}", e.getMessage());

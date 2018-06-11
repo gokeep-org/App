@@ -126,7 +126,8 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
             } else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0404){
                 message.setDataMsgs(setFirstValue(message.getDataMsgs(), 4));
             }else if (message.parseDeviceModelEnum() == DeviceTypeName.FIRE_CONTROL_POWER_MONITOR_0405){
-                message.setDataMsgs(setFirstValue(message.getDataMsgs(), 11));
+                message.setDataMsgs(setFirstValue(message.getDataMsgs(), 5));
+
             }
         }
         // TODO: 把变比放到最前面， 调整到每一个设备类型中操作
