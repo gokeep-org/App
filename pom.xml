@@ -5,7 +5,7 @@
     <!--项目声明-->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.app</groupId>
-    <artifactId>App</artifactId>
+    <artifactId>App-Consume</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>DtuDataCenter</name>
