@@ -8,7 +8,7 @@ import java.util.List;
 public class DtuConfig {
 
     // 是否启动socket监听服务
-    public static final boolean IS_ENABLE_SOCKET_SERVER = true;
+    public static final boolean IS_ENABLE_SOCKET_SERVER = false;
     // 以具体的服务器为准
     public static final String DEFAULT_HOST = "localhost";
     // Socket 服务的段端口
