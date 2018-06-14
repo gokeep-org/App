@@ -40,11 +40,10 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
     private Integer maxmzq1;
 
 
-
     @Override
     public CombustibleGasMonitorDevice generateEntity(Message message) {
         buildRedunancyDeviceInfo();
-        if (CollectionUtils.isEmpty(message.getDataMsgs())){
+        if (CollectionUtils.isEmpty(message.getDataMsgs())) {
             return this;
         }
         for (int i = 0; i < message.getDataMsgs().size(); i++) {
@@ -53,20 +52,20 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
             if (message.parseDeviceModelEnum() == DeviceTypeName.COMBUSTIBLE_GAS_MONITOR_0601) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_08) {
                     trq1 = DtuUtil.getIntegerValue(dataMsgs, 0);
-                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_88){
-                    maxtrq1 =  DtuUtil.getIntegerValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_88) {
+                    maxtrq1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
-            }else if (message.parseDeviceModelEnum() == DeviceTypeName.COMBUSTIBLE_GAS_MONITOR_0602) {
+            } else if (message.parseDeviceModelEnum() == DeviceTypeName.COMBUSTIBLE_GAS_MONITOR_0602) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_09) {
                     yhq1 = DtuUtil.getIntegerValue(dataMsgs, 0);
-                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_89){
-                    maxyhq1 =  DtuUtil.getIntegerValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_89) {
+                    maxyhq1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
-            }else if (message.parseDeviceModelEnum() == DeviceTypeName.COMBUSTIBLE_GAS_MONITOR_0603) {
+            } else if (message.parseDeviceModelEnum() == DeviceTypeName.COMBUSTIBLE_GAS_MONITOR_0603) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_0A) {
                     mzq1 = DtuUtil.getIntegerValue(dataMsgs, 0);
-                }else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_8A){
-                    maxmzq1 =  DtuUtil.getIntegerValue(dataMsgs, 0);
+                } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_8A) {
+                    maxmzq1 = DtuUtil.getIntegerValue(dataMsgs, 0);
                 }
             }
         }
@@ -77,13 +76,13 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
     @Override
     public boolean isChange() {
         boolean isChange = false;
-        List<Object> values = redisClient.opsForHash().multiGet(getMessageId(),  Arrays.asList(new String[]{"warn", "id"}));
+        List<Object> values = redisClient.opsForHash().multiGet(getMessageId(), Arrays.asList(new String[]{"warn", "id"}));
         if (CollectionUtils.isEmpty(values) || values.size() < 2) {
             isChange = true;
-        }else {
-            if (values.get(0) == null || values.get(1) == null || ! String.valueOf(values.get(0)).equalsIgnoreCase(String.valueOf(getWarnList()))){
+        } else {
+            if (values.get(0) == null || values.get(1) == null || !String.valueOf(values.get(0)).equalsIgnoreCase(String.valueOf(getWarnList()))) {
                 isChange = true;
-            }else{
+            } else {
                 isChange = false;
             }
         }
@@ -92,9 +91,9 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
             hashValue.put("warn", String.valueOf(getWarnList()));
             hashValue.put("id", String.valueOf(getId()));
             redisClient.expire(getMessageId(), DtuConfig.CACHE_EXPRIE_TIME_FOR_DAY, TimeUnit.DAYS);
-            redisClient.opsForHash().putAll(getMessageId(),hashValue);
+            redisClient.opsForHash().putAll(getMessageId(), hashValue);
             logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
-        }else {
+        } else {
             ServiceItem.combustibleGasMonitorService.updatePreviousDataStatus(String.valueOf(values.get(1)), 2);
         }
         return isChange;
@@ -107,15 +106,15 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
 
     @Override
     public boolean execute() {
-        try{
+        try {
             DeviceDataDeal deviceDataDeal = getStorageEntity();
-            if (Objects.isNull(deviceDataDeal)){
+            if (Objects.isNull(deviceDataDeal)) {
                 return false;
             }
             // 一定注意前后顺序，这个很重要
             ServiceItem.combustibleGasMonitorService.updateOldDataStatus(getMessageId());
             ServiceItem.combustibleGasMonitorService.save(deviceDataDeal);
-        }catch (Throwable e){
+        } catch (Throwable e) {
             logger.error("Execute add data to db or generate entity is error");
             return false;
         }
@@ -123,7 +122,7 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
     }
 
 
-    public CombustibleGasMonitorDevice getOfflineDeviceData(String messageId){
+    public CombustibleGasMonitorDevice getOfflineDeviceData(String messageId) {
         return generateEntity(getOfflineMessage(messageId));
     }
 

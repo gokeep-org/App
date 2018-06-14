@@ -32,6 +32,9 @@ public class DtuConfig {
     // 启动debug模式，只会一次初始化任务
     public static final boolean ENABLE_BUBUG_MODE = false;
 
+
+    // 离线数据更新任务cron
+    public static final boolean IS_ENABLE_SCHEDULE_TASK = false;
     // 本地缓存定时任务
     public static final String LOCAL_CACHE_CRON = "0 0 0/1 * * ?";
     // 离线数据更新任务cron

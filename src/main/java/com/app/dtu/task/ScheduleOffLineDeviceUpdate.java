@@ -27,27 +27,30 @@ public class ScheduleOffLineDeviceUpdate {
 
     @Scheduled(cron = DtuConfig.LOCAL_OFF_LINE_UPDATE_CRON)
     public void updateOffLineData() {
-        logger.info("Start execute update offline data process schedule");
-        long startTime = DtuUtil.getCurrentTimestrap();
-        List<DeviceRelation> relations = LocalCache.getDeviceRelationCache();
-        if (CollectionUtils.isEmpty(relations)) {
-            return;
-        }
+        if (DtuConfig.IS_ENABLE_SCHEDULE_TASK){
+            long startTime = DtuUtil.getCurrentTimestrap();
+            List<DeviceRelation> relations = LocalCache.getDeviceRelationCache();
+            if (CollectionUtils.isEmpty(relations)) {
+                return;
+            }
 
-        relations.stream().forEach(relation -> {
-            DeviceTypeName deviceTypeName = DeviceTypeName.getDeviceTypeInfoByModelCode(relation.getDevice_model_code());
-            if (Objects.isNull(deviceTypeName)) {
-                return;
-            }
-            DataService dataService = getDataService(deviceTypeName);
-            if (Objects.isNull(dataService)) {
-                return;
-            }
+            relations.stream().forEach(relation -> {
+                DeviceTypeName deviceTypeName = DeviceTypeName.getDeviceTypeInfoByModelCode(relation.getDevice_model_code());
+                if (Objects.isNull(deviceTypeName)) {
+                    return;
+                }
+                DataService dataService = getDataService(deviceTypeName);
+                if (Objects.isNull(dataService)) {
+                    return;
+                }
 //            dataService.updateOldDataStatus(relation.getDevice_id());
-            dataService.updateOffLineData(relation.getDevice_id());
-        });
-        long endTime = DtuUtil.getCurrentTimestrap();
-        logger.info("Update off line data schedule sum time is {}s, data num is {}", (endTime - startTime)/1000, relations.size());
+                dataService.updateOffLineData(relation.getDevice_id());
+            });
+            long endTime = DtuUtil.getCurrentTimestrap();
+            logger.info("Update off line data schedule sum time is {}s, data num is {}", (endTime - startTime)/1000, relations.size());
+        }else {
+            logger.info("consumer node is not update offline data process schedule");
+        }
     }
 
     public List<DataService> getDataServiceLists() {
