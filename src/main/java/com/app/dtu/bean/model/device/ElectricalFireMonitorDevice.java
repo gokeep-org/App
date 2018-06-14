@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 电器火灾监监控设备-01
@@ -280,6 +281,7 @@ public class ElectricalFireMonitorDevice extends RedundancyDeviceData implements
             Map<String, String> hashValue = new HashMap<>();
             hashValue.put("warn", String.valueOf(getWarnList()));
             hashValue.put("id", String.valueOf(getId()));
+            redisClient.expire(getMessageId(), DtuConfig.CACHE_EXPRIE_TIME_FOR_DAY, TimeUnit.DAYS);
             redisClient.opsForHash().putAll(getMessageId(),hashValue);
             logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
         }else {

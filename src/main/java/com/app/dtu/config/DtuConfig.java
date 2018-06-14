@@ -44,6 +44,7 @@ public class DtuConfig {
     public static final long PID_UPDATE_TIME = 1000 * 60;
     // Dtu-Config的更新设备列表
     public static final List<DeviceTypeName> updateDeviceTypes = new ArrayList<>();
+    public static final long CACHE_EXPRIE_TIME_FOR_DAY = 365 * 10;
 
     public static final String REDIS_URL = "114.116.23.218";
     // FMS系统路径

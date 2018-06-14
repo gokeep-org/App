@@ -15,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 消防设备电源监控-04
@@ -100,6 +101,7 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
             Map<String, String> hashValue = new HashMap<>();
             hashValue.put("warn", String.valueOf(getWarnList()));
             hashValue.put("id", String.valueOf(getId()));
+            redisClient.expire(getMessageId(), DtuConfig.CACHE_EXPRIE_TIME_FOR_DAY, TimeUnit.DAYS);
             redisClient.opsForHash().putAll(getMessageId(),hashValue);
             logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
         }else {

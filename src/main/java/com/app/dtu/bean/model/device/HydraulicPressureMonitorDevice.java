@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 水压监控-12
@@ -74,6 +75,7 @@ public class HydraulicPressureMonitorDevice extends RedundancyDeviceData impleme
             Map<String, String> hashValue = new HashMap<>();
             hashValue.put("warn", String.valueOf(getWarnList()));
             hashValue.put("id", String.valueOf(getId()));
+            redisClient.expire(getMessageId(), DtuConfig.CACHE_EXPRIE_TIME_FOR_DAY, TimeUnit.DAYS);
             redisClient.opsForHash().putAll(getMessageId(),hashValue);
             logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
         }else {

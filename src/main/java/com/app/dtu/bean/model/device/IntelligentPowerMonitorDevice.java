@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 智能电力设监控设别-02
@@ -510,6 +511,7 @@ public class IntelligentPowerMonitorDevice extends RedundancyDeviceData implemen
             Map<String, String> hashValue = new HashMap<>();
             hashValue.put("warn", String.valueOf(getWarnList()));
             hashValue.put("id", String.valueOf(getId()));
+            redisClient.expire(getMessageId(), DtuConfig.CACHE_EXPRIE_TIME_FOR_DAY, TimeUnit.DAYS);
             redisClient.opsForHash().putAll(getMessageId(),hashValue);
             logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
         }else {
