@@ -38,7 +38,7 @@ public class DtuConfig {
     // 本地缓存定时任务
     public static final String LOCAL_CACHE_CRON = "0 0 0/1 * * ?";
     // 离线数据更新任务cron
-    public static final String LOCAL_OFF_LINE_UPDATE_CRON = "0 0/15 * * * ?";
+    public static final String LOCAL_OFF_LINE_UPDATE_CRON = "0 0 0/36 * * ?";
     // 定时任务执行缓存数据到数据库, 每1小时执行一次
     public static final String CACHE_PREVIOUS_DATA = "0 0 /1 * * ?";
     // 0 0 0/1 * * ? 1小时更新1次
