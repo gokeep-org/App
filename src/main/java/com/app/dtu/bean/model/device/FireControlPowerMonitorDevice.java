@@ -309,7 +309,7 @@ public class FireControlPowerMonitorDevice extends RedundancyDeviceData implemen
                     uc3 = DtuUtil.getIntegerValue(dataMsgs, 8);
                     ua4 = DtuUtil.getIntegerValue(dataMsgs, 9);
                     ub4 = DtuUtil.getIntegerValue(dataMsgs, 10);
-                    ub4 = DtuUtil.getIntegerValue(dataMsgs, 11);
+                    uc4 = DtuUtil.getIntegerValue(dataMsgs, 11);
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83) {
                     umax = DtuUtil.getIntegerValue(dataMsgs, 0);
                     umin = DtuUtil.getIntegerValue(dataMsgs, 1);

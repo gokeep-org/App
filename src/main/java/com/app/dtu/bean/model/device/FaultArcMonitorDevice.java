@@ -37,17 +37,17 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
 
-    private Integer ua;
-    private Integer ia;
+    private String ua;
+    private String ia;
     // 电弧
-    private Integer h1;
+    private String h1;
 
-    private Integer umax1;
-    private Integer umin1;
+    private String umax1;
+    private String umin1;
 
-    private Integer imax1;
+    private String imax1;
 
-    private Integer hmax;
+    private String hmax;
 
 
     @Override
@@ -61,18 +61,18 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
             List<Integer> dataMsgs = dataMsg.getDatas();
             if (message.parseDeviceModelEnum() == DeviceTypeName.FAULT_ARC_MONITOR_0301) {
                 if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_03) {
-                    ua = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    ua = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 0));
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_04) {
-                    ia = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    ia = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 0));
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_05) {
-                    h1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    h1 = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 0));
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_85) {
-                    hmax = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    hmax = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 0));
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_83) {
-                    umax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
-                    umin1 = DtuUtil.getIntegerValue(dataMsgs, 1);
+                    umax1 = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 0));
+                    umin1 = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 1));
                 } else if (DataType.getValue(dataMsg.getType()) == DataType.DATA_TYPE_84) {
-                    imax1 = DtuUtil.getIntegerValue(dataMsgs, 0);
+                    imax1 = String.valueOf(DtuUtil.getIntegerValue(dataMsgs, 0));
                 }
             }
         }
@@ -136,61 +136,62 @@ public class FaultArcMonitorDevice extends RedundancyDeviceData implements Devic
         return logger;
     }
 
-    public Integer getUa() {
+    public String getUa() {
         return ua;
     }
 
-    public void setUa(Integer ua) {
+    public void setUa(String ua) {
         this.ua = ua;
     }
 
-    public Integer getIa() {
+    public String getIa() {
         return ia;
     }
 
-    public void setIa(Integer ia) {
+    public void setIa(String ia) {
         this.ia = ia;
     }
 
-    public Integer getH1() {
+    public String getH1() {
         return h1;
     }
 
-    public void setH1(Integer h1) {
+    public void setH1(String h1) {
         this.h1 = h1;
     }
 
-    public Integer getUmax1() {
+    public String getUmax1() {
         return umax1;
     }
 
-    public void setUmax1(Integer umax1) {
+    public void setUmax1(String umax1) {
         this.umax1 = umax1;
     }
 
-    public Integer getUmin1() {
+    public String getUmin1() {
         return umin1;
     }
 
-    public void setUmin1(Integer umin1) {
+    public void setUmin1(String umin1) {
         this.umin1 = umin1;
     }
 
-    public Integer getImax1() {
+    public String getImax1() {
         return imax1;
     }
 
-    public void setImax1(Integer imax1) {
+    public void setImax1(String imax1) {
         this.imax1 = imax1;
     }
 
-    public Integer getHmax() {
+    public String getHmax() {
         return hmax;
     }
 
-    public void setHmax(Integer hmax) {
+    public void setHmax(String hmax) {
         this.hmax = hmax;
     }
+
     @Override
     public RedisClient redisClient() {
         return redisClient();
