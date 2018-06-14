@@ -8,7 +8,6 @@ spring:
   datasource:
     name: dataSource
     type: com.zaxxer.hikari.HikariDataSource
-#    url: jdbc:mysql://47.105.50.55/fms?useUnicode=true&characterEncoding=utf8&useSSL=false
     url: jdbc:mysql://114.116.23.218/fms?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: qwe@w1#gg$v_
