@@ -1,3 +1,6 @@
+deploy:
+  host: 47.105.50.55
+#  host: 114.116.23.218
 server:
   port: 5005
 logging:
@@ -9,7 +12,7 @@ spring:
     name: dataSource
     type: com.zaxxer.hikari.HikariDataSource
 #    url: jdbc:mysql://114.116.23.218/fms?useUnicode=true&characterEncoding=utf8&useSSL=false
-    url: jdbc:mysql://47.105.50.55/fms?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://${deploy.host}/fms?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: qwe@w1#gg$v_
     driver-class-name: com.mysql.jdbc.Driver
@@ -24,7 +27,7 @@ spring:
       ddl-auto: update
   # Message queue config
   rabbitmq:
-    host: 114.116.23.218
+    host: ${deploy.host}
     port: 5672
     username: admin
     password: xuning!
@@ -33,7 +36,7 @@ spring:
       transaction-size: 1
   # Redis cache config
   redis:
-    host: 114.116.23.218
+    host: ${deploy.host}
     database: 0
     port: 6379
     timeout: 3000

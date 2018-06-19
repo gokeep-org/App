@@ -39,7 +39,7 @@ public class DtuConfig {
     public static final String LOCAL_CACHE_CRON = "0 0 0/1 * * ?";
     // 离线数据更新任务cron
     public static final String LOCAL_OFF_LINE_UPDATE_CRON = "0 0 0/36 * * ?";
-    // 定时任务执行缓存数据到数据库, 每1小时执行一次
+    // 定时任务执行缓存数据到数据库, 每1小时执行一次,没有实现
     public static final String CACHE_PREVIOUS_DATA = "0 0 /1 * * ?";
     // 0 0 0/1 * * ? 1小时更新1次
     public static final int LOCAL_OFF_LINE_UPDATE_BEFORE_TIME_SCAN = 1000 * 60 * 15;
@@ -49,14 +49,14 @@ public class DtuConfig {
     public static final List<DeviceTypeName> updateDeviceTypes = new ArrayList<>();
     public static final long CACHE_EXPRIE_TIME_FOR_DAY = 365 * 10;
 
-    public static final String REDIS_URL = "114.116.23.218";
+    public static final String REDIS_URL = "47.105.50.55";
     // FMS系统路径
-    public static final String FMS_SYS_API_PATH = "http://114.116.23.218:9999/FMS/V1-API";
+    public static final String FMS_SYS_API_PATH = "http://47.105.50.55:9362/FMS/V1-API";
     // FMS报警接口路径
     public static final String FMS_SYS_WARN_NOTICE_PATH = FMS_SYS_API_PATH + "/notice/warn?id=%s&dt=%s";
 
     // 定时任务数据库更新配置信息, 以下配置是为了方便快速开发调用sql的util，目前不再使用，仅做保留
-    public static final String cacheHost = "118.89.240.60";
+    public static final String cacheHost = "47.105.50.55";
     public static final String cachePort = "3306";
     public static final String cacheDbName = "fms";
     public static final String cacheUsername = "root";

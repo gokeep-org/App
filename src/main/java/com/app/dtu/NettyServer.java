@@ -33,6 +33,10 @@ public class NettyServer  implements com.app.dtu.ServerBootstrap {
      */
     @Override
     public void start() {
+        if (!DtuConfig.IS_ENABLE_SOCKET_SERVER){
+            stop();
+            return;
+        }
         try {
             ServerBootstrap bootstrap = new ServerBootstrap();
             bootstrap.group(bossGroup, workerGroup)
@@ -41,9 +45,6 @@ public class NettyServer  implements com.app.dtu.ServerBootstrap {
                     .option(ChannelOption.SO_BACKLOG, DtuConfig.SOCKET_SERVER_SO_BACKLOG)
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
             ChannelFuture future = bootstrap.bind(DtuConfig.SOCKET_SERVER_PORT).sync();
-            if (DtuConfig.IS_ENABLE_SOCKET_SERVER){
-                future.channel().closeFuture().sync();
-            }
             logger.info("Start netty socket server is success");
         } catch (InterruptedException e) {
             logger.error("Start netty socket server is fail, {}", e.getMessage());
@@ -54,8 +55,12 @@ public class NettyServer  implements com.app.dtu.ServerBootstrap {
 
     @Override
     public void stop() {
-        workerGroup.shutdownGracefully();
-        bossGroup.shutdownGracefully();
+        try{
+            workerGroup.shutdownGracefully();
+            bossGroup.shutdownGracefully();
+        }catch (Throwable e) {
+            logger.error("Close resources is fail, cause is {}", e.getMessage());
+        }
         logger.info("Netty socket close server is success");
     }
 }
