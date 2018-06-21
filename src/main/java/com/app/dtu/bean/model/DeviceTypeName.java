@@ -22,7 +22,6 @@ public enum DeviceTypeName {
     MONITOR_MANAGER_0005("00", "监控管理设备", "0005", "防火门监控器壁挂式", "DH-A-FM/BG"),
     MONITOR_MANAGER_0006("00", "监控管理设备", "0006", "防火门监控器立柜式", "DH-A-FM/LG"),
     MONITOR_MANAGER_0007("00", "监控管理设备", "0007", "智能电力监控管理机", "DH-A-DL"),
-
     // 电气火灾监控设备
 
     ELECTRICAL_FIRE_MONITOR_0101("01", "电气火灾监控", "0101", "组合式电气火灾监控探测器", "JTL-DQ"),
