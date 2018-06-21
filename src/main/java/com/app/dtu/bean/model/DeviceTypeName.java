@@ -36,7 +36,6 @@ public enum DeviceTypeName {
 
     // 智能电力监控
     INTELLIGENT_POWER_MONITOR_0201("02", "智能电力监控", "0201",  "多功能电力仪", "JTL-M/C100"),
-
     // 故障电弧监控
     FAULT_ARC_MONITOR_0301("03", "故障电弧监控", "0301", "故障电弧探测器", "DH-A-AF"),
 
