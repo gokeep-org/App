@@ -5,7 +5,7 @@ server:
   port: 5005
 logging:
   level: info
-  file: ./log/app.log
+  file: ./log/app-consume.log
 spring:
   # Database connection info
   datasource:
