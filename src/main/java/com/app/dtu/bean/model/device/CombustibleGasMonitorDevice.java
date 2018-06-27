@@ -5,6 +5,7 @@ import com.app.dtu.bean.Message;
 import com.app.dtu.bean.model.*;
 import com.app.dtu.config.DtuConfig;
 import com.app.dtu.redis.RedisClient;
+import com.app.dtu.service.DataService;
 import com.app.dtu.service.ServiceItem;
 import com.app.dtu.util.DtuUtil;
 import org.slf4j.Logger;
@@ -13,8 +14,8 @@ import org.springframework.util.CollectionUtils;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * 可燃气体监控-06
@@ -73,35 +74,40 @@ public class CombustibleGasMonitorDevice extends RedundancyDeviceData implements
     }
 
 
-    @Override
-    public boolean isChange() {
-        boolean isChange = false;
-        List<Object> values = redisClient.opsForHash().multiGet(getMessageId(), Arrays.asList(new String[]{"warn", "id"}));
-        if (CollectionUtils.isEmpty(values) || values.size() < 2) {
-            isChange = true;
-        } else {
-            if (values.get(0) == null || values.get(1) == null || !String.valueOf(values.get(0)).equalsIgnoreCase(String.valueOf(getWarnList()))) {
-                isChange = true;
-            } else {
-                isChange = false;
-            }
-        }
-        if (isChange) {
-            Map<String, String> hashValue = new HashMap<>();
-            hashValue.put("warn", String.valueOf(getWarnList()));
-            hashValue.put("id", String.valueOf(getId()));
-            redisClient.expire(getMessageId(), DtuConfig.CACHE_EXPRIE_TIME_FOR_DAY, TimeUnit.DAYS);
-            redisClient.opsForHash().putAll(getMessageId(), hashValue);
-            logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
-        } else {
-            ServiceItem.combustibleGasMonitorService.updatePreviousDataStatus(String.valueOf(values.get(1)), 2);
-        }
-        return isChange;
-    }
+//    @Override
+//    public boolean isChange() {
+//        boolean isChange = false;
+//        List<Object> values = redisClient.opsForHash().multiGet(getMessageId(), Arrays.asList(new String[]{"warn", "id", "timestramp"}));
+//        if (CollectionUtils.isEmpty(values) || values.size() < 2) {
+//            isChange = true;
+//        } else {
+//            if (values.get(0) == null || values.get(1) == null || !String.valueOf(values.get(0)).equalsIgnoreCase(String.valueOf(getWarnList()))) {
+//                isChange = true;
+//            } else {
+//                isChange = false;
+//            }
+//        }
+//        if (isChange) {
+//            Map<String, String> hashValue = new HashMap<>();
+//            hashValue.put("warn", String.valueOf(getWarnList()));
+//            hashValue.put("id", String.valueOf(getId()));
+//            redisClient.expire(getMessageId(), DtuConfig.CACHE_EXPRIE_TIME_FOR_DAY, TimeUnit.DAYS);
+//            redisClient.opsForHash().putAll(getMessageId(), hashValue);
+//            logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
+//        } else {
+//            ServiceItem.combustibleGasMonitorService.updatePreviousDataStatus(String.valueOf(values.get(1)), 2);
+//        }
+//        return isChange;
+//    }
 
     @Override
     public RedisClient redisClient() {
         return redisClient();
+    }
+
+
+    public DataService<CombustibleGasMonitorDevice> getService(){
+        return ServiceItem.combustibleGasMonitorService;
     }
 
     @Override

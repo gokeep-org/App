@@ -3,9 +3,11 @@ package com.app.dtu.bean.model;
 import com.app.dtu.bean.Message;
 import com.app.dtu.config.DtuConfig;
 import com.app.dtu.redis.RedisClient;
+import com.app.dtu.service.DataService;
 import com.app.dtu.service.ServiceItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -66,6 +68,21 @@ public class Device implements DeviceDataDeal, ParseToEntityAdapter<Device>, Ser
     @Override
     public boolean isChange() {
         return false;
+    }
+
+    @Override
+    public StringRedisTemplate getRedisClient() {
+        return null;
+    }
+
+    @Override
+    public DataService getService() {
+        return null;
+    }
+
+    @Override
+    public void buildWarnTime() {
+        return;
     }
 
     @Override

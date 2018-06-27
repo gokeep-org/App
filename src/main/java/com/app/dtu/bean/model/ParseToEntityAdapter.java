@@ -6,12 +6,16 @@ import com.app.dtu.bean.DataMsg;
 import com.app.dtu.bean.Message;
 import com.app.dtu.config.DtuConfig;
 import com.app.dtu.redis.RedisClient;
+import com.app.dtu.service.DataService;
 import com.app.dtu.util.DtuUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 用于支持设备数据解析完成之后解析给对象
@@ -42,6 +46,42 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
         return Objects.isNull(message);
     }
 
+
+
+    default boolean isChange() {
+        boolean isChange = false;
+        List<Object> values = getRedisClient().opsForHash().multiGet(getMessage().getId(), Arrays.asList(new String[]{"warn", "id", "timestramp"}));
+        if (CollectionUtils.isEmpty(values) || values.size() < 2) {
+            isChange = true;
+        } else {
+            if (values.get(0) == null || values.get(1) == null || !String.valueOf(values.get(0)).equalsIgnoreCase(String.valueOf(getMessage().getWarnList()))) {
+                isChange = true;
+            } else {
+                isChange = false;
+            }
+        }
+        if (isChange) {
+            Map<String, String> hashValue = new HashMap<>();
+            hashValue.put("warn", String.valueOf(getMessage().getWarnList()));
+            hashValue.put("id", String.valueOf(getId()));
+            if ((values.get(0) == null && getMessage().getWarnList() != 0) ||
+                    (values.get(0) != null && getMessage().getWarnList() != 0 && String.valueOf(values.get(0)).equals("0") ) ) {
+                hashValue.put("timestramp",String.valueOf(System.currentTimeMillis()));
+            } else {
+                if (getMessage().getWarnList() == 0 ) {
+                    hashValue.put("timestramp", "-1");
+                }
+                hashValue.put("timestramp", String.valueOf(values.get(2)));
+            }
+            getRedisClient().expire(getMessage().getId(), DtuConfig.CACHE_EXPRIE_TIME_FOR_DAY, TimeUnit.DAYS);
+            getRedisClient().opsForHash().putAll(getMessage().getId(), hashValue);
+            logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
+        } else {
+            getService().updatePreviousDataStatus(String.valueOf(values.get(1)), 2);
+        }
+        return isChange;
+    }
+
     /**
      * 同步更新redis缓存
      */
@@ -56,6 +96,7 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
         return Objects.isNull(buildDevice());
     }
 
+    public StringRedisTemplate getRedisClient();
 
     // 发送报警信息到fms系统
     default void sendWarnInfoToFmsSystem(T entity){
@@ -76,7 +117,7 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
         }
     }
 
-    public boolean isChange();
+    public DataService getService();
 
     // 获取实体类
     default T getStorageEntity(){
@@ -87,9 +128,12 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
         T entity =  generateEntity(buildMessage());
         // 这里先发送报警信息
         sendWarnInfoToFmsSystem(entity);
+        buildWarnTime();
         logger.info("Parse to entity is {}", Objects.isNull(entity) ? null : entity.toString());
         return entity;
     }
+
+    void buildWarnTime();
 
     default Message getOfflineMessage(String messageId){
         Message message = new Message();

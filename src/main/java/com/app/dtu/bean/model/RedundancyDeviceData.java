@@ -12,7 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,6 +61,9 @@ public class RedundancyDeviceData implements DeviceDataDeal, Serializable{
 
     private Long handle_date;
 
+    private Long warnTime;
+
+
     /**
      * 报警列表详情
      */
@@ -78,6 +83,14 @@ public class RedundancyDeviceData implements DeviceDataDeal, Serializable{
     private int warn14;
     private int warn15;
     private int warn16;
+    // 新增报警时长
+    public Long getWarnTime() {
+        return warnTime;
+    }
+
+    public void setWarnTime(Long warnTime) {
+        this.warnTime = warnTime;
+    }
 
     // 正常状态
     private Integer yhf_state = 1;
@@ -234,6 +247,12 @@ public class RedundancyDeviceData implements DeviceDataDeal, Serializable{
         setWarnList(message.getWarnList());
         buildWarnValues();
         buildDeviceStatus();
+    }
+
+
+    public void buildWarnTime(){
+        List<Object> values = getRedisClient().opsForHash().multiGet(getMessage().getId(), Arrays.asList(new String[]{"timestramp"}));
+        setWarnTime(Long.valueOf(String.valueOf(values.get(0))));
     }
 
     public String getMessageId() {
@@ -470,5 +489,13 @@ public class RedundancyDeviceData implements DeviceDataDeal, Serializable{
     @Override
     public boolean execute() {
         return true;
+    }
+
+    public StringRedisTemplate getRedisClient() {
+        return redisClient;
+    }
+
+    public void setRedisClient(StringRedisTemplate redisClient) {
+        this.redisClient = redisClient;
     }
 }
