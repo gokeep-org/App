@@ -50,7 +50,7 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
     default boolean isChange() {
         boolean isChange = false;
         List<Object> values = getRedisClient().opsForHash().multiGet(getMessage().getId(), Arrays.asList(new String[]{"warn", "id", "warn_time"}));
-        processWarnTime(values);
+        Long warnTime = processWarnTime(values);
         if (CollectionUtils.isEmpty(values) || values.size() < 2) {
             isChange = true;
         } else {
@@ -64,7 +64,7 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
             Map<String, String> hashValue = new HashMap<>();
             hashValue.put("warn", String.valueOf(getMessage().getWarnList()));
             hashValue.put("id", String.valueOf(getId()));
-            hashValue.put("warn_time", values.get(2) == null ? null : String.valueOf(values.get(2)));
+            hashValue.put("warn_time", String.valueOf(warnTime));
             getRedisClient().expire(getMessage().getId(), DtuConfig.CACHE_EXPRIE_TIME_FOR_DAY, TimeUnit.DAYS);
             getRedisClient().opsForHash().putAll(getMessage().getId(), hashValue);
             logger.info("Redis set cache is [device_id: {}], [value: {}]", hashValue.toString());
@@ -75,7 +75,7 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
     }
 
 
-    default void processWarnTime(List<Object> values) {
+    default Long processWarnTime(List<Object> values) {
         // 数据为空，从来没有接收 ， 正常状态
         if (CollectionUtils.isEmpty(values) || values.size() < 3 || values.get(2) == null) {
             PreviousData previousData = new PreviousData();
@@ -89,7 +89,7 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
             }
             getRedisClient().expire(getMessage().getId(), DtuConfig.CACHE_EXPRIE_TIME_FOR_DAY, TimeUnit.DAYS);
             getRedisClient().opsForHash().putAll(previousData.getDeviceId(), previousData.toMap());
-            return;
+            return previousData.getWarnTime();
         }
         // 接收过数据
         if (!CollectionUtils.isEmpty(values) || values.size() == 3) {
@@ -109,7 +109,9 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
             }
             getRedisClient().expire(getMessage().getId(), DtuConfig.CACHE_EXPRIE_TIME_FOR_DAY, TimeUnit.DAYS);
             getRedisClient().opsForHash().putAll(previousData.getDeviceId(), previousData.toMap());
+            return previousData.getWarnTime();
         }
+        return -1L;
     }
 
 //    /**
