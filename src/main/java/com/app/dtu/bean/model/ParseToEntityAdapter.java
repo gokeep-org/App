@@ -50,7 +50,12 @@ public interface ParseToEntityAdapter<T extends DeviceDataDeal> {
     default boolean isChange() {
         boolean isChange = false;
         List<Object> values = getRedisClient().opsForHash().multiGet(getMessage().getId(), Arrays.asList(new String[]{"warn", "id", "warn_time"}));
-        Long warnTime = processWarnTime(values);
+        Long warnTime = -1L;
+        try {
+            warnTime = processWarnTime(values);
+        }catch (Throwable e) {
+            logger.error("Prpcess warn start time from redis cache is fail, cause is {}", e.getMessage());
+        }
         if (CollectionUtils.isEmpty(values) || values.size() < 2) {
             isChange = true;
         } else {

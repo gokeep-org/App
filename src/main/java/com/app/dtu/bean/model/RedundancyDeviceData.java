@@ -251,7 +251,7 @@ public class RedundancyDeviceData implements DeviceDataDeal, Serializable{
 
 
     public void buildWarnTime(){
-        List<Object> values = getRedisClient().opsForHash().multiGet(getMessage().getId(), Arrays.asList(new String[]{"timestramp"}));
+        List<Object> values = getRedisClient().opsForHash().multiGet(getMessage().getId(), Arrays.asList(new String[]{"warn_time"}));
         setWarnTime(Long.valueOf(String.valueOf(values.get(0))));
     }
 
