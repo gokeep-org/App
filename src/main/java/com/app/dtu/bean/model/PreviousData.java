@@ -29,9 +29,11 @@ public class PreviousData extends Data{
         return new PreviousData();
     }
 
-    public PreviousData buildData(String deviceId, String strongId, String warnList, Integer status){
-        Data data = new Data(warnList, strongId, status);
+    public PreviousData buildData(String deviceId, String strongId, String warnList, Long warnTime){
         this.deviceId = deviceId;
+        setWarnTime(warnTime);
+        setWarn(warnList);
+        setId(strongId);
         return this;
     }
 
@@ -70,7 +72,9 @@ public class PreviousData extends Data{
     }
 
     public void setData(Data data) {
-        setData(data);
+        setId(data.getId());
+        setWarn(data.getWarn());
+        setWarnTime(data.getWarnTime());
     }
 
 
@@ -80,14 +84,5 @@ public class PreviousData extends Data{
 
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
-    }
-
-
-    @Override
-    public String toString() {
-        return "PreviousData{" +
-                "deviceId='" + deviceId + '\'' +
-                ", data=" + getData() +
-                '}';
     }
 }

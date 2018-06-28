@@ -9,7 +9,7 @@ public class Data {
 
     private String warn;
     private String id;
-    private Integer status;
+    private Long warnTime;
 
     public Data() {
     }
@@ -19,26 +19,27 @@ public class Data {
         this.id = id;
     }
 
-    public Data(String warn, String id, Integer status) {
+    public Data(String warn, String id, Long status) {
         this.warn = warn;
         this.id = id;
-        this.status = status;
+        this.warnTime = status;
     }
 
     public Map<String, String> toMap() {
         Map<String, String> result = new HashMap<>();
         result.put("warn", this.warn);
         result.put("id", this.id);
-        result.put("status", String.valueOf(this.status));
+        result.put("warn_time", String.valueOf(this.warnTime));
         return result;
     }
 
-    public Integer getStatus() {
-        return status;
+
+    public Long getWarnTime() {
+        return warnTime;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setWarnTime(Long warnTime) {
+        this.warnTime = warnTime;
     }
 
     public String getWarn() {
@@ -55,13 +56,5 @@ public class Data {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Data{" +
-                "warn='" + warn + '\'' +
-                ", id='" + id + '\'' +
-                '}';
     }
 }
