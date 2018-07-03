@@ -209,6 +209,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
+        <!--Http客户端框架-->
         <dependency>
             <groupId>cn.networklab</groupId>
             <artifactId>requests</artifactId>
@@ -273,6 +274,13 @@
             <artifactId>spring-boot-starter-redis</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
+        <!--MySQL 密码加密处理，生成加密密码见PwdTest.class-->
+        <dependency>
+            <groupId>com.github.ulisesbocchio</groupId>
+            <artifactId>jasypt-spring-boot-starter</artifactId>
+            <version>1.8</version>
+        </dependency>
+
 
         <!--<dependency>-->
             <!--<groupId>org.springframework.boot</groupId>-->
