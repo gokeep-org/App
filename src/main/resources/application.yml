@@ -10,5 +10,11 @@ spring:
       force: true
   profiles:
     active: dev
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    database: 0
+    timeout: 2000
 server:
   connection-timeout: 60000

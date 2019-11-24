@@ -23,8 +23,9 @@ public class TestInfoAction extends ItemAction<TestInfoOutput> {
     
     @Override
     protected void additionalValidate() throws Exception {
-        if (Objects.equals(null, flag))
+        if (Objects.equals(null, flag)) {
             flag = false;
+        }
         LOGGER.info("Test action additional validate flag is " + flag);
     
     }
