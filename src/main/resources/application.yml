@@ -10,5 +10,10 @@ spring:
       force: true
   profiles:
     active: dev
+  data:
+    neo4j:
+      username: neo4j
+      password: 123456
+      uri: bolt://localhost:7687
 server:
   connection-timeout: 60000

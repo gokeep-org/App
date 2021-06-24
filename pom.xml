@@ -10,10 +10,11 @@
     <packaging>jar</packaging>
     <name>AppExample</name>
     <description>SpringBoot 脚手架</description>
-
-    <modules>
-        <!--<module>OauthServer</module>-->
-    </modules>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.0</version>
+    </parent>
 
     <!--Maven相关配置属性-->
     <properties>
@@ -22,7 +23,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <spring-boot.version>1.4.2.RELEASE</spring-boot.version>
+        <spring-boot.version>2.4.0</spring-boot.version>
         <spring-boot-actuator.version>1.5.3.RELEASE</spring-boot-actuator.version>
         <spring-cloud.version>1.1.7.RELEASE</spring-cloud.version>
         <junit.version>4.12</junit.version>
@@ -42,6 +43,9 @@
 
     <!--依赖管理-->
     <dependencyManagement>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-neo4j -->
+
+
         <dependencies>
             <!--SpringBoot-starter-->
             <dependency>
@@ -183,20 +187,34 @@
 
     <!--项目依赖-->
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-neo4j -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-data-neo4j</artifactId>-->
+<!--            <version>2.3.0.RELEASE</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-neo4j</artifactId>
+            <version>5.3.0.RELEASE</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.neo4j/neo4j-ogm-http-driver -->
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-http-driver</artifactId>
+            <version>3.2.24</version>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-bolt-driver</artifactId>
+            <version>3.2.24</version>
+        </dependency>
+
         <!--web支持-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!--web容器-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jetty</artifactId>
-        </dependency>
-        <!--Jersey-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jersey</artifactId>
         </dependency>
         <!--JavaEE7-->
         <dependency>
@@ -204,10 +222,13 @@
             <artifactId>javaee-api</artifactId>
         </dependency>
         <!--日志-->
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-logging -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
+            <version>2.5.1</version>
         </dependency>
+
         <!--HTTP Client-->
         <dependency>
             <groupId>cn.networklab</groupId>
@@ -226,16 +247,6 @@
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-library</artifactId>
-            <version>${hamcrest.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
     <build>
