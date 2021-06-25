@@ -1,6 +1,7 @@
 package com.app.config;
 
 import org.neo4j.ogm.session.SessionFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.neo4j.transaction.Neo4jTransactionManager;
@@ -10,12 +11,19 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class Neo4jConfig {
 
+    @Value("${neo4j.uri}")
+    private String uri;
+    @Value("${neo4j.username}")
+    private String username;
+    @Value("${neo4j.password}")
+    private String password;
+
      @Bean
      public org.neo4j.ogm.config.Configuration getConfiguration() {
 
          org.neo4j.ogm.config.Configuration.Builder  builder = new org.neo4j.ogm.config.Configuration.Builder();
-         builder.credentials("neo4j", "zhongfu@2021");
-         builder.uri("bolt://localhost:7687");
+         builder.credentials(username, password);
+         builder.uri(uri);
          return builder.build();
     }
 
