@@ -1,5 +1,6 @@
-package com.app.domain;
+package com.app.repositories;
 
+import com.app.entities.Person;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;

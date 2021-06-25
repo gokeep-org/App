@@ -2,13 +2,12 @@ package com.app.rest;
 
 import javax.annotation.Resource;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 
 import com.app.action.factory.TestActionFactory;
-import com.app.domain.Friend;
-import com.app.domain.FriendRepository;
-import com.app.domain.Person;
-import com.app.domain.PersonRepository;
+import com.app.entities.Friend;
+import com.app.repositories.FriendRepository;
+import com.app.entities.Person;
+import com.app.repositories.PersonRepository;
 import com.app.domain.output.test.TestInfoOutput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
